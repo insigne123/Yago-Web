@@ -14,7 +14,7 @@ import {
 } from "lucide-react";
 
 export const COMPANY = {
-  name: "TuEmpresa · IA",
+  name: "Yago",
   email: "contacto@tuempresa.com",
   whatsapp: "+56 9 0000 0000",
   whatsappLink: "https://wa.me/56900000000",
