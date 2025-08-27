@@ -8,7 +8,7 @@ const gradientText =
 
 export function Testimonios() {
   return (
-    <Section>
+    <Section id="testimonios">
       <div className="mx-auto max-w-7xl px-4">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className={`text-3xl font-bold md:text-5xl ${gradientText}`}>Lo que dicen</h2>

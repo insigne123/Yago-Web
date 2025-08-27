@@ -8,7 +8,6 @@ import {
   MessageSquare,
   Rocket,
   Layers,
-  Building2,
   Clock,
   Lock,
   Users,
