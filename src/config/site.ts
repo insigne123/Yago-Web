@@ -15,9 +15,9 @@ import {
 
 export const COMPANY = {
   name: "Yago",
-  email: "contacto@tuempresa.com",
-  whatsapp: "+56 9 0000 0000",
-  whatsappLink: "https://wa.me/56900000000",
+  email: "nicolas.yarur.g@yago.cl",
+  whatsapp: "+56963930231",
+  whatsappLink: "https://wa.me/56963930231",
   location: "Chile · Remoto · LATAM",
 };
 
