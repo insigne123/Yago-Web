@@ -136,23 +136,7 @@ export const technologies = [
   "y muchos más...",
 ];
 
-export const testimonials = [
-    {
-      area: "Operaciones",
-      quote: "La automatización nos permitió escalar sin contratar más personal y mantener el control de calidad. Implementación ordenada y con métricas claras.",
-      author: "Persona 1"
-    },
-    {
-      area: "Atención al cliente",
-      quote: "Nuestro equipo ahora se enfoca en casos complejos, dejando las tareas repetitivas a los bots. La satisfacción del cliente ha mejorado notablemente.",
-      author: "Persona 2"
-    },
-    {
-      area: "Ventas",
-      quote: "El flujo de prospección automática nos trajo leads de mejor calidad y redujo el tiempo de contacto inicial. Un cambio de juego para el equipo comercial.",
-      author: "Persona 3"
-    },
-]
+export const testimonials = [];
 
 export const faqItems = [
     {

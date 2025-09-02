@@ -4,7 +4,6 @@ import { Logos } from "@/components/landing/Logos";
 import { Servicios } from "@/components/landing/Servicios";
 import { Productos } from "@/components/landing/Productos";
 import { Tecnologia } from "@/components/landing/Tecnologia";
-import { Testimonios } from "@/components/landing/Testimonios";
 import { FAQ } from "@/components/landing/FAQ";
 import { CTA } from "@/components/landing/CTA";
 import { Contacto } from "@/components/landing/Contacto";
@@ -20,7 +19,6 @@ export default function LandingIA() {
         <Servicios />
         <Productos />
         <Tecnologia />
-        <Testimonios />
         <FAQ />
         <CTA />
         <Contacto />
