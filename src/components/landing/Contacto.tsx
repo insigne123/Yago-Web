@@ -25,20 +25,24 @@ export function Contacto() {
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setLoading(true);
     const form = e.currentTarget;
-    const data = Object.fromEntries(new FormData(form).entries());
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
 
     try {
-      setLoading(true);
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
-      if (!res.ok) {
-        const errorData = await res.json();
-        throw new Error(errorData.message || "Error al enviar el mensaje.");
+
+      const resData = await res.json();
+
+      if (!res.ok || !resData.ok) {
+        throw new Error(resData.error || "Error al enviar el mensaje.");
       }
+
       form.reset();
       toast({ title: "¡Mensaje enviado!", description: "Te responderemos muy pronto." });
     } catch (err: any) {
@@ -79,6 +83,8 @@ export function Contacto() {
             </CardHeader>
             <CardContent>
               <form onSubmit={onSubmit} className="grid gap-3">
+                {/* Honeypot field for spam protection */}
+                <input type="text" name="hp" className="hidden" />
                 <Input name="nombre" placeholder="Tu nombre" required />
                 <Input name="email" type="email" placeholder="Tu email" required />
                 <Input name="empresa" placeholder="Empresa" />
