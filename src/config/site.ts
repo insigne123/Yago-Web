@@ -113,7 +113,28 @@ export const caseStudies = [
   },
 ];
 
-export const technologies = ["Firebase", "Next.js", "Supabase", "n8n", "Make", "GCP", "WhatsApp API", "PostgreSQL"];
+export const technologies = [
+  "Firebase",
+  "Next.js",
+  "Supabase",
+  "n8n",
+  "Make",
+  "GCP",
+  "WhatsApp API",
+  "PostgreSQL",
+  "Meta/Facebook",
+  "Excel",
+  "Instagram",
+  "Telegram",
+  "Gmail",
+  "Google Workspace",
+  "Microsoft 365",
+  "Microsoft Azure",
+  "Google Cloud",
+  "IA",
+  "LLM",
+  "y muchos más...",
+];
 
 export const testimonials = [
     {

@@ -11,7 +11,7 @@ export function Tecnologia() {
         <div className="mx-auto max-w-2xl text-center">
           <h2 className={`text-3xl font-bold md:text-5xl ${gradientText}`}>Tecnología</h2>
           <p className="mt-3 text-muted-foreground">
-            Pila moderna y escalable: Firebase, Next.js/React, n8n/Make, Supabase, GCP.
+            Pila moderna y escalable, con la que podemos conectarnos a cientos de aplicaciones como Excel, Gmail, WhatsApp, Instagram y muchas más.
           </p>
         </div>
 
