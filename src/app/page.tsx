@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/landing/Navbar";
 import { Hero } from "@/components/landing/Hero";
 import { Logos } from "@/components/landing/Logos";
+import { Nosotros } from "@/components/landing/Nosotros";
 import { Servicios } from "@/components/landing/Servicios";
 import { Productos } from "@/components/landing/Productos";
 import { Tecnologia } from "@/components/landing/Tecnologia";
@@ -16,6 +17,7 @@ export default function LandingIA() {
       <main>
         <Hero />
         <Logos />
+        <Nosotros />
         <Servicios />
         <Productos />
         <Tecnologia />

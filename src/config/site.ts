@@ -21,6 +21,22 @@ export const COMPANY = {
   location: "Chile · Remoto · LATAM",
 };
 
+export const about = {
+  id: "nosotros",
+  title: "Nosotros",
+  description:
+    "En Yago automatizamos procesos empresariales con IA para liberar tiempo operativo y potenciar a las personas. La tecnología asiste; las decisiones siguen siendo humanas.",
+  whatWeDo:
+    "Diseñamos, construimos y operamos automatizaciones y agentes de IA que eliminan tareas repetitivas, integran sistemas y aportan sugerencias basadas en datos para acelerar el trabajo diario.",
+  principles: [
+    "Automatización como mecanismo de colaboración humano-máquina.",
+    "Ahorro de tiempo en procesos repetitivos y tediosos.",
+    "Potenciar habilidades con datos y sugerencias de IA.",
+    "Medir por el ahorro en recursos (HH/administrativos), no solo por el costo.",
+  ],
+  ctaLabel: "Conversemos por WhatsApp",
+};
+
 export const features = [
   {
     icon: Bot,
@@ -155,6 +171,7 @@ export const faqItems = [
 
 export const navLinks = [
     { name: "Inicio", href: "#inicio" },
+    { name: "Nosotros", href: "#nosotros" },
     { name: "Servicios", href: "#servicios" },
     { name: "Productos", href: "#productos" },
     { name: "Tecnología", href: "#tecnologia" },
@@ -163,6 +180,7 @@ export const navLinks = [
 ];
 
 export const footerLinks = [
+    { name: "Nosotros", href: "#nosotros" },
     { name: "Servicios", href: "#servicios" },
     { name: "Productos", href: "#productos" },
     { name: "Tecnología", href: "#tecnologia" },
