@@ -40,7 +40,7 @@ export const features = [
   {
     icon: Cloud,
     title: "Apps Web Cloud",
-    desc: "Frontends modernos en Firebase/Next.js con despliegue continuo y analítica.",
+    desc: "Aplicaciones modernas personalizadas para tus necesidades con analitica y IA",
   },
   {
     icon: Shield,
