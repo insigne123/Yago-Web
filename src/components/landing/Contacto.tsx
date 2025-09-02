@@ -95,7 +95,7 @@ export function Contacto() {
                 </Button>
               </form>
               <p className="mt-3 text-xs text-muted-foreground">
-                Al enviar aceptas nuestra <Link href="#" className="underline hover:text-foreground">Política de Privacidad</Link>.
+                Al enviar aceptas nuestra <Link href="/privacidad" className="underline hover:text-foreground">Política de Privacidad</Link>.
               </p>
             </CardContent>
           </Card>

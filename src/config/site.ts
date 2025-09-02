@@ -185,6 +185,6 @@ export const footerLinks = [
     { name: "Productos", href: "#productos" },
     { name: "Tecnología", href: "#tecnologia" },
     { name: "FAQ", href: "#faq" },
-    { name: "Política de Privacidad", href: "#" },
+    { name: "Política de Privacidad", href: "/privacidad" },
     { name: "Términos", href: "#" },
 ];
