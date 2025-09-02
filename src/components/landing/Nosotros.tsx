@@ -72,12 +72,11 @@ export function Nosotros() {
               </p>
 
               <div className="mt-6 flex flex-wrap gap-3">
-                <Button asChild>
+                <Button asChild className="bg-gradient-to-r from-fuchsia-500 via-cyan-400 to-emerald-400 text-white">
                   <a
                     href={whatsappHref}
                     target={whatsappHref.startsWith("#") ? "_self" : "_blank"}
                     rel="noopener noreferrer"
-                    className="text-white"
                   >
                     {about.ctaLabel}
                   </a>
