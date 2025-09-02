@@ -2,35 +2,35 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import { COMPANY } from '@/config/site';
+import { SEOJSONLD } from '@/components/SEOJSONLD';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://tuempresa.com";
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://yago.cl";
 
 export const metadata: Metadata = {
-  title: `${COMPANY.name} — Automatización de procesos con IA`,
-  description: "Agentes IA, automatización de flujos y desarrollo web para optimizar procesos empresariales en LATAM.",
+  metadataBase: new URL(BASE_URL),
+  title: `${COMPANY.name} — Automatización con IA`,
+  description:
+    "Automatizamos tu empresa con IA: agentes, flujos y datos para acelerar tu operación.",
+  alternates: { canonical: "/" },
   openGraph: {
+    type: "website",
+    url: "/",
+    siteName: COMPANY.name,
     title: `${COMPANY.name} — Automatización con IA`,
-    description: "Diseñamos e integramos soluciones con resultados medibles.",
-    type: 'website',
-    locale: 'es_CL',
-    url: siteUrl,
+    description:
+      "Agentes, automatización de flujos y RAG para reducir costos y tiempos.",
+    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
   },
-  robots: {
-    index: true,
-    follow: true,
+  twitter: {
+    card: "summary_large_image",
+    title: `${COMPANY.name} — Automatización con IA`,
+    description:
+      "Agentes, automatización de flujos y RAG para reducir costos y tiempos.",
+    images: ["/twitter-image"],
   },
-  other: {
-    'application/ld+json': JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      name: COMPANY.name,
-      url: siteUrl,
-      email: COMPANY.email,
-      sameAs: [COMPANY.whatsappLink],
-      address: { "@type": "PostalAddress", addressCountry: "CL" },
-      areaServed: ["CL", "LATAM"],
-    }),
-  }
+  icons: {
+    icon: [{ url: "/favicon.ico" }],
+  },
 };
 
 export default function RootLayout({
@@ -46,6 +46,7 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
       </head>
       <body className="font-body antialiased">
+        <SEOJSONLD />
         {children}
         <Toaster />
       </body>
