@@ -57,7 +57,8 @@ export const features = [
 export const products = [
   {
     icon: MessageSquare,
-    name: "SOF.IA Support",
+    name: "SOF.IA",
+    subtitle: "Support Agent",
     summary:
       "Asistente corporativo para consultas internas, documentos y flujo de tickets.",
     bullets: ["RAG multi-fuente", "Resúmenes y respuestas accionables", "Dashboards"],

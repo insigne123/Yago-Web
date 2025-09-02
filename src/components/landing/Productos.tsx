@@ -25,16 +25,21 @@ export function Productos() {
         </div>
 
         <div className="mt-10 grid gap-6 md:grid-cols-2">
-          {products.map(({ icon: Icon, name, summary, bullets }) => (
+          {products.map(({ icon: Icon, name, subtitle, summary, bullets }) => (
             <Card key={name} className="border-white/5">
               <CardHeader>
                 <div className="flex items-center gap-3">
                   <div className="rounded-xl bg-gradient-to-br from-fuchsia-500/30 via-cyan-400/30 to-emerald-400/30 p-2">
                     <Icon className="h-5 w-5" />
                   </div>
-                  <CardTitle>{name}</CardTitle>
+                  <div>
+                    <CardTitle>{name}</CardTitle>
+                    {subtitle && (
+                      <p className="text-sm text-muted-foreground">{subtitle}</p>
+                    )}
+                  </div>
                 </div>
-                <CardDescription>{summary}</CardDescription>
+                <CardDescription className="pt-2">{summary}</CardDescription>
               </CardHeader>
               <CardContent>
                 <ul className="grid list-disc gap-1 pl-5 text-sm text-muted-foreground">
