@@ -12,7 +12,7 @@ export function CTA() {
             ¿Listo para reducir tiempos y errores con IA?
           </h3>
           <p className="mt-2 text-sm text-muted-foreground">
-            Te proponemos un roadmap con quick wins en 10 días hábiles.
+            Te proponemos un roadmap con quick wins en 5 días hábiles.
           </p>
           <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
             <Button asChild size="lg" className="bg-gradient-to-r from-fuchsia-500 via-cyan-400 to-emerald-400 text-white">
