@@ -121,11 +121,6 @@ export default function PrivacyPage() {
             Volver al inicio
           </a>
         </div>
-
-        <p className="mt-8 text-xs text-foreground/60">
-          *Este texto es un modelo informativo y no constituye asesoría legal. Ajusta
-          los apartados a tus procesos reales y normativa aplicable.
-        </p>
       </main>
     </div>
   );
