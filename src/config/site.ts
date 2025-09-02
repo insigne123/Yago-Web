@@ -65,7 +65,8 @@ export const products = [
   },
   {
     icon: Rocket,
-    name: "ANTON.IA LeadFlow",
+    name: "ANTON.IA",
+    subtitle: "Leads App",
     summary:
       "Prospección inteligente: scraping ético, scoring de leads y email outreach.",
     bullets: ["Buyer persona dinámico", "Plantillas IA", "Seguimiento de conversiones"],
