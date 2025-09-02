@@ -34,9 +34,6 @@ export function Navbar() {
         </nav>
 
         <div className="hidden items-center gap-2 md:flex">
-          <Button asChild variant="ghost" className="border border-white/10">
-            <Link href="#casos">Casos de éxito</Link>
-          </Button>
           <Button asChild className="bg-gradient-to-r from-fuchsia-500 via-cyan-400 to-emerald-400">
             <Link href="#contacto" className="text-white">
               Agendar demo

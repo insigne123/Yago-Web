@@ -3,7 +3,6 @@ import { Hero } from "@/components/landing/Hero";
 import { Logos } from "@/components/landing/Logos";
 import { Servicios } from "@/components/landing/Servicios";
 import { Productos } from "@/components/landing/Productos";
-import { Casos } from "@/components/landing/Casos";
 import { Tecnologia } from "@/components/landing/Tecnologia";
 import { Testimonios } from "@/components/landing/Testimonios";
 import { FAQ } from "@/components/landing/FAQ";
@@ -20,7 +19,6 @@ export default function LandingIA() {
         <Logos />
         <Servicios />
         <Productos />
-        <Casos />
         <Tecnologia />
         <Testimonios />
         <FAQ />

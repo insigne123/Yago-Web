@@ -152,7 +152,6 @@ export const navLinks = [
     { name: "Inicio", href: "#inicio" },
     { name: "Servicios", href: "#servicios" },
     { name: "Productos", href: "#productos" },
-    { name: "Casos", href: "#casos" },
     { name: "Tecnología", href: "#tecnologia" },
     { name: "FAQ", href: "#faq" },
     { name: "Contacto", href: "#contacto" },
@@ -161,7 +160,6 @@ export const navLinks = [
 export const footerLinks = [
     { name: "Servicios", href: "#servicios" },
     { name: "Productos", href: "#productos" },
-    { name: "Casos", href: "#casos" },
     { name: "Tecnología", href: "#tecnologia" },
     { name: "FAQ", href: "#faq" },
     { name: "Política de Privacidad", href: "#" },
