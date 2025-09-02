@@ -28,13 +28,14 @@ export function Contacto() {
     setLoading(true);
     const form = e.currentTarget;
     const formData = new FormData(form);
-    const data = Object.fromEntries(formData.entries());
-
+    
+    // We can use FormData directly, the API handler supports it.
+    // We don't need to convert it to a JSON object.
+    
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: formData,
       });
 
       const resData = await res.json();
