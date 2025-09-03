@@ -19,21 +19,37 @@ export default function LandingIA() {
       <main>
         <SectionReveal as="div"><Hero /></SectionReveal>
         <DividerGlow />
-        <SectionReveal as="div" delay={0.05}><Logos /></SectionReveal>
+        {/* Logos con surface suave */}
+        <SectionReveal as="div" delay={0.05} surface="soft">
+          <Logos />
+        </SectionReveal>
         <DividerGlow />
         <SectionReveal as="div" delay={0.1}><Nosotros /></SectionReveal>
         <DividerGlow />
-        <SectionReveal as="div" delay={0.1}><Servicios /></SectionReveal>
+        {/* Secciones densas con surface fuerte para máximo contraste */}
+        <SectionReveal as="div" delay={0.1} surface="strong">
+          <Servicios />
+        </SectionReveal>
         <DividerGlow />
-        <SectionReveal as="div" delay={0.12}><Productos /></SectionReveal>
+        <SectionReveal as="div" delay={0.12} surface="strong">
+          <Productos />
+        </SectionReveal>
         <DividerGlow />
-        <SectionReveal as="div" delay={0.14}><Tecnologia /></SectionReveal>
+        <SectionReveal as="div" delay={0.14} surface="soft">
+          <Tecnologia />
+        </SectionReveal>
         <DividerGlow />
-        <SectionReveal as="div" delay={0.16}><FAQ /></SectionReveal>
+        <SectionReveal as="div" delay={0.16} surface="strong">
+          <FAQ />
+        </SectionReveal>
         <DividerGlow />
-        <SectionReveal as="div" delay={0.18}><CTA /></SectionReveal>
+        <SectionReveal as="div" delay={0.18} surface="strong">
+          <CTA />
+        </SectionReveal>
         <DividerGlow />
-        <SectionReveal as="div" delay={0.2}><Contacto /></SectionReveal>
+        <SectionReveal as="div" delay={0.2} surface="strong">
+          <Contacto />
+        </SectionReveal>
       </main>
       <BrandStamp />
       <Footer />

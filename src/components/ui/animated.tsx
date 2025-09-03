@@ -8,6 +8,8 @@ type SectionRevealProps = {
   as?: keyof JSX.IntrinsicElements;
   delay?: number;
   className?: string;
+  /** Aplica un contenedor de contraste: "soft" | "strong" */
+  surface?: "soft" | "strong";
 };
 
 /**
@@ -20,18 +22,27 @@ export function SectionReveal({
   as: Tag = "section",
   delay = 0,
   className = "",
+  surface,
 }: SectionRevealProps) {
   const prefersReduced = useReducedMotion();
   const [mounted, setMounted] = React.useState(false);
+  React.useEffect(() => setMounted(true), []);
 
-  React.useEffect(() => {
-    setMounted(true);
-  }, []);
+  const SurfaceWrap = ({ children }: { children: React.ReactNode }) =>
+    surface === "strong" ? (
+      <div className="surface-strong">{children}</div>
+    ) : surface === "soft" ? (
+      <div className="surface">{children}</div>
+    ) : (
+      <>{children}</>
+    );
 
-  // En SSR y primer render del cliente: markup estático (sin motion)
-  // También respetamos prefers-reduced-motion.
   if (!mounted || prefersReduced) {
-    return <Tag className={className}>{children}</Tag>;
+    return (
+      <Tag className={className}>
+        <SurfaceWrap>{children}</SurfaceWrap>
+      </Tag>
+    );
   }
 
   const variants = {
@@ -46,10 +57,11 @@ export function SectionReveal({
 
   return (
     <LazyMotion features={domAnimation}>
-      {/* Usamos un wrapper motion pero solo en cliente (después de mount) */}
       <m.div initial="hidden" whileInView="show" viewport={{ once: true, margin: "-80px" }}>
         <Tag className={className}>
-          <m.div variants={variants}>{children}</m.div>
+          <SurfaceWrap>
+            <m.div variants={variants}>{children}</m.div>
+          </SurfaceWrap>
         </Tag>
       </m.div>
     </LazyMotion>
