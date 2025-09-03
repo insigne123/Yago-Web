@@ -3,6 +3,7 @@ import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import { COMPANY } from '@/config/site';
 import { SEOJSONLD } from '@/components/SEOJSONLD';
+import { BackgroundFX } from '@/components/BackgroundFX';
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://yago.cl";
 
@@ -46,6 +47,7 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
       </head>
       <body className="font-body antialiased">
+        <BackgroundFX />
         <SEOJSONLD />
         {children}
         <Toaster />

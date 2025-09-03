@@ -13,7 +13,7 @@ import { BrandStamp } from "@/components/BrandStamp";
 
 export default function LandingIA() {
   return (
-    <div className="relative min-h-screen bg-gradient-to-b from-black via-slate-950 to-black text-white">
+    <div className="relative min-h-screen bg-black text-white">
       <Navbar />
       <main>
         <Hero />
