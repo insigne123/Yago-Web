@@ -18,7 +18,7 @@ export function Navbar() {
   const logoAlt = `${COMPANY.name} logo`;
 
   return (
-    <header className="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-black/40 bg-gradient-to-r from-fuchsia-500/5 via-cyan-400/5 to-emerald-400/5 border-b border-white/5">
+    <header className="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-black/40 bg-gradient-to-r from-fuchsia-500/5 via-cyan-400/5 to-emerald-400/5 border-b border-white/10 shadow-[0_1px_0_0_rgba(255,255,255,0.04)]">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4">
         <Link href="#inicio" className="font-semibold tracking-tight">
           <span className="inline-flex items-center gap-2">
@@ -40,7 +40,7 @@ export function Navbar() {
             <Link
               key={i.href}
               href={i.href}
-              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              className="navlink-gradient text-sm text-muted-foreground hover:text-foreground transition-all"
             >
               {i.name}
             </Link>

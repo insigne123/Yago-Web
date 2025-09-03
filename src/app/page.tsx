@@ -10,21 +10,30 @@ import { CTA } from "@/components/landing/CTA";
 import { Contacto } from "@/components/landing/Contacto";
 import { Footer } from "@/components/landing/Footer";
 import { BrandStamp } from "@/components/BrandStamp";
+import { SectionReveal, DividerGlow } from "@/components/ui/animated";
 
 export default function LandingIA() {
   return (
     <div className="relative min-h-screen bg-black text-white">
       <Navbar />
       <main>
-        <Hero />
-        <Logos />
-        <Nosotros />
-        <Servicios />
-        <Productos />
-        <Tecnologia />
-        <FAQ />
-        <CTA />
-        <Contacto />
+        <SectionReveal as="div"><Hero /></SectionReveal>
+        <DividerGlow />
+        <SectionReveal as="div" delay={0.05}><Logos /></SectionReveal>
+        <DividerGlow />
+        <SectionReveal as="div" delay={0.1}><Nosotros /></SectionReveal>
+        <DividerGlow />
+        <SectionReveal as="div" delay={0.1}><Servicios /></SectionReveal>
+        <DividerGlow />
+        <SectionReveal as="div" delay={0.12}><Productos /></SectionReveal>
+        <DividerGlow />
+        <SectionReveal as="div" delay={0.14}><Tecnologia /></SectionReveal>
+        <DividerGlow />
+        <SectionReveal as="div" delay={0.16}><FAQ /></SectionReveal>
+        <DividerGlow />
+        <SectionReveal as="div" delay={0.18}><CTA /></SectionReveal>
+        <DividerGlow />
+        <SectionReveal as="div" delay={0.2}><Contacto /></SectionReveal>
       </main>
       <BrandStamp />
       <Footer />
