@@ -48,9 +48,11 @@ export default function RootLayout({
       </head>
       <body className="font-body antialiased">
         <BackgroundFX />
-        <SEOJSONLD />
-        {children}
-        <Toaster />
+        <div className="relative z-10">
+          <SEOJSONLD />
+          {children}
+          <Toaster />
+        </div>
       </body>
     </html>
   );

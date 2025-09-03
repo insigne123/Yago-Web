@@ -14,7 +14,7 @@ import { SectionReveal, DividerGlow } from "@/components/ui/animated";
 
 export default function LandingIA() {
   return (
-    <div className="relative min-h-screen bg-black text-white">
+    <div className="relative min-h-screen text-white">
       <Navbar />
       <main>
         <SectionReveal as="div"><Hero /></SectionReveal>

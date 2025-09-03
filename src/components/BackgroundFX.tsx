@@ -2,7 +2,10 @@
 
 export function BackgroundFX() {
   return (
-    <div aria-hidden="true" className="fixed inset-0 -z-10 pointer-events-none">
+    <div
+      aria-hidden="true"
+      className="fixed inset-0 z-0 pointer-events-none"
+    >
       {/* Glows radiales intensos y fijos */}
       <div className="absolute inset-0 bg-fx-gradient" />
       {/* Grid sutil con máscara */}
