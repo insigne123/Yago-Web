@@ -1,7 +1,7 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
 import * as React from "react";
+import { LazyMotion, domAnimation, m, useReducedMotion } from "framer-motion";
 
 type SectionRevealProps = {
   children: React.ReactNode;
@@ -10,6 +10,11 @@ type SectionRevealProps = {
   className?: string;
 };
 
+/**
+ * Evita hydration mismatch:
+ * - SSR y primer render del cliente devuelven **markup estático** (sin estilos inline de Motion).
+ * - Tras mount (useEffect), se habilita Motion y se anima al entrar en viewport.
+ */
 export function SectionReveal({
   children,
   as: Tag = "section",
@@ -17,28 +22,37 @@ export function SectionReveal({
   className = "",
 }: SectionRevealProps) {
   const prefersReduced = useReducedMotion();
-  const variants = prefersReduced
-    ? { hidden: { opacity: 0 }, show: { opacity: 1 } }
-    : {
-        hidden: { opacity: 0, y: 16, filter: "blur(4px)" },
-        show: {
-          opacity: 1,
-          y: 0,
-          filter: "blur(0px)",
-          transition: { duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] },
-        },
-      };
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // En SSR y primer render del cliente: markup estático (sin motion)
+  // También respetamos prefers-reduced-motion.
+  if (!mounted || prefersReduced) {
+    return <Tag className={className}>{children}</Tag>;
+  }
+
+  const variants = {
+    hidden: { opacity: 0, y: 16, filter: "blur(4px)" },
+    show: {
+      opacity: 1,
+      y: 0,
+      filter: "blur(0px)",
+      transition: { duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] },
+    },
+  };
 
   return (
-    <motion.div
-      variants={variants}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, margin: "-80px" }}
-      className={className}
-    >
-      {React.createElement(Tag, {}, children)}
-    </motion.div>
+    <LazyMotion features={domAnimation}>
+      {/* Usamos un wrapper motion pero solo en cliente (después de mount) */}
+      <m.div initial="hidden" whileInView="show" viewport={{ once: true, margin: "-80px" }}>
+        <Tag className={className}>
+          <m.div variants={variants}>{children}</m.div>
+        </Tag>
+      </m.div>
+    </LazyMotion>
   );
 }
 
