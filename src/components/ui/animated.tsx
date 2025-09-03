@@ -30,12 +30,14 @@ export function SectionReveal({
       };
 
   return (
-    <motion.div initial="hidden" whileInView="show" viewport={{ once: true, margin: "-80px" }}>
-      {React.createElement(
-        Tag,
-        { className },
-        <motion.div variants={variants}>{children}</motion.div>
-      )}
+    <motion.div
+      variants={variants}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, margin: "-80px" }}
+      className={className}
+    >
+      {React.createElement(Tag, {}, children)}
     </motion.div>
   );
 }
