@@ -14,7 +14,7 @@ const gradientText =
 export function Navbar() {
   const nav = useMemo(() => navLinks, []);
 
-  const logoSrc = COMPANY.logo || "/logo-yago.svg"; // fallback
+  const logoSrc = COMPANY.logo || "/logo-yago.png"; // fallback
   const logoAlt = `${COMPANY.name} logo`;
 
   return (
