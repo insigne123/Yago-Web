@@ -19,6 +19,9 @@ export const COMPANY = {
   whatsapp: "+56963930231",
   whatsappLink: "https://wa.me/56963930231",
   location: "Chile · Remoto · LATAM",
+  // Logo principal en carpeta /public
+  logo: "/logo-yago.svg",           // TODO: coloca tu archivo aquí (o usa .png)
+  logoMark: "/logo-yago-mark.svg",  // opcional: isotipo si lo tienes
 };
 
 export const about = {

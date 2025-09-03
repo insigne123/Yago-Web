@@ -9,6 +9,7 @@ import { FAQ } from "@/components/landing/FAQ";
 import { CTA } from "@/components/landing/CTA";
 import { Contacto } from "@/components/landing/Contacto";
 import { Footer } from "@/components/landing/Footer";
+import { BrandStamp } from "@/components/BrandStamp";
 
 export default function LandingIA() {
   return (
@@ -25,6 +26,7 @@ export default function LandingIA() {
         <CTA />
         <Contacto />
       </main>
+      <BrandStamp />
       <Footer />
     </div>
   );
