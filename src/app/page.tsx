@@ -5,7 +5,7 @@ import Nosotros from "@/components/landing/Nosotros";
 import { Servicios } from "@/components/landing/Servicios";
 import { Productos } from "@/components/landing/Productos";
 import { Tecnologia } from "@/components/landing/Tecnologia";
-import { FAQ } from "@/components/landing/FAQ";
+import FAQ from "@/components/landing/FAQ";
 import { CTA } from "@/components/landing/CTA";
 import { Contacto } from "@/components/landing/Contacto";
 import { Footer } from "@/components/landing/Footer";

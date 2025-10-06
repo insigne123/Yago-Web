@@ -157,21 +157,6 @@ export const technologies = [
 
 export const testimonials = [];
 
-export const faqItems = [
-    {
-      q: "¿Trabajan con datos sensibles?",
-      a: "Sí, aplicamos principios de privacidad by‑design, control de accesos por rol y auditoría. La infraestructura se despliega en proveedores con buenas prácticas. Podemos adaptar políticas a tu compliance.",
-    },
-    {
-      q: "¿Cuánto tarda un proyecto típico?",
-      a: "Prototipo funcional en 2‑4 semanas con entregas quincenales. La duración depende del alcance y las integraciones requeridas.",
-    },
-    {
-      q: "¿Qué necesito para comenzar?",
-      a: "Una conversación de descubrimiento (30‑45 min) para entender procesos, herramientas actuales y objetivos de negocio.",
-    },
-];
-
 export const navLinks = [
     { name: "Inicio", href: "#inicio" },
     { name: "Nosotros", href: "#nosotros" },
