@@ -5,6 +5,10 @@ import { SectionReveal } from "@/components/ui/animated";
 import { PRODUCTS } from "@/config/productos";
 
 function ProductosComponent() {
+  if (PRODUCTS.length === 0) {
+    return null; // Don't render the section if there are no products
+  }
+
   return (
     <section id="productos" className="py-24 px-6 md:px-12 relative z-10">
       <div className="max-w-6xl mx-auto">

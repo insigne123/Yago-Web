@@ -11,24 +11,18 @@ export type Product = {
 };
 
 export const PRODUCTS: Product[] = [
-  {
-    slug: "massimo",
-    name: "MASSIMO",
-    badge: "Nuevo",
-    tagline:
-      "Suite de automatización de marketing con IA: campañas, social listening y contenidos en minutos.",
-    highlights: [
-      "Campañas de email con plantillas y tracking (aperturas, clics, respuestas).",
-      "Social listening (YouTube/Google Trends/TikTok) para detectar tendencias.",
-      "Generación de copys y creatividades con IA + repositorio de prompts.",
-      "Calendario editorial, programación y aprobaciones por equipo.",
-      "Dashboard de métricas y scoring por buyer persona.",
-      "Integraciones: Outlook/Gmail, n8n/Make, APIs externas.",
-    ],
-    cta: {
-      label: "Conocer MASSIMO",
-      href: "/#contacto",
-    },
-  },
-  // Si luego agregas más productos, añádelos aquí.
+  // This file is ready for your products.
+  // Add your first product here.
+  // {
+  //   slug: "my-product",
+  //   name: "My Product",
+  //   tagline: "A short and catchy tagline for your product.",
+  //   highlights: [
+  //     "Key feature or benefit 1",
+  //     "Key feature or benefit 2",
+  //     "Key feature or benefit 3",
+  //   ],
+  //   cta: { label: "Learn More", href: "/#contacto" },
+  //   badge: "Nuevo",
+  // },
 ];
