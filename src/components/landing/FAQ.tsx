@@ -9,7 +9,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-export default function FAQ() {
+function FAQComponent() {
   return (
     <section id="faq" className="py-24 px-6 md:px-12 relative z-10">
       <div className="max-w-4xl mx-auto">
@@ -34,7 +34,6 @@ export default function FAQ() {
               ))}
             </Accordion>
 
-            {/* CTA final */}
             <div className="mt-6 text-sm text-gray-400 text-center">
               ¿No ves tu pregunta?{" "}
               <a
@@ -51,3 +50,6 @@ export default function FAQ() {
     </section>
   );
 }
+
+export default FAQComponent;
+export { FAQComponent as FAQ };

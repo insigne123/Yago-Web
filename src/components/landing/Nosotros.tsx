@@ -4,7 +4,7 @@ import Image from "next/image";
 import { SectionReveal } from "@/components/ui/animated";
 import { COLABORADORES } from "@/config/colaboradores";
 
-export default function Nosotros() {
+function NosotrosComponent() {
   return (
     <section id="nosotros" className="py-24 px-6 md:px-12 relative z-10">
       <div className="max-w-6xl mx-auto space-y-10">
@@ -96,3 +96,6 @@ export default function Nosotros() {
     </section>
   );
 }
+
+export default NosotrosComponent;
+export { NosotrosComponent as Nosotros };

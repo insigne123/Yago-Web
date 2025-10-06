@@ -4,7 +4,7 @@ import Link from "next/link";
 import { SectionReveal } from "@/components/ui/animated";
 import { SERVICES } from "@/config/services";
 
-export default function Servicios() {
+function ServiciosComponent() {
   return (
     <section id="servicios" className="py-24 px-6 md:px-12 relative z-10">
       <div className="max-w-6xl mx-auto">
@@ -43,3 +43,6 @@ export default function Servicios() {
     </section>
   );
 }
+
+export default ServiciosComponent;
+export { ServiciosComponent as Servicios };
