@@ -48,10 +48,6 @@ export const FAQ_ITEMS: FAQItem[] = [
     a: "Sí. Recomendamos una PoC/MVP acotada para validar supuestos y KPIs. Si el piloto cumple, escalamos gradualmente y documentamos operación y soporte."
   },
   {
-    q: "¿Quién es dueño del código y de los activos resultantes?",
-    a: "El cliente es dueño de los activos construidos para su operación (código, prompts, pipelines, documentación), salvo utilidades genéricas reutilizables que licitamos como aceleradores."
-  },
-  {
     q: "¿Cómo es el soporte post-implementación?",
     a: "Incluye monitoreo, alertas, parches y mejoras menores. Opcionalmente, mesas de servicio, acuerdos de nivel (SLA) y evolución continua del roadmap."
   }
