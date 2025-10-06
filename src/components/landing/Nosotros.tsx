@@ -8,7 +8,7 @@ export default function Nosotros() {
   return (
     <section id="nosotros" className="py-24 px-6 md:px-12 relative z-10">
       <div className="max-w-6xl mx-auto text-center space-y-8">
-        {/* Ideología */}
+        {/* Ideología (reemplaza por tu texto si ya lo tienes) */}
         <SectionReveal>
           <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-fuchsia-500 via-cyan-400 to-emerald-400 text-transparent bg-clip-text">
             Nuestra Ideología
@@ -20,15 +20,15 @@ export default function Nosotros() {
           </p>
         </SectionReveal>
 
-        {/* Nuestros Colaboradores (4 elementos) */}
+        {/* Nuestros Colaboradores (2 elementos) */}
         <SectionReveal>
           <div className="mt-16">
             <h3 className="text-2xl md:text-3xl font-semibold mb-8 text-white">
               Nuestros Colaboradores
             </h3>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 items-stretch justify-center">
-              {COLABORADORES.map((colab) => {
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 items-stretch justify-center">
+              {COLABORADORES.slice(0, 2).map((colab) => {
                 const Card = (
                   <div
                     className="flex justify-center items-center bg-surface backdrop-blur-md rounded-2xl p-6
@@ -43,6 +43,7 @@ export default function Nosotros() {
                       height={110}
                       className="object-contain opacity-90 hover:opacity-100 transition-opacity"
                       priority={false}
+                      sizes="(min-width: 768px) 220px, 50vw"
                     />
                   </div>
                 );
@@ -64,7 +65,7 @@ export default function Nosotros() {
             </div>
 
             <p className="sr-only">
-              Esta sección muestra 4 colaboradores. Puedes agregar más en la configuración.
+              Esta sección muestra 2 colaboradores. Puedes cambiarlo en la configuración.
             </p>
           </div>
         </SectionReveal>

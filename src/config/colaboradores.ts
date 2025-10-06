@@ -10,20 +10,14 @@ export type Collaborator = {
 export const COLABORADORES: Collaborator[] = [
   {
     name: "GrupoExpro",
-    logo: "/images/logos/grupoexpro.png",
+    // Archivo ubicado en /public según tu screenshot
+    logo: "/GrupoExpro-LATAM-negro.png",
     url: "https://grupoexpro.cl",
   },
   {
     name: "PSOL",
-    logo: "/images/logos/psol.png",
+    // Archivo ubicado en /public según tu screenshot
+    logo: "/PSOL.png",
     url: "https://psol.cl",
-  },
-  {
-    name: "YAGO Partner",
-    logo: "/images/logos/yago-partner.png",
-  },
-  {
-    name: "Cliente/Partner 4",
-    logo: "/images/logos/partner-4.png",
   },
 ];
