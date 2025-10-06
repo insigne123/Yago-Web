@@ -1,65 +1,45 @@
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card";
-import { features, processSteps } from "@/config/site";
-import { Section } from "./Section";
+"use client";
 
-const gradientText =
-  "bg-clip-text text-transparent bg-gradient-to-r from-fuchsia-500 via-cyan-400 to-emerald-400";
+import Link from "next/link";
+import { SectionReveal } from "@/components/ui/animated";
+import { SERVICES } from "@/config/services";
 
-export function Servicios() {
+export default function Servicios() {
   return (
-    <Section id="servicios">
-      <div className="mx-auto max-w-7xl px-4">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className={`text-3xl font-bold md:text-5xl ${gradientText}`}>Servicios</h2>
-          <p className="mt-3 text-muted-foreground">
-            Construimos soluciones extremo a extremo con foco en valor real para tu equipo.
-          </p>
-        </div>
+    <section id="servicios" className="py-24 px-6 md:px-12 relative z-10">
+      <div className="max-w-6xl mx-auto">
+        <SectionReveal>
+          <h2 className="text-4xl md:text-5xl font-bold mb-10 bg-gradient-to-r from-fuchsia-500 via-cyan-400 to-emerald-400 text-transparent bg-clip-text">
+            Servicios
+          </h2>
+        </SectionReveal>
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {features.map(({ icon: Icon, title, desc }) => (
-            <Card
-              key={title}
-              className="group relative overflow-hidden border-white/5 bg-gradient-to-br from-background to-background/60"
-            >
-              <CardHeader>
-                <div className="flex items-center gap-3">
-                  <div className="rounded-xl bg-gradient-to-br from-fuchsia-500/30 via-cyan-400/30 to-emerald-400/30 p-2">
-                    <Icon className="h-5 w-5" />
+        <SectionReveal>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {SERVICES.map((s) => (
+              <Link
+                key={s.slug}
+                href={`/servicios/${s.slug}`}
+                className="group block bg-surface backdrop-blur-md rounded-3xl ring-1 ring-white/10 p-6 hover:ring-white/20 transition"
+                aria-label={`Abrir detalle de ${s.title}`}
+              >
+                <div className="flex flex-col gap-3">
+                  <h3 className="text-xl md:text-2xl font-semibold text-white">
+                    {s.title}
+                  </h3>
+                  <p className="text-gray-300">{s.short}</p>
+                  <div className="text-sm text-gray-400">
+                    Tiempo típico: <span className="text-gray-200">{s.duration}</span>
                   </div>
-                  <CardTitle>{title}</CardTitle>
+                  <div className="text-sm text-gray-400">
+                    Ver más →
+                  </div>
                 </div>
-                <CardDescription>{desc}</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="text-sm text-muted-foreground">
-                  • Descubrimiento · Diseño · Implementación · Mantenimiento
-                </div>
-              </CardContent>
-              <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-gradient-to-r from-fuchsia-500/20 via-cyan-400/20 to-emerald-400/20 blur-2xl transition-opacity group-hover:opacity-70" />
-            </Card>
-          ))}
-        </div>
-
-        {/* Proceso */}
-        <div className="mt-16 grid gap-6 md:grid-cols-4">
-          {processSteps.map(({ icon: Icon, title, desc }) => (
-            <div key={title} className="rounded-2xl border border-white/5 p-5">
-              <div className="mb-2 flex items-center gap-2">
-                <Icon className="h-5 w-5" />
-                <h3 className="font-semibold">{title}</h3>
-              </div>
-              <p className="text-sm text-muted-foreground">{desc}</p>
-            </div>
-          ))}
-        </div>
+              </Link>
+            ))}
+          </div>
+        </SectionReveal>
       </div>
-    </Section>
+    </section>
   );
 }
