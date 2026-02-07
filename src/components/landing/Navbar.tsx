@@ -18,9 +18,9 @@ export function Navbar() {
   const logoAlt = `${COMPANY.name} logo`;
 
   return (
-    <header className="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-black/40 bg-gradient-to-r from-fuchsia-500/5 via-cyan-400/5 to-emerald-400/5 border-b border-white/10 shadow-[0_1px_0_0_rgba(255,255,255,0.04)]">
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-black/40 bg-gradient-to-r from-fuchsia-500/5 via-cyan-400/5 to-emerald-400/5 backdrop-blur supports-[backdrop-filter]:bg-black/30 shadow-[0_1px_0_0_rgba(255,255,255,0.04)]">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4">
-        <Link href="#inicio" className="font-semibold tracking-tight">
+        <Link href="#inicio" className="font-headline font-semibold tracking-tight">
           <span className="inline-flex items-center gap-2">
             <Image
               src={logoSrc}
@@ -28,7 +28,7 @@ export function Navbar() {
               width={28}
               height={28}
               priority
-              className="rounded-md"
+              className="rounded-md ring-1 ring-white/10"
             />
             <span className={`text-xl ${gradientText}`}>{COMPANY.name}</span>
           </span>
@@ -40,7 +40,10 @@ export function Navbar() {
             <Link
               key={i.href}
               href={i.href}
-              className="navlink-gradient text-sm text-muted-foreground hover:text-foreground transition-all"
+              className={`navlink-gradient text-sm font-medium text-muted-foreground hover:text-foreground transition-all plausible-event-name=Nav+Click plausible-event-location=navbar plausible-event-section=${i.href.replace(
+                "#",
+                ""
+              )}`}
             >
               {i.name}
             </Link>
@@ -48,8 +51,11 @@ export function Navbar() {
         </nav>
 
         <div className="hidden items-center gap-2 md:flex">
-          <Button asChild className="bg-gradient-to-r from-fuchsia-500 via-cyan-400 to-emerald-400">
-            <Link href="#contacto" className="text-white">
+          <Button asChild className="bg-gradient-to-r from-fuchsia-500 via-cyan-400 to-emerald-400 shadow-[0_10px_30px_rgba(0,0,0,0.35)]">
+            <Link
+              href="#contacto"
+              className="text-white plausible-event-name=CTA+Agendar+Demo plausible-event-location=navbar"
+            >
               Agendar demo
             </Link>
           </Button>
@@ -66,13 +72,24 @@ export function Navbar() {
             <nav className="mt-8 grid gap-4">
               {nav.map((i) => (
                 <SheetTrigger asChild key={i.href}>
-                  <Link href={i.href} className="text-foreground/90 text-left py-1">
+                  <Link
+                    href={i.href}
+                    className={`text-foreground/90 text-left py-1 plausible-event-name=Nav+Click plausible-event-location=navbar_mobile plausible-event-section=${i.href.replace(
+                      "#",
+                      ""
+                    )}`}
+                  >
                     {i.name}
                   </Link>
                 </SheetTrigger>
               ))}
               <Button asChild className="mt-4 bg-gradient-to-r from-fuchsia-500 via-cyan-400 to-emerald-400">
-                <Link href="#contacto" className="text-white">Agendar demo</Link>
+                <Link
+                  href="#contacto"
+                  className="text-white plausible-event-name=CTA+Agendar+Demo plausible-event-location=navbar_mobile"
+                >
+                  Agendar demo
+                </Link>
               </Button>
             </nav>
           </SheetContent>

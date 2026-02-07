@@ -6,15 +6,16 @@ import { getServiceBySlug, SERVICES } from "@/config/services";
 const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "contacto@yago.cl";
 const WHATSAPP_PHONE = process.env.NEXT_PUBLIC_WHATSAPP_PHONE || ""; // e.g., "56912345678"
 
-type PageProps = { params: { slug: string } };
+type PageProps = { params: Promise<{ slug: string }> };
 
 export function generateStaticParams() {
   // Opcional: pre-generar rutas si usas SSG
   return SERVICES.map((s) => ({ slug: s.slug }));
 }
 
-export function generateMetadata({ params }: PageProps): Metadata {
-  const svc = getServiceBySlug(params.slug);
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const svc = getServiceBySlug(slug);
   if (!svc) return {};
   return {
     title: `${svc.title} — Yago`,
@@ -22,8 +23,9 @@ export function generateMetadata({ params }: PageProps): Metadata {
   };
 }
 
-export default function ServicePage({ params }: PageProps) {
-  const svc = getServiceBySlug(params.slug);
+export default async function ServicePage({ params }: PageProps) {
+  const { slug } = await params;
+  const svc = getServiceBySlug(slug);
   if (!svc) notFound();
 
   const baseMsg = `Hola YAGO, me interesa el servicio: ${svc!.title}. ¿Podemos agendar una conversación?`;
@@ -35,15 +37,19 @@ export default function ServicePage({ params }: PageProps) {
   )}&body=${encodeURIComponent(baseMsg)}`;
 
   return (
-    <main className="py-20 px-6 md:px-12">
-      <div className="max-w-4xl mx-auto space-y-8">
-        <div className="flex items-center justify-between">
-          <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-fuchsia-500 via-cyan-400 to-emerald-400 text-transparent bg-clip-text">
-            {svc!.title}
-          </h1>
+    <main className="py-24">
+      <div className="mx-auto max-w-5xl space-y-8 px-4">
+        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p className="text-xs tracking-[0.22em] text-muted-foreground">SERVICIO</p>
+            <h1 className="mt-3 text-4xl font-semibold bg-gradient-to-r from-fuchsia-500 via-cyan-400 to-emerald-400 text-transparent bg-clip-text md:text-5xl">
+              {svc!.title}
+            </h1>
+          </div>
+
           <Link
             href="/#servicios"
-            className="text-sm text-gray-300 hover:text-white underline underline-offset-4"
+            className="text-sm text-muted-foreground hover:text-foreground underline underline-offset-4"
             aria-label="Volver a servicios"
           >
             ← Volver
@@ -51,29 +57,38 @@ export default function ServicePage({ params }: PageProps) {
         </div>
 
         {/* Resumen / duración */}
-        <section className="bg-surface backdrop-blur-md rounded-3xl ring-1 ring-white/10 p-6 space-y-3">
-          <p className="text-gray-200">{svc!.short}</p>
-          <p className="text-sm text-gray-400">
-            <span className="text-gray-300 font-medium">Tiempo típico:</span> {svc!.duration}
-          </p>
-          {svc!.stack && svc!.stack.length > 0 && (
-            <p className="text-sm text-gray-400">
-              <span className="text-gray-300 font-medium">Tecnologías:</span> {svc!.stack.join(", ")}
-            </p>
-          )}
+        <section className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur space-y-3">
+          <p className="text-foreground/90">{svc!.short}</p>
+          <div className="flex flex-col gap-2 text-sm text-muted-foreground md:flex-row md:items-center md:gap-6">
+            <div>
+              <span className="text-foreground/85 font-medium">Tiempo tipico:</span> {svc!.duration}
+            </div>
+            {svc!.stack && svc!.stack.length > 0 && (
+              <div>
+                <span className="text-foreground/85 font-medium">Tecnologias:</span> {svc!.stack.join(", ")}
+              </div>
+            )}
+          </div>
         </section>
 
         {/* Etapas */}
-        <section className="bg-surface backdrop-blur-md rounded-3xl ring-1 ring-white/10 p-6">
+        <section className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur">
           <h2 className="text-xl md:text-2xl font-semibold text-white mb-4">Etapas del proyecto</h2>
-          <ol className="space-y-5">
+          <ol className="space-y-4">
             {svc!.stages.map((st, i) => (
-              <li key={st.name} className="rounded-2xl p-4 bg-white/5 ring-1 ring-white/10">
+              <li key={st.name} className="rounded-2xl border border-white/10 bg-black/20 p-5">
                 <div className="text-white font-medium">{i + 1}. {st.name}</div>
-                <div className="text-gray-300">{st.description}</div>
+                <div className="mt-1 text-sm text-muted-foreground">{st.description}</div>
                 {st.outputs && st.outputs.length > 0 && (
-                  <ul className="mt-2 list-disc pl-5 text-gray-400">
-                    {st.outputs.map((o) => <li key={o}>{o}</li>)}
+                  <ul className="mt-3 flex flex-wrap gap-2">
+                    {st.outputs.map((o) => (
+                      <li
+                        key={o}
+                        className="rounded-full border border-white/10 bg-black/20 px-3 py-1 text-xs text-foreground/80"
+                      >
+                        {o}
+                      </li>
+                    ))}
                   </ul>
                 )}
               </li>
@@ -82,36 +97,40 @@ export default function ServicePage({ params }: PageProps) {
         </section>
 
         {/* Entregables */}
-        <section className="bg-surface backdrop-blur-md rounded-3xl ring-1 ring-white/10 p-6">
+        <section className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur">
           <h2 className="text-xl md:text-2xl font-semibold text-white mb-4">Entregables</h2>
-          <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-gray-300">
+          <ul className="grid grid-cols-1 gap-3 text-sm text-muted-foreground md:grid-cols-2">
             {svc!.deliverables.map((d) => (
-              <li key={d} className="rounded-xl p-3 bg-white/5 ring-1 ring-white/10">{d}</li>
+              <li key={d} className="rounded-2xl border border-white/10 bg-black/20 p-4">
+                {d}
+              </li>
             ))}
           </ul>
           {svc!.notes && svc!.notes.length > 0 && (
-            <div className="mt-4 text-sm text-gray-400">
-              {svc!.notes.map((n) => <p key={n} className="mt-1">• {n}</p>)}
+            <div className="mt-4 text-sm text-muted-foreground">
+              {svc!.notes.map((n) => (
+                <p key={n} className="mt-1">• {n}</p>
+              ))}
             </div>
           )}
         </section>
 
         {/* CTA contacto */}
-        <section className="bg-surface backdrop-blur-md rounded-3xl ring-1 ring-white/10 p-6 flex flex-col md:flex-row gap-3 md:items-center md:justify-between">
-          <div className="text-gray-300">
-            ¿Listo para conversar sobre <span className="text-white font-medium">{svc!.title}</span>?
+        <section className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+          <div className="text-muted-foreground">
+            Listo para conversar sobre <span className="text-white font-medium">{svc!.title}</span>?
           </div>
-          <div className="flex gap-3">
+          <div className="flex flex-wrap gap-3">
             <a
               href={mailHref}
-              className="inline-flex items-center rounded-xl px-4 py-2 bg-white text-black hover:opacity-90 transition"
+              className={`inline-flex items-center rounded-xl px-4 py-2 bg-white text-black hover:opacity-90 transition plausible-event-name=Service+Contact plausible-event-method=email plausible-event-service=${svc!.slug} plausible-event-location=service_page`}
             >
               Contactar por Email
             </a>
             {waHref ? (
               <a
                 href={waHref}
-                className="inline-flex items-center rounded-xl px-4 py-2 bg-emerald-500/90 hover:bg-emerald-500 transition text-white"
+                className={`inline-flex items-center rounded-xl px-4 py-2 bg-emerald-500/90 hover:bg-emerald-500 transition text-white plausible-event-name=Service+Contact plausible-event-method=whatsapp plausible-event-service=${svc!.slug} plausible-event-location=service_page`}
                 target="_blank" rel="noopener noreferrer"
               >
                 WhatsApp

@@ -2,6 +2,7 @@ import { Navbar } from "@/components/landing/Navbar";
 import { Hero } from "@/components/landing/Hero";
 import { Logos } from "@/components/landing/Logos";
 import Nosotros from "@/components/landing/Nosotros";
+import { Proceso } from "@/components/landing/Proceso";
 import { Servicios } from "@/components/landing/Servicios";
 import { Productos } from "@/components/landing/Productos";
 import { Tecnologia } from "@/components/landing/Tecnologia";
@@ -25,6 +26,10 @@ export default function LandingIA() {
         </SectionReveal>
         <DividerGlow />
         <SectionReveal as="div" delay={0.1}><Nosotros /></SectionReveal>
+        <DividerGlow />
+        <SectionReveal as="div" delay={0.1} surface="soft">
+          <Proceso />
+        </SectionReveal>
         <DividerGlow />
         {/* Secciones densas con surface fuerte para máximo contraste */}
         <SectionReveal as="div" delay={0.1} surface="strong">

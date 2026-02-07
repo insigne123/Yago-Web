@@ -92,6 +92,33 @@ export function buildContactTemplate(data: {
   phone?: string;
   company?: string;
   message: string;
+  topic?: string;
+  attribution?: {
+    firstTouch?: {
+      utm_source?: string;
+      utm_medium?: string;
+      utm_campaign?: string;
+      utm_term?: string;
+      utm_content?: string;
+      referrer?: string;
+      landing?: string;
+      ts?: string;
+    };
+    lastTouch?: {
+      utm_source?: string;
+      utm_medium?: string;
+      utm_campaign?: string;
+      utm_term?: string;
+      utm_content?: string;
+      referrer?: string;
+      landing?: string;
+      ts?: string;
+    };
+  };
+  meta?: {
+    userAgent?: string;
+    referer?: string;
+  };
 }) {
   const safe = {
     name: escapeHTML(data.name || ""),
@@ -99,7 +126,53 @@ export function buildContactTemplate(data: {
     phone: escapeHTML(data.phone || ""),
     company: escapeHTML(data.company || ""),
     message: escapeHTML(data.message || ""),
+    topic: escapeHTML(data.topic || ""),
+
+    ft_utm_source: escapeHTML(data.attribution?.firstTouch?.utm_source || ""),
+    ft_utm_medium: escapeHTML(data.attribution?.firstTouch?.utm_medium || ""),
+    ft_utm_campaign: escapeHTML(data.attribution?.firstTouch?.utm_campaign || ""),
+    ft_utm_term: escapeHTML(data.attribution?.firstTouch?.utm_term || ""),
+    ft_utm_content: escapeHTML(data.attribution?.firstTouch?.utm_content || ""),
+    ft_referrer: escapeHTML(data.attribution?.firstTouch?.referrer || ""),
+    ft_landing: escapeHTML(data.attribution?.firstTouch?.landing || ""),
+    ft_ts: escapeHTML(data.attribution?.firstTouch?.ts || ""),
+
+    lt_utm_source: escapeHTML(data.attribution?.lastTouch?.utm_source || ""),
+    lt_utm_medium: escapeHTML(data.attribution?.lastTouch?.utm_medium || ""),
+    lt_utm_campaign: escapeHTML(data.attribution?.lastTouch?.utm_campaign || ""),
+    lt_utm_term: escapeHTML(data.attribution?.lastTouch?.utm_term || ""),
+    lt_utm_content: escapeHTML(data.attribution?.lastTouch?.utm_content || ""),
+    lt_referrer: escapeHTML(data.attribution?.lastTouch?.referrer || ""),
+    lt_landing: escapeHTML(data.attribution?.lastTouch?.landing || ""),
+    lt_ts: escapeHTML(data.attribution?.lastTouch?.ts || ""),
+
+    meta_user_agent: escapeHTML(data.meta?.userAgent || ""),
+    meta_referer: escapeHTML(data.meta?.referer || ""),
   };
+
+  const hasFT = !!(
+    safe.ft_utm_source ||
+    safe.ft_utm_medium ||
+    safe.ft_utm_campaign ||
+    safe.ft_utm_term ||
+    safe.ft_utm_content ||
+    safe.ft_referrer ||
+    safe.ft_landing ||
+    safe.ft_ts
+  );
+
+  const hasLT = !!(
+    safe.lt_utm_source ||
+    safe.lt_utm_medium ||
+    safe.lt_utm_campaign ||
+    safe.lt_utm_term ||
+    safe.lt_utm_content ||
+    safe.lt_referrer ||
+    safe.lt_landing ||
+    safe.lt_ts
+  );
+
+  const hasMeta = !!(safe.meta_user_agent || safe.meta_referer);
 
   const html = `
   <div style="font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.5;color:#0b0b0b">
@@ -107,6 +180,7 @@ export function buildContactTemplate(data: {
     <p style="margin:0 0 16px">Has recibido un mensaje desde el formulario de Yago.</p>
     <table style="border-collapse:collapse;width:100%">
       <tbody>
+        ${safe.topic ? `<tr><td style="padding:6px 0;width:140px;color:#555">Motivo</td><td>${safe.topic}</td></tr>` : ""}
         <tr><td style="padding:6px 0;width:140px;color:#555">Nombre</td><td>${safe.name}</td></tr>
         <tr><td style="padding:6px 0;color:#555">Email</td><td>${safe.email}</td></tr>
         ${
@@ -121,12 +195,74 @@ export function buildContactTemplate(data: {
         }
       </tbody>
     </table>
+
+    ${
+      hasFT || hasLT || hasMeta
+        ? `
+    <hr style="margin:16px 0;border:0;border-top:1px solid #eee"/>
+    <h3 style="margin:0 0 8px;font-size:14px;color:#111">Origen / Atribución</h3>
+    <table style="border-collapse:collapse;width:100%">
+      <tbody>
+        ${
+          hasFT
+            ? `
+        <tr><td style="padding:6px 0;width:140px;color:#555">First touch</td><td>
+          ${safe.ft_ts ? `<div><strong>TS:</strong> ${safe.ft_ts}</div>` : ""}
+          ${safe.ft_landing ? `<div><strong>Landing:</strong> ${safe.ft_landing}</div>` : ""}
+          ${safe.ft_referrer ? `<div><strong>Referrer:</strong> ${safe.ft_referrer}</div>` : ""}
+          ${
+            safe.ft_utm_source ||
+            safe.ft_utm_medium ||
+            safe.ft_utm_campaign ||
+            safe.ft_utm_term ||
+            safe.ft_utm_content
+              ? `<div><strong>UTM:</strong> source=${safe.ft_utm_source || "-"} · medium=${safe.ft_utm_medium || "-"} · campaign=${safe.ft_utm_campaign || "-"} · term=${safe.ft_utm_term || "-"} · content=${safe.ft_utm_content || "-"}</div>`
+              : ""
+          }
+        </td></tr>`
+            : ""
+        }
+
+        ${
+          hasLT
+            ? `
+        <tr><td style="padding:6px 0;color:#555">Last touch</td><td>
+          ${safe.lt_ts ? `<div><strong>TS:</strong> ${safe.lt_ts}</div>` : ""}
+          ${safe.lt_landing ? `<div><strong>Landing:</strong> ${safe.lt_landing}</div>` : ""}
+          ${safe.lt_referrer ? `<div><strong>Referrer:</strong> ${safe.lt_referrer}</div>` : ""}
+          ${
+            safe.lt_utm_source ||
+            safe.lt_utm_medium ||
+            safe.lt_utm_campaign ||
+            safe.lt_utm_term ||
+            safe.lt_utm_content
+              ? `<div><strong>UTM:</strong> source=${safe.lt_utm_source || "-"} · medium=${safe.lt_utm_medium || "-"} · campaign=${safe.lt_utm_campaign || "-"} · term=${safe.lt_utm_term || "-"} · content=${safe.lt_utm_content || "-"}</div>`
+              : ""
+          }
+        </td></tr>`
+            : ""
+        }
+
+        ${
+          hasMeta
+            ? `
+        <tr><td style="padding:6px 0;color:#555">Meta</td><td>
+          ${safe.meta_referer ? `<div><strong>Referer:</strong> ${safe.meta_referer}</div>` : ""}
+          ${safe.meta_user_agent ? `<div><strong>User-Agent:</strong> ${safe.meta_user_agent}</div>` : ""}
+        </td></tr>`
+            : ""
+        }
+      </tbody>
+    </table>`
+        : ""
+    }
     <hr style="margin:16px 0;border:0;border-top:1px solid #eee"/>
     <p style="white-space:pre-wrap">${safe.message}</p>
   </div>`.trim();
 
   const text = `Nuevo contacto desde la web
 
+${data.topic ? `Motivo: ${data.topic}\n` : ""}
 Nombre: ${data.name}
 Email: ${data.email}
 ${data.phone ? `Teléfono: ${data.phone}\n` : ""}${
@@ -135,5 +271,34 @@ ${data.phone ? `Teléfono: ${data.phone}\n` : ""}${
 Mensaje:
 ${data.message}`;
 
-  return { html, text };
+  const attributionLines: string[] = [];
+  if (hasFT) {
+    attributionLines.push(
+      `\nFirst touch:\n` +
+        `${data.attribution?.firstTouch?.ts ? `- TS: ${data.attribution?.firstTouch?.ts}\n` : ""}` +
+        `${data.attribution?.firstTouch?.landing ? `- Landing: ${data.attribution?.firstTouch?.landing}\n` : ""}` +
+        `${data.attribution?.firstTouch?.referrer ? `- Referrer: ${data.attribution?.firstTouch?.referrer}\n` : ""}` +
+        `- UTM: source=${data.attribution?.firstTouch?.utm_source || "-"} · medium=${data.attribution?.firstTouch?.utm_medium || "-"} · campaign=${data.attribution?.firstTouch?.utm_campaign || "-"} · term=${data.attribution?.firstTouch?.utm_term || "-"} · content=${data.attribution?.firstTouch?.utm_content || "-"}`
+    );
+  }
+  if (hasLT) {
+    attributionLines.push(
+      `\nLast touch:\n` +
+        `${data.attribution?.lastTouch?.ts ? `- TS: ${data.attribution?.lastTouch?.ts}\n` : ""}` +
+        `${data.attribution?.lastTouch?.landing ? `- Landing: ${data.attribution?.lastTouch?.landing}\n` : ""}` +
+        `${data.attribution?.lastTouch?.referrer ? `- Referrer: ${data.attribution?.lastTouch?.referrer}\n` : ""}` +
+        `- UTM: source=${data.attribution?.lastTouch?.utm_source || "-"} · medium=${data.attribution?.lastTouch?.utm_medium || "-"} · campaign=${data.attribution?.lastTouch?.utm_campaign || "-"} · term=${data.attribution?.lastTouch?.utm_term || "-"} · content=${data.attribution?.lastTouch?.utm_content || "-"}`
+    );
+  }
+  if (hasMeta) {
+    attributionLines.push(
+      `\nMeta:\n` +
+        `${data.meta?.referer ? `- Referer: ${data.meta?.referer}\n` : ""}` +
+        `${data.meta?.userAgent ? `- User-Agent: ${data.meta?.userAgent}\n` : ""}`
+    );
+  }
+
+  const textWithAttribution = (text + (attributionLines.length ? `\n\nOrigen / Atribución:${attributionLines.join("\n")}` : "")).trim();
+
+  return { html, text: textWithAttribution };
 }

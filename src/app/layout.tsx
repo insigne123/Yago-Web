@@ -4,6 +4,10 @@ import { Toaster } from '@/components/ui/toaster';
 import { COMPANY } from '@/config/site';
 import { SEOJSONLD } from '@/components/SEOJSONLD';
 import { BackgroundFX } from '@/components/BackgroundFX';
+import { Plausible } from '@/components/analytics/Plausible';
+import { PlausiblePageview } from '@/components/analytics/PlausiblePageview';
+import { AttributionTracker } from '@/components/analytics/AttributionTracker';
+import { AuditWidget } from '@/components/landing/AuditWidget';
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://yago.cl";
 
@@ -44,13 +48,20 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+          rel="stylesheet"
+        />
+        <Plausible />
       </head>
       <body className="font-body antialiased">
         <BackgroundFX />
         <div className="relative z-10">
           <SEOJSONLD />
+          <PlausiblePageview />
+          <AttributionTracker />
           {children}
+          <AuditWidget />
           <Toaster />
         </div>
       </body>

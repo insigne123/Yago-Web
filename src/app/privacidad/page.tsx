@@ -9,7 +9,10 @@ export const metadata = {
 const gradientText =
   "bg-clip-text text-transparent bg-gradient-to-r from-fuchsia-500 via-cyan-400 to-emerald-400";
 
-const UPDATED_AT = "2025-09-02"; // TODO: actualiza al modificar el documento
+const UPDATED_AT = "2026-02-06";
+
+const PLAUSIBLE_DOMAIN = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN || "";
+const USES_ANALYTICS = Boolean(PLAUSIBLE_DOMAIN);
 
 export default function PrivacyPage() {
   return (
@@ -40,8 +43,10 @@ export default function PrivacyPage() {
             <li><strong>Comunicaciones</strong>: nuestra respuesta y seguimiento comercial.</li>
             <li>
               <strong>Uso del sitio</strong>: información técnica mínima para seguridad y operación
-              (logs del servidor). No utilizamos cookies de seguimiento salvo que se indique
-              lo contrario en el futuro.
+              (logs del servidor).
+              {USES_ANALYTICS
+                ? " También usamos analítica para medir tráfico y eventos de uso del sitio (sin enviar información identificable como emails o nombres)."
+                : " No utilizamos cookies de seguimiento salvo que se indique lo contrario en el futuro."}
             </li>
           </ul>
 
@@ -91,8 +96,10 @@ export default function PrivacyPage() {
           <h2>Cookies</h2>
           <p>
             Este sitio no usa cookies de marketing. Podemos utilizar cookies estrictamente
-            necesarias para el funcionamiento. Si en el futuro incorporamos analítica, te lo
-            informaremos y te daremos opciones de control.
+            necesarias para el funcionamiento.
+            {USES_ANALYTICS
+              ? " Para analítica usamos un enfoque sin cookies (por ejemplo, Plausible Analytics) para entender el rendimiento del sitio."
+              : " Si en el futuro incorporamos analítica, te lo informaremos y te daremos opciones de control."}
           </p>
 
           <h2>Menores de edad</h2>

@@ -38,7 +38,26 @@ async function readBody(req: Request): Promise<EmailFormPayload> {
       phone: pick(body as any, ["phone", "telefono", "tel"]),
       company: pick(body as any, ["company", "empresa", "org"]),
       message: pick(body as any, ["message", "mensaje", "content", "consulta", "texto", "msg"]),
+      topic: pick(body as any, ["topic", "motivo", "intent", "reason", "leadType", "lead_type"]),
       hp: pick(body as any, ["hp", "_hp", "honeypot"]),
+
+      ft_utm_source: pick(body as any, ["ft_utm_source"]),
+      ft_utm_medium: pick(body as any, ["ft_utm_medium"]),
+      ft_utm_campaign: pick(body as any, ["ft_utm_campaign"]),
+      ft_utm_term: pick(body as any, ["ft_utm_term"]),
+      ft_utm_content: pick(body as any, ["ft_utm_content"]),
+      ft_referrer: pick(body as any, ["ft_referrer"]),
+      ft_landing: pick(body as any, ["ft_landing"]),
+      ft_ts: pick(body as any, ["ft_ts"]),
+
+      lt_utm_source: pick(body as any, ["lt_utm_source"]),
+      lt_utm_medium: pick(body as any, ["lt_utm_medium"]),
+      lt_utm_campaign: pick(body as any, ["lt_utm_campaign"]),
+      lt_utm_term: pick(body as any, ["lt_utm_term"]),
+      lt_utm_content: pick(body as any, ["lt_utm_content"]),
+      lt_referrer: pick(body as any, ["lt_referrer"]),
+      lt_landing: pick(body as any, ["lt_landing"]),
+      lt_ts: pick(body as any, ["lt_ts"]),
     };
   }
 
@@ -59,7 +78,26 @@ async function readBody(req: Request): Promise<EmailFormPayload> {
       phone: get("phone", "telefono", "tel"),
       company: get("company", "empresa", "org"),
       message: get("message", "mensaje", "content", "consulta", "texto", "msg"),
+      topic: get("topic", "motivo", "intent", "reason", "leadType", "lead_type"),
       hp: get("hp", "_hp", "honeypot"),
+
+      ft_utm_source: get("ft_utm_source"),
+      ft_utm_medium: get("ft_utm_medium"),
+      ft_utm_campaign: get("ft_utm_campaign"),
+      ft_utm_term: get("ft_utm_term"),
+      ft_utm_content: get("ft_utm_content"),
+      ft_referrer: get("ft_referrer"),
+      ft_landing: get("ft_landing"),
+      ft_ts: get("ft_ts"),
+
+      lt_utm_source: get("lt_utm_source"),
+      lt_utm_medium: get("lt_utm_medium"),
+      lt_utm_campaign: get("lt_utm_campaign"),
+      lt_utm_term: get("lt_utm_term"),
+      lt_utm_content: get("lt_utm_content"),
+      lt_referrer: get("lt_referrer"),
+      lt_landing: get("lt_landing"),
+      lt_ts: get("lt_ts"),
     };
   }
 
@@ -79,7 +117,26 @@ async function readBody(req: Request): Promise<EmailFormPayload> {
       phone: get("phone", "telefono", "tel"),
       company: get("company", "empresa", "org"),
       message: get("message", "mensaje", "content", "consulta", "texto", "msg"),
+      topic: get("topic", "motivo", "intent", "reason", "leadType", "lead_type"),
       hp: get("hp", "_hp", "honeypot"),
+
+      ft_utm_source: get("ft_utm_source"),
+      ft_utm_medium: get("ft_utm_medium"),
+      ft_utm_campaign: get("ft_utm_campaign"),
+      ft_utm_term: get("ft_utm_term"),
+      ft_utm_content: get("ft_utm_content"),
+      ft_referrer: get("ft_referrer"),
+      ft_landing: get("ft_landing"),
+      ft_ts: get("ft_ts"),
+
+      lt_utm_source: get("lt_utm_source"),
+      lt_utm_medium: get("lt_utm_medium"),
+      lt_utm_campaign: get("lt_utm_campaign"),
+      lt_utm_term: get("lt_utm_term"),
+      lt_utm_content: get("lt_utm_content"),
+      lt_referrer: get("lt_referrer"),
+      lt_landing: get("lt_landing"),
+      lt_ts: get("lt_ts"),
     };
   }
 
@@ -111,6 +168,29 @@ export async function POST(req: Request) {
     const phone = clampText(data.phone, 60);
     const company = clampText(data.company, 120);
     const message = clampText(data.message, 5000);
+    const topic = clampText(data.topic, 80);
+
+    const ft = {
+      utm_source: clampText(data.ft_utm_source, 200),
+      utm_medium: clampText(data.ft_utm_medium, 200),
+      utm_campaign: clampText(data.ft_utm_campaign, 200),
+      utm_term: clampText(data.ft_utm_term, 200),
+      utm_content: clampText(data.ft_utm_content, 200),
+      referrer: clampText(data.ft_referrer, 800),
+      landing: clampText(data.ft_landing, 500),
+      ts: clampText(data.ft_ts, 60),
+    };
+
+    const lt = {
+      utm_source: clampText(data.lt_utm_source, 200),
+      utm_medium: clampText(data.lt_utm_medium, 200),
+      utm_campaign: clampText(data.lt_utm_campaign, 200),
+      utm_term: clampText(data.lt_utm_term, 200),
+      utm_content: clampText(data.lt_utm_content, 200),
+      referrer: clampText(data.lt_referrer, 800),
+      landing: clampText(data.lt_landing, 500),
+      ts: clampText(data.lt_ts, 60),
+    };
 
     if (!name || !email || !message) {
       return NextResponse.json(
@@ -145,13 +225,19 @@ export async function POST(req: Request) {
         );
     }
 
-    const subject = `📩 [Contacto Yago] ${name} — ${company || "sin empresa"}`;
+    const subject = `📩 [Contacto Yago${topic ? ` | ${topic}` : ""}] ${name} — ${company || "sin empresa"}`;
     const { html, text } = buildContactTemplate({
       name,
       email,
       phone,
       company,
       message,
+      topic,
+      attribution: { firstTouch: ft, lastTouch: lt },
+      meta: {
+        userAgent: clampText(req.headers.get("user-agent"), 600),
+        referer: clampText(req.headers.get("referer"), 800),
+      },
     });
 
     await sendEmail({
@@ -162,6 +248,28 @@ export async function POST(req: Request) {
       text,
       replyTo: email,
     });
+
+    const webhookUrl = (process.env.CONTACT_WEBHOOK_URL || "").trim();
+    if (webhookUrl) {
+      try {
+        await fetch(webhookUrl, {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({
+            type: "contact_lead",
+            receivedAt: new Date().toISOString(),
+            lead: { name, email, phone, company, message, topic },
+            attribution: { firstTouch: ft, lastTouch: lt },
+            meta: {
+              userAgent: req.headers.get("user-agent"),
+              referer: req.headers.get("referer"),
+            },
+          }),
+        });
+      } catch (err: any) {
+        console.error("[contact] webhook error:", err?.message || err);
+      }
+    }
 
     return NextResponse.json({ ok: true, message: "¡Mensaje enviado con éxito!" }, { status: 200 });
   } catch (err: any) {
