@@ -59,9 +59,18 @@ export function OcrMaster() {
                   <Badge variant="outline" className="border-amber-200/20 bg-amber-100/8 px-3 py-1 text-[11px] uppercase tracking-[0.16em] text-amber-100">
                     {OCR_MASTER.badge}
                   </Badge>
-                  <div className="rounded-[1.35rem] border border-white/10 bg-white/[0.05] px-4 py-3 text-right">
-                    <div className="text-xs uppercase tracking-[0.16em] text-slate-400">{OCR_MASTER.footerTitle}</div>
-                    <div className="mt-1 text-sm text-slate-200">Versión premium comercial</div>
+                  <div className="flex items-center gap-3">
+                    <div className="rounded-[1.35rem] border border-white/10 bg-white/[0.05] px-4 py-3 text-right">
+                      <div className="text-xs uppercase tracking-[0.16em] text-slate-400">{OCR_MASTER.footerTitle}</div>
+                      <div className="mt-1 text-sm text-slate-200">Version premium comercial</div>
+                    </div>
+                    <Button
+                      asChild
+                      variant="ghost"
+                      className="rounded-full border border-white/10 bg-white/[0.04] text-slate-100 hover:bg-white/[0.08]"
+                    >
+                      <Link href="/ocr-master">Ver pagina completa</Link>
+                    </Button>
                   </div>
                 </div>
                 <CardTitle className="mt-6 text-4xl font-semibold tracking-[-0.04em] text-white md:mt-8 md:text-6xl">
@@ -96,6 +105,13 @@ export function OcrMaster() {
                   <p className="mt-2 max-w-2xl text-sm leading-relaxed text-slate-300">
                     {OCR_MASTER.proposalDescription}
                   </p>
+                  <Link
+                    href="/ocr-master"
+                    className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-white transition hover:text-sky-100"
+                  >
+                    Explorar el detalle completo
+                    <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  </Link>
                 </div>
               </CardContent>
             </Card>
