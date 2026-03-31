@@ -1,36 +1,33 @@
 import { technologies } from "@/config/site";
 import { Section } from "./Section";
 
-const gradientText =
-  "bg-clip-text text-transparent bg-gradient-to-r from-fuchsia-500 via-cyan-400 to-emerald-400";
-
 export function Tecnologia() {
   return (
     <Section id="tecnologia">
       <div className="mx-auto max-w-7xl px-4">
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-xs tracking-[0.22em] text-muted-foreground">TECNOLOGIA</p>
-          <h2 className={`mt-3 text-3xl font-semibold md:text-5xl ${gradientText}`}>
-            Pila moderna, integrable, escalable
+          <h2 className="mt-3 text-3xl font-semibold text-white md:text-5xl">
+            Pila moderna, integrable y preparada para escalar.
           </h2>
-          <p className="mt-3 text-muted-foreground">
+          <p className="mt-3 text-slate-300">
             Nos conectamos con tus sistemas actuales y dejamos una base mantenible: permisos, logs, alertas y datos.
           </p>
         </div>
 
         <div className="mt-10 grid gap-6 lg:grid-cols-12">
           <div className="lg:col-span-8">
-            <div className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur">
+            <div className="hover-lift rounded-[1.8rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.72),rgba(10,16,25,0.92))] p-6 backdrop-blur-xl">
               <div className="flex items-center justify-between gap-3">
                 <div className="text-sm font-medium text-white">Herramientas y ecosistemas</div>
-                <div className="text-xs text-muted-foreground">Ejemplos tipicos</div>
+                <div className="text-xs text-slate-400">Ejemplos típicos</div>
               </div>
 
               <div className="mt-4 flex flex-wrap gap-2">
                 {technologies.map((t) => (
                   <span
                     key={t}
-                    className="rounded-full border border-white/10 bg-black/20 px-4 py-2 text-xs text-foreground/85"
+                    className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-xs text-slate-300"
                   >
                     {t}
                   </span>
@@ -40,9 +37,9 @@ export function Tecnologia() {
           </div>
 
           <div className="lg:col-span-4">
-            <div className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur">
+            <div className="hover-lift rounded-[1.8rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.72),rgba(10,16,25,0.92))] p-6 backdrop-blur-xl">
               <div className="text-sm font-medium text-white">Lo que siempre incluimos</div>
-              <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
+              <ul className="mt-4 space-y-3 text-sm text-slate-300">
                 {[
                   "Roles y permisos desde el diseno",
                   "Metrica de eventos y conversion",
@@ -51,14 +48,14 @@ export function Tecnologia() {
                 ].map((t) => (
                   <li key={t} className="flex items-start gap-2">
                     <span
-                      className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-gradient-to-r from-fuchsia-500 via-cyan-400 to-emerald-400"
+                      className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-sky-200"
                       aria-hidden="true"
                     />
                     <span>{t}</span>
                   </li>
                 ))}
               </ul>
-              <div className="mt-6 rounded-2xl border border-white/10 bg-black/20 p-4 text-xs text-muted-foreground">
+              <div className="mt-6 rounded-[1.25rem] border border-white/10 bg-black/20 p-4 text-xs leading-relaxed text-slate-400">
                 Si ya tienes herramientas (n8n/Make, Firebase/Supabase, Google/Microsoft), nos adaptamos.
               </div>
             </div>

@@ -1,165 +1,208 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, BadgeCheck } from "lucide-react";
+import { ArrowRight, BadgeCheck, ShieldCheck, Waypoints } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
+  CardDescription,
   CardHeader,
   CardTitle,
-  CardDescription,
 } from "@/components/ui/card";
-import { AnimatedBlobs } from "./AnimatedBlobs";
-import { Section } from "./Section";
 
-const gradientText =
-  "bg-clip-text text-transparent bg-gradient-to-r from-fuchsia-500 via-cyan-400 to-emerald-400";
+const trustSignals = [
+  "Privacidad by design",
+  "Integración API & automatización",
+  "Impacto medible desde el piloto",
+];
 
-const gradientRing =
-  "relative before:absolute before:inset-0 before:rounded-3xl before:p-[1px] before:bg-gradient-to-r before:from-fuchsia-500/70 before:via-cyan-400/70 before:to-emerald-400/70 before:blur-[2px]";
+const heroHighlights = [
+  { k: "Tiempo típico", v: "Piloto en 2-4 semanas" },
+  { k: "Modelo", v: "Servicios + productos aplicados" },
+  { k: "Operación", v: "Roles, trazabilidad y monitoreo" },
+];
+
+const impactMetrics = [
+  {
+    title: "Diseño claro",
+    detail: "Mapeamos procesos, KPI y riesgos antes de construir.",
+  },
+  {
+    title: "Integración real",
+    detail: "Conectamos APIs, documentos, canales y sistemas internos.",
+  },
+  {
+    title: "Operación sostenible",
+    detail: "Dejamos dashboards, alertas y ownership para escalar con confianza.",
+  },
+];
+
+const healthMetrics = [
+  { k: "Flujos activos", v: "12", c: "border-sky-300/20 bg-sky-400/10 text-sky-100" },
+  { k: "SLAs cubiertos", v: "96%", c: "border-emerald-300/20 bg-emerald-400/10 text-emerald-100" },
+  { k: "Trazabilidad", v: "Alta", c: "border-amber-200/20 bg-amber-200/10 text-amber-50" },
+];
 
 export function Hero() {
-  return (
-    <Section id="inicio" className="overflow-hidden">
-      <AnimatedBlobs />
-      <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-4 md:grid-cols-2">
-        <div>
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.05 }}
-            className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-foreground/80 backdrop-blur"
-          >
-            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" aria-hidden="true" />
-            Automatizacion con IA para operaciones
-          </motion.div>
+  const prefersReducedMotion = useReducedMotion();
 
-          <motion.h1
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className={`mt-4 text-4xl font-semibold leading-[1.05] md:text-6xl ${gradientText}`}
-          >
-            Automatizamos tu empresa con IA
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg"
-          >
-            Diseñamos agentes, flujos y aplicaciones web que convierten tareas manuales
-            en operaciones rapidas, seguras y medibles.
-          </motion.p>
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="mt-7 flex flex-wrap items-center gap-3"
-          >
+  return (
+    <section id="inicio" className="relative overflow-hidden pb-20 pt-12 md:pb-24 md:pt-16">
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+        <motion.div
+          className="absolute left-[-10rem] top-[8%] h-[22rem] w-[22rem] rounded-full bg-sky-300/12 blur-[120px]"
+          animate={prefersReducedMotion ? undefined : { x: [0, 18, 0], y: [0, -12, 0] }}
+          transition={{ duration: 24, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute right-[-8rem] top-[10%] h-[20rem] w-[20rem] rounded-full bg-indigo-300/14 blur-[110px]"
+          animate={prefersReducedMotion ? undefined : { x: [0, -16, 0], y: [0, 10, 0] }}
+          transition={{ duration: 28, repeat: Infinity, ease: "easeInOut" }}
+        />
+      </div>
+
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 hero-grid-overlay" />
+
+      <div className="relative mx-auto grid max-w-7xl items-center gap-8 px-4 lg:grid-cols-[1.02fr_0.98fr] lg:gap-14">
+        <motion.div
+          initial={{ opacity: 0, y: 22 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-120px" }}
+          transition={{ duration: 0.72, ease: [0.16, 1, 0.3, 1] }}
+          className="max-w-2xl"
+        >
+          <h1 className="max-w-3xl text-balance font-headline text-4xl font-semibold leading-[0.98] text-white md:text-6xl lg:text-[4.7rem]">
+            Automatización, agentes y productos IA para operar con más claridad.
+          </h1>
+
+          <p className="mt-4 max-w-xl text-base leading-relaxed text-slate-300 md:text-lg">
+            YAGO diseña sistemas que reducen fricción operativa, integran herramientas existentes y
+            convierten procesos manuales en operaciones trazables, rápidas y medibles.
+          </p>
+
+          <div className="mt-6 grid max-w-2xl grid-cols-1 gap-3 md:grid-cols-3">
+            {heroHighlights.map((item) => (
+              <div
+                key={item.k}
+                className="rounded-[1.35rem] border border-white/10 bg-white/[0.04] px-4 py-4 backdrop-blur-sm"
+              >
+                <div className="text-[11px] uppercase tracking-[0.14em] text-slate-400">{item.k}</div>
+                <div className="mt-1 text-sm font-medium text-white">{item.v}</div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-7 flex flex-wrap items-center gap-3">
             <Button
               asChild
               size="lg"
-              className="group bg-gradient-to-r from-fuchsia-500 via-cyan-400 to-emerald-400 text-white plausible-event-name=CTA+Agendar+Demo plausible-event-location=hero"
+              className="group rounded-full border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(223,234,255,0.92))] px-6 text-slate-950 shadow-[0_14px_38px_rgba(167,199,255,0.16)] transition-transform hover:-translate-y-0.5 plausible-event-name=CTA+Agendar+Demo plausible-event-location=hero"
             >
               <Link href="#contacto">
-                Agendar demo
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                Agendar Demo
+                <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </Link>
             </Button>
+
             <Button
               asChild
               size="lg"
               variant="ghost"
-              className="border border-white/15 text-foreground/90 hover:bg-white/5 plausible-event-name=CTA+Ver+Servicios plausible-event-location=hero"
+              className="rounded-full border border-white/12 bg-white/[0.03] px-6 text-slate-100 hover:bg-white/[0.06] plausible-event-name=CTA+Ver+Servicios plausible-event-location=hero"
             >
-              <Link href="#servicios">Ver servicios</Link>
+              <Link href="#servicios">Ver Servicios</Link>
             </Button>
 
             <Link
-              href="#productos"
-              className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition plausible-event-name=CTA+Explorar+Productos plausible-event-location=hero"
+              href="#ocr-master"
+              className="inline-flex items-center gap-2 rounded-full px-1 text-sm font-medium text-slate-300 transition hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-200/70 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 plausible-event-name=CTA+Ver+OCR+Master plausible-event-location=hero"
             >
-              Explorar productos
-              <ArrowRight className="h-4 w-4" />
+              Explorar OCR Master
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
-          </motion.div>
+          </div>
 
-          <div className="mt-8 flex flex-wrap gap-2 text-sm text-muted-foreground">
-            {["Privacidad by-design", "Human-in-the-loop", "ROI medible"].map((t) => (
+          <div className="mt-7 flex flex-wrap gap-2 text-sm text-slate-300">
+            {trustSignals.map((signal) => (
               <div
-                key={t}
-                className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-2"
+                key={signal}
+                className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-2"
               >
-                <BadgeCheck className="h-4 w-4" />
-                <span>{t}</span>
+                <BadgeCheck className="h-4 w-4 text-sky-200" aria-hidden="true" />
+                <span>{signal}</span>
               </div>
             ))}
           </div>
-        </div>
+        </motion.div>
 
-        <div className="relative">
-          <div className={`${gradientRing} rounded-3xl`}>
-            <div className="relative rounded-3xl bg-gradient-to-br from-background/60 to-background/30 p-1">
-              <Card className="relative overflow-hidden rounded-3xl border-white/10 bg-card/60 backdrop-blur">
-                <CardHeader className="pb-4">
-                  <div className="inline-flex items-center gap-2 text-xs text-muted-foreground">
-                    <span className="h-2 w-2 rounded-full bg-cyan-400" aria-hidden="true" />
-                    Ejemplo de tablero
-                  </div>
-                  <CardTitle className="mt-2 text-2xl md:text-3xl">Impacto operativo</CardTitle>
-                  <CardDescription>
-                    Visibilidad sobre flujos, errores y ahorro de tiempo (varia segun el caso).
-                  </CardDescription>
-                </CardHeader>
+        <motion.div
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-120px" }}
+          transition={{ duration: 0.8, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+          className="relative lg:justify-self-end"
+        >
+          <div className="absolute inset-x-10 top-4 h-28 rounded-full bg-sky-300/10 blur-[90px]" aria-hidden="true" />
 
-                <CardContent className="grid gap-3 md:grid-cols-3">
-                  {[
-                    { k: "Tiempo de ciclo", v: "-40%", d: "Menos espera entre sistemas" },
-                    { k: "Errores", v: "-55%", d: "Validaciones + trazabilidad" },
-                    { k: "SLA", v: "+", d: "Alertas y reintentos automaticos" },
-                  ].map((m) => (
+          <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,24,39,0.8),rgba(12,18,30,0.94))] p-1 shadow-[0_30px_100px_rgba(0,0,0,0.22)] backdrop-blur-xl">
+            <Card className="relative overflow-hidden rounded-[1.75rem] border-white/8 bg-transparent shadow-none">
+              <CardHeader className="pb-5">
+                <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.14em] text-slate-400">
+                  <Waypoints className="h-4 w-4 text-sky-200" aria-hidden="true" />
+                  YAGO Operating Canvas
+                </div>
+                <CardTitle className="mt-3 text-[2rem] leading-none text-white md:text-[2.4rem]">
+                  De brief a operación.
+                </CardTitle>
+                <CardDescription className="max-w-md text-sm leading-relaxed text-slate-300">
+                  Unimos diseño de flujo, producto e integración técnica para que el sistema quede listo
+                  para operar, no solo para verse bien en una demo.
+                </CardDescription>
+              </CardHeader>
+
+              <CardContent className="space-y-4">
+                <div className="grid gap-3 md:grid-cols-3">
+                  {impactMetrics.map((metric) => (
                     <div
-                      key={m.k}
-                      className="group rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm transition hover:border-white/15"
+                      key={metric.title}
+                      className="rounded-[1.35rem] border border-white/10 bg-white/[0.04] p-4"
                     >
-                      <div className="flex items-start justify-between gap-3">
-                        <div className="text-sm text-muted-foreground">{m.k}</div>
-                        <div className="h-1.5 w-10 rounded-full bg-gradient-to-r from-fuchsia-500/60 via-cyan-400/60 to-emerald-400/60" />
-                      </div>
-                      <div className="mt-2 text-3xl font-semibold text-white">{m.v}</div>
-                      <div className="mt-1 text-xs text-muted-foreground">{m.d}</div>
+                      <div className="text-sm font-semibold text-white">{metric.title}</div>
+                      <div className="mt-2 text-sm leading-relaxed text-slate-300">{metric.detail}</div>
                     </div>
                   ))}
-                </CardContent>
+                </div>
 
-                <div className="px-6 pb-6">
-                  <div className="rounded-2xl border border-white/10 bg-black/30 p-4">
-                    <div className="flex items-center justify-between gap-3">
-                      <div className="text-sm text-white">Estado de automatizaciones</div>
-                      <div className="text-xs text-muted-foreground">Ultimas 24h</div>
+                <div className="rounded-[1.5rem] border border-white/10 bg-black/20 p-5">
+                  <div className="flex items-center justify-between gap-3">
+                    <div>
+                      <div className="inline-flex items-center gap-2 text-sm font-medium text-white">
+                        <ShieldCheck className="h-4 w-4 text-sky-200" aria-hidden="true" />
+                        Señales de una implementación madura
+                      </div>
+                      <div className="mt-1 text-sm text-slate-400">Productos, servicios y operación documentada.</div>
                     </div>
-                    <div className="mt-3 grid grid-cols-3 gap-2 text-xs">
-                      {[
-                        { k: "OK", v: "96%", c: "bg-emerald-400/30 text-emerald-200" },
-                        { k: "Reintentos", v: "3%", c: "bg-cyan-400/25 text-cyan-200" },
-                        { k: "Fallos", v: "1%", c: "bg-fuchsia-400/25 text-fuchsia-200" },
-                      ].map((x) => (
-                        <div key={x.k} className={`rounded-xl border border-white/10 px-3 py-2 ${x.c}`}>
-                          <div className="text-[11px] opacity-90">{x.k}</div>
-                          <div className="mt-1 text-base font-semibold">{x.v}</div>
-                        </div>
-                      ))}
+                    <div className="rounded-full border border-white/10 bg-white/[0.05] px-3 py-1 text-xs uppercase tracking-[0.16em] text-slate-300">
+                      Últimos 30 días
                     </div>
                   </div>
+
+                  <div className="mt-4 grid grid-cols-3 gap-2 text-xs">
+                    {healthMetrics.map((metric) => (
+                      <div key={metric.k} className={`rounded-2xl border px-3 py-3 ${metric.c}`}>
+                        <div className="text-[11px] uppercase tracking-[0.12em] opacity-80">{metric.k}</div>
+                        <div className="mt-2 text-lg font-semibold">{metric.v}</div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </Card>
-            </div>
+              </CardContent>
+            </Card>
           </div>
-        </div>
+        </motion.div>
       </div>
-    </Section>
+    </section>
   );
 }

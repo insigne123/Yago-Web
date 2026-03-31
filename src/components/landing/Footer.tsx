@@ -1,61 +1,64 @@
 import Link from "next/link";
-import { COMPANY, footerLinks } from "@/config/site";
 import { Mail, MessageCircle } from "lucide-react";
+import { COMPANY, footerLinks } from "@/config/site";
 
 export function Footer() {
   return (
-    <footer className="border-t border-white/10 py-12">
+    <footer className="relative pb-12 pt-6">
       <div className="mx-auto max-w-7xl px-4">
-        <div className="grid gap-8 md:grid-cols-12">
-          <div className="md:col-span-5">
-            <div className="text-lg font-semibold text-white">{COMPANY.name}</div>
-            <p className="mt-2 max-w-md text-sm text-muted-foreground">
-              Automatizacion con IA: agentes, flujos y datos para acelerar tu operacion.
-            </p>
-            <div className="mt-4 text-xs text-muted-foreground">{COMPANY.location}</div>
-          </div>
+        <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,23,35,0.9),rgba(10,15,24,0.98))] shadow-[0_24px_90px_rgba(0,0,0,0.2)] backdrop-blur-xl">
+          <div className="grid gap-8 px-6 py-8 md:grid-cols-12 md:px-8 md:py-10">
+            <div className="md:col-span-4">
+              <div className="font-headline text-2xl font-semibold text-white">{COMPANY.name}</div>
+              <p className="mt-3 max-w-sm text-sm leading-relaxed text-slate-300">
+                Automatización con IA, productos digitales e integraciones para equipos que necesitan
+                operar mejor sin perder control.
+              </p>
+              <div className="mt-4 text-xs uppercase tracking-[0.16em] text-slate-400">{COMPANY.location}</div>
+            </div>
 
-          <div className="md:col-span-4">
-            <div className="text-sm font-medium text-white">Secciones</div>
-            <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted-foreground">
-              {footerLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  className="hover:text-foreground transition-colors"
+            <div className="md:col-span-4">
+              <div className="text-sm font-medium text-white">Secciones</div>
+              <div className="mt-4 grid grid-cols-2 gap-3 text-sm text-slate-300">
+                {footerLinks.map((link) => (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    className="rounded-xl px-2 py-1 transition hover:bg-white/[0.04] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-200/70 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            <div className="md:col-span-4">
+              <div className="text-sm font-medium text-white">Contacto Directo</div>
+              <div className="mt-4 grid gap-3 text-sm">
+                <a
+                  className="inline-flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3 text-slate-300 transition hover:border-white/14 hover:bg-white/[0.06] hover:text-white"
+                  href={`mailto:${COMPANY.email}`}
                 >
-                  {link.name}
-                </Link>
-              ))}
+                  <Mail className="h-4 w-4 text-sky-200" aria-hidden="true" />
+                  <span className="min-w-0 truncate">{COMPANY.email}</span>
+                </a>
+                <a
+                  className="inline-flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3 text-slate-300 transition hover:border-white/14 hover:bg-white/[0.06] hover:text-white"
+                  href={COMPANY.whatsappLink}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <MessageCircle className="h-4 w-4 text-emerald-200" aria-hidden="true" />
+                  <span>{COMPANY.whatsapp}</span>
+                </a>
+              </div>
             </div>
           </div>
 
-          <div className="md:col-span-3">
-            <div className="text-sm font-medium text-white">Contacto</div>
-            <div className="mt-3 grid gap-2 text-sm">
-              <a
-                className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition"
-                href={`mailto:${COMPANY.email}`}
-              >
-                <Mail className="h-4 w-4" />
-                {COMPANY.email}
-              </a>
-              <a
-                className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition"
-                href={COMPANY.whatsappLink}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <MessageCircle className="h-4 w-4" />
-                {COMPANY.whatsapp}
-              </a>
-            </div>
+          <div className="flex flex-col gap-2 border-t border-white/10 px-6 py-4 text-xs text-slate-400 md:flex-row md:items-center md:justify-between md:px-8">
+            <div>© {new Date().getFullYear()} {COMPANY.name} · IA, Integraciones & Automatización</div>
+            <div>Hecho en Chile · Remoto para LATAM</div>
           </div>
-        </div>
-
-        <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 text-xs text-muted-foreground md:flex-row">
-          <div>© {new Date().getFullYear()} {COMPANY.name} — IA & Automatizacion</div>
-          <div>Hecho en Chile · Remoto</div>
         </div>
       </div>
     </footer>

@@ -5,6 +5,7 @@ import Nosotros from "@/components/landing/Nosotros";
 import { Proceso } from "@/components/landing/Proceso";
 import { Servicios } from "@/components/landing/Servicios";
 import { Productos } from "@/components/landing/Productos";
+import { OcrMaster } from "@/components/landing/OcrMaster";
 import { Tecnologia } from "@/components/landing/Tecnologia";
 import FAQ from "@/components/landing/FAQ";
 import { CTA } from "@/components/landing/CTA";
@@ -15,17 +16,19 @@ import { SectionReveal, DividerGlow } from "@/components/ui/animated";
 
 export default function LandingIA() {
   return (
-    <div className="relative min-h-screen text-white">
+    <div className="relative min-h-screen overflow-x-clip text-white">
       <Navbar />
-      <main>
-        <SectionReveal as="div"><Hero /></SectionReveal>
+      <main id="main-content" className="main-premium">
+        <Hero />
         <DividerGlow />
         {/* Logos con surface suave */}
         <SectionReveal as="div" delay={0.05} surface="soft">
           <Logos />
         </SectionReveal>
         <DividerGlow />
-        <SectionReveal as="div" delay={0.1}><Nosotros /></SectionReveal>
+        <SectionReveal as="div" delay={0.1}>
+          <Nosotros />
+        </SectionReveal>
         <DividerGlow />
         <SectionReveal as="div" delay={0.1} surface="soft">
           <Proceso />
@@ -38,6 +41,10 @@ export default function LandingIA() {
         <DividerGlow />
         <SectionReveal as="div" delay={0.12} surface="strong">
           <Productos />
+        </SectionReveal>
+        <DividerGlow />
+        <SectionReveal as="div" delay={0.13} surface="strong">
+          <OcrMaster />
         </SectionReveal>
         <DividerGlow />
         <SectionReveal as="div" delay={0.14} surface="soft">

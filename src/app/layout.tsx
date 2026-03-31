@@ -1,15 +1,29 @@
-import type { Metadata } from 'next';
-import './globals.css';
-import { Toaster } from '@/components/ui/toaster';
-import { COMPANY } from '@/config/site';
-import { SEOJSONLD } from '@/components/SEOJSONLD';
-import { BackgroundFX } from '@/components/BackgroundFX';
-import { Plausible } from '@/components/analytics/Plausible';
-import { PlausiblePageview } from '@/components/analytics/PlausiblePageview';
-import { AttributionTracker } from '@/components/analytics/AttributionTracker';
-import { AuditWidget } from '@/components/landing/AuditWidget';
+import type { Metadata, Viewport } from "next";
+import { Instrument_Sans, Manrope } from "next/font/google";
+import "./globals.css";
+import { Toaster } from "@/components/ui/toaster";
+import { COMPANY } from "@/config/site";
+import { SEOJSONLD } from "@/components/SEOJSONLD";
+import { BackgroundFX } from "@/components/BackgroundFX";
+import { Plausible } from "@/components/analytics/Plausible";
+import { PlausiblePageview } from "@/components/analytics/PlausiblePageview";
+import { AttributionTracker } from "@/components/analytics/AttributionTracker";
+import { CloudflareWebAnalytics } from "@/components/analytics/CloudflareWebAnalytics";
+import { AuditWidget } from "@/components/landing/AuditWidget";
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://yago.cl";
+
+const bodyFont = Manrope({
+  subsets: ["latin"],
+  variable: "--font-body",
+  weight: ["400", "500", "600", "700", "800"],
+});
+
+const headlineFont = Instrument_Sans({
+  subsets: ["latin"],
+  variable: "--font-headline",
+  weight: ["500", "600", "700"],
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
@@ -38,6 +52,10 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  themeColor: "#070b13",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -46,15 +64,16 @@ export default function RootLayout({
   return (
     <html lang="es" className="dark">
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
-          rel="stylesheet"
-        />
         <Plausible />
+        <CloudflareWebAnalytics />
       </head>
-      <body className="font-body antialiased">
+      <body className={`${bodyFont.variable} ${headlineFont.variable} font-body antialiased`}>
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-white focus:px-4 focus:py-2 focus:text-black"
+        >
+          Ir al contenido principal
+        </a>
         <BackgroundFX />
         <div className="relative z-10">
           <SEOJSONLD />

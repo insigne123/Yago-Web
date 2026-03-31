@@ -1,57 +1,68 @@
+import { Badge } from "@/components/ui/badge";
 import { processSteps } from "@/config/site";
 import { Section } from "./Section";
 
-const gradientText =
-  "bg-clip-text text-transparent bg-gradient-to-r from-fuchsia-500 via-cyan-400 to-emerald-400";
+const deliverables = [
+  "Backlog priorizado + KPI",
+  "Arquitectura + plan de accesos",
+  "MVP funcional + QA",
+  "Monitoreo + runbook",
+];
 
 export function Proceso() {
-  const deliverables = [
-    "Backlog priorizado + KPIs",
-    "Arquitectura + plan de accesos",
-    "MVP funcional + QA",
-    "Monitoreo + runbook",
-  ];
-
   return (
     <Section className="z-10">
       <div className="mx-auto max-w-7xl px-4">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-xs tracking-[0.22em] text-muted-foreground">METODO</p>
-          <h2 className={`mt-3 text-3xl font-semibold md:text-5xl ${gradientText}`}>
-            De proceso a produccion, con KPIs
+          <Badge variant="outline" className="border-white/12 bg-white/[0.04] px-3 py-1 text-[11px] uppercase tracking-[0.16em] text-slate-300">
+            Método
+          </Badge>
+          <h2 className="mt-4 text-3xl font-semibold text-white md:text-5xl">
+            Un proceso corto, claro y visible para cada decisión importante.
           </h2>
-          <p className="mt-3 text-muted-foreground">
-            Trabajamos por etapas cortas para entregar valor temprano y operar con confianza.
+          <p className="mt-4 text-base leading-relaxed text-slate-300">
+            Trabajamos por etapas cortas para entregar valor temprano, ordenar integraciones y dejar el
+            sistema listo para operar con ownership compartido.
           </p>
         </div>
 
-        <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {processSteps.map((s, idx) => {
-            const Icon = s.icon;
-            const d = deliverables[idx] || "Entrega por etapa";
-            return (
-              <div
-                key={s.title}
-                className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur"
-              >
-                <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-fuchsia-500/60 via-cyan-400/60 to-emerald-400/60 opacity-60" />
+        <div className="relative mt-12">
+          <div
+            aria-hidden="true"
+            className="absolute left-0 right-0 top-9 hidden h-px bg-gradient-to-r from-transparent via-sky-200/35 to-transparent lg:block"
+          />
 
-                <div className="flex items-center gap-3">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-black/25">
-                    <Icon className="h-5 w-5 text-foreground/90" />
+          <div className="grid gap-6 lg:grid-cols-4 lg:gap-5">
+            {processSteps.map((step, index) => {
+              const Icon = step.icon;
+
+              return (
+                <div
+                  key={step.title}
+                  className="hover-lift relative rounded-[1.8rem] border border-white/10 bg-[linear-gradient(180deg,rgba(18,24,37,0.74),rgba(10,16,25,0.9))] p-6 shadow-[0_20px_60px_rgba(0,0,0,0.12)] backdrop-blur-xl"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="flex size-14 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.05] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]">
+                      <Icon className="h-5 w-5" aria-hidden="true" />
+                    </div>
+                    <div>
+                      <div className="text-xs font-medium uppercase tracking-[0.16em] text-slate-400">
+                        Paso {index + 1}
+                      </div>
+                      <div className="mt-1 text-xl font-semibold text-white">{step.title}</div>
+                    </div>
                   </div>
-                  <div>
-                    <div className="text-lg font-semibold text-white">{s.title}</div>
-                    <div className="mt-0.5 text-xs text-muted-foreground">{s.desc}</div>
+
+                  <p className="mt-5 text-sm leading-relaxed text-slate-300">{step.desc}</p>
+
+                  <div className="mt-6 rounded-[1.25rem] border border-white/10 bg-black/20 px-4 py-4">
+                    <div className="text-[11px] uppercase tracking-[0.16em] text-slate-400">Entregable</div>
+                    <div className="mt-2 text-sm font-medium text-slate-100">{deliverables[index]}</div>
                   </div>
                 </div>
-
-                <div className="mt-5 rounded-2xl border border-white/10 bg-black/20 p-4 text-xs text-muted-foreground">
-                  Entregable: <span className="text-foreground/90">{d}</span>
-                </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </div>
     </Section>

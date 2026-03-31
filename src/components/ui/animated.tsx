@@ -1,7 +1,15 @@
 "use client";
 
 import * as React from "react";
-import { LazyMotion, domAnimation, m, useReducedMotion } from "framer-motion";
+import {
+  LazyMotion,
+  domAnimation,
+  m,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "framer-motion";
 
 type SectionRevealProps = {
   children: React.ReactNode;
@@ -26,7 +34,25 @@ export function SectionReveal({
 }: SectionRevealProps) {
   const prefersReduced = useReducedMotion();
   const [mounted, setMounted] = React.useState(false);
+  const sectionRef = React.useRef<HTMLDivElement | null>(null);
   React.useEffect(() => setMounted(true), []);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start 98%", "start 30%"],
+  });
+
+  const progress = useSpring(scrollYProgress, {
+    stiffness: 72,
+    damping: 32,
+    mass: 0.95,
+  });
+
+  const entranceStart = Math.min(delay * 0.24, 0.14);
+
+  const opacity = useTransform(progress, [entranceStart, 1], [0.84, 1]);
+  const y = useTransform(progress, [entranceStart, 1], [14, 0]);
+  const scale = useTransform(progress, [entranceStart, 1], [0.996, 1]);
 
   const SurfaceWrap = ({ children }: { children: React.ReactNode }) =>
     surface === "strong" ? (
@@ -45,22 +71,12 @@ export function SectionReveal({
     );
   }
 
-  const variants = {
-    hidden: { opacity: 0, y: 16, filter: "blur(4px)" },
-    show: {
-      opacity: 1,
-      y: 0,
-      filter: "blur(0px)",
-      transition: { duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] },
-    },
-  };
-
   return (
     <LazyMotion features={domAnimation}>
-      <m.div initial="hidden" whileInView="show" viewport={{ once: true, margin: "-80px" }}>
+      <m.div ref={sectionRef} style={{ opacity, y, scale }}>
         <Tag className={className}>
           <SurfaceWrap>
-            <m.div variants={variants}>{children}</m.div>
+            {children}
           </SurfaceWrap>
         </Tag>
       </m.div>
@@ -70,8 +86,9 @@ export function SectionReveal({
 
 export function DividerGlow() {
   return (
-    <div className="my-10 md:my-16">
-      <div className="h-px w-full bg-fx-divider" />
+    <div className="relative my-4 h-6 md:my-8 md:h-10">
+      <div className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-fx-divider" />
+      <div className="absolute inset-x-0 top-1/2 h-6 -translate-y-1/2 bg-fx-divider-fade md:h-10" />
     </div>
   );
 }

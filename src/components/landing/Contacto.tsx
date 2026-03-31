@@ -15,12 +15,10 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Section } from "./Section";
 import { Mail, MapPin, MessageCircle } from "lucide-react";
-
-const gradientText =
-  "bg-clip-text text-transparent bg-gradient-to-r from-fuchsia-500 via-cyan-400 to-emerald-400";
 
 export function Contacto() {
   const { toast } = useToast();
@@ -91,18 +89,19 @@ export function Contacto() {
         <div className="grid items-start gap-8 md:grid-cols-2">
           <div>
             <p className="text-xs tracking-[0.22em] text-muted-foreground">CONTACTO</p>
-            <h2 className={`mt-3 text-3xl font-semibold md:text-5xl ${gradientText}`}>Conversemos</h2>
-            <p className="mt-3 text-muted-foreground">
-              Cuéntanos tu caso y te proponemos un roadmap con quick wins medibles.
+            <h2 className="mt-3 text-3xl font-semibold text-white md:text-5xl">Conversemos</h2>
+            <p className="mt-3 max-w-xl leading-relaxed text-slate-300">
+              Cuéntanos tu caso y te proponemos un roadmap con quick wins medibles, prioridades claras
+              y una primera recomendación de arquitectura.
             </p>
 
             <div className="mt-6 grid gap-3 sm:grid-cols-2">
               <a
                 href={`mailto:${COMPANY.email}`}
-                className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-muted-foreground backdrop-blur transition hover:border-white/15 hover:bg-white/[0.06]"
+                className="hover-lift rounded-[1.5rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.72),rgba(10,16,25,0.9))] p-4 text-sm text-slate-300 backdrop-blur-xl transition hover:border-white/14"
               >
                 <div className="flex items-center gap-2 text-white">
-                  <Mail className="h-4 w-4 text-cyan-200" />
+                  <Mail className="h-4 w-4 text-sky-200" />
                   Email
                 </div>
                 <div className="mt-2 underline underline-offset-4">{COMPANY.email}</div>
@@ -112,7 +111,7 @@ export function Contacto() {
                 href={COMPANY.whatsappLink}
                 target="_blank"
                 rel="noreferrer"
-                className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-muted-foreground backdrop-blur transition hover:border-white/15 hover:bg-white/[0.06] plausible-event-name=CTA+WhatsApp plausible-event-location=contact_section"
+                className="hover-lift rounded-[1.5rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.72),rgba(10,16,25,0.9))] p-4 text-sm text-slate-300 backdrop-blur-xl transition hover:border-white/14 plausible-event-name=CTA+WhatsApp plausible-event-location=contact_section"
               >
                 <div className="flex items-center gap-2 text-white">
                   <MessageCircle className="h-4 w-4 text-emerald-200" />
@@ -121,9 +120,9 @@ export function Contacto() {
                 <div className="mt-2 underline underline-offset-4">{COMPANY.whatsapp}</div>
               </a>
 
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-muted-foreground backdrop-blur sm:col-span-2">
+              <div className="hover-lift rounded-[1.5rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.72),rgba(10,16,25,0.9))] p-4 text-sm text-slate-300 backdrop-blur-xl sm:col-span-2">
                 <div className="flex items-center gap-2 text-white">
-                  <MapPin className="h-4 w-4 text-fuchsia-200" />
+                  <MapPin className="h-4 w-4 text-amber-100" />
                   Operamos
                 </div>
                 <div className="mt-2">{COMPANY.location}</div>
@@ -131,13 +130,13 @@ export function Contacto() {
             </div>
           </div>
 
-          <Card className="border-white/10 bg-white/5 backdrop-blur">
+          <Card className="hover-lift rounded-[1.8rem] border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.76),rgba(10,16,25,0.92))] shadow-[0_20px_60px_rgba(0,0,0,0.14)] backdrop-blur-xl">
             <CardHeader>
               <CardTitle>Escríbenos</CardTitle>
-              <CardDescription>Te responderemos muy pronto.</CardDescription>
+              <CardDescription>Te respondemos con el siguiente paso recomendado para tu caso.</CardDescription>
             </CardHeader>
             <CardContent>
-              <form onSubmit={onSubmit} onFocusCapture={markStart} className="grid gap-3">
+              <form onSubmit={onSubmit} onFocusCapture={markStart} className="grid gap-4">
                 {/* Honeypot field for spam protection */}
                 <input type="text" name="hp" className="hidden" />
 
@@ -160,19 +159,66 @@ export function Contacto() {
                 <input type="hidden" name="lt_landing" value={attribution?.last.landing || ""} />
                 <input type="hidden" name="lt_ts" value={attribution?.last.ts || ""} />
 
-                <Input name="nombre" placeholder="Tu nombre" required />
-                <Input name="email" type="email" placeholder="Tu email" required />
-                <Input name="empresa" placeholder="Empresa" />
-                <Textarea name="mensaje" placeholder="Cuéntanos brevemente qué necesitas" rows={5} required />
+                <div className="grid gap-2">
+                  <Label htmlFor="nombre" className="text-slate-200">Nombre</Label>
+                  <Input
+                    id="nombre"
+                    name="nombre"
+                    autoComplete="name"
+                    placeholder="Tu nombre"
+                    required
+                    className="rounded-2xl border-white/10 bg-white/[0.04] text-white placeholder:text-slate-500"
+                  />
+                </div>
+
+                <div className="grid gap-2">
+                  <Label htmlFor="email" className="text-slate-200">Email</Label>
+                  <Input
+                    id="email"
+                    name="email"
+                    type="email"
+                    autoComplete="email"
+                    inputMode="email"
+                    placeholder="tu@empresa.com"
+                    spellCheck={false}
+                    required
+                    className="rounded-2xl border-white/10 bg-white/[0.04] text-white placeholder:text-slate-500"
+                  />
+                </div>
+
+                <div className="grid gap-2">
+                  <Label htmlFor="empresa" className="text-slate-200">Empresa</Label>
+                  <Input
+                    id="empresa"
+                    name="empresa"
+                    autoComplete="organization"
+                    placeholder="Nombre de la empresa"
+                    className="rounded-2xl border-white/10 bg-white/[0.04] text-white placeholder:text-slate-500"
+                  />
+                </div>
+
+                <div className="grid gap-2">
+                  <Label htmlFor="mensaje" className="text-slate-200">¿Qué necesitas resolver?</Label>
+                  <Textarea
+                    id="mensaje"
+                    name="mensaje"
+                    autoComplete="off"
+                    placeholder="Describe brevemente el proceso, equipo o problema que quieres mejorar..."
+                    rows={5}
+                    required
+                    className="rounded-2xl border-white/10 bg-white/[0.04] text-white placeholder:text-slate-500"
+                  />
+                </div>
+
                 <Button
                   type="submit"
                   disabled={loading}
-                  className="bg-gradient-to-r from-fuchsia-500 via-cyan-400 to-emerald-400 text-white plausible-event-name=CTA+Enviar+Contacto plausible-event-location=contact_section"
+                  className="rounded-full border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(223,234,255,0.92))] text-slate-950 plausible-event-name=CTA+Enviar+Contacto plausible-event-location=contact_section"
                 >
-                  {loading ? "Enviando…" : "Enviar"}
+                  {loading ? "Enviando…" : "Enviar Mensaje"}
                 </Button>
               </form>
-              <p className="mt-3 text-xs text-muted-foreground">
+              <p className="mt-3 text-xs text-slate-400">
                 Al enviar aceptas nuestra <Link href="/privacidad" className="underline hover:text-foreground">Política de Privacidad</Link>.
               </p>
             </CardContent>

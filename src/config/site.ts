@@ -158,21 +158,23 @@ export const technologies = [
 export const testimonials = [];
 
 export const navLinks = [
-    { name: "Inicio", href: "#inicio" },
-    { name: "Nosotros", href: "#nosotros" },
-    { name: "Servicios", href: "#servicios" },
-    { name: "Productos", href: "#productos" },
-    { name: "Tecnología", href: "#tecnologia" },
-    { name: "FAQ", href: "#faq" },
-    { name: "Contacto", href: "#contacto" },
+    { name: "Inicio", href: "/#inicio" },
+    { name: "Nosotros", href: "/#nosotros" },
+    { name: "Servicios", href: "/#servicios" },
+    { name: "Productos", href: "/#productos" },
+    { name: "OCR Master", href: "/#ocr-master" },
+    { name: "Tecnología", href: "/#tecnologia" },
+    { name: "FAQ", href: "/#faq" },
+    { name: "Contacto", href: "/#contacto" },
 ];
 
 export const footerLinks = [
-    { name: "Nosotros", href: "#nosotros" },
-    { name: "Servicios", href: "#servicios" },
-    { name: "Productos", href: "#productos" },
-    { name: "Tecnología", href: "#tecnologia" },
-    { name: "FAQ", href: "#faq" },
+    { name: "Nosotros", href: "/#nosotros" },
+    { name: "Servicios", href: "/#servicios" },
+    { name: "Productos", href: "/#productos" },
+    { name: "OCR Master", href: "/#ocr-master" },
+    { name: "Tecnología", href: "/#tecnologia" },
+    { name: "FAQ", href: "/#faq" },
     { name: "Política de Privacidad", href: "/privacidad" },
     { name: "Términos", href: "#" },
 ];
