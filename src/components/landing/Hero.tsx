@@ -76,39 +76,41 @@ const trustSignals = [
 
 const healthMetrics = [
   { k: "Piloto", v: "2-4 sem", c: "border-sky-300/20 bg-sky-400/10 text-sky-100" },
-  { k: "OCR Master", v: "95%", c: "border-amber-200/20 bg-amber-200/10 text-amber-50" },
+  { k: "OCR Master", v: "99%", c: "border-amber-200/20 bg-amber-200/10 text-amber-50" },
   { k: "Operacion", v: "Trazable", c: "border-emerald-300/20 bg-emerald-400/10 text-emerald-100" },
 ];
 
 export function Hero() {
   const prefersReducedMotion = useReducedMotion();
+  const leftReveal = prefersReducedMotion
+    ? {}
+    : {
+        initial: { opacity: 0, y: 22 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true, margin: "-120px" },
+        transition: { duration: 0.72, ease: [0.16, 1, 0.3, 1] as const },
+      };
+  const rightReveal = prefersReducedMotion
+    ? {}
+    : {
+        initial: { opacity: 0, y: 28 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true, margin: "-120px" },
+        transition: { duration: 0.8, delay: 0.08, ease: [0.16, 1, 0.3, 1] as const },
+      };
 
   return (
     <section id="inicio" className="relative overflow-hidden pb-20 pt-12 md:pb-24 md:pt-16">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        <motion.div
-          className="absolute left-[-10rem] top-[8%] h-[22rem] w-[22rem] rounded-full bg-sky-300/12 blur-[120px]"
-          animate={prefersReducedMotion ? undefined : { x: [0, 18, 0], y: [0, -12, 0] }}
-          transition={{ duration: 24, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute right-[-8rem] top-[10%] h-[20rem] w-[20rem] rounded-full bg-indigo-300/14 blur-[110px]"
-          animate={prefersReducedMotion ? undefined : { x: [0, -16, 0], y: [0, 10, 0] }}
-          transition={{ duration: 28, repeat: Infinity, ease: "easeInOut" }}
-        />
+        <div className="absolute left-[-8rem] top-[8%] h-[18rem] w-[18rem] rounded-full bg-sky-300/10 blur-[88px]" />
+        <div className="absolute right-[-7rem] top-[12%] h-[16rem] w-[16rem] rounded-full bg-indigo-300/10 blur-[92px]" />
       </div>
 
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 hero-grid-overlay" />
 
       <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-4 lg:grid-cols-[1.02fr_0.98fr] lg:gap-14">
-        <motion.div
-          initial={{ opacity: 0, y: 22 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-120px" }}
-          transition={{ duration: 0.72, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-2xl"
-        >
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-[11px] uppercase tracking-[0.16em] text-slate-300 backdrop-blur-md">
+        <motion.div {...leftReveal} className="max-w-2xl">
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-[11px] uppercase tracking-[0.16em] text-slate-300">
             <span className="h-1.5 w-1.5 rounded-full bg-sky-300" aria-hidden="true" />
             YAGO · IA aplicada para negocio real
           </div>
@@ -172,7 +174,7 @@ export function Hero() {
               <Link
                 key={item.title}
                 href={item.href}
-                className="hover-lift rounded-[1.35rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.72),rgba(10,16,25,0.9))] px-4 py-4 text-left transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-200/70 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
+                className="hover-lift rounded-[1.35rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.86),rgba(10,16,25,0.96))] px-4 py-4 text-left transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-200/70 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
               >
                 <div className="text-sm font-semibold text-white">{item.title}</div>
                 <div className="mt-2 text-sm leading-relaxed text-slate-300">{item.description}</div>
@@ -197,16 +199,10 @@ export function Hero() {
           </div>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 28 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-120px" }}
-          transition={{ duration: 0.8, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-          className="relative lg:justify-self-end"
-        >
-          <div className="absolute inset-x-10 top-4 h-28 rounded-full bg-sky-300/10 blur-[90px]" aria-hidden="true" />
+        <motion.div {...rightReveal} className="relative lg:justify-self-end">
+          <div className="absolute inset-x-10 top-4 h-24 rounded-full bg-sky-300/10 blur-[72px]" aria-hidden="true" />
 
-          <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,24,39,0.8),rgba(12,18,30,0.94))] p-1 shadow-[0_30px_100px_rgba(0,0,0,0.22)] backdrop-blur-xl">
+          <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,24,39,0.92),rgba(12,18,30,0.98))] p-1 shadow-[0_30px_100px_rgba(0,0,0,0.22)]">
             <Card className="relative overflow-hidden rounded-[1.75rem] border-white/8 bg-transparent shadow-none">
               <CardHeader className="pb-5">
                 <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.14em] text-slate-400">

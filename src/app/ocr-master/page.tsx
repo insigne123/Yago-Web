@@ -71,7 +71,7 @@ export default function OcrMasterPage() {
       <main className="main-premium py-20 md:py-24">
         <div className="mx-auto max-w-6xl space-y-8 px-4 md:space-y-10">
           <section className="grid gap-6 xl:grid-cols-[1.05fr_0.95fr] xl:items-start">
-            <Card className="overflow-hidden rounded-[2rem] border-white/10 bg-[linear-gradient(180deg,rgba(12,22,35,0.86),rgba(8,14,23,0.98))] shadow-[0_28px_100px_rgba(0,0,0,0.18)] backdrop-blur-xl">
+            <Card className="overflow-hidden rounded-[2rem] border-white/10 bg-[linear-gradient(180deg,rgba(12,22,35,0.94),rgba(8,14,23,1))] shadow-[0_28px_100px_rgba(0,0,0,0.18)]">
               <CardHeader className="pb-5 md:pb-6">
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <Badge
@@ -154,7 +154,7 @@ export default function OcrMasterPage() {
             </Card>
 
             <div className="grid gap-5">
-              <Card className="overflow-hidden rounded-[2rem] border-white/10 bg-[linear-gradient(180deg,rgba(11,18,30,0.84),rgba(9,14,22,0.98))] shadow-[0_28px_100px_rgba(0,0,0,0.18)] backdrop-blur-xl">
+              <Card className="overflow-hidden rounded-[2rem] border-white/10 bg-[linear-gradient(180deg,rgba(11,18,30,0.94),rgba(9,14,22,1))] shadow-[0_28px_100px_rgba(0,0,0,0.18)]">
                 <CardHeader className="pb-4">
                   <Badge
                     variant="outline"
@@ -180,7 +180,7 @@ export default function OcrMasterPage() {
                 </CardContent>
               </Card>
 
-              <Card className="overflow-hidden rounded-[2rem] border-white/10 bg-[linear-gradient(180deg,rgba(18,25,39,0.82),rgba(10,16,25,0.95))] backdrop-blur-xl">
+              <Card className="overflow-hidden rounded-[2rem] border-white/10 bg-[linear-gradient(180deg,rgba(18,25,39,0.94),rgba(10,16,25,1))]">
                 <CardHeader className="pb-4">
                   <CardTitle className="text-2xl text-white">{OCR_MASTER.metaTitle}</CardTitle>
                 </CardHeader>
@@ -201,7 +201,7 @@ export default function OcrMasterPage() {
             </div>
           </section>
 
-          <section className="rounded-[1.8rem] border border-white/10 bg-[linear-gradient(180deg,rgba(16,24,36,0.72),rgba(10,16,25,0.9))] p-6 backdrop-blur-xl">
+          <section className="rounded-[1.8rem] border border-white/10 bg-[linear-gradient(180deg,rgba(16,24,36,0.9),rgba(10,16,25,0.98))] p-6">
             <div className="flex flex-wrap gap-2">
               {[
                 { id: "impacto", label: "Impacto" },
@@ -233,7 +233,7 @@ export default function OcrMasterPage() {
               {OCR_MASTER.results.map((result) => (
                 <Card
                   key={result.title}
-                  className="rounded-[1.7rem] border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.72),rgba(10,16,25,0.92))] backdrop-blur-xl"
+                  className="rounded-[1.7rem] border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.88),rgba(10,16,25,0.98))]"
                 >
                   <CardHeader>
                     <CardTitle className="text-2xl text-white">{result.title}</CardTitle>
@@ -262,7 +262,7 @@ export default function OcrMasterPage() {
                 return (
                   <Card
                     key={block.buyer}
-                    className="rounded-[1.7rem] border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.72),rgba(10,16,25,0.92))] backdrop-blur-xl"
+                    className="rounded-[1.7rem] border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.88),rgba(10,16,25,0.98))]"
                   >
                     <CardHeader>
                       <div className="flex size-12 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.05] text-sky-100">
@@ -301,7 +301,7 @@ export default function OcrMasterPage() {
               {OCR_MASTER.stages.map((stage, index) => (
                 <Card
                   key={stage.name}
-                  className="rounded-[1.7rem] border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.72),rgba(10,16,25,0.92))] backdrop-blur-xl"
+                  className="rounded-[1.7rem] border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.88),rgba(10,16,25,0.98))]"
                 >
                   <CardHeader>
                     <div className="text-xs uppercase tracking-[0.16em] text-slate-400">Paso {index + 1}</div>
@@ -346,7 +346,7 @@ export default function OcrMasterPage() {
                 return (
                   <Card
                     key={plan.name}
-                    className={`overflow-hidden rounded-[1.8rem] border-white/10 bg-[linear-gradient(180deg,rgba(18,25,39,0.86),rgba(10,16,25,0.98))] backdrop-blur-xl ${tone.border}`}
+                    className={`overflow-hidden rounded-[1.8rem] border-white/10 bg-[linear-gradient(180deg,rgba(18,25,39,0.94),rgba(10,16,25,1))] ${tone.border}`}
                   >
                     <div className={`h-1.5 w-full ${tone.accent}`} />
                     <CardHeader className="space-y-4">
@@ -412,7 +412,7 @@ export default function OcrMasterPage() {
           </section>
 
           <section id="faq" className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
-            <Card className="rounded-[1.8rem] border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.72),rgba(10,16,25,0.92))] p-6 backdrop-blur-xl">
+            <Card className="rounded-[1.8rem] border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.88),rgba(10,16,25,0.98))] p-6">
               <CardHeader className="px-0 pb-4 pt-0">
                 <CardTitle className="text-3xl text-white">Preguntas frecuentes</CardTitle>
                 <CardDescription className="text-base leading-relaxed text-slate-300">
@@ -426,7 +426,7 @@ export default function OcrMasterPage() {
               </CardContent>
             </Card>
 
-            <Card className="rounded-[1.8rem] border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.72),rgba(10,16,25,0.92))] p-2 backdrop-blur-xl md:p-4">
+            <Card className="rounded-[1.8rem] border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.88),rgba(10,16,25,0.98))] p-2 md:p-4">
               <Accordion type="single" collapsible className="w-full">
                 {OCR_MASTER.faqs.map((item, idx) => (
                   <AccordionItem key={item.question} value={`item-${idx}`} className="border-white/10 px-4">
@@ -440,7 +440,7 @@ export default function OcrMasterPage() {
             </Card>
           </section>
 
-          <section className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(18,25,39,0.82),rgba(10,16,25,0.95))] px-6 py-6 backdrop-blur-xl md:px-8">
+          <section className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(18,25,39,0.94),rgba(10,16,25,1))] px-6 py-6 md:px-8">
             <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
               <div className="max-w-3xl">
                 <div className="text-3xl font-semibold text-white">{OCR_MASTER.closeCta.title}</div>

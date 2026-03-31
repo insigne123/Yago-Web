@@ -17,7 +17,7 @@ export function Tecnologia() {
 
         <div className="mt-10 grid gap-6 lg:grid-cols-12">
           <div className="lg:col-span-8">
-            <div className="hover-lift rounded-[1.8rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.72),rgba(10,16,25,0.92))] p-6 backdrop-blur-xl">
+            <div className="hover-lift rounded-[1.8rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.86),rgba(10,16,25,0.96))] p-6">
               <div className="flex items-center justify-between gap-3">
                 <div className="text-sm font-medium text-white">Herramientas y ecosistemas</div>
                 <div className="text-xs text-slate-400">Ejemplos típicos</div>
@@ -37,7 +37,7 @@ export function Tecnologia() {
           </div>
 
           <div className="lg:col-span-4">
-            <div className="hover-lift rounded-[1.8rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.72),rgba(10,16,25,0.92))] p-6 backdrop-blur-xl">
+            <div className="hover-lift rounded-[1.8rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.86),rgba(10,16,25,0.96))] p-6">
               <div className="text-sm font-medium text-white">Lo que siempre incluimos</div>
               <ul className="mt-4 space-y-3 text-sm text-slate-300">
                 {[

@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import { COMPANY } from "@/config/site";
 
@@ -10,7 +8,7 @@ export function BrandStamp() {
   return (
     <section aria-label="Marca Yago" className="py-12">
       <div className="mx-auto flex max-w-7xl items-center gap-4 px-4">
-        <div className="relative w-full overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur">
+        <div className="relative w-full overflow-hidden rounded-3xl border border-white/10 bg-[linear-gradient(180deg,rgba(18,25,39,0.92),rgba(10,16,25,0.98))] p-6">
           <div
             aria-hidden="true"
             className="absolute inset-0 opacity-70"

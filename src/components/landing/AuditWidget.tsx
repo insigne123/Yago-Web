@@ -221,7 +221,7 @@ export function AuditWidget() {
   return (
     <div className="fixed bottom-5 right-5 z-[90] flex flex-col items-end gap-3">
       {showNudge && (
-        <div className="w-[min(420px,calc(100vw-40px))] overflow-hidden rounded-3xl border border-white/15 bg-white/5 backdrop-blur shadow-[0_24px_80px_rgba(0,0,0,0.5)] animate-in fade-in-0 slide-in-from-bottom-4 duration-500">
+        <div className="w-[min(420px,calc(100vw-40px))] overflow-hidden rounded-3xl border border-white/15 bg-[linear-gradient(180deg,rgba(17,24,37,0.96),rgba(10,16,25,0.99))] shadow-[0_24px_80px_rgba(0,0,0,0.4)] animate-in fade-in-0 slide-in-from-bottom-4 duration-500">
           <div className="h-px w-full bg-gradient-to-r from-fuchsia-500/60 via-cyan-400/60 to-emerald-400/60" />
 
           <div className="p-5">
@@ -308,7 +308,7 @@ export function AuditWidget() {
             <button
               type="button"
               onClick={() => openSheet("floating")}
-              className="group inline-flex items-center gap-3 rounded-full border border-white/10 bg-black/55 px-4 py-3 backdrop-blur transition hover:bg-black/45"
+                  className="group inline-flex items-center gap-3 rounded-full border border-white/10 bg-slate-950/92 px-4 py-3 transition hover:bg-slate-900"
               aria-label="Pedir analisis de automatizacion"
             >
               <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white ring-1 ring-white/10">

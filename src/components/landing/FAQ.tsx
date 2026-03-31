@@ -1,7 +1,4 @@
-"use client";
-
 import { FAQ_ITEMS } from "@/config/faq";
-import { SectionReveal } from "@/components/ui/animated";
 import { Section } from "./Section";
 import {
   Accordion,
@@ -14,21 +11,19 @@ function FAQComponent() {
   return (
     <Section id="faq" className="z-10">
       <div className="mx-auto max-w-7xl px-4">
-        <SectionReveal>
-          <p className="text-xs tracking-[0.22em] text-muted-foreground">FAQ</p>
-          <div className="mt-3 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-            <h2 className="text-4xl font-semibold text-white md:text-5xl">
-              Preguntas frecuentes
-            </h2>
-            <p className="max-w-xl text-sm text-muted-foreground">
-              Respuestas cortas y directas. Si quieres, te armamos un roadmap con quick wins en 5 dias habiles.
-            </p>
-          </div>
-        </SectionReveal>
+        <p className="text-xs tracking-[0.22em] text-muted-foreground">FAQ</p>
+        <div className="mt-3 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+          <h2 className="text-4xl font-semibold text-white md:text-5xl">
+            Preguntas frecuentes
+          </h2>
+          <p className="max-w-xl text-sm text-muted-foreground">
+            Respuestas cortas y directas. Si quieres, te armamos un roadmap con quick wins en 5 dias habiles.
+          </p>
+        </div>
 
         <div className="mt-10 grid gap-6 lg:grid-cols-12">
-          <SectionReveal as="div" className="lg:col-span-8">
-            <div className="rounded-3xl border border-white/10 bg-white/5 p-2 backdrop-blur md:p-4">
+          <div className="lg:col-span-8">
+            <div className="hover-lift rounded-3xl border border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.84),rgba(10,16,25,0.96))] p-2 md:p-4">
               <Accordion type="single" collapsible className="w-full">
                 {FAQ_ITEMS.map((item, idx) => (
                   <AccordionItem key={idx} value={`item-${idx}`} className="border-white/10">
@@ -42,10 +37,10 @@ function FAQComponent() {
                 ))}
               </Accordion>
             </div>
-          </SectionReveal>
+          </div>
 
-          <SectionReveal as="div" className="lg:col-span-4">
-            <div className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur">
+          <div className="lg:col-span-4">
+            <div className="hover-lift rounded-3xl border border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.84),rgba(10,16,25,0.96))] p-6">
               <div className="text-sm font-medium text-white">No ves tu caso?</div>
               <p className="mt-2 text-sm text-muted-foreground">
                 Cuentalo en 2-3 lineas y te respondemos con sugerencias y siguientes pasos.
@@ -61,7 +56,7 @@ function FAQComponent() {
                 Tip: si tienes UTMs en tus campanas, veras el origen del lead cuando envien el formulario.
               </div>
             </div>
-          </SectionReveal>
+          </div>
         </div>
       </div>
     </Section>

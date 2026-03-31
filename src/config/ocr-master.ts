@@ -56,7 +56,7 @@ export const OCR_MASTER = {
   title: "OCR Master",
   subtitle: "OCR premium para integracion API.",
   description:
-    "Procesa PDF e imagenes y entrega JSON estructurado listo para sistemas, onboarding y operaciones documentales. Pensado para uso comercial B2B con una meta operativa de hasta 95% de confianza de datos en flujos compatibles.",
+    "Procesa PDF e imagenes y entrega JSON estructurado listo para sistemas, onboarding y operaciones documentales. Pensado para uso comercial B2B con una meta operativa de hasta 99% de confianza de datos en flujos compatibles.",
   supportingText:
     "Tecnologia, presentacion comercial clara y propuesta lista para demo o piloto.",
   featurePills: ["Integracion simple", "Salida JSON", "Escalable por volumen"],
@@ -71,7 +71,7 @@ export const OCR_MASTER = {
     { label: "Salida", value: "JSON estructurado" },
   ] as OcrMasterApiDetail[],
   metaTitle: "Meta operativa",
-  metaValue: "Hasta 95% de confianza de datos",
+  metaValue: "Hasta 99% de confianza de datos",
   metaDescription:
     "Segun calidad del archivo, tipo documental y configuracion del flujo.",
   proposalTitle: "Propuesta comercial",
@@ -96,7 +96,7 @@ export const OCR_MASTER = {
     {
       title: "Precision objetivo",
       description:
-        "Meta operativa de hasta 95% de confianza de datos en escenarios compatibles.",
+        "Meta operativa de hasta 99% de confianza de datos en escenarios compatibles.",
       tone: "amber",
     },
     {
@@ -254,7 +254,7 @@ export const OCR_MASTER = {
   ] as OcrMasterPlan[],
   faqs: [
     {
-      question: "¿La precision siempre llega a 95%?",
+      question: "¿La precision siempre llega a 99%?",
       answer:
         "No. Es una meta operativa en flujos compatibles y depende de calidad del archivo, tipo documental y configuracion del caso.",
     },
@@ -294,7 +294,7 @@ export const OCR_MASTER = {
   footerTitle: "YAGO SPA",
   footerDescription:
     "OCR Master se presenta como propuesta premium para automatizacion documental mediante API. Brochure refinado para propuesta comercial, demo o presentacion ejecutiva.",
-  footerHighlights: ["Hasta 95% de confianza de datos", "POST /v1/process -> JSON"],
+  footerHighlights: ["Hasta 99% de confianza de datos", "POST /v1/process -> JSON"],
   seoTitle: "OCR premium via API | OCR Master by YAGO",
   seoDescription:
     "OCR Master procesa PDF e imagenes y entrega JSON estructurado para sistemas, onboarding y automatizacion documental con una propuesta premium lista para demo o piloto.",

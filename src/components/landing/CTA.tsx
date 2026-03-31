@@ -7,7 +7,7 @@ export function CTA() {
   return (
     <Section className="py-16">
       <div className="mx-auto max-w-5xl px-4">
-        <div className="relative hover-lift overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.78),rgba(10,16,25,0.94))] p-8 text-center backdrop-blur-xl">
+        <div className="relative hover-lift overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.9),rgba(10,16,25,0.98))] p-8 text-center">
           <div
             aria-hidden="true"
             className="absolute inset-0 opacity-60"

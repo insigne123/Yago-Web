@@ -20,7 +20,6 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { COMPANY } from "@/config/site";
 import { OCR_MASTER } from "@/config/ocr-master";
-import { SectionReveal } from "@/components/ui/animated";
 import { Section } from "./Section";
 
 const benefitIcons = {
@@ -51,9 +50,8 @@ export function OcrMaster() {
   return (
     <Section id="ocr-master" className="z-10">
       <div className="mx-auto flex max-w-7xl flex-col gap-5 px-4 md:gap-6">
-        <SectionReveal>
-          <div className="grid gap-5 xl:grid-cols-[1.08fr_0.92fr] xl:gap-6">
-            <Card className="overflow-hidden rounded-[2rem] border-white/10 bg-[linear-gradient(180deg,rgba(12,22,35,0.86),rgba(8,14,23,0.98))] shadow-[0_28px_100px_rgba(0,0,0,0.18)] backdrop-blur-xl">
+        <div className="grid gap-5 xl:grid-cols-[1.08fr_0.92fr] xl:gap-6">
+          <Card className="overflow-hidden rounded-[2rem] border-white/10 bg-[linear-gradient(180deg,rgba(12,22,35,0.94),rgba(8,14,23,1))] shadow-[0_28px_100px_rgba(0,0,0,0.18)]">
               <CardHeader className="pb-4 md:pb-5">
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <Badge variant="outline" className="border-amber-200/20 bg-amber-100/8 px-3 py-1 text-[11px] uppercase tracking-[0.16em] text-amber-100">
@@ -116,7 +114,7 @@ export function OcrMaster() {
               </CardContent>
             </Card>
 
-            <Card className="overflow-hidden rounded-[2rem] border-white/10 bg-[linear-gradient(180deg,rgba(11,18,30,0.84),rgba(9,14,22,0.98))] shadow-[0_28px_100px_rgba(0,0,0,0.18)] backdrop-blur-xl">
+          <Card className="overflow-hidden rounded-[2rem] border-white/10 bg-[linear-gradient(180deg,rgba(11,18,30,0.94),rgba(9,14,22,1))] shadow-[0_28px_100px_rgba(0,0,0,0.18)]">
               <CardHeader className="pb-4 md:pb-5">
                 <Badge variant="outline" className="w-fit border-sky-200/20 bg-sky-200/8 px-3 py-1 text-[11px] uppercase tracking-[0.16em] text-sky-100">
                   {OCR_MASTER.apiBadge}
@@ -146,71 +144,67 @@ export function OcrMaster() {
               <CardFooter className="pt-2">
                 <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-slate-200">
                   <FileJson2 className="h-4 w-4 text-sky-200" aria-hidden="true" />
-                  Integración lista para portales, backoffice y automatización documental.
+                  Integracion lista para portales, backoffice y automatizacion documental.
                 </div>
               </CardFooter>
-            </Card>
-          </div>
-        </SectionReveal>
+          </Card>
+        </div>
 
-        <SectionReveal>
-          <div className="grid gap-4 lg:grid-cols-3">
-            {OCR_MASTER.benefits.map((benefit) => {
-              const Icon = benefitIcons[benefit.tone];
-              const tone = toneClasses[benefit.tone];
+        <div className="grid gap-4 lg:grid-cols-3">
+          {OCR_MASTER.benefits.map((benefit) => {
+            const Icon = benefitIcons[benefit.tone];
+            const tone = toneClasses[benefit.tone];
+
+            return (
+              <Card
+                key={benefit.title}
+                className={`rounded-[1.7rem] border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.88),rgba(10,16,25,0.98))] ${tone.border}`}
+              >
+                <CardHeader>
+                  <div className={`flex size-12 items-center justify-center rounded-2xl border border-white/10 ${tone.panel}`}>
+                    <Icon className="h-5 w-5" aria-hidden="true" />
+                  </div>
+                  <CardTitle className="pt-4 text-2xl text-white">{benefit.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-base leading-relaxed text-slate-300">
+                    {benefit.description}
+                  </CardDescription>
+                </CardContent>
+              </Card>
+            );
+          })}
+        </div>
+
+        <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(13,20,31,0.94),rgba(8,13,22,1))] px-5 py-7 shadow-[0_28px_90px_rgba(0,0,0,0.18)] md:px-8 md:py-10">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+            <div>
+              <Badge variant="outline" className="border-white/12 bg-white/[0.04] px-3 py-1 text-[11px] uppercase tracking-[0.16em] text-slate-300">
+                OCR Master Pricing
+              </Badge>
+              <h3 className="mt-4 text-4xl font-semibold text-white md:text-5xl">
+                {OCR_MASTER.pricingTitle}
+              </h3>
+              <p className="mt-3 max-w-2xl text-base leading-relaxed text-slate-300">
+                {OCR_MASTER.pricingDescription}
+              </p>
+            </div>
+
+            <div className="inline-flex items-center gap-2 rounded-full border border-amber-200/20 bg-amber-100/8 px-4 py-2 text-sm text-amber-50">
+              <DatabaseZap className="h-4 w-4 text-amber-100" aria-hidden="true" />
+              {OCR_MASTER.metaValue}
+            </div>
+          </div>
+
+          <div className="mt-6 grid gap-4 xl:grid-cols-3 md:mt-8">
+            {OCR_MASTER.plans.map((plan) => {
+              const tone = toneClasses[plan.tone];
 
               return (
                 <Card
-                  key={benefit.title}
-                  className={`rounded-[1.7rem] border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.72),rgba(10,16,25,0.92))] backdrop-blur-xl ${tone.border}`}
+                  key={plan.name}
+                  className={`overflow-hidden rounded-[1.8rem] border-white/10 bg-[linear-gradient(180deg,rgba(18,25,39,0.94),rgba(10,16,25,1))] ${tone.border}`}
                 >
-                  <CardHeader>
-                    <div className={`flex size-12 items-center justify-center rounded-2xl border border-white/10 ${tone.panel}`}>
-                      <Icon className="h-5 w-5" aria-hidden="true" />
-                    </div>
-                    <CardTitle className="pt-4 text-2xl text-white">{benefit.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription className="text-base leading-relaxed text-slate-300">
-                      {benefit.description}
-                    </CardDescription>
-                  </CardContent>
-                </Card>
-              );
-            })}
-          </div>
-        </SectionReveal>
-
-        <SectionReveal>
-            <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(13,20,31,0.84),rgba(8,13,22,0.98))] px-5 py-7 shadow-[0_28px_90px_rgba(0,0,0,0.18)] backdrop-blur-xl md:px-8 md:py-10">
-            <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-              <div>
-                <Badge variant="outline" className="border-white/12 bg-white/[0.04] px-3 py-1 text-[11px] uppercase tracking-[0.16em] text-slate-300">
-                  OCR Master Pricing
-                </Badge>
-                <h3 className="mt-4 text-4xl font-semibold text-white md:text-5xl">
-                  {OCR_MASTER.pricingTitle}
-                </h3>
-                <p className="mt-3 max-w-2xl text-base leading-relaxed text-slate-300">
-                  {OCR_MASTER.pricingDescription}
-                </p>
-              </div>
-
-              <div className="inline-flex items-center gap-2 rounded-full border border-amber-200/20 bg-amber-100/8 px-4 py-2 text-sm text-amber-50">
-                <DatabaseZap className="h-4 w-4 text-amber-100" aria-hidden="true" />
-                Hasta 95% de confianza de datos
-              </div>
-            </div>
-
-              <div className="mt-6 grid gap-4 xl:grid-cols-3 md:mt-8">
-              {OCR_MASTER.plans.map((plan) => {
-                const tone = toneClasses[plan.tone];
-
-                return (
-                  <Card
-                    key={plan.name}
-                    className={`overflow-hidden rounded-[1.8rem] border-white/10 bg-[linear-gradient(180deg,rgba(18,25,39,0.86),rgba(10,16,25,0.98))] backdrop-blur-xl ${tone.border}`}
-                  >
                     <div className={`h-1.5 w-full ${tone.accent}`} />
                     <CardHeader className="pb-4 md:pb-5">
                       <Badge variant="outline" className="w-fit border-white/12 bg-white/[0.04] px-3 py-1 text-[11px] uppercase tracking-[0.16em] text-slate-300">
@@ -247,7 +241,7 @@ export function OcrMaster() {
                           Uso comercial vía API
                         </div>
                         <div className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2">
-                          Meta operativa: hasta 95% de confianza
+                          Meta operativa: hasta 99% de confianza
                         </div>
                       </div>
                     </CardContent>
@@ -263,15 +257,13 @@ export function OcrMaster() {
                         </Link>
                       </Button>
                     </CardFooter>
-                  </Card>
-                );
-              })}
-            </div>
+                </Card>
+              );
+            })}
           </div>
-        </SectionReveal>
+        </div>
 
-        <SectionReveal>
-          <div className="overflow-hidden rounded-[1.9rem] border border-white/10 bg-[linear-gradient(180deg,rgba(18,25,39,0.82),rgba(10,16,25,0.95))] px-6 py-6 backdrop-blur-xl md:px-8">
+        <div className="overflow-hidden rounded-[1.9rem] border border-white/10 bg-[linear-gradient(180deg,rgba(18,25,39,0.94),rgba(10,16,25,1))] px-6 py-6 md:px-8">
             <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
               <div className="max-w-3xl">
                 <div className="text-3xl font-semibold text-white">{OCR_MASTER.footerTitle}</div>
@@ -315,8 +307,7 @@ export function OcrMaster() {
                 </Button>
               </div>
             </div>
-          </div>
-        </SectionReveal>
+        </div>
       </div>
     </Section>
   );

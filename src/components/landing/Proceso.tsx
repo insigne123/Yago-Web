@@ -39,7 +39,7 @@ export function Proceso() {
               return (
                 <div
                   key={step.title}
-                  className="hover-lift relative rounded-[1.8rem] border border-white/10 bg-[linear-gradient(180deg,rgba(18,24,37,0.74),rgba(10,16,25,0.9))] p-6 shadow-[0_20px_60px_rgba(0,0,0,0.12)] backdrop-blur-xl"
+                  className="hover-lift relative rounded-[1.8rem] border border-white/10 bg-[linear-gradient(180deg,rgba(18,24,37,0.88),rgba(10,16,25,0.96))] p-6 shadow-[0_20px_60px_rgba(0,0,0,0.12)]"
                 >
                   <div className="flex items-center gap-4">
                     <div className="flex size-14 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.05] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]">

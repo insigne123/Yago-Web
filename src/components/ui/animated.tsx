@@ -6,9 +6,6 @@ import {
   domAnimation,
   m,
   useReducedMotion,
-  useScroll,
-  useSpring,
-  useTransform,
 } from "framer-motion";
 
 type SectionRevealProps = {
@@ -20,11 +17,6 @@ type SectionRevealProps = {
   surface?: "soft" | "strong";
 };
 
-/**
- * Evita hydration mismatch:
- * - SSR y primer render del cliente devuelven **markup estático** (sin estilos inline de Motion).
- * - Tras mount (useEffect), se habilita Motion y se anima al entrar en viewport.
- */
 export function SectionReveal({
   children,
   as: Tag = "section",
@@ -34,25 +26,7 @@ export function SectionReveal({
 }: SectionRevealProps) {
   const prefersReduced = useReducedMotion();
   const [mounted, setMounted] = React.useState(false);
-  const sectionRef = React.useRef<HTMLDivElement | null>(null);
   React.useEffect(() => setMounted(true), []);
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start 98%", "start 30%"],
-  });
-
-  const progress = useSpring(scrollYProgress, {
-    stiffness: 72,
-    damping: 32,
-    mass: 0.95,
-  });
-
-  const entranceStart = Math.min(delay * 0.24, 0.14);
-
-  const opacity = useTransform(progress, [entranceStart, 1], [0.84, 1]);
-  const y = useTransform(progress, [entranceStart, 1], [14, 0]);
-  const scale = useTransform(progress, [entranceStart, 1], [0.996, 1]);
 
   const SurfaceWrap = ({ children }: { children: React.ReactNode }) =>
     surface === "strong" ? (
@@ -73,7 +47,16 @@ export function SectionReveal({
 
   return (
     <LazyMotion features={domAnimation}>
-      <m.div ref={sectionRef} style={{ opacity, y, scale }}>
+      <m.div
+        initial={{ opacity: 0, y: 18, scale: 0.992 }}
+        whileInView={{ opacity: 1, y: 0, scale: 1 }}
+        viewport={{ once: true, amount: 0.14, margin: "0px 0px -72px 0px" }}
+        transition={{
+          duration: 0.54,
+          delay: Math.min(delay, 0.16),
+          ease: [0.22, 1, 0.36, 1],
+        }}
+      >
         <Tag className={className}>
           <SurfaceWrap>
             {children}

@@ -9,7 +9,7 @@ import { Plausible } from "@/components/analytics/Plausible";
 import { PlausiblePageview } from "@/components/analytics/PlausiblePageview";
 import { AttributionTracker } from "@/components/analytics/AttributionTracker";
 import { CloudflareWebAnalytics } from "@/components/analytics/CloudflareWebAnalytics";
-import { AuditWidget } from "@/components/landing/AuditWidget";
+import { DeferredAuditWidget } from "@/components/landing/DeferredAuditWidget";
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://yago.cl";
 
@@ -80,7 +80,7 @@ export default function RootLayout({
           <PlausiblePageview />
           <AttributionTracker />
           {children}
-          <AuditWidget />
+          <DeferredAuditWidget />
           <Toaster />
         </div>
       </body>

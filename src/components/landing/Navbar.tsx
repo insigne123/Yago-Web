@@ -20,7 +20,7 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 px-4 pt-3 md:pt-4">
-      <div className="mx-auto max-w-7xl overflow-hidden rounded-[1.6rem] border border-white/10 bg-slate-950/70 shadow-[0_20px_80px_rgba(0,0,0,0.2)] backdrop-blur-2xl supports-[backdrop-filter]:bg-slate-950/60">
+      <div className="mx-auto max-w-7xl overflow-hidden rounded-[1.6rem] border border-white/10 bg-slate-950/92 shadow-[0_20px_80px_rgba(0,0,0,0.18)]">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-sky-200/35 to-transparent"

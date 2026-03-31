@@ -6,7 +6,7 @@ export function Footer() {
   return (
     <footer className="relative pb-12 pt-6">
       <div className="mx-auto max-w-7xl px-4">
-        <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,23,35,0.9),rgba(10,15,24,0.98))] shadow-[0_24px_90px_rgba(0,0,0,0.2)] backdrop-blur-xl">
+        <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,23,35,0.94),rgba(10,15,24,1))] shadow-[0_24px_90px_rgba(0,0,0,0.2)]">
           <div className="grid gap-8 px-6 py-8 md:grid-cols-12 md:px-8 md:py-10">
             <div className="md:col-span-4">
               <div className="font-headline text-2xl font-semibold text-white">{COMPANY.name}</div>

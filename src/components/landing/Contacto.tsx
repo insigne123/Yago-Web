@@ -98,7 +98,7 @@ export function Contacto() {
             <div className="mt-6 grid gap-3 sm:grid-cols-2">
               <a
                 href={`mailto:${COMPANY.email}`}
-                className="hover-lift rounded-[1.5rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.72),rgba(10,16,25,0.9))] p-4 text-sm text-slate-300 backdrop-blur-xl transition hover:border-white/14"
+                className="hover-lift rounded-[1.5rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.88),rgba(10,16,25,0.96))] p-4 text-sm text-slate-300 transition hover:border-white/14"
               >
                 <div className="flex items-center gap-2 text-white">
                   <Mail className="h-4 w-4 text-sky-200" />
@@ -111,7 +111,7 @@ export function Contacto() {
                 href={COMPANY.whatsappLink}
                 target="_blank"
                 rel="noreferrer"
-                className="hover-lift rounded-[1.5rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.72),rgba(10,16,25,0.9))] p-4 text-sm text-slate-300 backdrop-blur-xl transition hover:border-white/14 plausible-event-name=CTA+WhatsApp plausible-event-location=contact_section"
+                className="hover-lift rounded-[1.5rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.88),rgba(10,16,25,0.96))] p-4 text-sm text-slate-300 transition hover:border-white/14 plausible-event-name=CTA+WhatsApp plausible-event-location=contact_section"
               >
                 <div className="flex items-center gap-2 text-white">
                   <MessageCircle className="h-4 w-4 text-emerald-200" />
@@ -120,7 +120,7 @@ export function Contacto() {
                 <div className="mt-2 underline underline-offset-4">{COMPANY.whatsapp}</div>
               </a>
 
-              <div className="hover-lift rounded-[1.5rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.72),rgba(10,16,25,0.9))] p-4 text-sm text-slate-300 backdrop-blur-xl sm:col-span-2">
+              <div className="hover-lift rounded-[1.5rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.88),rgba(10,16,25,0.96))] p-4 text-sm text-slate-300 sm:col-span-2">
                 <div className="flex items-center gap-2 text-white">
                   <MapPin className="h-4 w-4 text-amber-100" />
                   Operamos
@@ -130,7 +130,7 @@ export function Contacto() {
             </div>
           </div>
 
-          <Card className="hover-lift rounded-[1.8rem] border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.76),rgba(10,16,25,0.92))] shadow-[0_20px_60px_rgba(0,0,0,0.14)] backdrop-blur-xl">
+          <Card className="hover-lift rounded-[1.8rem] border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.9),rgba(10,16,25,0.98))] shadow-[0_20px_60px_rgba(0,0,0,0.14)]">
             <CardHeader>
               <CardTitle>Escríbenos</CardTitle>
               <CardDescription>Te respondemos con el siguiente paso recomendado para tu caso.</CardDescription>
