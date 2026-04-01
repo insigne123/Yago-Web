@@ -1,6 +1,3 @@
-"use client";
-
-import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -81,24 +78,6 @@ const healthMetrics = [
 ];
 
 export function Hero() {
-  const prefersReducedMotion = useReducedMotion();
-  const leftReveal = prefersReducedMotion
-    ? {}
-    : {
-        initial: { opacity: 0, y: 22 },
-        whileInView: { opacity: 1, y: 0 },
-        viewport: { once: true, margin: "-120px" },
-        transition: { duration: 0.72, ease: [0.16, 1, 0.3, 1] as const },
-      };
-  const rightReveal = prefersReducedMotion
-    ? {}
-    : {
-        initial: { opacity: 0, y: 28 },
-        whileInView: { opacity: 1, y: 0 },
-        viewport: { once: true, margin: "-120px" },
-        transition: { duration: 0.8, delay: 0.08, ease: [0.16, 1, 0.3, 1] as const },
-      };
-
   return (
     <section id="inicio" className="relative overflow-hidden pb-20 pt-12 md:pb-24 md:pt-16">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
@@ -109,7 +88,7 @@ export function Hero() {
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 hero-grid-overlay" />
 
       <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-4 lg:grid-cols-[1.02fr_0.98fr] lg:gap-14">
-        <motion.div {...leftReveal} className="max-w-2xl">
+        <div className="max-w-2xl">
           <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-[11px] uppercase tracking-[0.16em] text-slate-300">
             <span className="h-1.5 w-1.5 rounded-full bg-sky-300" aria-hidden="true" />
             YAGO · IA aplicada para negocio real
@@ -197,9 +176,9 @@ export function Hero() {
               </div>
             ))}
           </div>
-        </motion.div>
+        </div>
 
-        <motion.div {...rightReveal} className="relative lg:justify-self-end">
+        <div className="relative lg:justify-self-end">
           <div className="absolute inset-x-10 top-4 h-24 rounded-full bg-sky-300/10 blur-[72px]" aria-hidden="true" />
 
           <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,24,39,0.92),rgba(12,18,30,0.98))] p-1 shadow-[0_30px_100px_rgba(0,0,0,0.22)]">
@@ -269,7 +248,7 @@ export function Hero() {
               </CardContent>
             </Card>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
