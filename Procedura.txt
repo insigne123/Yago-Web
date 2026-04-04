@@ -1,0 +1,96 @@
+Copy Web Principal
+- Hero (H1): Procedimientos ISO 9001 listos para auditoría, con menos trabajo manual.
+- Subhero: Centraliza la creación, revisión, aprobación y versionado de procedimientos en una sola plataforma SaaS multiempresa, asistida por IA y con trazabilidad completa.
+- CTA principal: Solicitar demo
+- CTA secundaria: Ver cómo funciona
+- Apoyo corto bajo CTA: Chat y formularios guiados | Voz y DOCX como entrada | Control por roles | Exportación PDF, DOCX y BPMN
+- Sección resultados (título): Impacto directo en tu operación de calidad
+- Resultado 1 - Ahorro de tiempo: Convierte entrevistas, notas o documentos en borradores estructurados y evita empezar desde cero en cada procedimiento.
+- Resultado 2 - Preparación para auditorías: Trabaja con validaciones de cumplimiento, campos obligatorios y reglas de calidad diseñadas para ISO 9001 readiness.
+- Resultado 3 - Estandarización: Unifica formato, flujo de estados y criterios de revisión para que todas las áreas documenten con el mismo nivel.
+- Resultado 4 - Control y gobernanza: Mantén trazabilidad de cambios, comentarios, aprobaciones y versiones para sostener decisiones con evidencia.
+Bloques de Funcionalidades por Comprador
+- Operaciones: Documenta procesos más rápido y manténlos actualizados.
+- Dashboard con listado, búsqueda y gestión de procedimientos.
+- Creación asistida por IA en modo formulario o chat.
+- Captura de información desde voz, texto y documentos DOCX.
+- Editor visual de diagramas para reflejar el flujo operativo real.
+- Calidad: Mejora consistencia documental sin aumentar carga manual.
+- Normalización y completado de estructura documental ISO.
+- Motor de reglas y scoring de calidad para detectar brechas.
+- Revisión de cumplimiento antes de publicar.
+- Ajustes guiados por IA a partir de feedback del equipo.
+- Compliance: Refuerza trazabilidad y control del ciclo de vida.
+- Flujo de estados de borrador a revisión y aprobación/publicación.
+- Versionado automático con historial y comparación de cambios.
+- Cola de revisión para procedimientos en evaluación.
+- Registro de actividad útil para auditoría interna y externa.
+- RR. HH. y Formación: Facilita adopción y comunicación interna.
+- Invitaciones, solicitudes de acceso y alta de usuarios por organización.
+- Roles definidos para editor, aprobador, auditor y lector.
+- Notificaciones y plantillas de email para eventos de procedimiento/capacitación.
+- Seguimiento de comentarios abiertos y aplicados.
+- Dirección/Liderazgo: Escala el sistema de calidad con visibilidad.
+- Administración central de usuarios, roles y estado de cuentas.
+- Configuración organizacional y branding corporativo.
+- Gobierno documental con permisos y responsabilidades claras.
+- Exportación en formatos ejecutivos y técnicos para distintos stakeholders.
+Cómo Funciona (5 pasos)
+- Paso 1 - Captura: Ingresa el proceso por chat, formulario guiado, voz o importación DOCX.
+- Paso 2 - Generación: La IA construye o actualiza el procedimiento con estructura ISO y contenido accionable.
+- Paso 3 - Colaboración: El equipo comenta sobre el texto y aplica ajustes con asistencia de IA.
+- Paso 4 - Validación y aprobación: Verifica calidad/compliance, ejecuta revisiones y controla el paso a publicado.
+- Paso 5 - Publicación y salida: Exporta en PDF, DOCX, HTML, JSON o BPMN (SVG/XML) según necesidad.
+Sección de Precios (Estructura Sugerida)
+- Título: Planes que crecen con tu sistema de calidad
+- Subtítulo: Empieza con control documental sólido y escala a gobernanza avanzada conforme madura tu operación.
+- Starter (para equipos en implementación inicial)
+- Ideal para estandarizar primeros procesos y crear disciplina documental.
+- Incluye creación asistida por IA, flujo básico de revisión/aprobación y exportaciones estándar.
+- Sugerencia de display comercial: Desde [precio]/mes con límites visibles de usuarios y uso de IA.
+- CTA: Empezar con Starter
+- Pro (para organizaciones en crecimiento o preparación de auditoría)
+- Ideal para acelerar producción documental y fortalecer cumplimiento.
+- Añade validación de calidad/compliance, colaboración avanzada, versionado comparativo, cola de revisión y diagramación BPMN.
+- Sugerencia de display comercial: Desde [precio]/mes + opción anual con ahorro.
+- CTA: Solicitar demo Pro
+- Enterprise (para operación multiárea con gobierno formal)
+- Ideal para empresas con mayores exigencias de control, escalabilidad y soporte.
+- Añade capacidades ampliadas de administración, gobernanza por roles, configuración organizacional y acompañamiento dedicado.
+- Sugerencia de display comercial: Precio a medida.
+- CTA: Hablar con ventas
+CTA de Cierre
+- Título: Pasa de documentos dispersos a un sistema ISO gobernado.
+- Texto: Evalúa la plataforma con tus propios procedimientos y define un plan de adopción por etapas, con impacto operativo desde el primer mes.
+- CTA principal: Agendar demo
+- CTA secundaria: Solicitar propuesta
+FAQ / Objeciones
+- ¿La plataforma garantiza certificación ISO 9001?  
+No. Está diseñada para mejorar ISO 9001 readiness con controles de calidad, trazabilidad y gobernanza documental.
+- ¿Podemos migrar procedimientos que ya tenemos en Word?  
+Sí. Puedes extraer contenido desde DOCX y usarlo como base para generación o actualización.
+- ¿Se puede trabajar con distintos perfiles y aprobadores?  
+Sí. Incluye control de acceso por roles (admin, quality manager, approver, editor, auditor, viewer).
+- ¿Cómo se evidencia lo que cambió en cada procedimiento?  
+Con versionado, comparación de cambios, historial y estado del ciclo de vida.
+- ¿Podemos exportar para auditorías o terceros?  
+Sí. Exportación en PDF, DOCX, HTML, JSON y diagramas BPMN (SVG/XML).
+- ¿Necesitamos escribir todo desde cero?  
+No. Puedes iniciar por chat, formulario, voz o documentos existentes.
+Variantes Cortas de Anuncios (Opcional)
+- Variante 1
+- Título: ISO 9001 con menos retrabajo
+- Texto: Crea, revisa y aprueba procedimientos con IA, control de versiones y trazabilidad real.
+- CTA: Solicitar demo
+- Variante 2
+- Título: De borrador a auditoría, en un solo flujo
+- Texto: Estandariza tu documentación, colabora por roles y exporta en formatos listos para presentar.
+- CTA: Ver plataforma
+- Variante 3
+- Título: Tu sistema de calidad, más ágil y gobernado
+- Texto: Centraliza procesos, valida cumplimiento y mantén evidencia de cada cambio.
+- CTA: Hablar con ventas
+Snippets SEO y CTA (Opcional)
+- SEO title: Software ISO 9001 con IA | Gestión de Procedimientos
+- SEO description: Plataforma SaaS para crear, revisar y aprobar procedimientos ISO 9001 con IA, control de versiones, trazabilidad y exportación en PDF, DOCX y BPMN.
+- CTA labels sugeridos: Solicitar demo, Ver cómo funciona, Iniciar evaluación, Hablar con ventas, Solicitar propuesta.

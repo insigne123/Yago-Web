@@ -3,6 +3,11 @@ import Script from "next/script";
 const DEFAULT_SRC = "https://plausible.io/js/script.manual.js";
 
 export function Plausible() {
+  const cfToken =
+    process.env.NEXT_PUBLIC_CF_WEB_ANALYTICS_TOKEN ||
+    process.env.NEXT_PUBLIC_CF_BEACON_TOKEN;
+  if (cfToken) return null;
+
   const domain = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
   if (!domain) return null;
 

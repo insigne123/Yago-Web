@@ -2,155 +2,338 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PRODUCTS } from "@/config/productos";
+import { Navbar } from "@/components/landing/Navbar";
+import { Footer } from "@/components/landing/Footer";
+import { BrandStamp } from "@/components/BrandStamp";
 
 const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "contacto@yago.cl";
-const WHATSAPP_PHONE = process.env.NEXT_PUBLIC_WHATSAPP_PHONE || ""; // ej: 56912345678
+const WHATSAPP_PHONE = process.env.NEXT_PUBLIC_WHATSAPP_PHONE || "";
+
+type PageProps = { params: Promise<{ slug: string }> };
+
+function getProductBySlug(slug: string) {
+  return PRODUCTS.find((x) => x.slug === slug);
+}
 
 export function generateStaticParams() {
   return PRODUCTS.map((p) => ({ slug: p.slug }));
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const p = PRODUCTS.find((x) => x.slug === slug);
+  const p = getProductBySlug(slug);
   if (!p) return {};
-  return { title: `${p.name} — Yago`, description: p.tagline };
+
+  return {
+    title: p.seoTitle || `${p.name} — Yago`,
+    description: p.seoDescription || p.pageSubtitle || p.tagline,
+  };
 }
 
-export default async function ProductPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+export default async function ProductPage({ params }: PageProps) {
   const { slug } = await params;
-  const p = PRODUCTS.find((x) => x.slug === slug);
+  const p = getProductBySlug(slug);
   if (!p) notFound();
 
-  const baseMsg = `Hola YAGO, quiero más información sobre el producto: ${p!.name}. ¿Podemos agendar una conversación?`;
-  const waHref = WHATSAPP_PHONE ? `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(baseMsg)}` : undefined;
-  const mailHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(`Interés en ${p!.name}`)}&body=${encodeURIComponent(baseMsg)}`;
+  const baseMsg = `Hola YAGO, me interesa ${p.name}. ¿Podemos revisar una demo?`;
+  const waHref = WHATSAPP_PHONE
+    ? `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(baseMsg)}`
+    : undefined;
+  const mailHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(`Interés en ${p.name}`)}&body=${encodeURIComponent(baseMsg)}`;
+
+  const heading = p.pageTitle || p.name;
+  const subtitle = p.pageSubtitle || p.details.description;
+  const primaryLabel = p.ctaPrimary || "Solicitar demo";
+  const secondaryLabel = p.ctaSecondary || "Ver módulos";
+  const supportPoints = p.supportPoints?.length ? p.supportPoints : p.highlights;
+  const results = p.results?.length
+    ? p.results
+    : p.highlights.map((item) => ({
+      title: item,
+      description: "Impacto directo en eficiencia operativa, consistencia y velocidad de ejecución.",
+    }));
+  const idealFor = p.idealFor?.length ? p.idealFor : p.details.notes || [];
+  const faqs = p.faq || [];
+  const quickLinks = [
+    { id: "impacto", label: "Impacto" },
+    { id: "modulos", label: "Módulos" },
+    p.details.integrations?.length ? { id: "integraciones", label: "Integraciones" } : null,
+    p.details.stages?.length ? { id: "implementacion", label: "Implementación" } : null,
+    idealFor.length ? { id: "ideal", label: "Ideal para" } : null,
+    faqs.length ? { id: "faq", label: "FAQ" } : null,
+  ].filter(Boolean) as { id: string; label: string }[];
+  const relatedProducts = PRODUCTS.filter((x) => x.slug !== p.slug).slice(0, 3);
 
   return (
-    <main className="py-24">
-      <div className="mx-auto max-w-5xl space-y-8 px-4">
-        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-          <div>
-            <p className="text-xs tracking-[0.22em] text-muted-foreground">PRODUCTO</p>
-            <h1 className="mt-3 text-4xl font-semibold bg-gradient-to-r from-fuchsia-500 via-cyan-400 to-emerald-400 text-transparent bg-clip-text md:text-5xl">
-              {p!.name}
-            </h1>
-          </div>
+    <div className="relative min-h-screen overflow-x-clip text-white">
+      <Navbar />
 
-          <Link
-            href="/#productos"
-            className="text-sm text-muted-foreground hover:text-foreground underline underline-offset-4"
-            aria-label="Volver a productos"
-          >
-            ← Volver
-          </Link>
-        </div>
+      <main className="main-premium py-24">
+        <div className="mx-auto max-w-6xl space-y-8 px-4">
+          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <div>
+              <p className="text-xs tracking-[0.22em] text-muted-foreground">PRODUCTO</p>
+              <h1 className="mt-3 bg-gradient-to-r from-fuchsia-500 via-cyan-400 to-emerald-400 bg-clip-text text-4xl font-semibold text-transparent md:text-5xl">
+                {heading}
+              </h1>
+            </div>
 
-        {/* Resumen */}
-        <section className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur space-y-3">
-          <p className="text-foreground/90">{p!.tagline}</p>
-          <p className="text-muted-foreground">{p!.details.description}</p>
-          <p className="text-sm text-muted-foreground">
-            <span className="text-foreground/85 font-medium">Tiempo de puesta en marcha:</span> {p!.details.timeToValue}
-          </p>
-        </section>
-
-        {/* Módulos */}
-        <section className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur">
-          <h2 className="text-xl md:text-2xl font-semibold text-white mb-4">Modulos</h2>
-          <ul className="grid grid-cols-1 gap-3 text-sm text-muted-foreground md:grid-cols-2">
-            {p!.details.modules.map((m) => (
-              <li key={m} className="rounded-2xl border border-white/10 bg-black/20 p-4">{m}</li>
-            ))}
-          </ul>
-        </section>
-
-        {/* Integraciones */}
-        {p!.details.integrations && p!.details.integrations.length > 0 && (
-          <section className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur">
-            <h2 className="text-xl md:text-2xl font-semibold text-white mb-4">Integraciones</h2>
-            <ul className="flex flex-wrap gap-2 text-sm text-muted-foreground">
-              {p!.details.integrations.map((i) => (
-                <li key={i} className="rounded-full border border-white/10 bg-black/20 px-4 py-2">{i}</li>
-              ))}
-            </ul>
-          </section>
-        )}
-
-        {/* Etapas */}
-        {p!.details.stages && p!.details.stages.length > 0 && (
-          <section className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur">
-            <h2 className="text-xl md:text-2xl font-semibold text-white mb-4">Etapas del proyecto</h2>
-            <ol className="space-y-4">
-              {p!.details.stages.map((st, i) => (
-                <li key={st.name} className="rounded-2xl border border-white/10 bg-black/20 p-5">
-                  <div className="text-white font-medium">{i + 1}. {st.name}</div>
-                  <div className="mt-1 text-sm text-muted-foreground">{st.description}</div>
-                  {st.outputs && st.outputs.length > 0 && (
-                    <ul className="mt-3 flex flex-wrap gap-2">
-                      {st.outputs.map((o) => (
-                        <li
-                          key={o}
-                          className="rounded-full border border-white/10 bg-black/20 px-3 py-1 text-xs text-foreground/80"
-                        >
-                          {o}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </li>
-              ))}
-            </ol>
-          </section>
-        )}
-
-        {/* Notas */}
-        {p!.details.notes && p!.details.notes.length > 0 && (
-          <section className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur">
-            <h2 className="text-xl md:text-2xl font-semibold text-white mb-4">Notas</h2>
-            <ul className="list-disc pl-5 text-sm text-muted-foreground">
-              {p!.details.notes.map((n) => <li key={n}>{n}</li>)}
-            </ul>
-          </section>
-        )}
-
-        {/* CTA contacto */}
-        <section className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-          <div className="text-muted-foreground">
-            ¿Quieres ver cómo <span className="text-white font-medium">{p!.name}</span> encaja en tu operación?
-          </div>
-          <div className="flex flex-wrap gap-3">
-            <a
-              href={mailHref}
-              className={`inline-flex items-center rounded-xl px-4 py-2 bg-white text-black hover:opacity-90 transition plausible-event-name=Product+Contact plausible-event-method=email plausible-event-product=${p!.slug} plausible-event-location=product_page`}
-            >
-              Contactar por Email
-            </a>
-            {waHref ? (
-              <a
-                href={waHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`inline-flex items-center rounded-xl px-4 py-2 bg-emerald-500/90 hover:bg-emerald-500 transition text-white plausible-event-name=Product+Contact plausible-event-method=whatsapp plausible-event-product=${p!.slug} plausible-event-location=product_page`}
-              >
-                WhatsApp
-              </a>
-            ) : (
-              <span className="inline-flex items-center rounded-xl px-4 py-2 bg-neutral-700 text-neutral-300 cursor-not-allowed" title="Configura NEXT_PUBLIC_WHATSAPP_PHONE">
-                WhatsApp
+            <div className="flex items-center gap-4 text-sm">
+              <span className="rounded-full border border-white/10 bg-black/25 px-3 py-1 text-foreground/85">
+                {p.badge || "Producto"}
               </span>
-            )}
+              <Link
+                href="/#productos"
+                className="text-muted-foreground underline underline-offset-4 transition hover:text-foreground"
+                aria-label="Volver a productos"
+              >
+                ← Volver
+              </Link>
+            </div>
           </div>
-        </section>
-      </div>
-    </main>
+
+          {/* Hero Banner Imagen Premium */}
+          <div className="relative aspect-[21/9] w-full overflow-hidden rounded-3xl border border-white/10 bg-black/20 shadow-2xl">
+            <img
+              src={`/images/product_${p.slug}.png`}
+              alt={`Banner de ${p.name}`}
+              className="h-full w-full object-cover opacity-90"
+            />
+            {/* Gradient Overlay sutil */}
+            <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#0a0a0a] to-transparent opacity-40" />
+            <div className="absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/10" />
+          </div>
+
+          <section className="space-y-5 rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur">
+            <p className="text-base text-foreground/90 md:text-lg">{subtitle}</p>
+
+            <div className="flex flex-col gap-2 text-sm text-muted-foreground md:flex-row md:flex-wrap md:items-center md:gap-6">
+              <div>
+                <span className="font-medium text-foreground/85">Tiempo de puesta en marcha:</span> {p.details.timeToValue}
+              </div>
+              <div>
+                <span className="font-medium text-foreground/85">Módulos:</span> {p.details.modules.length}
+              </div>
+              {p.details.integrations?.length ? (
+                <div>
+                  <span className="font-medium text-foreground/85">Integraciones:</span> {p.details.integrations.length}
+                </div>
+              ) : null}
+            </div>
+
+            <div className="flex flex-wrap gap-2">
+              {quickLinks.map((item) => (
+                <a
+                  key={item.id}
+                  href={`#${item.id}`}
+                  className="rounded-full border border-white/15 bg-black/20 px-3 py-1.5 text-xs text-foreground/85 transition hover:bg-black/30"
+                >
+                  {item.label}
+                </a>
+              ))}
+            </div>
+
+            <div className="flex flex-wrap gap-3 mt-4">
+              <a
+                href={mailHref}
+                className={`group relative inline-flex items-center overflow-hidden rounded-xl bg-white px-5 py-2.5 font-medium text-black transition hover:scale-105 hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] plausible-event-name=Product+CTA+Primary plausible-event-product=${p.slug} plausible-event-location=product_page`}
+              >
+                <span className="relative z-10">{primaryLabel}</span>
+                <div className="absolute inset-0 h-full w-full animate-[shimmer_2s_infinite] bg-gradient-to-r from-transparent via-black/10 to-transparent -translate-x-full" />
+              </a>
+              <a
+                href="#modulos"
+                className={`group relative inline-flex items-center overflow-hidden rounded-xl border border-white/15 bg-black/40 px-5 py-2.5 font-medium text-white transition hover:bg-white/10 plausible-event-name=Product+CTA+Secondary plausible-event-product=${p.slug} plausible-event-location=product_page`}
+              >
+                <span className="relative z-10">{secondaryLabel}</span>
+              </a>
+            </div>
+
+            {supportPoints.length > 0 && (
+              <ul className="flex flex-wrap gap-2 text-xs text-foreground/85">
+                {supportPoints.map((point) => (
+                  <li key={point} className="rounded-full border border-white/10 bg-black/25 px-3 py-1.5">
+                    {point}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </section>
+
+          {/* Sección Bento Box Combinada: Impacto y Módulos */}
+          <section className="mt-12">
+            <div className="mb-6 flex flex-col gap-2">
+              <h2 className="text-2xl font-semibold text-white md:text-3xl">Por qué y cómo funciona</h2>
+              <p className="text-sm text-muted-foreground">El impacto directo en tu operación y los módulos técnicos que lo hacen posible.</p>
+            </div>
+
+            <div className="grid grid-cols-1 gap-4 lg:grid-cols-12 lg:grid-rows-2">
+
+              {/* Bento: Impacto Principal (Ocupa más espacio) */}
+              <div id="impacto" className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur transition hover:border-white/15 hover:bg-white/[0.06] lg:col-span-8 lg:row-span-2">
+                <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-emerald-500/20 blur-[80px] pointer-events-none" />
+                <h3 className="mb-6 text-xl font-medium text-white flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-emerald-400"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" /></svg>
+                  Impacto Operativo
+                </h3>
+
+                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                  {results.map((result) => (
+                    <div key={result.title} className="flex flex-col gap-2">
+                      <div className="h-0.5 w-8 bg-gradient-to-r from-fuchsia-500 to-cyan-400 rounded-full" />
+                      <div className="font-medium text-white/90">{result.title}</div>
+                      <p className="text-sm leading-relaxed text-muted-foreground">{result.description}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Bento: Módulos (Sidebar) */}
+              <div id="modulos" className="group relative overflow-hidden rounded-3xl border border-white/10 bg-black/40 p-6 backdrop-blur transition hover:border-white/15 lg:col-span-4 lg:row-span-2">
+                <div className="absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-cyan-500/10 blur-[60px] pointer-events-none" />
+                <h3 className="mb-6 text-xl font-medium text-white flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-cyan-400"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" /><polyline points="3.27 6.96 12 12.01 20.73 6.96" /><line x1="12" y1="22.08" x2="12" y2="12" /></svg>
+                  Módulos Clave
+                </h3>
+
+                <ul className="flex flex-col gap-4 relative z-10">
+                  {p.details.modules.map((module, index) => (
+                    <li key={module} className="flex items-start gap-3 text-sm text-muted-foreground">
+                      <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-white/10 text-[10px] font-medium text-white ring-1 ring-white/20">
+                        {index + 1}
+                      </span>
+                      <span className="leading-snug pt-0.5">{module}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+            </div>
+          </section>
+
+          {p.details.integrations?.length ? (
+            <section id="integraciones" className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur">
+              <h2 className="mb-4 text-xl font-semibold text-white md:text-2xl">Integraciones frecuentes</h2>
+              <ul className="flex flex-wrap gap-2 text-sm text-muted-foreground">
+                {p.details.integrations.map((integration) => (
+                  <li key={integration} className="rounded-full border border-white/10 bg-black/20 px-4 py-2">
+                    {integration}
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ) : null}
+
+          {p.details.stages?.length ? (
+            <section id="implementacion" className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur">
+              <h2 className="mb-4 text-xl font-semibold text-white md:text-2xl">Cómo se implementa</h2>
+              <ol className="space-y-4">
+                {p.details.stages.map((stage, index) => (
+                  <li key={stage.name} className="rounded-2xl border border-white/10 bg-black/20 p-5">
+                    <div className="font-medium text-white">Paso {index + 1} - {stage.name}</div>
+                    <p className="mt-1 text-sm text-muted-foreground">{stage.description}</p>
+                    {stage.outputs?.length ? (
+                      <ul className="mt-3 flex flex-wrap gap-2">
+                        {stage.outputs.map((output) => (
+                          <li
+                            key={output}
+                            className="rounded-full border border-white/10 bg-black/20 px-3 py-1 text-xs text-foreground/80"
+                          >
+                            {output}
+                          </li>
+                        ))}
+                      </ul>
+                    ) : null}
+                  </li>
+                ))}
+              </ol>
+            </section>
+          ) : null}
+
+          {idealFor.length ? (
+            <section id="ideal" className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur">
+              <h2 className="mb-4 text-xl font-semibold text-white md:text-2xl">Ideal para</h2>
+              <ul className="grid grid-cols-1 gap-3 md:grid-cols-2">
+                {idealFor.map((item) => (
+                  <li key={item} className="rounded-2xl border border-white/10 bg-black/20 p-4 text-sm text-muted-foreground">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ) : null}
+
+          {faqs.length ? (
+            <section id="faq" className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur">
+              <h2 className="mb-4 text-xl font-semibold text-white md:text-2xl">Preguntas frecuentes</h2>
+              <div className="space-y-3">
+                {faqs.map((item) => (
+                  <article key={item.question} className="rounded-2xl border border-white/10 bg-black/20 p-4">
+                    <h3 className="text-sm font-medium text-white">{item.question}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.answer}</p>
+                  </article>
+                ))}
+              </div>
+            </section>
+          ) : null}
+
+          {relatedProducts.length ? (
+            <section className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur">
+              <h2 className="mb-4 text-xl font-semibold text-white md:text-2xl">Otros productos de Yago</h2>
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+                {relatedProducts.map((related) => (
+                  <Link
+                    key={related.slug}
+                    href={`/productos/${related.slug}`}
+                    className="group hover-lift rounded-2xl border border-white/10 bg-black/20 p-4 transition hover:border-white/20"
+                  >
+                    <div className="text-sm font-medium text-white">{related.name}</div>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{related.tagline}</p>
+                    <div className="mt-3 text-xs text-foreground/80">Ver detalle →</div>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          ) : null}
+
+          <section className="flex flex-col gap-4 rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur md:flex-row md:items-start md:justify-between">
+            <div className="max-w-3xl text-muted-foreground">
+              <div className="font-semibold text-white">{p.closeCta?.title || `¿Listo para implementar ${p.name}?`}</div>
+              <p className="mt-2">
+                {p.closeCta?.text || "Te ayudamos a evaluar alcance, tiempos y el mejor plan de adopción para tu equipo."}
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-3">
+              <a
+                href={mailHref}
+                className={`inline-flex items-center rounded-xl bg-white px-4 py-2 text-black transition hover:opacity-90 plausible-event-name=Product+Contact plausible-event-method=email plausible-event-product=${p.slug} plausible-event-location=product_page`}
+              >
+                {p.closeCta?.primary || "Contactar por email"}
+              </a>
+              {waHref ? (
+                <a
+                  href={waHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`inline-flex items-center rounded-xl bg-emerald-500/90 px-4 py-2 text-white transition hover:bg-emerald-500 plausible-event-name=Product+Contact plausible-event-method=whatsapp plausible-event-product=${p.slug} plausible-event-location=product_page`}
+                >
+                  {p.closeCta?.secondary || "WhatsApp"}
+                </a>
+              ) : (
+                <span
+                  className="inline-flex cursor-not-allowed items-center rounded-xl bg-neutral-700 px-4 py-2 text-neutral-300"
+                  title="Configura NEXT_PUBLIC_WHATSAPP_PHONE"
+                >
+                  {p.closeCta?.secondary || "WhatsApp"}
+                </span>
+              )}
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <BrandStamp />
+      <Footer />
+    </div>
   );
 }

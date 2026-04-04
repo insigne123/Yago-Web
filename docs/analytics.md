@@ -1,31 +1,56 @@
 # Analitica (Yago Web)
 
-Este proyecto soporta analitica con Plausible (sin cookies) y tracking de eventos clave para entender:
+Este proyecto soporta:
 
-- De donde llegan (canal / UTM / landing)
-- Que secciones y paginas ven
-- Que CTAs convierten (WhatsApp, Agendar demo, formulario)
+- Cloudflare Web Analytics (trafico + rendimiento, sin cookies)
+- Captura de origen en leads (UTMs/referrer/landing en el formulario)
 
-## 1) Activar Plausible
+Opcional:
 
-1. Crea una cuenta en Plausible y agrega tu dominio (ej: `yago.cl`).
-2. Define la variable de entorno en tu deploy:
+- Plausible (si quieres funnels/eventos custom en un dashboard; requiere cuenta)
 
-   - `NEXT_PUBLIC_PLAUSIBLE_DOMAIN=yago.cl`
+## 1) Activar Cloudflare Web Analytics (recomendado)
 
-Opcionales (solo si usas Plausible self-hosted o proxy):
+Si tu sitio esta alojado/proxy en Cloudflare, tienes dos opciones:
 
-- `NEXT_PUBLIC_PLAUSIBLE_SRC=https://plausible.io/js/script.manual.js`
-- `NEXT_PUBLIC_PLAUSIBLE_API=https://plausible.tu-dominio.com/api/event`
+1) Automatico (sin codigo)
 
-Notas:
+- Cloudflare Dashboard -> Web Analytics -> Add site / Enable.
 
-- Usamos `script.manual.js` + un componente SPA para que Next (App Router) trackee pageviews en navegacion interna.
-- Los eventos custom cuentan para la facturacion de Plausible.
+2) Manual por snippet (con env)
 
-## 2) Eventos que ya quedan trackeados
+- Crea el sitio en Cloudflare Web Analytics y copia el token.
+- Define en tu deploy:
 
-Estos eventos se disparan por clases `plausible-event-*` y/o por JS (formulario):
+  - `NEXT_PUBLIC_CF_WEB_ANALYTICS_TOKEN=...`
+
+Notas importantes (Cloudflare):
+
+- Web Analytics no soporta UTMs ni eventos custom por ahora.
+- El beacon soporta SPA (route changes) automaticamente.
+
+Archivos relevantes:
+
+- `src/components/analytics/CloudflareWebAnalytics.tsx`
+- `src/app/layout.tsx`
+
+## 2) Eventos (opcional con Plausible)
+
+Cloudflare Web Analytics no tiene eventos custom.
+Si quieres medir clicks/CTA/funnels en un dashboard, puedes usar Plausible.
+
+Para activarlo:
+
+- `NEXT_PUBLIC_PLAUSIBLE_DOMAIN=yago.cl`
+
+Opcionales (Plausible self-hosted/proxy):
+
+- `NEXT_PUBLIC_PLAUSIBLE_SRC=...`
+- `NEXT_PUBLIC_PLAUSIBLE_API=...`
+
+Nota: si defines `NEXT_PUBLIC_CF_WEB_ANALYTICS_TOKEN`, el componente de Plausible se desactiva automaticamente para evitar doble tracking.
+
+Eventos ya etiquetados (si Plausible esta activo):
 
 - `Nav Click`
   - props: `location` (`navbar` | `navbar_mobile`)
@@ -81,12 +106,13 @@ Estos eventos se disparan por clases `plausible-event-*` y/o por JS (formulario)
   - props: `kind` (`validation` | `server` | `network_or_unknown`)
   - props: `status` (si hubo respuesta HTTP)
 
-Archivos relevantes:
+Archivos relevantes (Plausible):
 
 - `src/components/analytics/Plausible.tsx`
 - `src/components/analytics/PlausiblePageview.tsx`
 - `src/components/landing/*` (clases `plausible-event-*`)
 - `src/components/landing/Contacto.tsx` (eventos del formulario)
+- `src/components/landing/AuditWidget.tsx` (nudge + widget)
 
 ## 3) Captura de origen en leads (para poder contactarlos)
 

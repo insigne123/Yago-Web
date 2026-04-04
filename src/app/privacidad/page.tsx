@@ -12,7 +12,12 @@ const gradientText =
 const UPDATED_AT = "2026-02-06";
 
 const PLAUSIBLE_DOMAIN = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN || "";
-const USES_ANALYTICS = Boolean(PLAUSIBLE_DOMAIN);
+const CF_TOKEN =
+  process.env.NEXT_PUBLIC_CF_WEB_ANALYTICS_TOKEN ||
+  process.env.NEXT_PUBLIC_CF_BEACON_TOKEN ||
+  "";
+
+const USES_ANALYTICS = Boolean(PLAUSIBLE_DOMAIN || CF_TOKEN);
 
 export default function PrivacyPage() {
   return (
@@ -45,7 +50,7 @@ export default function PrivacyPage() {
               <strong>Uso del sitio</strong>: información técnica mínima para seguridad y operación
               (logs del servidor).
               {USES_ANALYTICS
-                ? " También usamos analítica para medir tráfico y eventos de uso del sitio (sin enviar información identificable como emails o nombres)."
+                ? " También usamos analítica para medir tráfico y rendimiento del sitio (sin enviar información identificable como emails o nombres)."
                 : " No utilizamos cookies de seguimiento salvo que se indique lo contrario en el futuro."}
             </li>
           </ul>
@@ -98,7 +103,7 @@ export default function PrivacyPage() {
             Este sitio no usa cookies de marketing. Podemos utilizar cookies estrictamente
             necesarias para el funcionamiento.
             {USES_ANALYTICS
-              ? " Para analítica usamos un enfoque sin cookies (por ejemplo, Plausible Analytics) para entender el rendimiento del sitio."
+              ? " Para analítica usamos un enfoque sin cookies (por ejemplo, Cloudflare Web Analytics) para entender el rendimiento del sitio."
               : " Si en el futuro incorporamos analítica, te lo informaremos y te daremos opciones de control."}
           </p>
 

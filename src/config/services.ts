@@ -7,8 +7,43 @@ export type ServiceStage = {
   outputs?: string[];
 };
 
+export type ServiceResult = {
+  title: string;
+  description: string;
+};
+
+export type ServiceBuyerBlock = {
+  buyer: string;
+  summary: string;
+  items: string[];
+};
+
+export type ServicePlan = {
+  name: string;
+  audience: string;
+  includes: string;
+  priceHint: string;
+  cta: string;
+};
+
+export type ServiceFaq = {
+  question: string;
+  answer: string;
+};
+
+export type ServiceCloseCta = {
+  title: string;
+  text: string;
+  primary: string;
+  secondary: string;
+};
+
 export type Service = {
-  slug: "automatizacion-procesos" | "apps-automatizacion" | "paginas-web" | "capacitacion-ia";
+  slug:
+    | "automatizacion-procesos"
+    | "apps-automatizacion"
+    | "paginas-web"
+    | "capacitacion-ia";
   title: string;
   short: string; // resumen para la tarjeta
   duration: string; // tiempo típico de producción
@@ -16,6 +51,18 @@ export type Service = {
   stages: ServiceStage[]; // etapas del proyecto
   deliverables: string[]; // entregables estándar
   notes?: string[]; // consideraciones, límites, etc.
+  pageTitle?: string;
+  pageSubtitle?: string;
+  ctaPrimary?: string;
+  ctaSecondary?: string;
+  supportPoints?: string[];
+  results?: ServiceResult[];
+  buyerBlocks?: ServiceBuyerBlock[];
+  pricingPlans?: ServicePlan[];
+  closeCta?: ServiceCloseCta;
+  faq?: ServiceFaq[];
+  seoTitle?: string;
+  seoDescription?: string;
 };
 
 export const SERVICES: Service[] = [
