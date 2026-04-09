@@ -14,20 +14,20 @@ export function Logos() {
   ];
 
   return (
-    <Section className="pt-0">
+    <Section className="pt-0" id="tecnologia">
       <div className="mx-auto max-w-7xl px-4">
         <div className="hover-lift overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(15,21,33,0.9),rgba(10,16,26,0.98))] px-6 py-8 shadow-[0_24px_80px_rgba(0,0,0,0.16)] md:px-8">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-2xl">
               <Badge variant="outline" className="border-white/12 bg-white/[0.04] px-3 py-1 text-[11px] uppercase tracking-[0.16em] text-slate-300">
-                Integraciones
+                Compatibilidad
               </Badge>
               <h2 className="mt-4 text-2xl font-semibold text-white md:text-[2rem]">
-                Tu stack actual, conectado con una capa de automatización elegante.
+                No necesitas cambiar tu stack para empezar a automatizar.
               </h2>
               <p className="mt-3 max-w-xl text-sm leading-relaxed text-slate-300">
                 Integramos APIs, documentos, canales y bases de datos para que el sistema funcione como
-                una sola operación, con trazabilidad y ownership claro.
+                una sola operacion, con trazabilidad y ownership claro.
               </p>
             </div>
 

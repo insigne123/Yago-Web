@@ -101,33 +101,33 @@ export const processSteps = [
 
 export const caseStudies = [
   {
-    company: "Empresa 1",
-    title: "Automatización de soporte N1",
-    description: "Integración de chatbot + ticketing + RAG documental.",
+    company: "Backoffice financiero",
+    title: "Carga y validacion documental",
+    description: "Facturas, ordenes de compra y respaldos dejan de pasar por digitacion manual para poder seguir operando.",
     stats: [
-      { icon: Clock, text: "TTR ↓ 55% · SLA 95% · Satisfacción ↑ 30%" },
-      { icon: Users, text: "300+ agentes asistidos · 24/7" },
-      { icon: Lock, text: "SSO + roles + auditoría" },
+      { icon: Clock, text: "Menos digitacion y tiempos de registro" },
+      { icon: Users, text: "Mas capacidad para revision y control" },
+      { icon: Lock, text: "Trazabilidad y validacion cuando aplica" },
     ],
   },
   {
-    company: "Empresa 2",
-    title: "Automatización de soporte N2",
-    description: "Integración de chatbot + ticketing + RAG documental.",
+    company: "Operaciones y aprobaciones",
+    title: "Flujos internos mas rapidos y visibles",
+    description: "Solicitudes, aprobaciones y traspasos entre areas dejan de depender de correos, planillas sueltas o seguimiento manual.",
     stats: [
-      { icon: Clock, text: "TTR ↓ 50% · SLA 98% · Satisfacción ↑ 25%" },
-      { icon: Users, text: "500+ agentes asistidos · 24/7" },
-      { icon: Lock, text: "SSO + roles + auditoría" },
+      { icon: Clock, text: "Menos esperas entre etapas del proceso" },
+      { icon: Users, text: "Responsables y estados mas claros" },
+      { icon: Lock, text: "Reglas, logs y ownership operativo" },
     ],
   },
   {
-    company: "Empresa 3",
-    title: "Automatización de soporte N3",
-    description: "Integración de chatbot + ticketing + RAG documental.",
+    company: "Soporte interno y reportes",
+    title: "Menos trabajo repetitivo para el equipo",
+    description: "Consultas internas, consolidacion de datos y reportes operativos se resuelven con mejor contexto y menos retrabajo.",
     stats: [
-      { icon: Clock, text: "TTR ↓ 65% · SLA 99% · Satisfacción ↑ 40%" },
-      { icon: Users, text: "150+ agentes asistidos · 24/7" },
-      { icon: Lock, text: "SSO + roles + auditoría" },
+      { icon: Clock, text: "Respuestas y reportes mas rapidos" },
+      { icon: Users, text: "Equipos liberados para tareas de mayor valor" },
+      { icon: Lock, text: "Informacion mas ordenada y auditable" },
     ],
   },
 ];
@@ -159,22 +159,21 @@ export const testimonials = [];
 
 export const navLinks = [
     { name: "Inicio", href: "/#inicio" },
-    { name: "Nosotros", href: "/#nosotros" },
+    { name: "Casos", href: "/#casos" },
+    { name: "Proceso", href: "/#proceso" },
     { name: "Servicios", href: "/#servicios" },
-    { name: "Productos", href: "/#productos" },
-    { name: "OCR Master", href: "/#ocr-master" },
-    { name: "Tecnología", href: "/#tecnologia" },
+    { name: "OCR", href: "/ocr" },
     { name: "FAQ", href: "/#faq" },
     { name: "Contacto", href: "/#contacto" },
 ];
 
 export const footerLinks = [
-    { name: "Nosotros", href: "/#nosotros" },
+    { name: "Casos", href: "/#casos" },
+    { name: "Proceso", href: "/#proceso" },
     { name: "Servicios", href: "/#servicios" },
-    { name: "Productos", href: "/#productos" },
-    { name: "OCR Master", href: "/#ocr-master" },
-    { name: "Tecnología", href: "/#tecnologia" },
+    { name: "OCR", href: "/ocr" },
     { name: "FAQ", href: "/#faq" },
+    { name: "Contacto", href: "/#contacto" },
     { name: "Política de Privacidad", href: "/privacidad" },
     { name: "Términos", href: "#" },
 ];

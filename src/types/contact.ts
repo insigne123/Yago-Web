@@ -3,6 +3,9 @@ export type EmailFormPayload = {
   email: string;
   phone?: string;
   company?: string;
+  role?: string;
+  documentType?: string;
+  monthlyVolume?: string;
   message: string;
   topic?: string;
   hp?: string;

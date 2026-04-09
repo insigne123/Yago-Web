@@ -91,6 +91,9 @@ export function buildContactTemplate(data: {
   email: string;
   phone?: string;
   company?: string;
+  role?: string;
+  documentType?: string;
+  monthlyVolume?: string;
   message: string;
   topic?: string;
   attribution?: {
@@ -125,6 +128,9 @@ export function buildContactTemplate(data: {
     email: escapeHTML(data.email || ""),
     phone: escapeHTML(data.phone || ""),
     company: escapeHTML(data.company || ""),
+    role: escapeHTML(data.role || ""),
+    documentType: escapeHTML(data.documentType || ""),
+    monthlyVolume: escapeHTML(data.monthlyVolume || ""),
     message: escapeHTML(data.message || ""),
     topic: escapeHTML(data.topic || ""),
 
@@ -191,6 +197,21 @@ export function buildContactTemplate(data: {
         ${
           safe.company
             ? `<tr><td style="padding:6px 0;color:#555">Empresa</td><td>${safe.company}</td></tr>`
+            : ""
+        }
+        ${
+          safe.role
+            ? `<tr><td style="padding:6px 0;color:#555">Cargo</td><td>${safe.role}</td></tr>`
+            : ""
+        }
+        ${
+          safe.documentType
+            ? `<tr><td style="padding:6px 0;color:#555">Tipo de documento</td><td>${safe.documentType}</td></tr>`
+            : ""
+        }
+        ${
+          safe.monthlyVolume
+            ? `<tr><td style="padding:6px 0;color:#555">Volumen mensual</td><td>${safe.monthlyVolume}</td></tr>`
             : ""
         }
       </tbody>
@@ -267,6 +288,12 @@ Nombre: ${data.name}
 Email: ${data.email}
 ${data.phone ? `Teléfono: ${data.phone}\n` : ""}${
     data.company ? `Empresa: ${data.company}\n` : ""
+  }${
+    data.role ? `Cargo: ${data.role}\n` : ""
+  }${
+    data.documentType ? `Tipo de documento: ${data.documentType}\n` : ""
+  }${
+    data.monthlyVolume ? `Volumen mensual: ${data.monthlyVolume}\n` : ""
   }
 Mensaje:
 ${data.message}`;

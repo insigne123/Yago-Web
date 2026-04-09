@@ -67,7 +67,7 @@ export function OcrMaster() {
                       variant="ghost"
                       className="rounded-full border border-white/10 bg-white/[0.04] text-slate-100 hover:bg-white/[0.08]"
                     >
-                      <Link href="/ocr-master">Ver pagina completa</Link>
+                      <Link href="/ocr">Ver landing OCR</Link>
                     </Button>
                   </div>
                 </div>
@@ -104,10 +104,10 @@ export function OcrMaster() {
                     {OCR_MASTER.proposalDescription}
                   </p>
                   <Link
-                    href="/ocr-master"
+                    href="/ocr"
                     className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-white transition hover:text-sky-100"
                   >
-                    Explorar el detalle completo
+                    Explorar la landing completa
                     <ArrowRight className="h-4 w-4" aria-hidden="true" />
                   </Link>
                 </div>
@@ -251,10 +251,10 @@ export function OcrMaster() {
                         asChild
                         className="w-full rounded-full border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(223,234,255,0.92))] text-slate-950"
                       >
-                        <Link href="#contacto">
+                        <a href="#contacto">
                           {plan.cta}
                           <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                        </Link>
+                        </a>
                       </Button>
                     </CardFooter>
                 </Card>
@@ -294,7 +294,7 @@ export function OcrMaster() {
                   asChild
                   className="rounded-full border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(223,234,255,0.92))] text-slate-950"
                 >
-                  <Link href="#contacto">Agendar Demo</Link>
+                  <a href="#contacto">Agendar Demo</a>
                 </Button>
                 <Button
                   asChild

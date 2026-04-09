@@ -37,9 +37,17 @@ export function Contacto() {
     setLoading(true);
     const form = e.currentTarget;
     const formData = new FormData(form);
-    
-    // We can use FormData directly, the API handler supports it.
-    // We don't need to convert it to a JSON object.
+    const processType = String(formData.get("tipo_proceso") || "").trim();
+    const currentMessage = String(formData.get("mensaje") || "").trim();
+
+    const enrichedMessage = [
+      processType ? `Tipo de proceso: ${processType}` : "",
+      currentMessage,
+    ]
+      .filter(Boolean)
+      .join("\n\n");
+
+    formData.set("mensaje", enrichedMessage);
 
     let errorTracked = false;
 
@@ -89,10 +97,10 @@ export function Contacto() {
         <div className="grid items-start gap-8 md:grid-cols-2">
           <div>
             <p className="text-xs tracking-[0.22em] text-muted-foreground">CONTACTO</p>
-            <h2 className="mt-3 text-3xl font-semibold text-white md:text-5xl">Conversemos</h2>
+            <h2 className="mt-3 text-3xl font-semibold text-white md:text-5xl">Pide un analisis inicial</h2>
             <p className="mt-3 max-w-xl leading-relaxed text-slate-300">
-              Cuéntanos tu caso y te proponemos un roadmap con quick wins medibles, prioridades claras
-              y una primera recomendación de arquitectura.
+              Cuentanos tu proceso, cuello de botella o problema operativo y te respondemos con quick wins,
+              prioridades claras y el siguiente paso recomendado para tu caso.
             </p>
 
             <div className="mt-6 grid gap-3 sm:grid-cols-2">
@@ -132,13 +140,14 @@ export function Contacto() {
 
           <Card className="hover-lift rounded-[1.8rem] border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.9),rgba(10,16,25,0.98))] shadow-[0_20px_60px_rgba(0,0,0,0.14)]">
             <CardHeader>
-              <CardTitle>Escríbenos</CardTitle>
+              <CardTitle>Cuentanos que quieres automatizar</CardTitle>
               <CardDescription>Te respondemos con el siguiente paso recomendado para tu caso.</CardDescription>
             </CardHeader>
             <CardContent>
               <form onSubmit={onSubmit} onFocusCapture={markStart} className="grid gap-4">
                 {/* Honeypot field for spam protection */}
                 <input type="text" name="hp" className="hidden" />
+                <input type="hidden" name="topic" value="Analisis automatizacion" />
 
                 {/* Attribution (first touch / last touch) */}
                 <input type="hidden" name="ft_utm_source" value={attribution?.first.utm_source || ""} />
@@ -186,7 +195,8 @@ export function Contacto() {
                   />
                 </div>
 
-                <div className="grid gap-2">
+                <div className="grid gap-2 md:grid-cols-2 md:gap-4">
+                  <div className="grid gap-2">
                   <Label htmlFor="empresa" className="text-slate-200">Empresa</Label>
                   <Input
                     id="empresa"
@@ -195,6 +205,36 @@ export function Contacto() {
                     placeholder="Nombre de la empresa"
                     className="rounded-2xl border-white/10 bg-white/[0.04] text-white placeholder:text-slate-500"
                   />
+                  </div>
+
+                  <div className="grid gap-2">
+                    <Label htmlFor="cargo" className="text-slate-200">Cargo</Label>
+                    <Input
+                      id="cargo"
+                      name="cargo"
+                      autoComplete="organization-title"
+                      placeholder="Ej. Operaciones, Finanzas, Backoffice"
+                      className="rounded-2xl border-white/10 bg-white/[0.04] text-white placeholder:text-slate-500"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid gap-2">
+                  <Label htmlFor="tipo_proceso" className="text-slate-200">Tipo de proceso</Label>
+                  <select
+                    id="tipo_proceso"
+                    name="tipo_proceso"
+                    defaultValue=""
+                    className="h-11 rounded-2xl border border-white/10 bg-white/[0.04] px-3 text-sm text-white outline-none transition-colors focus:border-sky-200/40 focus:ring-2 focus:ring-sky-200/30"
+                  >
+                    <option value="" className="bg-slate-950 text-slate-400">Selecciona una opcion (opcional)</option>
+                    <option value="Backoffice y carga de datos" className="bg-slate-950 text-white">Backoffice y carga de datos</option>
+                    <option value="Documentos y OCR" className="bg-slate-950 text-white">Documentos y OCR</option>
+                    <option value="Aprobaciones y seguimiento" className="bg-slate-950 text-white">Aprobaciones y seguimiento</option>
+                    <option value="Reportes y consolidacion" className="bg-slate-950 text-white">Reportes y consolidacion</option>
+                    <option value="Soporte interno o atencion" className="bg-slate-950 text-white">Soporte interno o atencion</option>
+                    <option value="Otro" className="bg-slate-950 text-white">Otro</option>
+                  </select>
                 </div>
 
                 <div className="grid gap-2">
@@ -203,7 +243,7 @@ export function Contacto() {
                     id="mensaje"
                     name="mensaje"
                     autoComplete="off"
-                    placeholder="Describe brevemente el proceso, equipo o problema que quieres mejorar..."
+                    placeholder="Describe brevemente el proceso, area o cuello de botella que quieres mejorar..."
                     rows={5}
                     required
                     className="rounded-2xl border-white/10 bg-white/[0.04] text-white placeholder:text-slate-500"
@@ -215,7 +255,7 @@ export function Contacto() {
                   disabled={loading}
                   className="rounded-full border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(223,234,255,0.92))] text-slate-950 plausible-event-name=CTA+Enviar+Contacto plausible-event-location=contact_section"
                 >
-                  {loading ? "Enviando…" : "Enviar Mensaje"}
+                  {loading ? "Enviando..." : "Pedir analisis"}
                 </Button>
               </form>
               <p className="mt-3 text-xs text-slate-400">

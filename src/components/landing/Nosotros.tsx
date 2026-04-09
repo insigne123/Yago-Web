@@ -9,18 +9,18 @@ function NosotrosComponent() {
       <div className="mx-auto max-w-7xl px-4">
         <p className="text-xs tracking-[0.22em] text-muted-foreground">NOSOTROS</p>
         <h2 className="mt-3 text-4xl font-semibold text-white md:text-5xl">
-          Construimos automatizacion que tu equipo quiere usar
+          Trabajamos como partner operativo, no como proveedor que desaparece.
         </h2>
         <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
-          Diseñamos, construimos y operamos automatizaciones y agentes de IA que integran sistemas,
-          reducen tareas repetitivas y entregan visibilidad real (logs, metricas y control).
+          Diseniamos, construimos y operamos automatizaciones y agentes de IA que integran sistemas,
+          reducen tareas repetitivas y entregan visibilidad real para el equipo que se queda operando.
         </p>
 
         <div className="mt-10 grid gap-6 md:grid-cols-12">
           <div className="md:col-span-7">
             <div className="hover-lift rounded-3xl border border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.84),rgba(10,16,25,0.96))] p-6 md:p-8">
               <h3 className="text-2xl font-semibold text-white md:text-3xl">
-                IA como copiloto, no como reemplazo
+                IA como copiloto, con control humano cuando importa
               </h3>
               <p className="mt-3 text-muted-foreground">
                 En YAGO creemos que la inteligencia artificial no reemplaza a las personas: amplifica su potencial.

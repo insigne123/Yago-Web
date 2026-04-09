@@ -37,6 +37,9 @@ async function readBody(req: Request): Promise<EmailFormPayload> {
       email: pick(body as any, ["email", "mail", "correo"]),
       phone: pick(body as any, ["phone", "telefono", "tel"]),
       company: pick(body as any, ["company", "empresa", "org"]),
+      role: pick(body as any, ["role", "cargo", "position"]),
+      documentType: pick(body as any, ["documentType", "document_type", "tipo_documento"]),
+      monthlyVolume: pick(body as any, ["monthlyVolume", "monthly_volume", "volumen_mensual"]),
       message: pick(body as any, ["message", "mensaje", "content", "consulta", "texto", "msg"]),
       topic: pick(body as any, ["topic", "motivo", "intent", "reason", "leadType", "lead_type"]),
       hp: pick(body as any, ["hp", "_hp", "honeypot"]),
@@ -77,6 +80,9 @@ async function readBody(req: Request): Promise<EmailFormPayload> {
       email: get("email", "mail", "correo"),
       phone: get("phone", "telefono", "tel"),
       company: get("company", "empresa", "org"),
+      role: get("role", "cargo", "position"),
+      documentType: get("documentType", "document_type", "tipo_documento"),
+      monthlyVolume: get("monthlyVolume", "monthly_volume", "volumen_mensual"),
       message: get("message", "mensaje", "content", "consulta", "texto", "msg"),
       topic: get("topic", "motivo", "intent", "reason", "leadType", "lead_type"),
       hp: get("hp", "_hp", "honeypot"),
@@ -116,6 +122,9 @@ async function readBody(req: Request): Promise<EmailFormPayload> {
       email: get("email", "mail", "correo"),
       phone: get("phone", "telefono", "tel"),
       company: get("company", "empresa", "org"),
+      role: get("role", "cargo", "position"),
+      documentType: get("documentType", "document_type", "tipo_documento"),
+      monthlyVolume: get("monthlyVolume", "monthly_volume", "volumen_mensual"),
       message: get("message", "mensaje", "content", "consulta", "texto", "msg"),
       topic: get("topic", "motivo", "intent", "reason", "leadType", "lead_type"),
       hp: get("hp", "_hp", "honeypot"),
@@ -147,6 +156,9 @@ async function readBody(req: Request): Promise<EmailFormPayload> {
     return {
       name: (body["name"] as string) || "",
       email: (body["email"] as string) || "",
+      role: (body["role"] as string) || "",
+      documentType: (body["documentType"] as string) || "",
+      monthlyVolume: (body["monthlyVolume"] as string) || "",
       message: (body["message"] as string) || "",
     };
   } catch {
@@ -167,6 +179,9 @@ export async function POST(req: Request) {
     const email = clampText(data.email, 200);
     const phone = clampText(data.phone, 60);
     const company = clampText(data.company, 120);
+    const role = clampText(data.role, 120);
+    const documentType = clampText(data.documentType, 160);
+    const monthlyVolume = clampText(data.monthlyVolume, 120);
     const message = clampText(data.message, 5000);
     const topic = clampText(data.topic, 80);
 
@@ -231,6 +246,9 @@ export async function POST(req: Request) {
       email,
       phone,
       company,
+      role,
+      documentType,
+      monthlyVolume,
       message,
       topic,
       attribution: { firstTouch: ft, lastTouch: lt },
@@ -258,7 +276,7 @@ export async function POST(req: Request) {
           body: JSON.stringify({
             type: "contact_lead",
             receivedAt: new Date().toISOString(),
-            lead: { name, email, phone, company, message, topic },
+            lead: { name, email, phone, company, role, documentType, monthlyVolume, message, topic },
             attribution: { firstTouch: ft, lastTouch: lt },
             meta: {
               userAgent: req.headers.get("user-agent"),

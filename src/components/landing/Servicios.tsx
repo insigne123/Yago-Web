@@ -24,11 +24,11 @@ function ServiciosComponent() {
         <p className="text-xs tracking-[0.22em] text-muted-foreground">SERVICIOS</p>
         <div className="mt-3 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
           <h2 className="text-4xl font-semibold text-white md:text-5xl">
-            Diseño, integración y operación para sistemas IA que sí llegan a producción.
+            Formas en que implementamos automatizacion para negocio real.
           </h2>
           <p className="max-w-xl text-sm leading-relaxed text-slate-300">
-            Definimos KPI, construimos MVPs y dejamos ownership operativo. Todo queda medible:
-            ahorro, tiempos, errores y adopción.
+            Cuando el problema exige una solucion a medida, entramos con discovery, MVP y operacion.
+            Todo queda conectado, medible y pensado para que el equipo lo use de verdad.
           </p>
         </div>
 

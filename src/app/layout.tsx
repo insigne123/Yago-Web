@@ -27,24 +27,24 @@ const headlineFont = Instrument_Sans({
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: `${COMPANY.name} — Automatización con IA`,
+  title: `${COMPANY.name} — Automatizacion de procesos con IA`,
   description:
-    "Automatizamos tu empresa con IA: agentes, flujos y datos para acelerar tu operación.",
+    "Automatizacion de procesos con IA para equipos de operaciones: menos trabajo manual, menos errores y mas velocidad operativa.",
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     url: "/",
     siteName: COMPANY.name,
-    title: `${COMPANY.name} — Automatización con IA`,
+    title: `${COMPANY.name} — Automatizacion de procesos con IA`,
     description:
-      "Agentes, automatización de flujos y RAG para reducir costos y tiempos.",
+      "Automatizacion de procesos, OCR e integraciones para reducir trabajo manual, errores y tiempos operativos.",
     images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${COMPANY.name} — Automatización con IA`,
+    title: `${COMPANY.name} — Automatizacion de procesos con IA`,
     description:
-      "Agentes, automatización de flujos y RAG para reducir costos y tiempos.",
+      "Automatizacion de procesos, OCR e integraciones para equipos que necesitan operar mejor.",
     images: ["/twitter-image"],
   },
   icons: {

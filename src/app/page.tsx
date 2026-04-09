@@ -1,12 +1,11 @@
 import { Navbar } from "@/components/landing/Navbar";
 import { Hero } from "@/components/landing/Hero";
+import { OperationsFit } from "@/components/landing/OperationsFit";
+import { CaseStudies } from "@/components/landing/CaseStudies";
 import { Logos } from "@/components/landing/Logos";
-import Nosotros from "@/components/landing/Nosotros";
 import { Proceso } from "@/components/landing/Proceso";
 import { Servicios } from "@/components/landing/Servicios";
-import { Productos } from "@/components/landing/Productos";
-import { OcrMaster } from "@/components/landing/OcrMaster";
-import { Tecnologia } from "@/components/landing/Tecnologia";
+import { OcrPreview } from "@/components/landing/OcrPreview";
 import FAQ from "@/components/landing/FAQ";
 import { CTA } from "@/components/landing/CTA";
 import { Contacto } from "@/components/landing/Contacto";
@@ -17,46 +16,40 @@ import { SectionReveal, DividerGlow } from "@/components/ui/animated";
 export default function LandingIA() {
   return (
     <div className="relative min-h-screen overflow-x-clip text-white">
-      <Navbar />
+      <Navbar ctaHref="#contacto" ctaLabel="Pedir analisis" />
       <main id="main-content" className="main-premium">
         <Hero />
         <DividerGlow />
-        {/* Logos con surface suave */}
-        <SectionReveal as="div" delay={0.05} surface="soft">
-          <Logos />
+        <SectionReveal as="div" delay={0.05} surface="strong">
+          <OperationsFit />
         </SectionReveal>
         <DividerGlow />
         <SectionReveal as="div" delay={0.1}>
-          <Nosotros />
+          <CaseStudies />
+        </SectionReveal>
+        <DividerGlow />
+        <SectionReveal as="div" delay={0.1} surface="strong">
+          <CTA />
         </SectionReveal>
         <DividerGlow />
         <SectionReveal as="div" delay={0.1} surface="soft">
           <Proceso />
         </SectionReveal>
         <DividerGlow />
-        {/* Secciones densas con surface fuerte para máximo contraste */}
-        <SectionReveal as="div" delay={0.1} surface="strong">
+        <SectionReveal as="div" delay={0.12} surface="strong">
           <Servicios />
         </SectionReveal>
         <DividerGlow />
-        <SectionReveal as="div" delay={0.12} surface="strong">
-          <Productos />
-        </SectionReveal>
-        <DividerGlow />
         <SectionReveal as="div" delay={0.13} surface="strong">
-          <OcrMaster />
+          <OcrPreview />
         </SectionReveal>
         <DividerGlow />
         <SectionReveal as="div" delay={0.14} surface="soft">
-          <Tecnologia />
-        </SectionReveal>
-        <DividerGlow />
-        <SectionReveal as="div" delay={0.16} surface="strong">
-          <FAQ />
+          <Logos />
         </SectionReveal>
         <DividerGlow />
         <SectionReveal as="div" delay={0.18} surface="strong">
-          <CTA />
+          <FAQ />
         </SectionReveal>
         <DividerGlow />
         <SectionReveal as="div" delay={0.2} surface="strong">

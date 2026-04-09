@@ -17,7 +17,7 @@ function FAQComponent() {
             Preguntas frecuentes
           </h2>
           <p className="max-w-xl text-sm text-muted-foreground">
-            Respuestas cortas y directas. Si quieres, te armamos un roadmap con quick wins en 5 dias habiles.
+            Respuestas cortas para bajar dudas de implementacion, seguridad, ROI y tiempos.
           </p>
         </div>
 
@@ -43,13 +43,13 @@ function FAQComponent() {
             <div className="hover-lift rounded-3xl border border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.84),rgba(10,16,25,0.96))] p-6">
               <div className="text-sm font-medium text-white">No ves tu caso?</div>
               <p className="mt-2 text-sm text-muted-foreground">
-                Cuentalo en 2-3 lineas y te respondemos con sugerencias y siguientes pasos.
+                Cuentalo en 2-3 lineas y te respondemos con el siguiente paso recomendado.
               </p>
               <a
                 href="#contacto"
                 className="mt-5 inline-flex w-full items-center justify-center rounded-xl bg-gradient-to-r from-fuchsia-500 via-cyan-400 to-emerald-400 px-4 py-2 text-sm font-medium text-white transition hover:opacity-95 plausible-event-name=FAQ+Contact+Click plausible-event-location=faq_section"
               >
-                Hablar con YAGO
+                Pedir analisis
               </a>
 
               <div className="mt-4 rounded-2xl border border-white/10 bg-black/20 p-4 text-xs text-muted-foreground">

@@ -21,11 +21,11 @@ function ProductosComponent() {
         <p className="text-xs tracking-[0.22em] text-muted-foreground">PRODUCTOS</p>
         <div className="mt-3 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
           <h2 className="text-4xl font-semibold text-white md:text-5xl">
-            Productos listos para integrarse a tu operación.
+            Productos listos para acelerar iniciativas recurrentes.
           </h2>
           <p className="max-w-xl text-sm leading-relaxed text-slate-300">
-            Ahorra meses de desarrollo con soluciones paquetizadas que ya consideran panel,
-            permisos, analítica, flujos y puntos de integración para negocio real.
+            Si el problema ya se repite en varios clientes o areas, tenemos productos que acortan el
+            tiempo entre la idea y la puesta en marcha.
           </p>
         </div>
 
