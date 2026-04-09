@@ -55,10 +55,14 @@ export function Navbar({
 
   return (
     <header className="sticky top-0 z-50 px-4 pt-3 md:pt-4">
-      <div className="mx-auto max-w-7xl overflow-hidden rounded-[1.6rem] border border-white/12 bg-slate-950/96 shadow-[0_20px_80px_rgba(0,0,0,0.32)] backdrop-blur-2xl">
+      <div className="mx-auto max-w-7xl overflow-hidden rounded-[1.6rem] border border-white/12 bg-[linear-gradient(180deg,rgba(8,12,20,0.97),rgba(8,12,20,0.94))] shadow-[0_20px_80px_rgba(0,0,0,0.28)]">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-sky-200/35 to-transparent"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.028),transparent_36%)]"
         />
 
         <div className="mx-auto flex h-[4.35rem] max-w-7xl items-center justify-between gap-4 px-4 md:px-5">
@@ -81,7 +85,7 @@ export function Navbar({
             </span>
           </NavHref>
 
-          <nav className="hidden min-w-0 items-center gap-1 rounded-full border border-white/10 bg-black/25 px-2 py-2 md:flex">
+          <nav className="hidden min-w-0 items-center gap-1 rounded-full border border-white/10 bg-black/35 px-2 py-2 md:flex">
             {nav.map((item) => {
               const section = item.href.replace(/^\/?#/, "");
               return (
@@ -120,14 +124,14 @@ export function Navbar({
                 variant="ghost"
                 size="icon"
                 aria-label="Abrir menú"
-                className="rounded-full border border-white/10 bg-white/[0.03] text-white hover:bg-white/[0.07] focus-visible:ring-sky-200/70 md:hidden"
+              className="rounded-full border border-white/10 bg-white/[0.045] text-white hover:bg-white/[0.08] focus-visible:ring-sky-200/70 md:hidden"
               >
                 <Menu className="h-5 w-5" aria-hidden="true" />
               </Button>
             </SheetTrigger>
             <SheetContent
               side="right"
-              className="w-[300px] border-white/10 bg-slate-950/95 p-0 text-white backdrop-blur-2xl"
+              className="w-[300px] border-white/10 bg-[linear-gradient(180deg,rgba(8,12,20,0.98),rgba(8,12,20,0.96))] p-0 text-white"
             >
               <SheetHeader className="border-b border-white/10 px-6 py-5 text-left">
                 <SheetTitle className="text-white">Navegacion</SheetTitle>

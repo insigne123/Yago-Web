@@ -48,12 +48,12 @@ export function SectionReveal({
   return (
     <LazyMotion features={domAnimation}>
       <m.div
-        initial={{ opacity: 0, y: 18, scale: 0.992 }}
-        whileInView={{ opacity: 1, y: 0, scale: 1 }}
-        viewport={{ once: true, amount: 0.14, margin: "0px 0px -72px 0px" }}
+        initial={{ opacity: 0, transform: "translateY(16px)" }}
+        whileInView={{ opacity: 1, transform: "translateY(0px)" }}
+        viewport={{ once: true, amount: 0.18, margin: "0px 0px -48px 0px" }}
         transition={{
-          duration: 0.54,
-          delay: Math.min(delay, 0.16),
+          duration: 0.44,
+          delay: Math.min(delay, 0.12),
           ease: [0.22, 1, 0.36, 1],
         }}
       >
