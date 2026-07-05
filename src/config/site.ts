@@ -159,21 +159,20 @@ export const testimonials = [];
 
 export const navLinks = [
     { name: "Inicio", href: "/#inicio" },
-    { name: "Casos", href: "/#casos" },
-    { name: "Proceso", href: "/#proceso" },
-    { name: "Servicios", href: "/#servicios" },
+    { name: "Servicios", href: "/servicios" },
+    { name: "Proceso", href: "/proceso" },
+    { name: "Blog", href: "/blog" },
     { name: "OCR", href: "/ocr" },
-    { name: "FAQ", href: "/#faq" },
     { name: "Contacto", href: "/#contacto" },
 ];
 
 export const footerLinks = [
+    { name: "Servicios", href: "/servicios" },
+    { name: "Proceso", href: "/proceso" },
+    { name: "Blog", href: "/blog" },
     { name: "Casos", href: "/#casos" },
-    { name: "Proceso", href: "/#proceso" },
-    { name: "Servicios", href: "/#servicios" },
     { name: "OCR", href: "/ocr" },
     { name: "FAQ", href: "/#faq" },
     { name: "Contacto", href: "/#contacto" },
     { name: "Política de Privacidad", href: "/privacidad" },
-    { name: "Términos", href: "#" },
 ];
