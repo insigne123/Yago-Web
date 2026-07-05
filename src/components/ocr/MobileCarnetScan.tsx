@@ -252,10 +252,10 @@ function statusLabel(status: ScanStatus, hasFiles: boolean, hasConsent: boolean)
 
 function statusTone(status: ScanStatus, hasFiles: boolean, hasConsent: boolean) {
   if (status === "error") return "border-red-300/30 bg-red-400/10 text-red-100";
-  if (status === "processing") return "border-sky-200/30 bg-sky-300/10 text-sky-100";
+  if (status === "processing") return "border-sky-200/30 bg-sky-300/10 text-sky-700";
   if (status === "result") return "border-emerald-300/30 bg-emerald-300/10 text-emerald-100";
-  if (hasFiles && hasConsent) return "border-sky-200/30 bg-sky-300/10 text-sky-100";
-  return "border-white/10 bg-white/[0.04] text-slate-300";
+  if (hasFiles && hasConsent) return "border-sky-200/30 bg-sky-300/10 text-sky-700";
+  return "border-slate-900/10 bg-white/[0.04] text-slate-600";
 }
 
 function CaptureStep({
@@ -291,18 +291,18 @@ function CaptureStep({
   }
 
   return (
-    <section className="rounded-[1.6rem] border border-white/10 bg-white/[0.045] p-4 shadow-[0_18px_60px_rgba(0,0,0,0.18)]">
+    <section className="rounded-[1.6rem] border border-slate-900/10 bg-white/[0.045] p-4 shadow-[0_18px_60px_rgba(30,58,95,0.08)]">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <div className="text-xs font-semibold uppercase tracking-[0.16em] text-sky-100">{step}</div>
-          <h2 className="mt-2 text-xl font-semibold text-white">{title}</h2>
-          <p className="mt-1 text-sm leading-relaxed text-slate-300">{description}</p>
+          <div className="text-xs font-semibold uppercase tracking-[0.16em] text-sky-700">{step}</div>
+          <h2 className="mt-2 text-xl font-semibold text-slate-900">{title}</h2>
+          <p className="mt-1 text-sm leading-relaxed text-slate-600">{description}</p>
         </div>
 
         <div
           className={cn(
             "flex h-9 w-9 shrink-0 items-center justify-center rounded-full border",
-            capture ? "border-sky-200/30 bg-sky-300/10 text-sky-100" : "border-white/10 bg-black/20 text-slate-400"
+            capture ? "border-sky-200/30 bg-sky-300/10 text-sky-700" : "border-slate-900/10 bg-slate-900/5 text-slate-600"
           )}
           aria-hidden="true"
         >
@@ -320,7 +320,7 @@ function CaptureStep({
         onChange={handleChange}
       />
 
-      <div className="mt-4 overflow-hidden rounded-[1.25rem] border border-white/10 bg-black/25">
+      <div className="mt-4 overflow-hidden rounded-[1.25rem] border border-slate-900/10 bg-slate-900/5">
         {capture && !previewFailed ? (
           <img
             src={capture.previewUrl}
@@ -329,7 +329,7 @@ function CaptureStep({
             onError={() => setPreviewFailed(true)}
           />
         ) : (
-          <div className="flex aspect-[1.58/1] w-full flex-col items-center justify-center gap-3 px-6 text-center text-slate-400">
+          <div className="flex aspect-[1.58/1] w-full flex-col items-center justify-center gap-3 px-6 text-center text-slate-600">
             <FileText className="h-8 w-8 text-slate-500" aria-hidden="true" />
             <p className="text-sm">
               {capture ? "Vista previa no disponible, pero el archivo sera enviado." : "Aun no hay imagen seleccionada."}
@@ -339,7 +339,7 @@ function CaptureStep({
       </div>
 
       {capture && (
-        <div className="mt-3 flex items-center justify-between gap-3 text-xs text-slate-400">
+        <div className="mt-3 flex items-center justify-between gap-3 text-xs text-slate-600">
           <span className="truncate">{capture.file.name || "Imagen seleccionada"}</span>
           <span className="shrink-0">{formatFileSize(capture.file.size)}</span>
         </div>
@@ -351,8 +351,8 @@ function CaptureStep({
           className={cn(
             "inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 rounded-full border px-4 text-sm font-semibold transition-[transform,background-color,border-color] duration-200 active:scale-[0.98]",
             disabled
-              ? "pointer-events-none border-white/10 bg-white/[0.03] text-slate-500"
-              : "border-white/12 bg-white text-slate-950 hover:bg-slate-100"
+              ? "pointer-events-none border-slate-900/10 bg-white/[0.03] text-slate-500"
+              : "border-slate-900/10 bg-white text-slate-950 hover:bg-slate-100"
           )}
         >
           {capture ? <RotateCcw className="h-4 w-4" aria-hidden="true" /> : <Camera className="h-4 w-4" aria-hidden="true" />}
@@ -364,7 +364,7 @@ function CaptureStep({
           variant="ghost"
           disabled={!capture || disabled}
           onClick={() => onClear(side)}
-          className="min-h-12 rounded-full border border-white/10 bg-white/[0.035] text-slate-200 transition-[transform,background-color] duration-200 hover:bg-white/[0.07] hover:text-white active:scale-[0.98] disabled:opacity-40"
+          className="min-h-12 rounded-full border border-slate-900/10 bg-white/[0.035] text-slate-800 transition-[transform,background-color] duration-200 hover:bg-slate-50 hover:text-slate-900 active:scale-[0.98] disabled:opacity-40"
         >
           Quitar imagen
         </Button>
@@ -380,63 +380,63 @@ function ResultView({ response, onReset }: { response: TrialResponse; onReset: (
   const confidence = formatConfidence(result.globalConfidence);
 
   return (
-    <section className="rounded-[1.75rem] border border-sky-200/20 bg-[linear-gradient(180deg,rgba(15,23,42,0.96),rgba(7,11,19,0.98))] p-4 shadow-[0_24px_80px_rgba(0,0,0,0.26)]">
+    <section className="rounded-[1.75rem] border border-sky-200/20 bg-[linear-gradient(180deg,rgba(255,255,255,0.97),rgba(246,250,254,1))] p-4 shadow-[0_24px_80px_rgba(30,58,95,0.14)]">
       <div className="flex items-start justify-between gap-3">
         <div>
-          <div className="text-xs font-semibold uppercase tracking-[0.16em] text-sky-100">Resultado OCR</div>
-          <h2 className="mt-2 text-2xl font-semibold text-white">{formatDecision(result.decision)}</h2>
+          <div className="text-xs font-semibold uppercase tracking-[0.16em] text-sky-700">Resultado OCR</div>
+          <h2 className="mt-2 text-2xl font-semibold text-slate-900">{formatDecision(result.decision)}</h2>
         </div>
-        <div className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-sm text-slate-200">
+        <div className="rounded-full border border-slate-900/10 bg-white/[0.04] px-3 py-1 text-sm text-slate-800">
           {confidence || "Confianza no informada"}
         </div>
       </div>
 
       {typeof result.reviewRequired === "boolean" && (
-        <div className="mt-4 rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-slate-200">
+        <div className="mt-4 rounded-2xl border border-slate-900/10 bg-white/[0.04] px-4 py-3 text-sm text-slate-800">
           Revision humana: {result.reviewRequired ? "requerida" : "no requerida"}
         </div>
       )}
 
-      <div className="mt-4 rounded-2xl border border-white/10 bg-black/20 p-4">
-        <div className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">Resumen</div>
-        <p className="mt-2 text-sm leading-relaxed text-slate-200">
+      <div className="mt-4 rounded-2xl border border-slate-900/10 bg-slate-900/5 p-4">
+        <div className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-600">Resumen</div>
+        <p className="mt-2 text-sm leading-relaxed text-slate-800">
           {result.humanSummary || "El servicio OCR no entrego resumen humano para esta lectura."}
         </p>
       </div>
 
-      <div className="mt-4 overflow-hidden rounded-2xl border border-white/10 bg-black/20">
-        <div className="border-b border-white/10 px-4 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">
+      <div className="mt-4 overflow-hidden rounded-2xl border border-slate-900/10 bg-slate-900/5">
+        <div className="border-b border-slate-900/10 px-4 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-slate-600">
           Campos detectados
         </div>
         {rows.length > 0 ? (
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm">
               <thead className="text-xs uppercase tracking-[0.12em] text-slate-500">
-                <tr className="border-b border-white/10">
+                <tr className="border-b border-slate-900/10">
                   <th className="px-4 py-3 font-medium">Campo</th>
                   <th className="px-4 py-3 font-medium">Valor</th>
                   <th className="px-4 py-3 font-medium">Conf.</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-white/10 text-slate-200">
+              <tbody className="divide-y divide-slate-900/10 text-slate-800">
                 {rows.map((row) => (
                   <tr key={`${row.label}-${row.value}`}>
-                    <td className="px-4 py-3 align-top text-slate-400">{row.label}</td>
+                    <td className="px-4 py-3 align-top text-slate-600">{row.label}</td>
                     <td className="max-w-[13rem] break-words px-4 py-3 align-top">{row.value}</td>
-                    <td className="px-4 py-3 align-top text-slate-400">{row.confidence || "-"}</td>
+                    <td className="px-4 py-3 align-top text-slate-600">{row.confidence || "-"}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
         ) : (
-          <div className="px-4 py-5 text-sm text-slate-400">No se informaron campos estructurados.</div>
+          <div className="px-4 py-5 text-sm text-slate-600">No se informaron campos estructurados.</div>
         )}
       </div>
 
       {issues.length > 0 && (
         <div className="mt-4 rounded-2xl border border-amber-200/20 bg-amber-300/10 p-4">
-          <div className="flex items-center gap-2 text-sm font-semibold text-amber-100">
+          <div className="flex items-center gap-2 text-sm font-semibold text-amber-700">
             <AlertTriangle className="h-4 w-4" aria-hidden="true" />
             Issues detectados
           </div>
@@ -574,18 +574,18 @@ export function MobileCarnetScan() {
   }
 
   return (
-    <main id="main-content" className="min-h-[100svh] bg-[#070b13] px-4 py-5 text-white">
+    <main id="main-content" className="min-h-[100svh] bg-slate-50 px-4 py-5 text-slate-900">
       <div className="pointer-events-none fixed inset-0 overflow-hidden" aria-hidden="true">
         <div className="absolute left-[-8rem] top-[-7rem] h-72 w-72 rounded-full bg-sky-300/10 blur-[90px]" />
-        <div className="absolute right-[-7rem] top-24 h-64 w-64 rounded-full bg-white/5 blur-[90px]" />
+        <div className="absolute right-[-7rem] top-24 h-64 w-64 rounded-full bg-white/80 blur-[90px]" />
         <div className="absolute inset-x-8 bottom-[-8rem] h-56 rounded-full bg-sky-200/[0.08] blur-[80px]" />
       </div>
 
       <div className="relative mx-auto flex w-full max-w-md flex-col gap-4 pb-24">
-        <header className="rounded-[1.75rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.025))] p-5 shadow-[0_22px_70px_rgba(0,0,0,0.2)]">
+        <header className="rounded-[1.75rem] border border-slate-900/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.025))] p-5 shadow-[0_22px_70px_rgba(30,58,95,0.14)]">
           <div className="flex items-center justify-between gap-3">
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/20 px-3 py-1 text-xs text-slate-300">
-              <ShieldCheck className="h-3.5 w-3.5 text-sky-200" aria-hidden="true" />
+            <div className="inline-flex items-center gap-2 rounded-full border border-slate-900/10 bg-slate-900/5 px-3 py-1 text-xs text-slate-600">
+              <ShieldCheck className="h-3.5 w-3.5 text-sky-700" aria-hidden="true" />
               Prueba OCR en vivo
             </div>
             <div
@@ -599,8 +599,8 @@ export function MobileCarnetScan() {
             </div>
           </div>
 
-          <h1 className="mt-5 text-4xl font-semibold leading-none tracking-tight text-white">Escaneo de Carnet</h1>
-          <p className="mt-3 text-base leading-relaxed text-slate-300">
+          <h1 className="mt-5 text-4xl font-semibold leading-none tracking-tight text-slate-900">Escaneo de Carnet</h1>
+          <p className="mt-3 text-base leading-relaxed text-slate-600">
             Toma una foto clara del frente y reverso. Usa buena luz, evita reflejos y deja el carnet completo dentro del encuadre.
           </p>
         </header>
@@ -631,19 +631,19 @@ export function MobileCarnetScan() {
               onClear={clearCapture}
             />
 
-            <section className="rounded-[1.6rem] border border-white/10 bg-white/[0.045] p-4">
-              <div className="text-xs font-semibold uppercase tracking-[0.16em] text-sky-100">Paso 3</div>
-              <h2 className="mt-2 text-xl font-semibold text-white">Revisar y enviar</h2>
-              <p className="mt-1 text-sm leading-relaxed text-slate-300">
+            <section className="rounded-[1.6rem] border border-slate-900/10 bg-white/[0.045] p-4">
+              <div className="text-xs font-semibold uppercase tracking-[0.16em] text-sky-700">Paso 3</div>
+              <h2 className="mt-2 text-xl font-semibold text-slate-900">Revisar y enviar</h2>
+              <p className="mt-1 text-sm leading-relaxed text-slate-600">
                 Confirma que ambas imagenes se ven completas antes de enviarlas al OCR.
               </p>
 
-              <label className="mt-4 flex items-start gap-3 rounded-2xl border border-white/10 bg-black/20 p-4 text-sm leading-relaxed text-slate-200">
+              <label className="mt-4 flex items-start gap-3 rounded-2xl border border-slate-900/10 bg-slate-900/5 p-4 text-sm leading-relaxed text-slate-800">
                 <Checkbox
                   checked={consent}
                   disabled={status === "processing"}
                   onCheckedChange={(checked) => setConsent(checked === true)}
-                  className="mt-0.5 border-white/30 data-[state=checked]:border-sky-200 data-[state=checked]:bg-sky-200 data-[state=checked]:text-slate-950"
+                  className="mt-0.5 border-slate-900/10 data-[state=checked]:border-sky-200 data-[state=checked]:bg-sky-200 data-[state=checked]:text-slate-950"
                   aria-label="Consentimiento para procesar imagenes"
                 />
                 <span>
@@ -684,7 +684,7 @@ export function MobileCarnetScan() {
               )}
             </section>
 
-            <div className="fixed inset-x-0 bottom-0 z-20 border-t border-white/10 bg-[#070b13]/92 px-4 py-3 backdrop-blur-xl">
+            <div className="fixed inset-x-0 bottom-0 z-20 border-t border-slate-900/10 bg-white/92 px-4 py-3 backdrop-blur-xl">
               <div className="mx-auto max-w-md">
                 <Button
                   type="button"

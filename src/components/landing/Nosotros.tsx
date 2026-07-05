@@ -8,7 +8,7 @@ function NosotrosComponent() {
     <Section id="nosotros" className="z-10">
       <div className="mx-auto max-w-7xl px-4">
         <p className="text-xs tracking-[0.22em] text-muted-foreground">NOSOTROS</p>
-        <h2 className="mt-3 text-4xl font-semibold text-white md:text-5xl">
+        <h2 className="mt-3 text-4xl font-semibold text-slate-900 md:text-5xl">
           Trabajamos como partner operativo, no como proveedor que desaparece.
         </h2>
         <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
@@ -18,8 +18,8 @@ function NosotrosComponent() {
 
         <div className="mt-10 grid gap-6 md:grid-cols-12">
           <div className="md:col-span-7">
-            <div className="hover-lift rounded-3xl border border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.84),rgba(10,16,25,0.96))] p-6 md:p-8">
-              <h3 className="text-2xl font-semibold text-white md:text-3xl">
+            <div className="hover-lift rounded-3xl border border-slate-900/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(246,250,254,1))] p-6 md:p-8">
+              <h3 className="text-2xl font-semibold text-slate-900 md:text-3xl">
                 IA como copiloto, con control humano cuando importa
               </h3>
               <p className="mt-3 text-muted-foreground">
@@ -36,10 +36,10 @@ function NosotrosComponent() {
                 ].map((x) => (
                   <div
                     key={x.t}
-                    className="hover-lift rounded-2xl border border-white/10 bg-black/25 p-4"
+                    className="hover-lift rounded-2xl border border-slate-900/10 bg-slate-900/5 p-4"
                   >
-                    <div className="flex items-center gap-2 text-sm font-medium text-white">
-                      <BadgeCheck className="h-4 w-4 text-emerald-300" />
+                    <div className="flex items-center gap-2 text-sm font-medium text-slate-900">
+                      <BadgeCheck className="h-4 w-4 text-emerald-700" />
                       {x.t}
                     </div>
                     <div className="mt-1 text-xs text-muted-foreground">{x.d}</div>
@@ -50,8 +50,8 @@ function NosotrosComponent() {
           </div>
 
           <div className="md:col-span-5 space-y-6">
-            <div className="hover-lift rounded-3xl border border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.84),rgba(10,16,25,0.96))] p-6">
-              <h3 className="text-xl font-semibold text-white">Nuestra ideologia</h3>
+            <div className="hover-lift rounded-3xl border border-slate-900/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(246,250,254,1))] p-6">
+              <h3 className="text-xl font-semibold text-slate-900">Nuestra ideologia</h3>
               <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
                 {
                   [
@@ -72,9 +72,9 @@ function NosotrosComponent() {
               </ul>
             </div>
 
-            <div className="hover-lift rounded-3xl border border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.84),rgba(10,16,25,0.96))] p-6">
+            <div className="hover-lift rounded-3xl border border-slate-900/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(246,250,254,1))] p-6">
               <div className="flex items-end justify-between gap-3">
-                <h3 className="text-xl font-semibold text-white">Colaboradores</h3>
+                <h3 className="text-xl font-semibold text-slate-900">Colaboradores</h3>
                 <div className="text-xs text-muted-foreground">Algunos partners</div>
               </div>
 
@@ -82,7 +82,7 @@ function NosotrosComponent() {
                 {COLABORADORES.slice(0, 2).map((colab) => {
                   const Card = (
                     <div
-                      className="flex items-center justify-center rounded-2xl border border-black/5 bg-white/90 p-4 shadow-sm transition hover:shadow-md"
+                      className="flex items-center justify-center rounded-2xl border border-black/5 bg-white/80 p-4 shadow-sm transition hover:shadow-md"
                     >
                       <Image
                         src={colab.logo}

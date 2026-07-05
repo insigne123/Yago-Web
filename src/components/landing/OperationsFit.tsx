@@ -37,24 +37,24 @@ export function OperationsFit() {
     <Section className="z-10" id="fit-operacional">
       <div className="mx-auto grid max-w-7xl gap-6 px-4 xl:grid-cols-[0.96fr_1.04fr]">
         <div>
-          <Badge variant="outline" className="border-white/12 bg-white/[0.04] px-3 py-1 text-[11px] uppercase tracking-[0.16em] text-slate-300">
+          <Badge variant="outline" className="border-slate-900/10 bg-white/[0.04] px-3 py-1 text-[11px] uppercase tracking-[0.16em] text-slate-600">
             Donde mejor encaja
           </Badge>
-          <h2 className="mt-4 text-4xl font-semibold text-white md:text-5xl">
+          <h2 className="mt-4 text-4xl font-semibold text-slate-900 md:text-5xl">
             Si operaciones, backoffice o finanzas siguen persiguiendo tareas manuales, hay una oportunidad clara.
           </h2>
-          <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-300">
+          <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-600">
             YAGO esta pensado para equipos que necesitan bajar carga manual, reducir errores y mover
             procesos mas rapido, sin rehacer toda la operacion desde cero ni abrir un proyecto enorme
             antes de ver valor.
           </p>
 
-          <div className="mt-6 rounded-[1.7rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.86),rgba(10,16,25,0.96))] p-6">
-            <div className="text-sm font-medium text-white">Donde suele haber mejor fit</div>
+          <div className="mt-6 rounded-[1.7rem] border border-slate-900/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.97),rgba(246,250,254,1))] p-6">
+            <div className="text-sm font-medium text-slate-900">Donde suele haber mejor fit</div>
             <div className="mt-4 grid gap-3">
               {buyers.map((item) => (
-                <div key={item} className="flex items-start gap-3 rounded-2xl border border-white/10 bg-black/20 px-4 py-4 text-sm text-slate-300">
-                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-sky-200" aria-hidden="true" />
+                <div key={item} className="flex items-start gap-3 rounded-2xl border border-slate-900/10 bg-slate-900/5 px-4 py-4 text-sm text-slate-600">
+                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-sky-700" aria-hidden="true" />
                   <span>{item}</span>
                 </div>
               ))}
@@ -68,13 +68,13 @@ export function OperationsFit() {
             return (
               <div
                 key={pain.title}
-                className="hover-lift rounded-[1.7rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.86),rgba(10,16,25,0.96))] p-6 shadow-[0_18px_50px_rgba(0,0,0,0.12)]"
+                className="hover-lift rounded-[1.7rem] border border-slate-900/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.97),rgba(246,250,254,1))] p-6 shadow-[0_18px_50px_rgba(30,58,95,0.08)]"
               >
-                <div className="flex size-11 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] text-sky-100">
+                <div className="flex size-11 items-center justify-center rounded-2xl border border-slate-900/10 bg-white/[0.04] text-sky-700">
                   <Icon className="h-5 w-5" aria-hidden="true" />
                 </div>
-                <div className="mt-5 text-2xl font-semibold text-white">{pain.title}</div>
-                <p className="mt-3 text-sm leading-relaxed text-slate-300">{pain.description}</p>
+                <div className="mt-5 text-2xl font-semibold text-slate-900">{pain.title}</div>
+                <p className="mt-3 text-sm leading-relaxed text-slate-600">{pain.description}</p>
               </div>
             );
           })}

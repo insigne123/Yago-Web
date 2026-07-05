@@ -46,7 +46,7 @@ export default async function ServicePage({ params }: PageProps) {
   const primaryLabel = svc.ctaPrimary || "Solicitar demo";
 
   return (
-    <div className="relative min-h-screen overflow-x-clip text-white">
+    <div className="relative min-h-screen overflow-x-clip text-slate-900">
       <Navbar ctaHref="/#contacto" ctaLabel="Pedir analisis" />
       <main id="main-content" className="main-premium pb-24 pt-28 md:pt-32">
         <div className="mx-auto max-w-6xl space-y-14 px-4">
@@ -55,21 +55,21 @@ export default async function ServicePage({ params }: PageProps) {
             <div>
               <Link
                 href="/servicios"
-                className="inline-flex items-center gap-2 text-sm text-slate-400 transition hover:text-white"
+                className="inline-flex items-center gap-2 text-sm text-slate-600 transition hover:text-slate-900"
               >
                 <ArrowLeft className="h-4 w-4" aria-hidden="true" />
                 Todos los servicios
               </Link>
 
-              <h1 className="mt-5 text-balance font-headline text-4xl font-semibold text-white md:text-5xl">
+              <h1 className="mt-5 text-balance font-headline text-4xl font-semibold text-slate-900 md:text-5xl">
                 {heading}
               </h1>
-              <p className="mt-4 max-w-xl text-pretty text-lg leading-relaxed text-slate-300">
+              <p className="mt-4 max-w-xl text-pretty text-lg leading-relaxed text-slate-600">
                 {subtitle}
               </p>
 
-              <div className="mt-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-slate-200">
-                <Clock className="h-4 w-4 text-cyan-200" aria-hidden="true" />
+              <div className="mt-5 inline-flex items-center gap-2 rounded-full border border-slate-900/10 bg-white/[0.04] px-4 py-2 text-sm text-slate-800">
+                <Clock className="h-4 w-4 text-cyan-700" aria-hidden="true" />
                 {svc.duration}
               </div>
 
@@ -78,7 +78,7 @@ export default async function ServicePage({ params }: PageProps) {
                   {svc.stack.map((t) => (
                     <span
                       key={t}
-                      className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-xs text-slate-300"
+                      className="rounded-full border border-slate-900/10 bg-white/[0.04] px-3 py-1 text-xs text-slate-600"
                     >
                       {t}
                     </span>
@@ -96,14 +96,14 @@ export default async function ServicePage({ params }: PageProps) {
                 </a>
                 <a
                   href="#como-funciona"
-                  className="inline-flex items-center rounded-full border border-white/12 bg-white/[0.03] px-6 py-3 text-sm text-slate-100 transition hover:bg-white/[0.06]"
+                  className="inline-flex items-center rounded-full border border-slate-900/10 bg-white/[0.03] px-6 py-3 text-sm text-slate-900 transition hover:bg-slate-50"
                 >
                   Ver etapas
                 </a>
               </div>
             </div>
 
-            <div className="card-glow-border relative overflow-hidden rounded-[2rem] border border-white/10 shadow-[0_30px_100px_rgba(0,0,0,0.3)]">
+            <div className="card-glow-border relative overflow-hidden rounded-[2rem] border border-slate-900/10 shadow-[0_30px_100px_rgba(30,58,95,0.14)]">
               <Image
                 src={svc.image || "/placeholder.svg"}
                 alt={`Ilustración del servicio ${svc.title}`}
@@ -117,27 +117,27 @@ export default async function ServicePage({ params }: PageProps) {
 
           {/* Timeline de etapas */}
           <section id="como-funciona">
-            <h2 className="text-balance text-3xl font-semibold text-white md:text-4xl">
+            <h2 className="text-balance text-3xl font-semibold text-slate-900 md:text-4xl">
               Cómo funciona
             </h2>
-            <div className="relative mt-10 space-y-8 border-l border-white/10 pl-8 md:pl-10">
+            <div className="relative mt-10 space-y-8 border-l border-slate-900/10 pl-8 md:pl-10">
               {svc.stages.map((st, i) => (
                 <div key={st.name} className="relative">
                   <span
-                    className="absolute -left-[2.55rem] flex size-9 items-center justify-center rounded-full border border-cyan-300/30 bg-[#0a1019] text-sm font-semibold text-cyan-200 md:-left-[3.05rem]"
+                    className="absolute -left-[2.55rem] flex size-9 items-center justify-center rounded-full border border-cyan-300/30 bg-white text-sm font-semibold text-cyan-700 md:-left-[3.05rem]"
                     aria-hidden="true"
                   >
                     {i + 1}
                   </span>
-                  <div className="hover-lift rounded-[1.5rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.84),rgba(10,16,25,0.96))] p-6">
-                    <h3 className="text-xl font-semibold text-white">{st.name}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-slate-300">{st.description}</p>
+                  <div className="hover-lift rounded-[1.5rem] border border-slate-900/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(246,250,254,1))] p-6">
+                    <h3 className="text-xl font-semibold text-slate-900">{st.name}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-slate-600">{st.description}</p>
                     {st.outputs && st.outputs.length > 0 && (
                       <ul className="mt-4 flex flex-wrap gap-2">
                         {st.outputs.map((o) => (
                           <li
                             key={o}
-                            className="rounded-full border border-cyan-300/20 bg-cyan-400/[0.06] px-3 py-1 text-xs text-cyan-100"
+                            className="rounded-full border border-cyan-300/20 bg-cyan-400/[0.06] px-3 py-1 text-xs text-cyan-700"
                           >
                             {o}
                           </li>
@@ -152,22 +152,22 @@ export default async function ServicePage({ params }: PageProps) {
 
           {/* Entregables */}
           <section id="entregables">
-            <h2 className="text-balance text-3xl font-semibold text-white md:text-4xl">
+            <h2 className="text-balance text-3xl font-semibold text-slate-900 md:text-4xl">
               Qué te llevas
             </h2>
             <ul className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2">
               {svc.deliverables.map((d) => (
                 <li
                   key={d}
-                  className="flex items-start gap-3 rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-5"
+                  className="flex items-start gap-3 rounded-[1.5rem] border border-slate-900/10 bg-white/[0.03] p-5"
                 >
-                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald-300" aria-hidden="true" />
-                  <span className="text-sm leading-relaxed text-slate-200">{d}</span>
+                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald-700" aria-hidden="true" />
+                  <span className="text-sm leading-relaxed text-slate-800">{d}</span>
                 </li>
               ))}
             </ul>
             {svc.notes && svc.notes.length > 0 && (
-              <div className="mt-5 space-y-1 text-sm text-slate-400">
+              <div className="mt-5 space-y-1 text-sm text-slate-600">
                 {svc.notes.map((n) => (
                   <p key={n}>{n}</p>
                 ))}
@@ -178,17 +178,17 @@ export default async function ServicePage({ params }: PageProps) {
           {/* FAQ opcional */}
           {svc.faq && svc.faq.length > 0 && (
             <section id="faq">
-              <h2 className="text-balance text-3xl font-semibold text-white md:text-4xl">
+              <h2 className="text-balance text-3xl font-semibold text-slate-900 md:text-4xl">
                 Preguntas frecuentes
               </h2>
               <div className="mt-8 space-y-3">
                 {svc.faq.map((item) => (
                   <article
                     key={item.question}
-                    className="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-5"
+                    className="rounded-[1.5rem] border border-slate-900/10 bg-white/[0.03] p-5"
                   >
-                    <h3 className="text-sm font-medium text-white">{item.question}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-slate-300">{item.answer}</p>
+                    <h3 className="text-sm font-medium text-slate-900">{item.question}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-slate-600">{item.answer}</p>
                   </article>
                 ))}
               </div>
@@ -196,11 +196,11 @@ export default async function ServicePage({ params }: PageProps) {
           )}
 
           {/* CTA final */}
-          <section className="card-glow-border flex flex-col items-center gap-4 rounded-[2rem] border border-white/10 bg-[linear-gradient(120deg,rgba(34,211,238,0.1),rgba(139,92,246,0.1))] p-8 text-center md:p-12">
-            <h2 className="text-balance text-2xl font-semibold text-white md:text-3xl">
+          <section className="card-glow-border flex flex-col items-center gap-4 rounded-[2rem] border border-slate-900/10 bg-[linear-gradient(120deg,rgba(34,211,238,0.1),rgba(139,92,246,0.1))] p-8 text-center md:p-12">
+            <h2 className="text-balance text-2xl font-semibold text-slate-900 md:text-3xl">
               {svc.closeCta?.title || `¿Listo para conversar sobre ${svc.title}?`}
             </h2>
-            <p className="max-w-xl text-pretty text-sm leading-relaxed text-slate-300">
+            <p className="max-w-xl text-pretty text-sm leading-relaxed text-slate-600">
               {svc.closeCta?.text || "Te ayudamos a evaluar el mejor plan para tu contexto."}
             </p>
             <div className="flex flex-wrap justify-center gap-3">

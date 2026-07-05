@@ -18,7 +18,7 @@ import { PRIMARY_CTA } from "@/config/site";
 
 export default function LandingIA() {
   return (
-    <div className="relative min-h-screen overflow-x-clip text-white">
+    <div className="relative min-h-screen overflow-x-clip text-slate-900">
       <Navbar ctaHref={PRIMARY_CTA.href} ctaLabel={PRIMARY_CTA.label} />
       <main id="main-content" className="main-premium">
         <Hero />

@@ -18,17 +18,17 @@ export const metadata: Metadata = {
 
 export default function SolutionsIndexPage() {
   return (
-    <div className="relative min-h-screen overflow-x-clip text-white">
+    <div className="relative min-h-screen overflow-x-clip text-slate-900">
       <Navbar ctaHref={PRIMARY_CTA.href} ctaLabel={PRIMARY_CTA.label} />
 
       <main id="main-content" className="main-premium py-20 md:py-24">
         <div className="mx-auto max-w-7xl px-4">
           <section className="max-w-4xl">
-            <p className="text-xs uppercase tracking-[0.22em] text-slate-400">Soluciones</p>
-            <h1 className="mt-4 text-balance font-headline text-4xl font-semibold text-white md:text-6xl">
+            <p className="text-xs uppercase tracking-[0.22em] text-slate-600">Soluciones</p>
+            <h1 className="mt-4 text-balance font-headline text-4xl font-semibold text-slate-900 md:text-6xl">
               Paginas pensadas para problemas operativos concretos.
             </h1>
-            <p className="mt-5 max-w-3xl text-base leading-relaxed text-slate-300 md:text-lg">
+            <p className="mt-5 max-w-3xl text-base leading-relaxed text-slate-600 md:text-lg">
               Si llegaste buscando una necesidad mas especifica, aqui reunimos las soluciones con mejor fit
               para equipos de operaciones, backoffice y finanzas que quieren reducir trabajo manual,
               errores y tiempos de ciclo.
@@ -40,21 +40,21 @@ export default function SolutionsIndexPage() {
               <Link
                 key={page.slug}
                 href={`/soluciones/${page.slug}`}
-                className="group rounded-[1.8rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.9),rgba(10,16,25,0.98))] p-6 shadow-[0_18px_50px_rgba(0,0,0,0.12)] transition hover:-translate-y-0.5 hover:border-white/14"
+                className="group rounded-[1.8rem] border border-slate-900/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.97),rgba(246,250,254,1))] p-6 shadow-[0_18px_50px_rgba(30,58,95,0.08)] transition hover:-translate-y-0.5 hover:border-slate-900/10"
               >
-                <div className="text-xs uppercase tracking-[0.18em] text-sky-100">{page.eyebrow}</div>
-                <h2 className="mt-4 text-2xl font-semibold text-white">{page.title}</h2>
-                <p className="mt-3 text-sm leading-relaxed text-slate-300">{page.seoDescription}</p>
+                <div className="text-xs uppercase tracking-[0.18em] text-sky-700">{page.eyebrow}</div>
+                <h2 className="mt-4 text-2xl font-semibold text-slate-900">{page.title}</h2>
+                <p className="mt-3 text-sm leading-relaxed text-slate-600">{page.seoDescription}</p>
 
                 <div className="mt-5 flex flex-wrap gap-2">
                   {page.proof.slice(0, 2).map((item) => (
-                    <span key={item} className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-slate-200">
+                    <span key={item} className="rounded-full border border-slate-900/10 bg-white/[0.04] px-3 py-1.5 text-xs text-slate-800">
                       {item}
                     </span>
                   ))}
                 </div>
 
-                <div className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-white">
+                <div className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-slate-900">
                   Ver pagina
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
                 </div>

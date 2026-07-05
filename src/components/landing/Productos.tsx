@@ -20,10 +20,10 @@ function ProductosComponent() {
       <div className="mx-auto max-w-7xl px-4">
         <p className="text-xs tracking-[0.22em] text-muted-foreground">PRODUCTOS</p>
         <div className="mt-3 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-          <h2 className="text-4xl font-semibold text-white md:text-5xl">
+          <h2 className="text-4xl font-semibold text-slate-900 md:text-5xl">
             Productos listos para acelerar iniciativas recurrentes.
           </h2>
-          <p className="max-w-xl text-sm leading-relaxed text-slate-300">
+          <p className="max-w-xl text-sm leading-relaxed text-slate-600">
             Si el problema ya se repite en varios clientes o areas, tenemos productos que acortan el
             tiempo entre la idea y la puesta en marcha.
           </p>
@@ -49,11 +49,11 @@ function ProductosComponent() {
             return (
               <div
                 key={p.slug}
-                className="group hover-lift relative flex flex-col overflow-hidden rounded-[1.8rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.84),rgba(10,16,25,0.96))] p-6 shadow-[0_18px_50px_rgba(0,0,0,0.12)] transition hover:border-white/14"
+                className="group hover-lift relative flex flex-col overflow-hidden rounded-[1.8rem] border border-slate-900/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(246,250,254,1))] p-6 shadow-[0_18px_50px_rgba(30,58,95,0.08)] transition hover:border-slate-900/10"
               >
                 <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-sky-200/55 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
 
-                <div className="relative mb-6 aspect-[16/9] w-full shrink-0 overflow-hidden rounded-[1.4rem] border border-white/10 bg-black/40">
+                <div className="relative mb-6 aspect-[16/9] w-full shrink-0 overflow-hidden rounded-[1.4rem] border border-slate-900/10 bg-slate-900/5">
                   <Image
                     src={`/images/product_${p.slug}.png`}
                     alt={`Visualización de ${p.name}`}
@@ -66,24 +66,24 @@ function ProductosComponent() {
 
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-center gap-3">
-                    <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.05] shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]">
-                      <Icon className="h-5 w-5 text-sky-100" />
+                    <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-slate-900/10 bg-white/[0.05] shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]">
+                      <Icon className="h-5 w-5 text-sky-700" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-semibold text-white">{p.name}</h3>
+                      <h3 className="text-xl font-semibold text-slate-900">{p.name}</h3>
                     </div>
                   </div>
 
                   {p.badge && p.badge !== "—" && (
-                    <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-xs uppercase tracking-[0.14em] text-slate-300">
+                    <span className="rounded-full border border-slate-900/10 bg-white/[0.04] px-3 py-1 text-xs uppercase tracking-[0.14em] text-slate-600">
                       {p.badge}
                     </span>
                   )}
                 </div>
 
-                <p className="mt-4 text-sm leading-relaxed text-slate-300">{p.tagline}</p>
+                <p className="mt-4 text-sm leading-relaxed text-slate-600">{p.tagline}</p>
 
-                <ul className="mt-5 space-y-2 text-sm text-slate-300">
+                <ul className="mt-5 space-y-2 text-sm text-slate-600">
                   {p.highlights.slice(0, 3).map((h) => (
                     <li key={h} className="flex items-start gap-2">
                       <span
@@ -98,7 +98,7 @@ function ProductosComponent() {
                 <div className="mt-6 flex flex-wrap items-center gap-2">
                   <Link
                     href={`/productos/${p.slug}`}
-                    className={`inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.06] px-4 py-2 text-sm text-white transition hover:bg-white/[0.1] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-200/70 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 plausible-event-name=Product+More+Info plausible-event-product=${p.slug} plausible-event-location=productos_section`}
+                    className={`inline-flex items-center gap-2 rounded-full border border-slate-900/10 bg-white/[0.06] px-4 py-2 text-sm text-slate-900 transition hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-200/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background plausible-event-name=Product+More+Info plausible-event-product=${p.slug} plausible-event-location=productos_section`}
                     aria-label={`Ver más info sobre ${p.name}`}
                   >
                     Ver más info
@@ -110,14 +110,14 @@ function ProductosComponent() {
                       href={waHref}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`inline-flex items-center rounded-full border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(223,234,255,0.92))] px-4 py-2 text-sm font-medium text-slate-950 transition hover:-translate-y-0.5 plausible-event-name=Product+Contact plausible-event-method=whatsapp plausible-event-product=${p.slug} plausible-event-location=productos_section`}
+                      className={`inline-flex items-center rounded-full border border-slate-900/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(223,234,255,0.92))] px-4 py-2 text-sm font-medium text-slate-950 transition hover:-translate-y-0.5 plausible-event-name=Product+Contact plausible-event-method=whatsapp plausible-event-product=${p.slug} plausible-event-location=productos_section`}
                     >
                       Contactar
                     </a>
                   ) : (
                     <a
                       href={mailHref}
-                      className={`inline-flex items-center rounded-full border border-white/10 bg-black/20 px-4 py-2 text-sm text-white transition hover:bg-black/30 plausible-event-name=Product+Contact plausible-event-method=email plausible-event-product=${p.slug} plausible-event-location=productos_section`}
+                      className={`inline-flex items-center rounded-full border border-slate-900/10 bg-slate-900/5 px-4 py-2 text-sm text-slate-900 transition hover:bg-slate-900/5 plausible-event-name=Product+Contact plausible-event-method=email plausible-event-product=${p.slug} plausible-event-location=productos_section`}
                     >
                       Contactar
                     </a>

@@ -21,14 +21,14 @@ const USES_ANALYTICS = Boolean(PLAUSIBLE_DOMAIN || CF_TOKEN);
 
 export default function PrivacyPage() {
   return (
-    <div className="min-h-[80vh] bg-gradient-to-b from-black via-slate-950 to-black text-white">
+    <div className="min-h-[80vh] bg-transparent text-slate-900">
       <main className="mx-auto max-w-3xl px-4 py-16">
         <h1 className={`text-4xl font-bold tracking-tight ${gradientText}`}>
           Política de Privacidad
         </h1>
-        <p className="mt-2 text-sm text-foreground/70">Última actualización: {UPDATED_AT}</p>
+        <p className="mt-2 text-sm text-slate-600">Última actualización: {UPDATED_AT}</p>
 
-        <article className="prose prose-invert mt-8 prose-p:leading-relaxed prose-li:marker:text-foreground/60">
+        <article className="prose prose-invert mt-8 prose-p:leading-relaxed prose-li:marker:text-slate-600">
           <p>
             En {COMPANY.name} valoramos tu privacidad. Este documento explica cómo
             tratamos tus datos personales cuando navegas nuestro sitio o nos
@@ -128,7 +128,7 @@ export default function PrivacyPage() {
         <div className="mt-10">
           <a
             href="/"
-            className="inline-flex rounded-xl border border-white/10 bg-white/10 px-4 py-2 text-sm font-medium hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-offset-2"
+            className="inline-flex rounded-xl border border-slate-900/10 bg-white/80 px-4 py-2 text-sm font-medium hover:bg-white/80 focus:outline-none focus:ring-2 focus:ring-offset-2"
           >
             Volver al inicio
           </a>

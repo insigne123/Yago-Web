@@ -65,7 +65,7 @@ export default async function ProductPage({ params }: PageProps) {
   const relatedProducts = PRODUCTS.filter((x) => x.slug !== p.slug).slice(0, 3);
 
   return (
-    <div className="relative min-h-screen overflow-x-clip text-white">
+    <div className="relative min-h-screen overflow-x-clip text-slate-900">
       <Navbar />
 
       <main className="main-premium py-24">
@@ -79,7 +79,7 @@ export default async function ProductPage({ params }: PageProps) {
             </div>
 
             <div className="flex items-center gap-4 text-sm">
-              <span className="rounded-full border border-white/10 bg-black/25 px-3 py-1 text-foreground/85">
+              <span className="rounded-full border border-slate-900/10 bg-slate-900/5 px-3 py-1 text-slate-600">
                 {p.badge || "Producto"}
               </span>
               <Link
@@ -93,7 +93,7 @@ export default async function ProductPage({ params }: PageProps) {
           </div>
 
           {/* Hero Banner Imagen Premium */}
-          <div className="relative aspect-[21/9] w-full overflow-hidden rounded-3xl border border-white/10 bg-black/20 shadow-2xl">
+          <div className="relative aspect-[21/9] w-full overflow-hidden rounded-3xl border border-slate-900/10 bg-slate-900/5 shadow-2xl">
             <img
               src={`/images/product_${p.slug}.png`}
               alt={`Banner de ${p.name}`}
@@ -101,22 +101,22 @@ export default async function ProductPage({ params }: PageProps) {
             />
             {/* Gradient Overlay sutil */}
             <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#0a0a0a] to-transparent opacity-40" />
-            <div className="absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/10" />
+            <div className="absolute inset-0 rounded-3xl ring-1 ring-inset ring-slate-900/10" />
           </div>
 
-          <section className="space-y-5 rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur">
-            <p className="text-base text-foreground/90 md:text-lg">{subtitle}</p>
+          <section className="space-y-5 rounded-3xl border border-slate-900/10 bg-white/80 p-6 backdrop-blur">
+            <p className="text-base text-slate-600 md:text-lg">{subtitle}</p>
 
             <div className="flex flex-col gap-2 text-sm text-muted-foreground md:flex-row md:flex-wrap md:items-center md:gap-6">
               <div>
-                <span className="font-medium text-foreground/85">Tiempo de puesta en marcha:</span> {p.details.timeToValue}
+                <span className="font-medium text-slate-600">Tiempo de puesta en marcha:</span> {p.details.timeToValue}
               </div>
               <div>
-                <span className="font-medium text-foreground/85">Módulos:</span> {p.details.modules.length}
+                <span className="font-medium text-slate-600">Módulos:</span> {p.details.modules.length}
               </div>
               {p.details.integrations?.length ? (
                 <div>
-                  <span className="font-medium text-foreground/85">Integraciones:</span> {p.details.integrations.length}
+                  <span className="font-medium text-slate-600">Integraciones:</span> {p.details.integrations.length}
                 </div>
               ) : null}
             </div>
@@ -126,7 +126,7 @@ export default async function ProductPage({ params }: PageProps) {
                 <a
                   key={item.id}
                   href={`#${item.id}`}
-                  className="rounded-full border border-white/15 bg-black/20 px-3 py-1.5 text-xs text-foreground/85 transition hover:bg-black/30"
+                  className="rounded-full border border-slate-900/10 bg-slate-900/5 px-3 py-1.5 text-xs text-slate-600 transition hover:bg-slate-900/5"
                 >
                   {item.label}
                 </a>
@@ -143,16 +143,16 @@ export default async function ProductPage({ params }: PageProps) {
               </a>
               <a
                 href="#modulos"
-                className={`group relative inline-flex items-center overflow-hidden rounded-xl border border-white/15 bg-black/40 px-5 py-2.5 font-medium text-white transition hover:bg-white/10 plausible-event-name=Product+CTA+Secondary plausible-event-product=${p.slug} plausible-event-location=product_page`}
+                className={`group relative inline-flex items-center overflow-hidden rounded-xl border border-slate-900/10 bg-slate-900/5 px-5 py-2.5 font-medium text-slate-900 transition hover:bg-white/80 plausible-event-name=Product+CTA+Secondary plausible-event-product=${p.slug} plausible-event-location=product_page`}
               >
                 <span className="relative z-10">{secondaryLabel}</span>
               </a>
             </div>
 
             {supportPoints.length > 0 && (
-              <ul className="flex flex-wrap gap-2 text-xs text-foreground/85">
+              <ul className="flex flex-wrap gap-2 text-xs text-slate-600">
                 {supportPoints.map((point) => (
-                  <li key={point} className="rounded-full border border-white/10 bg-black/25 px-3 py-1.5">
+                  <li key={point} className="rounded-full border border-slate-900/10 bg-slate-900/5 px-3 py-1.5">
                     {point}
                   </li>
                 ))}
@@ -163,17 +163,17 @@ export default async function ProductPage({ params }: PageProps) {
           {/* Sección Bento Box Combinada: Impacto y Módulos */}
           <section className="mt-12">
             <div className="mb-6 flex flex-col gap-2">
-              <h2 className="text-2xl font-semibold text-white md:text-3xl">Por qué y cómo funciona</h2>
+              <h2 className="text-2xl font-semibold text-slate-900 md:text-3xl">Por qué y cómo funciona</h2>
               <p className="text-sm text-muted-foreground">El impacto directo en tu operación y los módulos técnicos que lo hacen posible.</p>
             </div>
 
             <div className="grid grid-cols-1 gap-4 lg:grid-cols-12 lg:grid-rows-2">
 
               {/* Bento: Impacto Principal (Ocupa más espacio) */}
-              <div id="impacto" className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur transition hover:border-white/15 hover:bg-white/[0.06] lg:col-span-8 lg:row-span-2">
+              <div id="impacto" className="group relative overflow-hidden rounded-3xl border border-slate-900/10 bg-white/80 p-6 backdrop-blur transition hover:border-slate-900/10 hover:bg-slate-50 lg:col-span-8 lg:row-span-2">
                 <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-emerald-500/20 blur-[80px] pointer-events-none" />
-                <h3 className="mb-6 text-xl font-medium text-white flex items-center gap-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-emerald-400"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" /></svg>
+                <h3 className="mb-6 text-xl font-medium text-slate-900 flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-emerald-600"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" /></svg>
                   Impacto Operativo
                 </h3>
 
@@ -181,7 +181,7 @@ export default async function ProductPage({ params }: PageProps) {
                   {results.map((result) => (
                     <div key={result.title} className="flex flex-col gap-2">
                       <div className="h-0.5 w-8 bg-gradient-to-r from-fuchsia-500 to-cyan-400 rounded-full" />
-                      <div className="font-medium text-white/90">{result.title}</div>
+                      <div className="font-medium text-slate-800">{result.title}</div>
                       <p className="text-sm leading-relaxed text-muted-foreground">{result.description}</p>
                     </div>
                   ))}
@@ -189,17 +189,17 @@ export default async function ProductPage({ params }: PageProps) {
               </div>
 
               {/* Bento: Módulos (Sidebar) */}
-              <div id="modulos" className="group relative overflow-hidden rounded-3xl border border-white/10 bg-black/40 p-6 backdrop-blur transition hover:border-white/15 lg:col-span-4 lg:row-span-2">
+              <div id="modulos" className="group relative overflow-hidden rounded-3xl border border-slate-900/10 bg-slate-900/5 p-6 backdrop-blur transition hover:border-slate-900/10 lg:col-span-4 lg:row-span-2">
                 <div className="absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-cyan-500/10 blur-[60px] pointer-events-none" />
-                <h3 className="mb-6 text-xl font-medium text-white flex items-center gap-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-cyan-400"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" /><polyline points="3.27 6.96 12 12.01 20.73 6.96" /><line x1="12" y1="22.08" x2="12" y2="12" /></svg>
+                <h3 className="mb-6 text-xl font-medium text-slate-900 flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-cyan-600"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" /><polyline points="3.27 6.96 12 12.01 20.73 6.96" /><line x1="12" y1="22.08" x2="12" y2="12" /></svg>
                   Módulos Clave
                 </h3>
 
                 <ul className="flex flex-col gap-4 relative z-10">
                   {p.details.modules.map((module, index) => (
                     <li key={module} className="flex items-start gap-3 text-sm text-muted-foreground">
-                      <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-white/10 text-[10px] font-medium text-white ring-1 ring-white/20">
+                      <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-white/80 text-[10px] font-medium text-slate-900 ring-1 ring-slate-900/10">
                         {index + 1}
                       </span>
                       <span className="leading-snug pt-0.5">{module}</span>
@@ -212,11 +212,11 @@ export default async function ProductPage({ params }: PageProps) {
           </section>
 
           {p.details.integrations?.length ? (
-            <section id="integraciones" className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur">
-              <h2 className="mb-4 text-xl font-semibold text-white md:text-2xl">Integraciones frecuentes</h2>
+            <section id="integraciones" className="rounded-3xl border border-slate-900/10 bg-white/80 p-6 backdrop-blur">
+              <h2 className="mb-4 text-xl font-semibold text-slate-900 md:text-2xl">Integraciones frecuentes</h2>
               <ul className="flex flex-wrap gap-2 text-sm text-muted-foreground">
                 {p.details.integrations.map((integration) => (
-                  <li key={integration} className="rounded-full border border-white/10 bg-black/20 px-4 py-2">
+                  <li key={integration} className="rounded-full border border-slate-900/10 bg-slate-900/5 px-4 py-2">
                     {integration}
                   </li>
                 ))}
@@ -225,19 +225,19 @@ export default async function ProductPage({ params }: PageProps) {
           ) : null}
 
           {p.details.stages?.length ? (
-            <section id="implementacion" className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur">
-              <h2 className="mb-4 text-xl font-semibold text-white md:text-2xl">Cómo se implementa</h2>
+            <section id="implementacion" className="rounded-3xl border border-slate-900/10 bg-white/80 p-6 backdrop-blur">
+              <h2 className="mb-4 text-xl font-semibold text-slate-900 md:text-2xl">Cómo se implementa</h2>
               <ol className="space-y-4">
                 {p.details.stages.map((stage, index) => (
-                  <li key={stage.name} className="rounded-2xl border border-white/10 bg-black/20 p-5">
-                    <div className="font-medium text-white">Paso {index + 1} - {stage.name}</div>
+                  <li key={stage.name} className="rounded-2xl border border-slate-900/10 bg-slate-900/5 p-5">
+                    <div className="font-medium text-slate-900">Paso {index + 1} - {stage.name}</div>
                     <p className="mt-1 text-sm text-muted-foreground">{stage.description}</p>
                     {stage.outputs?.length ? (
                       <ul className="mt-3 flex flex-wrap gap-2">
                         {stage.outputs.map((output) => (
                           <li
                             key={output}
-                            className="rounded-full border border-white/10 bg-black/20 px-3 py-1 text-xs text-foreground/80"
+                            className="rounded-full border border-slate-900/10 bg-slate-900/5 px-3 py-1 text-xs text-slate-600"
                           >
                             {output}
                           </li>
@@ -251,11 +251,11 @@ export default async function ProductPage({ params }: PageProps) {
           ) : null}
 
           {idealFor.length ? (
-            <section id="ideal" className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur">
-              <h2 className="mb-4 text-xl font-semibold text-white md:text-2xl">Ideal para</h2>
+            <section id="ideal" className="rounded-3xl border border-slate-900/10 bg-white/80 p-6 backdrop-blur">
+              <h2 className="mb-4 text-xl font-semibold text-slate-900 md:text-2xl">Ideal para</h2>
               <ul className="grid grid-cols-1 gap-3 md:grid-cols-2">
                 {idealFor.map((item) => (
-                  <li key={item} className="rounded-2xl border border-white/10 bg-black/20 p-4 text-sm text-muted-foreground">
+                  <li key={item} className="rounded-2xl border border-slate-900/10 bg-slate-900/5 p-4 text-sm text-muted-foreground">
                     {item}
                   </li>
                 ))}
@@ -264,12 +264,12 @@ export default async function ProductPage({ params }: PageProps) {
           ) : null}
 
           {faqs.length ? (
-            <section id="faq" className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur">
-              <h2 className="mb-4 text-xl font-semibold text-white md:text-2xl">Preguntas frecuentes</h2>
+            <section id="faq" className="rounded-3xl border border-slate-900/10 bg-white/80 p-6 backdrop-blur">
+              <h2 className="mb-4 text-xl font-semibold text-slate-900 md:text-2xl">Preguntas frecuentes</h2>
               <div className="space-y-3">
                 {faqs.map((item) => (
-                  <article key={item.question} className="rounded-2xl border border-white/10 bg-black/20 p-4">
-                    <h3 className="text-sm font-medium text-white">{item.question}</h3>
+                  <article key={item.question} className="rounded-2xl border border-slate-900/10 bg-slate-900/5 p-4">
+                    <h3 className="text-sm font-medium text-slate-900">{item.question}</h3>
                     <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.answer}</p>
                   </article>
                 ))}
@@ -278,27 +278,27 @@ export default async function ProductPage({ params }: PageProps) {
           ) : null}
 
           {relatedProducts.length ? (
-            <section className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur">
-              <h2 className="mb-4 text-xl font-semibold text-white md:text-2xl">Otros productos de Yago</h2>
+            <section className="rounded-3xl border border-slate-900/10 bg-white/80 p-6 backdrop-blur">
+              <h2 className="mb-4 text-xl font-semibold text-slate-900 md:text-2xl">Otros productos de Yago</h2>
               <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
                 {relatedProducts.map((related) => (
                   <Link
                     key={related.slug}
                     href={`/productos/${related.slug}`}
-                    className="group hover-lift rounded-2xl border border-white/10 bg-black/20 p-4 transition hover:border-white/20"
+                    className="group hover-lift rounded-2xl border border-slate-900/10 bg-slate-900/5 p-4 transition hover:border-slate-900/10"
                   >
-                    <div className="text-sm font-medium text-white">{related.name}</div>
+                    <div className="text-sm font-medium text-slate-900">{related.name}</div>
                     <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{related.tagline}</p>
-                    <div className="mt-3 text-xs text-foreground/80">Ver detalle →</div>
+                    <div className="mt-3 text-xs text-slate-600">Ver detalle →</div>
                   </Link>
                 ))}
               </div>
             </section>
           ) : null}
 
-          <section className="flex flex-col gap-4 rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur md:flex-row md:items-start md:justify-between">
+          <section className="flex flex-col gap-4 rounded-3xl border border-slate-900/10 bg-white/80 p-6 backdrop-blur md:flex-row md:items-start md:justify-between">
             <div className="max-w-3xl text-muted-foreground">
-              <div className="font-semibold text-white">{p.closeCta?.title || `¿Listo para implementar ${p.name}?`}</div>
+              <div className="font-semibold text-slate-900">{p.closeCta?.title || `¿Listo para implementar ${p.name}?`}</div>
               <p className="mt-2">
                 {p.closeCta?.text || "Te ayudamos a evaluar alcance, tiempos y el mejor plan de adopción para tu equipo."}
               </p>
@@ -315,7 +315,7 @@ export default async function ProductPage({ params }: PageProps) {
                   href={waHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`inline-flex items-center rounded-xl bg-emerald-500/90 px-4 py-2 text-white transition hover:bg-emerald-500 plausible-event-name=Product+Contact plausible-event-method=whatsapp plausible-event-product=${p.slug} plausible-event-location=product_page`}
+                  className={`inline-flex items-center rounded-xl bg-emerald-500/90 px-4 py-2 text-slate-900 transition hover:bg-emerald-500 plausible-event-name=Product+Contact plausible-event-method=whatsapp plausible-event-product=${p.slug} plausible-event-location=product_page`}
                 >
                   {p.closeCta?.secondary || "WhatsApp"}
                 </a>

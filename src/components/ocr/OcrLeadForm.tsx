@@ -104,7 +104,7 @@ export function OcrLeadForm() {
   }
 
   return (
-    <Card className="hover-lift rounded-[1.9rem] border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.92),rgba(10,16,25,0.98))] shadow-[0_20px_60px_rgba(0,0,0,0.16)]">
+    <Card className="hover-lift rounded-[1.9rem] border-slate-900/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.97),rgba(246,250,254,1))] shadow-[0_20px_60px_rgba(30,58,95,0.08)]">
       <CardHeader>
         <CardTitle>{OCR_PAGE.form.title}</CardTitle>
         <CardDescription>{OCR_PAGE.form.description}</CardDescription>
@@ -134,33 +134,33 @@ export function OcrLeadForm() {
 
           <div className="grid gap-4 md:grid-cols-2">
             <div className="grid gap-2">
-              <Label htmlFor="ocr-nombre" className="text-slate-200">Nombre</Label>
+              <Label htmlFor="ocr-nombre" className="text-slate-800">Nombre</Label>
               <Input
                 id="ocr-nombre"
                 name="nombre"
                 autoComplete="name"
                 placeholder="Tu nombre"
                 required
-                className="rounded-2xl border-white/10 bg-white/[0.04] text-white placeholder:text-slate-500"
+                className="rounded-2xl border-slate-900/10 bg-white/[0.04] text-slate-900 placeholder:text-slate-500"
               />
             </div>
 
             <div className="grid gap-2">
-              <Label htmlFor="ocr-empresa" className="text-slate-200">Empresa</Label>
+              <Label htmlFor="ocr-empresa" className="text-slate-800">Empresa</Label>
               <Input
                 id="ocr-empresa"
                 name="empresa"
                 autoComplete="organization"
                 placeholder="Nombre de la empresa"
                 required
-                className="rounded-2xl border-white/10 bg-white/[0.04] text-white placeholder:text-slate-500"
+                className="rounded-2xl border-slate-900/10 bg-white/[0.04] text-slate-900 placeholder:text-slate-500"
               />
             </div>
           </div>
 
           <div className="grid gap-4 md:grid-cols-2">
             <div className="grid gap-2">
-              <Label htmlFor="ocr-email" className="text-slate-200">Correo</Label>
+              <Label htmlFor="ocr-email" className="text-slate-800">Correo</Label>
               <Input
                 id="ocr-email"
                 name="email"
@@ -169,49 +169,49 @@ export function OcrLeadForm() {
                 inputMode="email"
                 placeholder="tu@empresa.com"
                 required
-                className="rounded-2xl border-white/10 bg-white/[0.04] text-white placeholder:text-slate-500"
+                className="rounded-2xl border-slate-900/10 bg-white/[0.04] text-slate-900 placeholder:text-slate-500"
               />
             </div>
 
             <div className="grid gap-2">
-              <Label htmlFor="ocr-phone" className="text-slate-200">Telefono o WhatsApp</Label>
+              <Label htmlFor="ocr-phone" className="text-slate-800">Telefono o WhatsApp</Label>
               <Input
                 id="ocr-phone"
                 name="telefono"
                 autoComplete="tel"
                 inputMode="tel"
                 placeholder="Tu numero de contacto"
-                className="rounded-2xl border-white/10 bg-white/[0.04] text-white placeholder:text-slate-500"
+                className="rounded-2xl border-slate-900/10 bg-white/[0.04] text-slate-900 placeholder:text-slate-500"
               />
             </div>
           </div>
 
           <div className="grid gap-4 md:grid-cols-2">
             <div className="grid gap-2">
-              <Label htmlFor="ocr-role" className="text-slate-200">Cargo</Label>
+              <Label htmlFor="ocr-role" className="text-slate-800">Cargo</Label>
               <Input
                 id="ocr-role"
                 name="cargo"
                 autoComplete="organization-title"
                 placeholder="Ej. Operaciones, Finanzas, Backoffice"
-                className="rounded-2xl border-white/10 bg-white/[0.04] text-white placeholder:text-slate-500"
+                className="rounded-2xl border-slate-900/10 bg-white/[0.04] text-slate-900 placeholder:text-slate-500"
               />
             </div>
 
             <div className="grid gap-2">
-              <Label htmlFor="ocr-document-type" className="text-slate-200">Tipo de documento</Label>
+              <Label htmlFor="ocr-document-type" className="text-slate-800">Tipo de documento</Label>
               <select
                 id="ocr-document-type"
                 name="tipo_documento"
                 required
                 defaultValue=""
-                className="h-11 rounded-2xl border border-white/10 bg-white/[0.04] px-3 text-sm text-white outline-none transition-colors focus:border-sky-200/40 focus:ring-2 focus:ring-sky-200/30"
+                className="h-11 rounded-2xl border border-slate-900/10 bg-white/[0.04] px-3 text-sm text-slate-900 outline-none transition-colors focus:border-sky-200/40 focus:ring-2 focus:ring-sky-200/30"
               >
-                <option value="" disabled className="bg-slate-950 text-slate-400">
+                <option value="" disabled className="bg-white text-slate-600">
                   Selecciona una opcion
                 </option>
                 {OCR_PAGE.form.documentOptions.map((option) => (
-                  <option key={option} value={option} className="bg-slate-950 text-white">
+                  <option key={option} value={option} className="bg-white text-slate-900">
                     {option}
                   </option>
                 ))}
@@ -220,19 +220,19 @@ export function OcrLeadForm() {
           </div>
 
           <div className="grid gap-2">
-            <Label htmlFor="ocr-volume" className="text-slate-200">Volumen aproximado mensual</Label>
+            <Label htmlFor="ocr-volume" className="text-slate-800">Volumen aproximado mensual</Label>
             <select
               id="ocr-volume"
               name="volumen_mensual"
               required
               defaultValue=""
-              className="h-11 rounded-2xl border border-white/10 bg-white/[0.04] px-3 text-sm text-white outline-none transition-colors focus:border-sky-200/40 focus:ring-2 focus:ring-sky-200/30"
+              className="h-11 rounded-2xl border border-slate-900/10 bg-white/[0.04] px-3 text-sm text-slate-900 outline-none transition-colors focus:border-sky-200/40 focus:ring-2 focus:ring-sky-200/30"
             >
-              <option value="" disabled className="bg-slate-950 text-slate-400">
+              <option value="" disabled className="bg-white text-slate-600">
                 Selecciona una opcion
               </option>
               {OCR_PAGE.form.volumeOptions.map((option) => (
-                <option key={option} value={option} className="bg-slate-950 text-white">
+                <option key={option} value={option} className="bg-white text-slate-900">
                   {option}
                 </option>
               ))}
@@ -240,26 +240,26 @@ export function OcrLeadForm() {
           </div>
 
           <div className="grid gap-2">
-            <Label htmlFor="ocr-message" className="text-slate-200">Mensaje opcional</Label>
+            <Label htmlFor="ocr-message" className="text-slate-800">Mensaje opcional</Label>
             <Textarea
               id="ocr-message"
               name="mensaje"
               autoComplete="off"
               placeholder="Si quieres, cuentanos brevemente el proceso o el problema que quieres resolver..."
               rows={4}
-              className="rounded-2xl border-white/10 bg-white/[0.04] text-white placeholder:text-slate-500"
+              className="rounded-2xl border-slate-900/10 bg-white/[0.04] text-slate-900 placeholder:text-slate-500"
             />
           </div>
 
           <Button
             type="submit"
             disabled={loading}
-            className="rounded-full border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(223,234,255,0.92))] text-slate-950 transition-[transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:shadow-[0_16px_38px_rgba(167,199,255,0.18)] active:scale-[0.98]"
+            className="rounded-full border border-slate-900/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(223,234,255,0.92))] text-slate-950 transition-[transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:shadow-[0_16px_38px_rgba(167,199,255,0.18)] active:scale-[0.98]"
           >
             {loading ? "Enviando..." : OCR_PAGE.form.submitLabel}
           </Button>
         </form>
-        <p className="mt-3 text-xs text-slate-400">
+        <p className="mt-3 text-xs text-slate-600">
           Al enviar aceptas nuestra <Link href="/privacidad" className="underline hover:text-foreground">Politica de Privacidad</Link>.
         </p>
       </CardContent>

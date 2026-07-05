@@ -15,7 +15,7 @@ export function Section({ id, className = "", children }: SectionProps) {
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-[16%] top-0 -z-10 h-px bg-gradient-to-r from-transparent via-white/16 to-transparent"
+        className="pointer-events-none absolute inset-x-[16%] top-0 -z-10 h-px bg-gradient-to-r from-transparent via-slate-900/10 to-transparent"
       />
       <div className="relative z-[1]">{children}</div>
     </section>

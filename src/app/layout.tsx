@@ -54,7 +54,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#070b13",
+  themeColor: "#f8fafd",
 };
 
 export default function RootLayout({
@@ -63,7 +63,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className="dark">
+    <html lang="es" className="bg-background">
       <head>
         <Plausible />
         <CloudflareWebAnalytics />
@@ -71,7 +71,7 @@ export default function RootLayout({
       <body className={`${bodyFont.variable} ${headlineFont.variable} font-body antialiased`}>
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-white focus:px-4 focus:py-2 focus:text-black"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-foreground focus:px-4 focus:py-2 focus:text-background"
         >
           Ir al contenido principal
         </a>

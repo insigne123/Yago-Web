@@ -97,8 +97,8 @@ export function Contacto() {
         <div className="grid items-start gap-8 md:grid-cols-2">
           <div>
             <p className="text-xs tracking-[0.22em] text-muted-foreground">CONTACTO</p>
-            <h2 className="mt-3 text-3xl font-semibold text-white md:text-5xl">Coordina una sesion de descubrimiento</h2>
-            <p className="mt-3 max-w-xl leading-relaxed text-slate-300">
+            <h2 className="mt-3 text-3xl font-semibold text-slate-900 md:text-5xl">Coordina una sesion de descubrimiento</h2>
+            <p className="mt-3 max-w-xl leading-relaxed text-slate-600">
               Cuentanos el proceso, cuello de botella o problema operativo que quieres destrabar y te
               respondemos con el siguiente paso recomendado para tu caso y una forma concreta de seguir.
             </p>
@@ -106,10 +106,10 @@ export function Contacto() {
             <div className="mt-6 grid gap-3 sm:grid-cols-2">
               <a
                 href={`mailto:${COMPANY.email}`}
-                className="hover-lift rounded-[1.5rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.88),rgba(10,16,25,0.96))] p-4 text-sm text-slate-300 transition hover:border-white/14"
+                className="hover-lift rounded-[1.5rem] border border-slate-900/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.97),rgba(246,250,254,1))] p-4 text-sm text-slate-600 transition hover:border-slate-900/10"
               >
-                <div className="flex items-center gap-2 text-white">
-                  <Mail className="h-4 w-4 text-sky-200" />
+                <div className="flex items-center gap-2 text-slate-900">
+                  <Mail className="h-4 w-4 text-sky-700" />
                   Email
                 </div>
                 <div className="mt-2 underline underline-offset-4">{COMPANY.email}</div>
@@ -119,18 +119,18 @@ export function Contacto() {
                 href={COMPANY.whatsappLink}
                 target="_blank"
                 rel="noreferrer"
-                className="hover-lift rounded-[1.5rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.88),rgba(10,16,25,0.96))] p-4 text-sm text-slate-300 transition hover:border-white/14 plausible-event-name=CTA+WhatsApp plausible-event-location=contact_section"
+                className="hover-lift rounded-[1.5rem] border border-slate-900/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.97),rgba(246,250,254,1))] p-4 text-sm text-slate-600 transition hover:border-slate-900/10 plausible-event-name=CTA+WhatsApp plausible-event-location=contact_section"
               >
-                <div className="flex items-center gap-2 text-white">
-                  <MessageCircle className="h-4 w-4 text-emerald-200" />
+                <div className="flex items-center gap-2 text-slate-900">
+                  <MessageCircle className="h-4 w-4 text-emerald-700" />
                   WhatsApp
                 </div>
                 <div className="mt-2 underline underline-offset-4">{COMPANY.whatsapp}</div>
               </a>
 
-              <div className="hover-lift rounded-[1.5rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.88),rgba(10,16,25,0.96))] p-4 text-sm text-slate-300 sm:col-span-2">
-                <div className="flex items-center gap-2 text-white">
-                  <MapPin className="h-4 w-4 text-sky-100" />
+              <div className="hover-lift rounded-[1.5rem] border border-slate-900/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.97),rgba(246,250,254,1))] p-4 text-sm text-slate-600 sm:col-span-2">
+                <div className="flex items-center gap-2 text-slate-900">
+                  <MapPin className="h-4 w-4 text-sky-700" />
                   Cobertura
                 </div>
                 <div className="mt-2">{COMPANY.location} · sesiones remotas para equipos de operaciones, backoffice y finanzas.</div>
@@ -138,7 +138,7 @@ export function Contacto() {
             </div>
           </div>
 
-          <Card className="hover-lift rounded-[1.8rem] border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.9),rgba(10,16,25,0.98))] shadow-[0_20px_60px_rgba(0,0,0,0.14)]">
+          <Card className="hover-lift rounded-[1.8rem] border-slate-900/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.97),rgba(246,250,254,1))] shadow-[0_20px_60px_rgba(30,58,95,0.08)]">
             <CardHeader>
               <CardTitle>Cuentanos que quieres destrabar</CardTitle>
               <CardDescription>Te respondemos con el siguiente paso recomendado y como coordinar la llamada.</CardDescription>
@@ -169,19 +169,19 @@ export function Contacto() {
                 <input type="hidden" name="lt_ts" value={attribution?.last.ts || ""} />
 
                 <div className="grid gap-2">
-                  <Label htmlFor="nombre" className="text-slate-200">Nombre</Label>
+                  <Label htmlFor="nombre" className="text-slate-800">Nombre</Label>
                   <Input
                     id="nombre"
                     name="nombre"
                     autoComplete="name"
                     placeholder="Tu nombre"
                     required
-                    className="rounded-2xl border-white/10 bg-white/[0.04] text-white placeholder:text-slate-500"
+                    className="rounded-2xl border-slate-900/10 bg-white/[0.04] text-slate-900 placeholder:text-slate-500"
                   />
                 </div>
 
                 <div className="grid gap-2">
-                  <Label htmlFor="email" className="text-slate-200">Email</Label>
+                  <Label htmlFor="email" className="text-slate-800">Email</Label>
                   <Input
                     id="email"
                     name="email"
@@ -191,54 +191,54 @@ export function Contacto() {
                     placeholder="tu@empresa.com"
                     spellCheck={false}
                     required
-                    className="rounded-2xl border-white/10 bg-white/[0.04] text-white placeholder:text-slate-500"
+                    className="rounded-2xl border-slate-900/10 bg-white/[0.04] text-slate-900 placeholder:text-slate-500"
                   />
                 </div>
 
                 <div className="grid gap-2 md:grid-cols-2 md:gap-4">
                   <div className="grid gap-2">
-                  <Label htmlFor="empresa" className="text-slate-200">Empresa</Label>
+                  <Label htmlFor="empresa" className="text-slate-800">Empresa</Label>
                   <Input
                     id="empresa"
                     name="empresa"
                     autoComplete="organization"
                     placeholder="Nombre de la empresa"
-                    className="rounded-2xl border-white/10 bg-white/[0.04] text-white placeholder:text-slate-500"
+                    className="rounded-2xl border-slate-900/10 bg-white/[0.04] text-slate-900 placeholder:text-slate-500"
                   />
                   </div>
 
                   <div className="grid gap-2">
-                    <Label htmlFor="cargo" className="text-slate-200">Cargo</Label>
+                    <Label htmlFor="cargo" className="text-slate-800">Cargo</Label>
                     <Input
                       id="cargo"
                       name="cargo"
                       autoComplete="organization-title"
                       placeholder="Ej. Operaciones, Finanzas, Backoffice"
-                      className="rounded-2xl border-white/10 bg-white/[0.04] text-white placeholder:text-slate-500"
+                      className="rounded-2xl border-slate-900/10 bg-white/[0.04] text-slate-900 placeholder:text-slate-500"
                     />
                   </div>
                 </div>
 
                 <div className="grid gap-2">
-                  <Label htmlFor="tipo_proceso" className="text-slate-200">Tipo de proceso</Label>
+                  <Label htmlFor="tipo_proceso" className="text-slate-800">Tipo de proceso</Label>
                   <select
                     id="tipo_proceso"
                     name="tipo_proceso"
                     defaultValue=""
-                    className="h-11 rounded-2xl border border-white/10 bg-white/[0.04] px-3 text-sm text-white outline-none transition-colors focus:border-sky-200/40 focus:ring-2 focus:ring-sky-200/30"
+                    className="h-11 rounded-2xl border border-slate-900/10 bg-white/[0.04] px-3 text-sm text-slate-900 outline-none transition-colors focus:border-sky-200/40 focus:ring-2 focus:ring-sky-200/30"
                   >
-                    <option value="" className="bg-slate-950 text-slate-400">Selecciona una opcion (opcional)</option>
-                    <option value="Backoffice y carga de datos" className="bg-slate-950 text-white">Backoffice y carga de datos</option>
-                    <option value="Documentos y OCR" className="bg-slate-950 text-white">Documentos y OCR</option>
-                    <option value="Aprobaciones y seguimiento" className="bg-slate-950 text-white">Aprobaciones y seguimiento</option>
-                    <option value="Reportes y consolidacion" className="bg-slate-950 text-white">Reportes y consolidacion</option>
-                    <option value="Soporte interno o atencion" className="bg-slate-950 text-white">Soporte interno o atencion</option>
-                    <option value="Otro" className="bg-slate-950 text-white">Otro</option>
+                    <option value="" className="bg-white text-slate-600">Selecciona una opcion (opcional)</option>
+                    <option value="Backoffice y carga de datos" className="bg-white text-slate-900">Backoffice y carga de datos</option>
+                    <option value="Documentos y OCR" className="bg-white text-slate-900">Documentos y OCR</option>
+                    <option value="Aprobaciones y seguimiento" className="bg-white text-slate-900">Aprobaciones y seguimiento</option>
+                    <option value="Reportes y consolidacion" className="bg-white text-slate-900">Reportes y consolidacion</option>
+                    <option value="Soporte interno o atencion" className="bg-white text-slate-900">Soporte interno o atencion</option>
+                    <option value="Otro" className="bg-white text-slate-900">Otro</option>
                   </select>
                 </div>
 
                 <div className="grid gap-2">
-                  <Label htmlFor="mensaje" className="text-slate-200">¿Que proceso quieres destrabar?</Label>
+                  <Label htmlFor="mensaje" className="text-slate-800">¿Que proceso quieres destrabar?</Label>
                   <Textarea
                     id="mensaje"
                     name="mensaje"
@@ -246,19 +246,19 @@ export function Contacto() {
                     placeholder="Describe brevemente el proceso, area o cuello de botella que hoy te consume mas tiempo..."
                     rows={5}
                     required
-                    className="rounded-2xl border-white/10 bg-white/[0.04] text-white placeholder:text-slate-500"
+                    className="rounded-2xl border-slate-900/10 bg-white/[0.04] text-slate-900 placeholder:text-slate-500"
                   />
                 </div>
 
                 <Button
                   type="submit"
                   disabled={loading}
-                  className="rounded-full border border-white/12 bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(241,247,255,0.94))] text-slate-950 shadow-[0_14px_34px_rgba(5,11,19,0.24)] plausible-event-name=CTA+Coordinar+Sesion plausible-event-location=contact_section"
+                  className="rounded-full border border-slate-900/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(241,247,255,0.94))] text-slate-950 shadow-[0_14px_34px_rgba(5,11,19,0.24)] plausible-event-name=CTA+Coordinar+Sesion plausible-event-location=contact_section"
                 >
                   {loading ? "Enviando..." : "Coordinar sesion"}
                 </Button>
               </form>
-              <p className="mt-3 text-xs text-slate-400">
+              <p className="mt-3 text-xs text-slate-600">
                 Al enviar aceptas nuestra <Link href="/privacidad" className="underline hover:text-foreground">Política de Privacidad</Link>.
               </p>
             </CardContent>

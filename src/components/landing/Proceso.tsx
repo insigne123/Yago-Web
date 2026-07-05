@@ -15,7 +15,7 @@ export function Proceso() {
           >
             Método
           </Badge>
-          <h2 className="mt-4 text-balance text-3xl font-semibold text-white md:text-5xl">
+          <h2 className="mt-4 text-balance text-3xl font-semibold text-slate-900 md:text-5xl">
             De la idea al go-live en 4 etapas.
           </h2>
         </div>
@@ -33,20 +33,20 @@ export function Proceso() {
               return (
                 <div
                   key={step.title}
-                  className="hover-lift relative rounded-[1.8rem] border border-white/10 bg-[linear-gradient(180deg,rgba(18,24,37,0.88),rgba(10,16,25,0.96))] p-6 shadow-[0_20px_60px_rgba(0,0,0,0.12)]"
+                  className="hover-lift relative rounded-[1.8rem] border border-slate-900/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.97),rgba(246,250,254,1))] p-6 shadow-[0_20px_60px_rgba(30,58,95,0.08)]"
                 >
                   <div className="flex items-center gap-4">
-                    <div className="flex size-12 items-center justify-center rounded-2xl border border-cyan-300/20 bg-cyan-400/[0.08] text-cyan-100 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]">
+                    <div className="flex size-12 items-center justify-center rounded-2xl border border-cyan-300/20 bg-cyan-400/[0.08] text-cyan-700 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]">
                       <Icon className="h-5 w-5" aria-hidden="true" />
                     </div>
                     <div>
-                      <div className="text-xs font-medium uppercase tracking-[0.16em] text-slate-400">
+                      <div className="text-xs font-medium uppercase tracking-[0.16em] text-slate-600">
                         Paso {index + 1}
                       </div>
-                      <div className="mt-1 text-lg font-semibold text-white">{step.title}</div>
+                      <div className="mt-1 text-lg font-semibold text-slate-900">{step.title}</div>
                     </div>
                   </div>
-                  <p className="mt-4 text-sm leading-relaxed text-slate-300">{step.desc}</p>
+                  <p className="mt-4 text-sm leading-relaxed text-slate-600">{step.desc}</p>
                 </div>
               );
             })}
