@@ -141,7 +141,7 @@ export default function ProcesoPage() {
                 priority
                 className="h-auto w-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#070b13]/70 via-transparent to-transparent" aria-hidden="true" />
+              <div className="absolute inset-0 bg-gradient-to-t from-white/40 via-transparent to-transparent" aria-hidden="true" />
             </div>
           </div>
         </section>

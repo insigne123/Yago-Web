@@ -166,7 +166,7 @@ export default async function BlogPostPage({ params }: Props) {
                     sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a1019] via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-white/80 via-transparent to-transparent" />
                 </div>
                 <div className="flex flex-1 flex-col p-5">
                   <h3 className="text-balance text-base font-semibold leading-snug text-slate-900">{rel.title}</h3>
