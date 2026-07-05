@@ -1,6 +1,5 @@
 import { Navbar } from "@/components/landing/Navbar";
 import { Hero } from "@/components/landing/Hero";
-import { OperationsFit } from "@/components/landing/OperationsFit";
 import { CaseStudies } from "@/components/landing/CaseStudies";
 import { Logos } from "@/components/landing/Logos";
 import { Proceso } from "@/components/landing/Proceso";
@@ -20,16 +19,16 @@ export default function LandingIA() {
       <main id="main-content" className="main-premium">
         <Hero />
         <DividerGlow />
-        <SectionReveal as="div" delay={0.05} surface="strong">
-          <OperationsFit />
+        <SectionReveal as="div" delay={0.05} surface="soft">
+          <Logos />
+        </SectionReveal>
+        <DividerGlow />
+        <SectionReveal as="div" delay={0.08} surface="strong">
+          <Servicios />
         </SectionReveal>
         <DividerGlow />
         <SectionReveal as="div" delay={0.1}>
           <CaseStudies />
-        </SectionReveal>
-        <DividerGlow />
-        <SectionReveal as="div" delay={0.1} surface="strong">
-          <CTA />
         </SectionReveal>
         <DividerGlow />
         <SectionReveal as="div" delay={0.1} surface="soft">
@@ -37,22 +36,18 @@ export default function LandingIA() {
         </SectionReveal>
         <DividerGlow />
         <SectionReveal as="div" delay={0.12} surface="strong">
-          <Servicios />
+          <CTA />
         </SectionReveal>
         <DividerGlow />
-        <SectionReveal as="div" delay={0.13} surface="strong">
+        <SectionReveal as="div" delay={0.13} surface="soft">
           <OcrPreview />
         </SectionReveal>
         <DividerGlow />
-        <SectionReveal as="div" delay={0.14} surface="soft">
-          <Logos />
-        </SectionReveal>
-        <DividerGlow />
-        <SectionReveal as="div" delay={0.18} surface="strong">
+        <SectionReveal as="div" delay={0.16} surface="strong">
           <FAQ />
         </SectionReveal>
         <DividerGlow />
-        <SectionReveal as="div" delay={0.2} surface="strong">
+        <SectionReveal as="div" delay={0.18} surface="strong">
           <Contacto />
         </SectionReveal>
       </main>

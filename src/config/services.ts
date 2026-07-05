@@ -46,6 +46,7 @@ export type Service = {
     | "capacitacion-ia";
   title: string;
   short: string; // resumen para la tarjeta
+  image: string; // ilustración del servicio
   duration: string; // tiempo típico de producción
   stack?: string[]; // tecnologías frecuentes
   stages: ServiceStage[]; // etapas del proyecto
@@ -70,6 +71,7 @@ export const SERVICES: Service[] = [
     slug: "automatizacion-procesos",
     title: "Automatización de procesos",
     short: "Orquestamos tareas repetitivas con IA y APIs para ahorrar HH y reducir errores.",
+    image: "/images/service-automatizacion-procesos.png",
     duration: "MVP en 1–2 semanas; productivo en 3–6 semanas (según integraciones).",
     stack: ["n8n/Make", "Genkit/Vertex/OpenAI", "APIs REST/Graph", "Google/Microsoft 365", "DB SQL/NoSQL"],
     stages: [
@@ -109,6 +111,7 @@ export const SERVICES: Service[] = [
     slug: "apps-automatizacion",
     title: "Apps que centralizan automatización",
     short: "Aplicaciones web para operar y monitorear flujos: panel, permisos, logs y acciones.",
+    image: "/images/service-apps-automatizacion.png",
     duration: "2–4 semanas el primer módulo; evolución continua por sprints.",
     stack: ["Next.js", "TypeScript", "Tailwind + ShadCN", "Supabase/Postgres", "APIs internas"],
     stages: [
@@ -144,6 +147,7 @@ export const SERVICES: Service[] = [
     slug: "paginas-web",
     title: "Páginas web personalizadas",
     short: "Sitios modernos y performantes que comunican productos y capturan demanda.",
+    image: "/images/service-paginas-web.png",
     duration: "1–3 semanas según número de secciones e integraciones.",
     stack: ["Next.js", "Tailwind", "Vercel/Firebase", "Analytics/SEO"],
     stages: [
@@ -178,6 +182,7 @@ export const SERVICES: Service[] = [
     slug: "capacitacion-ia",
     title: "Capacitación de equipos en IA",
     short: "Workshops prácticos y guías operativas para adoptar IA con seguridad y ROI.",
+    image: "/images/service-capacitacion-ia.png",
     duration: "Bootcamp de 6–12 horas; programas a medida desde 2 semanas.",
     stack: ["Playbooks de prompts", "Plantillas", "Buenas prácticas de datos/seguridad"],
     stages: [

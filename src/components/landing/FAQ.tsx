@@ -25,7 +25,7 @@ function FAQComponent() {
           <div className="lg:col-span-8">
             <div className="hover-lift rounded-3xl border border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.84),rgba(10,16,25,0.96))] p-2 md:p-4">
               <Accordion type="single" collapsible className="w-full">
-                {FAQ_ITEMS.map((item, idx) => (
+                {FAQ_ITEMS.slice(0, 6).map((item, idx) => (
                   <AccordionItem key={idx} value={`item-${idx}`} className="border-white/10">
                     <AccordionTrigger className="text-left text-white hover:no-underline">
                       {item.q}

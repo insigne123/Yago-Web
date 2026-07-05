@@ -79,12 +79,12 @@
 }
 
 body {
-  background-color: #050913;
+  background-color: #04070f;
   background-image:
-    radial-gradient(1000px 580px at 10% -4%, rgba(76, 120, 172, 0.22), transparent 56%),
-    radial-gradient(860px 420px at 92% 4%, rgba(94, 198, 255, 0.12), transparent 50%),
-    radial-gradient(760px 320px at 50% 108%, rgba(232, 181, 103, 0.08), transparent 62%),
-    linear-gradient(180deg, #070b13 0%, #070c15 36%, #0a1019 100%);
+    radial-gradient(1000px 580px at 10% -4%, rgba(34, 211, 238, 0.2), transparent 56%),
+    radial-gradient(860px 420px at 92% 4%, rgba(139, 92, 246, 0.18), transparent 50%),
+    radial-gradient(760px 320px at 50% 108%, rgba(245, 158, 11, 0.1), transparent 62%),
+    linear-gradient(180deg, #05080f 0%, #060a14 36%, #0a1019 100%);
   overflow-x: hidden;
 }
 
@@ -112,19 +112,19 @@ body {
 }
 
 :root{
-  --fx-fuchsia: 112 127 214;
-  --fx-cyan: 94 198 255;
-  --fx-emerald: 132 190 182;
+  --fx-fuchsia: 139 92 246;
+  --fx-cyan: 34 211 238;
+  --fx-emerald: 52 211 153;
   --fx-grid: 48px;
-  --fx-grid-alpha: 0.02;
+  --fx-grid-alpha: 0.03;
   --fx-noise-alpha: 0.018;
 }
 
 .bg-fx-gradient{
   background-image:
-    radial-gradient(760px 420px at 10% 10%, rgba(var(--fx-cyan)/0.08), transparent 58%),
-    radial-gradient(700px 380px at 86% 14%, rgba(var(--fx-fuchsia)/0.065), transparent 56%),
-    radial-gradient(760px 380px at 50% 110%, rgba(var(--fx-emerald)/0.05), transparent 62%);
+    radial-gradient(760px 420px at 10% 10%, rgba(var(--fx-cyan)/0.16), transparent 58%),
+    radial-gradient(700px 380px at 86% 14%, rgba(var(--fx-fuchsia)/0.14), transparent 56%),
+    radial-gradient(760px 380px at 50% 110%, rgba(var(--fx-emerald)/0.1), transparent 62%);
   background-repeat: no-repeat;
   background-size: 110% 110%, 110% 110%, 110% 110%;
   animation: none;
@@ -132,11 +132,11 @@ body {
 
 .bg-fx-soft-orbs {
   background-image:
-    radial-gradient(560px 280px at 8% 8%, rgba(94, 198, 255, 0.07), transparent 68%),
-    radial-gradient(520px 260px at 90% 16%, rgba(112, 127, 214, 0.07), transparent 70%),
-    radial-gradient(460px 220px at 24% 82%, rgba(232, 181, 103, 0.045), transparent 72%);
+    radial-gradient(560px 280px at 8% 8%, rgba(34, 211, 238, 0.14), transparent 68%),
+    radial-gradient(520px 260px at 90% 16%, rgba(139, 92, 246, 0.14), transparent 70%),
+    radial-gradient(460px 220px at 24% 82%, rgba(245, 158, 11, 0.08), transparent 72%);
   background-repeat: no-repeat;
-  opacity: 0.92;
+  opacity: 0.95;
 }
 
 @keyframes fx-gradient-drift {
@@ -345,11 +345,11 @@ body {
 
 .section-atmosphere {
   background:
-    radial-gradient(900px 240px at 14% 14%, rgba(94, 198, 255, 0.08), transparent 70%),
-    radial-gradient(860px 300px at 88% 18%, rgba(112, 127, 214, 0.08), transparent 72%),
-    radial-gradient(760px 220px at 50% 100%, rgba(232, 181, 103, 0.05), transparent 76%);
+    radial-gradient(900px 240px at 14% 14%, rgba(34, 211, 238, 0.14), transparent 70%),
+    radial-gradient(860px 300px at 88% 18%, rgba(139, 92, 246, 0.14), transparent 72%),
+    radial-gradient(760px 220px at 50% 100%, rgba(245, 158, 11, 0.08), transparent 76%);
   filter: blur(4px);
-  opacity: 0.46;
+  opacity: 0.6;
 }
 
 .hero-grid-overlay {
@@ -474,12 +474,44 @@ body {
 }
 
 .text-shimmer {
-  background-image: linear-gradient(90deg, #e2e8f0 0%, #dbeafe 46%, #fde68a 100%);
+  background-image: linear-gradient(90deg, #67e8f9 0%, #a5b4fc 46%, #fcd34d 100%);
   background-size: 200% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
   animation: none;
+}
+
+/* Botón primario con gradiente vibrante */
+.btn-vibrant {
+  background-image: linear-gradient(120deg, #22d3ee 0%, #6366f1 100%);
+  color: #04070f;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow:
+    0 10px 34px rgba(34, 211, 238, 0.28),
+    0 4px 14px rgba(99, 102, 241, 0.22);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s, filter 0.35s;
+}
+.btn-vibrant:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+  box-shadow:
+    0 16px 44px rgba(34, 211, 238, 0.36),
+    0 6px 18px rgba(99, 102, 241, 0.3);
+}
+
+/* Borde superior con gradiente para cards clave */
+.card-glow-border {
+  position: relative;
+}
+.card-glow-border::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 2px;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, transparent, rgba(34, 211, 238, 0.7), rgba(139, 92, 246, 0.65), transparent);
 }
 
 @keyframes text-shimmer {

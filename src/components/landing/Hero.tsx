@@ -1,81 +1,40 @@
-import {
-  ArrowRight,
-  BadgeCheck,
-  BarChart3,
-  Boxes,
-  ShieldCheck,
-  Waypoints,
-  Workflow,
-} from "lucide-react";
+import Image from "next/image";
+import { ArrowRight, BadgeCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 
-const proofSignals = ["Analisis inicial en 48h", "Piloto operativo en 2-4 semanas"];
-
-const canvasModules = [
-  {
-    title: "Entradas dispersas",
-    detail: "Correos, PDFs, formularios, planillas y tareas que hoy frenan la operacion.",
-    icon: Workflow,
-  },
-  {
-    title: "Reglas e integraciones",
-    detail: "Definimos aprobaciones, validacion humana e integraciones para que el flujo avance solo donde corresponde.",
-    icon: Boxes,
-  },
-  {
-    title: "Operacion visible",
-    detail: "Alertas, ownership, trazabilidad y puntos claros de control para el equipo.",
-    icon: BarChart3,
-  },
-];
+const proofSignals = ["Análisis inicial en 48h", "Piloto operativo en 2-4 semanas"];
 
 const trustSignals = ["Sin romper tu stack actual", "Impacto medible desde el primer quick win"];
-
-const healthMetrics = [
-  { k: "Analisis", v: "48h", c: "border-sky-300/20 bg-sky-400/10 text-sky-100" },
-  { k: "Piloto", v: "2-4 sem", c: "border-amber-200/20 bg-amber-200/10 text-amber-50" },
-  { k: "Operacion", v: "Trazable", c: "border-emerald-300/20 bg-emerald-400/10 text-emerald-100" },
-];
 
 export function Hero() {
   return (
     <section id="inicio" className="relative overflow-hidden pb-20 pt-20 md:pb-24 md:pt-24 lg:pt-28">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        <div className="absolute left-[-8rem] top-[8%] h-[18rem] w-[18rem] rounded-full bg-sky-300/10 blur-[88px]" />
-        <div className="absolute right-[-7rem] top-[12%] h-[16rem] w-[16rem] rounded-full bg-indigo-300/10 blur-[92px]" />
+        <div className="absolute left-[-8rem] top-[8%] h-[20rem] w-[20rem] rounded-full bg-cyan-400/15 blur-[96px]" />
+        <div className="absolute right-[-7rem] top-[12%] h-[18rem] w-[18rem] rounded-full bg-violet-500/15 blur-[100px]" />
       </div>
 
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 hero-grid-overlay" />
 
       <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-4 lg:grid-cols-[1.02fr_0.98fr] lg:gap-14">
         <div className="max-w-2xl">
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-[11px] uppercase tracking-[0.16em] text-slate-300">
-            <span className="h-1.5 w-1.5 rounded-full bg-sky-300" aria-hidden="true" />
-            YAGO · Automatizacion para operaciones
+          <div className="inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-400/[0.06] px-3 py-1.5 text-[11px] uppercase tracking-[0.16em] text-cyan-100">
+            <span className="h-1.5 w-1.5 rounded-full bg-cyan-300" aria-hidden="true" />
+            YAGO · Automatización con IA
           </div>
 
-          <h1 className="mt-6 max-w-4xl text-balance font-headline text-5xl font-semibold leading-[0.94] text-white md:text-6xl lg:text-[5rem]">
+          <h1 className="mt-6 max-w-4xl text-balance font-headline text-5xl font-semibold leading-[0.94] text-white md:text-6xl lg:text-[4.6rem]">
             Menos trabajo manual.
             <br />
-            Menos espera.
-            <br />
-            <span className="text-sky-100">Mas control operativo.</span>
+            <span className="text-shimmer">Más control operativo.</span>
           </h1>
 
-          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-slate-300 md:text-[1.18rem]">
-            En YAGO diseniamos e implementamos automatizacion con IA para equipos que todavia dependen
-            de correos, planillas, documentos y tareas manuales. Partimos por quick wins medibles y
-            dejamos una operacion mas clara, trazable y lista para escalar.
+          <p className="mt-5 max-w-xl text-pretty text-lg leading-relaxed text-slate-300">
+            Automatizamos procesos con IA para equipos que dependen de correos, planillas y tareas
+            manuales. Quick wins medibles, operación trazable.
           </p>
 
-          <div className="mt-6 flex flex-wrap gap-2 text-sm text-slate-300">
+          <div className="mt-6 flex flex-wrap gap-2 text-sm text-slate-200">
             {proofSignals.map((item) => (
               <div
                 key={item}
@@ -90,10 +49,10 @@ export function Hero() {
             <Button
               asChild
               size="lg"
-              className="group rounded-full border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(223,234,255,0.92))] px-6 text-slate-950 shadow-[0_14px_38px_rgba(167,199,255,0.16)] transition-transform hover:-translate-y-0.5 plausible-event-name=CTA+Analisis plausible-event-location=hero"
+              className="btn-vibrant group rounded-full px-6 plausible-event-name=CTA+Analisis plausible-event-location=hero"
             >
               <a href="#contacto">
-                Pedir analisis
+                Pedir análisis
                 <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </a>
             </Button>
@@ -114,7 +73,7 @@ export function Hero() {
                 key={signal}
                 className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-2"
               >
-                <BadgeCheck className="h-4 w-4 text-sky-200" aria-hidden="true" />
+                <BadgeCheck className="h-4 w-4 text-cyan-200" aria-hidden="true" />
                 <span>{signal}</span>
               </div>
             ))}
@@ -122,78 +81,36 @@ export function Hero() {
         </div>
 
         <div className="relative lg:justify-self-end">
-          <div className="absolute inset-x-10 top-4 h-24 rounded-full bg-sky-300/10 blur-[72px]" aria-hidden="true" />
+          <div
+            className="absolute inset-x-10 top-4 h-32 rounded-full bg-cyan-400/15 blur-[80px]"
+            aria-hidden="true"
+          />
 
-          <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,24,39,0.92),rgba(12,18,30,0.98))] p-1 shadow-[0_30px_100px_rgba(0,0,0,0.22)]">
-            <Card className="relative overflow-hidden rounded-[1.75rem] border-white/8 bg-transparent shadow-none">
-              <CardHeader className="pb-5">
-                <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.14em] text-slate-400">
-                  <Waypoints className="h-4 w-4 text-sky-200" aria-hidden="true" />
-                  Mapa de automatizacion operativa
+          <div className="card-glow-border relative overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,24,39,0.9),rgba(12,18,30,0.98))] shadow-[0_30px_100px_rgba(0,0,0,0.3)]">
+            <Image
+              src="/images/hero-automation.png"
+              alt="Ilustración de un flujo de automatización operativa: documentos y datos conectados hacia un panel ordenado"
+              width={720}
+              height={720}
+              priority
+              className="h-auto w-full object-cover"
+            />
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#04070f]/95 via-[#04070f]/50 to-transparent p-6 pt-16">
+              <div className="grid grid-cols-3 gap-2 text-xs">
+                <div className="rounded-2xl border border-cyan-300/20 bg-cyan-400/10 px-3 py-3 text-cyan-100 backdrop-blur-sm">
+                  <div className="text-[11px] uppercase tracking-[0.12em] opacity-80">Análisis</div>
+                  <div className="mt-1 text-lg font-semibold">48h</div>
                 </div>
-                <CardTitle className="mt-3 text-[2rem] leading-none text-white md:text-[2.4rem]">
-                  Asi se ve una operacion menos manual.
-                </CardTitle>
-                <CardDescription className="max-w-md text-sm leading-relaxed text-slate-300">
-                  Entradas dispersas, reglas de negocio, integraciones y seguimiento quedan orquestados
-                  como un solo sistema visible para el equipo.
-                </CardDescription>
-              </CardHeader>
-
-              <CardContent className="space-y-4">
-                <div className="grid gap-3">
-                  {canvasModules.map((module) => {
-                    const Icon = module.icon;
-
-                    return (
-                      <div
-                        key={module.title}
-                        className="rounded-[1.35rem] border border-white/10 bg-white/[0.04] p-4"
-                      >
-                        <div className="flex items-start gap-4">
-                          <div className="flex size-10 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] text-sky-100">
-                            <Icon className="h-4 w-4" aria-hidden="true" />
-                          </div>
-                          <div>
-                            <div className="text-sm font-semibold text-white">{module.title}</div>
-                            <div className="mt-2 text-sm leading-relaxed text-slate-300">{module.detail}</div>
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
+                <div className="rounded-2xl border border-violet-300/20 bg-violet-400/10 px-3 py-3 text-violet-100 backdrop-blur-sm">
+                  <div className="text-[11px] uppercase tracking-[0.12em] opacity-80">Piloto</div>
+                  <div className="mt-1 text-lg font-semibold">2-4 sem</div>
                 </div>
-
-                <div className="rounded-[1.5rem] border border-white/10 bg-black/20 p-5">
-                  <div className="flex items-center justify-between gap-3">
-                    <div>
-                      <div className="inline-flex items-center gap-2 text-sm font-medium text-white">
-                        <ShieldCheck className="h-4 w-4 text-sky-200" aria-hidden="true" />
-                        Senales de una operacion mejor diseniada
-                      </div>
-                      <div className="mt-1 text-sm text-slate-400">
-                        Menos copias manuales, mas visibilidad y mas capacidad real para el equipo.
-                      </div>
-                    </div>
-                    <a
-                      href="#casos"
-                      className="rounded-full border border-white/10 bg-white/[0.05] px-3 py-1 text-xs uppercase tracking-[0.16em] text-slate-300 transition hover:bg-white/[0.08] hover:text-white"
-                    >
-                      Ver casos
-                    </a>
-                  </div>
-
-                  <div className="mt-4 grid grid-cols-3 gap-2 text-xs">
-                    {healthMetrics.map((metric) => (
-                      <div key={metric.k} className={`rounded-2xl border px-3 py-3 ${metric.c}`}>
-                        <div className="text-[11px] uppercase tracking-[0.12em] opacity-80">{metric.k}</div>
-                        <div className="mt-2 text-lg font-semibold">{metric.v}</div>
-                      </div>
-                    ))}
-                  </div>
+                <div className="rounded-2xl border border-amber-200/20 bg-amber-200/10 px-3 py-3 text-amber-50 backdrop-blur-sm">
+                  <div className="text-[11px] uppercase tracking-[0.12em] opacity-80">Operación</div>
+                  <div className="mt-1 text-lg font-semibold">Trazable</div>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           </div>
         </div>
       </div>
