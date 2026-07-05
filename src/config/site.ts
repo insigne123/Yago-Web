@@ -208,6 +208,12 @@ export const navLinks = [
       description: "Ejemplos de procesos donde YAGO libera carga manual y ordena la trazabilidad.",
     },
     {
+      name: "Blog",
+      href: "/blog",
+      eyebrow: "Guías prácticas",
+      description: "Automatización, IA, OCR y ROI explicados sin humo para equipos de operaciones.",
+    },
+    {
       name: "FAQ",
       href: "/#faq",
       eyebrow: "Dudas comunes",
@@ -217,9 +223,10 @@ export const navLinks = [
 
 export const footerLinks = [
     { name: "Casos", href: "/#casos" },
-    { name: "Proceso", href: "/#proceso" },
-    { name: "Servicios", href: "/#servicios" },
+    { name: "Proceso", href: "/proceso" },
+    { name: "Servicios", href: "/servicios" },
     { name: "Soluciones", href: "/soluciones" },
+    { name: "Blog", href: "/blog" },
     { name: "OCR", href: "/ocr" },
     { name: "SADT", href: "/sadt" },
     { name: "AXIS", href: "/axis" },
