@@ -223,6 +223,41 @@ export default async function ServicePage({ params }: PageProps) {
               )}
             </div>
           </section>
+
+          {/* Otros servicios */}
+          <section id="otros-servicios" aria-label="Otros servicios de YAGO">
+            <h2 className="text-balance text-2xl font-semibold text-white md:text-3xl">
+              Otros servicios
+            </h2>
+            <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {SERVICES.filter((other) => other.slug !== svc.slug).map((other) => (
+                <Link
+                  key={other.slug}
+                  href={`/servicios/${other.slug}`}
+                  className="group hover-lift overflow-hidden rounded-[1.5rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.84),rgba(10,16,25,0.96))]"
+                >
+                  <div className="relative aspect-[16/9] overflow-hidden">
+                    <Image
+                      src={other.image || "/placeholder.svg"}
+                      alt=""
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                      sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 100vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a1019]/80 via-transparent to-transparent" aria-hidden="true" />
+                  </div>
+                  <div className="p-5">
+                    <h3 className="font-semibold text-white">{other.title}</h3>
+                    <p className="mt-1 line-clamp-2 text-sm leading-relaxed text-slate-300">{other.short}</p>
+                    <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-cyan-200">
+                      Ver servicio
+                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+                    </span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
         </div>
       </main>
       <Footer />

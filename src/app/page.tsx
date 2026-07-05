@@ -1,19 +1,16 @@
 import { Navbar } from "@/components/landing/Navbar";
 import { Hero } from "@/components/landing/Hero";
-import { RouteChooser } from "@/components/landing/RouteChooser";
-import { OperationsFit } from "@/components/landing/OperationsFit";
-import { CaseStudies } from "@/components/landing/CaseStudies";
 import { Logos } from "@/components/landing/Logos";
-import { SolutionsPreview } from "@/components/landing/SolutionsPreview";
+import { QueHacemos } from "@/components/landing/QueHacemos";
+import { CasosExito } from "@/components/landing/CasosExito";
 import { Proceso } from "@/components/landing/Proceso";
-import { Servicios } from "@/components/landing/Servicios";
 import { OcrPreview } from "@/components/landing/OcrPreview";
+import { BlogDestacado } from "@/components/landing/BlogDestacado";
 import FAQ from "@/components/landing/FAQ";
-import { CTA } from "@/components/landing/CTA";
 import { Contacto } from "@/components/landing/Contacto";
 import { Footer } from "@/components/landing/Footer";
 import { BrandStamp } from "@/components/BrandStamp";
-import { SectionReveal, DividerGlow } from "@/components/ui/animated";
+import { SectionReveal } from "@/components/ui/animated";
 import { PRIMARY_CTA } from "@/config/site";
 
 export default function LandingIA() {
@@ -21,49 +18,44 @@ export default function LandingIA() {
     <div className="relative min-h-screen overflow-x-clip text-white">
       <Navbar ctaHref={PRIMARY_CTA.href} ctaLabel={PRIMARY_CTA.label} />
       <main id="main-content" className="main-premium">
+        {/* 1. Hero (dark) */}
         <Hero />
-        <DividerGlow />
-        <SectionReveal as="div" delay={0.03} surface="strong">
-          <RouteChooser />
-        </SectionReveal>
-        <DividerGlow />
-        <SectionReveal as="div" delay={0.04} surface="soft">
+
+        {/* 2. Prueba social compacta (dark) */}
+        <SectionReveal as="div" delay={0.03}>
           <Logos />
         </SectionReveal>
-        <DividerGlow />
-        <SectionReveal as="div" delay={0.05} surface="strong">
-          <OperationsFit />
+
+        {/* 3. Qué hacemos: rutas + servicios fusionados (light) */}
+        <SectionReveal as="div" delay={0.04}>
+          <QueHacemos />
         </SectionReveal>
-        <DividerGlow />
-        <SectionReveal as="div" delay={0.1}>
-          <CaseStudies />
+
+        {/* 4. Casos de éxito (light) */}
+        <SectionReveal as="div" delay={0.05}>
+          <CasosExito />
         </SectionReveal>
-        <DividerGlow />
-        <SectionReveal as="div" delay={0.1} surface="soft">
-          <SolutionsPreview />
-        </SectionReveal>
-        <DividerGlow />
-        <SectionReveal as="div" delay={0.1} surface="strong">
-          <CTA />
-        </SectionReveal>
-        <DividerGlow />
-        <SectionReveal as="div" delay={0.1} surface="soft">
+
+        {/* 5. Proceso resumido (dark) */}
+        <SectionReveal as="div" delay={0.05}>
           <Proceso />
         </SectionReveal>
-        <DividerGlow />
-        <SectionReveal as="div" delay={0.13} surface="soft">
-          <Servicios />
-        </SectionReveal>
-        <DividerGlow />
-        <SectionReveal as="div" delay={0.13} surface="strong">
+
+        {/* 6. OCR demo teaser (dark) */}
+        <SectionReveal as="div" delay={0.05}>
           <OcrPreview />
         </SectionReveal>
-        <DividerGlow />
-        <SectionReveal as="div" delay={0.18} surface="strong">
+
+        {/* 7. Blog destacado (light) */}
+        <SectionReveal as="div" delay={0.05}>
+          <BlogDestacado />
+        </SectionReveal>
+
+        {/* 8. FAQ + Contacto (dark) */}
+        <SectionReveal as="div" delay={0.06}>
           <FAQ />
         </SectionReveal>
-        <DividerGlow />
-        <SectionReveal as="div" delay={0.18} surface="strong">
+        <SectionReveal as="div" delay={0.06}>
           <Contacto />
         </SectionReveal>
       </main>
