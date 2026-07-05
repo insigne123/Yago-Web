@@ -1,3 +1,4 @@
+import { PRIMARY_CTA } from "@/config/site";
 import { FAQ_ITEMS } from "@/config/faq";
 import { Section } from "./Section";
 import {
@@ -17,7 +18,7 @@ function FAQComponent() {
             Preguntas frecuentes
           </h2>
           <p className="max-w-xl text-sm text-muted-foreground">
-            Respuestas cortas para bajar dudas de implementacion, seguridad, ROI y tiempos.
+            Respuestas cortas para bajar dudas de implementacion, seguridad, ROI, tiempos y la sesion inicial.
           </p>
         </div>
 
@@ -43,17 +44,18 @@ function FAQComponent() {
             <div className="hover-lift rounded-3xl border border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.84),rgba(10,16,25,0.96))] p-6">
               <div className="text-sm font-medium text-white">No ves tu caso?</div>
               <p className="mt-2 text-sm text-muted-foreground">
-                Cuentalo en 2-3 lineas y te respondemos con el siguiente paso recomendado.
+                Cuentalo en 2-3 lineas y coordinamos una sesion para aterrizar el mejor primer paso.
               </p>
               <a
-                href="#contacto"
-                className="mt-5 inline-flex w-full items-center justify-center rounded-xl bg-gradient-to-r from-fuchsia-500 via-cyan-400 to-emerald-400 px-4 py-2 text-sm font-medium text-white transition hover:opacity-95 plausible-event-name=FAQ+Contact+Click plausible-event-location=faq_section"
+                href={PRIMARY_CTA.href}
+                className="mt-5 inline-flex w-full items-center justify-center rounded-xl border border-white/12 bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(241,247,255,0.94))] px-4 py-2 text-sm font-medium text-slate-950 shadow-[0_14px_34px_rgba(5,11,19,0.24)] transition hover:brightness-[0.985] plausible-event-name=FAQ+Contact+Click plausible-event-location=faq_section"
               >
-                Pedir analisis
+                {PRIMARY_CTA.label}
               </a>
 
               <div className="mt-4 rounded-2xl border border-white/10 bg-black/20 p-4 text-xs text-muted-foreground">
-                Tip: si tienes UTMs en tus campanas, veras el origen del lead cuando envien el formulario.
+                No necesitas llegar con el flujo perfectamente resuelto. Si hoy hay correos, planillas,
+                documentos o aprobaciones manuales, ya hay suficiente para conversar.
               </div>
             </div>
           </div>

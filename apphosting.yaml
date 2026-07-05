@@ -5,3 +5,33 @@ runConfig:
   # Increase this value if you'd like to automatically spin up
   # more instances in response to increased traffic.
   maxInstances: 1
+
+env:
+  - variable: NEXT_PUBLIC_SITE_URL
+    value: "https://yago.cl"
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: NEXT_PUBLIC_CONTACT_EMAIL
+    value: "nicolas.yarur.g@yago.cl"
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: NEXT_PUBLIC_WHATSAPP_PHONE
+    value: "56963930231"
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: NEXT_PUBLIC_BOOKING_URL
+    value: "https://calendar.app.google/aLB7kT4JZpiE5Csj9"
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: CONTACT_TO
+    value: "nicolas.yarur.g@yago.cl"
+    availability:
+      - RUNTIME
+  - variable: OCR_MOBILE_SCAN_API_BASE_URL
+    value: "https://ocr-test.yago.cl"
+    availability:
+      - RUNTIME

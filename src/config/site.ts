@@ -13,24 +13,32 @@ import {
   Users,
 } from "lucide-react";
 
+const bookingLink = process.env.NEXT_PUBLIC_BOOKING_URL?.trim() || "";
+
 export const COMPANY = {
   name: "Yago",
   email: "nicolas.yarur.g@yago.cl",
   whatsapp: "+56963930231",
   whatsappLink: "https://wa.me/56963930231",
+  bookingLink,
   location: "Chile · Remoto · LATAM",
   // Logo principal en carpeta /public
   logo: "/logo-yago.png",           // <-- tu archivo real en /public
   logoMark: "/logo-yago-mark.svg",  // opcional si luego lo agregas
 };
 
+export const PRIMARY_CTA = {
+  href: bookingLink || "#contacto",
+  label: "Agendar sesion",
+};
+
 export const about = {
   id: "nosotros",
   title: "Nosotros",
   description:
-    "En Yago automatizamos procesos empresariales con IA para liberar tiempo operativo y potenciar a las personas. La tecnología asiste; las decisiones siguen siendo humanas.",
+    "En Yago automatizamos procesos empresariales con IA para equipos de operaciones, backoffice y finanzas que necesitan bajar carga manual sin perder control.",
   whatWeDo:
-    "Diseñamos, construimos y operamos automatizaciones y agentes de IA que eliminan tareas repetitivas, integran sistemas y aportan sugerencias basadas en datos para acelerar el trabajo diario.",
+    "Diseniamos, construimos y operamos automatizaciones y agentes de IA que eliminan tareas repetitivas, integran sistemas y entregan visibilidad real para seguir operando mejor.",
   principles: [
     "Automatización como mecanismo de colaboración humano-máquina.",
     "Ahorro de tiempo en procesos repetitivos y tediosos.",
@@ -159,19 +167,62 @@ export const testimonials = [];
 
 export const navLinks = [
     { name: "Inicio", href: "/#inicio" },
-    { name: "Casos", href: "/#casos" },
-    { name: "Proceso", href: "/#proceso" },
-    { name: "Servicios", href: "/#servicios" },
-    { name: "OCR", href: "/ocr" },
-    { name: "FAQ", href: "/#faq" },
-    { name: "Contacto", href: "/#contacto" },
+    {
+      name: "Apps listas",
+      href: "/#elige-ruta",
+      eyebrow: "Servicios listos",
+      description: "OCR, SADT y AXIS para problemas operativos específicos.",
+      detail: "Elige esta ruta si ya sabes qué proceso quieres resolver.",
+      children: [
+        {
+          name: "OCR",
+          href: "/ocr",
+          eyebrow: "Documentos a datos",
+          description: "Convierte facturas, contratos, formularios y PDFs escaneados en datos útiles para operar.",
+        },
+        {
+          name: "SADT",
+          href: "/sadt",
+          eyebrow: "Portal DT",
+          description: "Automatiza contratos, desvinculaciones y certificados F30/F30-1.",
+        },
+        {
+          name: "AXIS",
+          href: "/axis",
+          eyebrow: "Consulta PJUD",
+          description: "Consulta causas penales públicas a volumen con evidencia y monitoreo diario.",
+        },
+      ],
+    },
+    {
+      name: "Soluciones",
+      href: "/soluciones",
+      eyebrow: "Por problema",
+      description: "Rutas para backoffice, finanzas, reportes, aprobaciones, RRHH y procesos documentales.",
+      detail: "Útil si tu caso no calza exactamente con OCR, SADT o AXIS.",
+    },
+    {
+      name: "Casos",
+      href: "/#casos",
+      eyebrow: "Prueba operativa",
+      description: "Ejemplos de procesos donde YAGO libera carga manual y ordena la trazabilidad.",
+    },
+    {
+      name: "FAQ",
+      href: "/#faq",
+      eyebrow: "Dudas comunes",
+      description: "Respuestas rápidas sobre seguridad, alcance, ROI, tiempos y la sesión inicial.",
+    },
 ];
 
 export const footerLinks = [
     { name: "Casos", href: "/#casos" },
     { name: "Proceso", href: "/#proceso" },
     { name: "Servicios", href: "/#servicios" },
+    { name: "Soluciones", href: "/soluciones" },
     { name: "OCR", href: "/ocr" },
+    { name: "SADT", href: "/sadt" },
+    { name: "AXIS", href: "/axis" },
     { name: "FAQ", href: "/#faq" },
     { name: "Contacto", href: "/#contacto" },
     { name: "Política de Privacidad", href: "/privacidad" },

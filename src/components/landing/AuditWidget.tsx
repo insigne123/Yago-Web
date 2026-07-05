@@ -60,6 +60,7 @@ export function AuditWidget() {
 
   const [open, setOpen] = React.useState(false);
   const [showNudge, setShowNudge] = React.useState(false);
+  const [readyToShow, setReadyToShow] = React.useState(false);
   const [nudgeSeenTracked, setNudgeSeenTracked] = React.useState(false);
 
   const [loading, setLoading] = React.useState(false);
@@ -91,19 +92,39 @@ export function AuditWidget() {
     };
   }, [attribution]);
 
-  const disableOnThisPage = pathname === "/privacidad";
+  const disableOnThisPage = pathname === "/privacidad" || pathname.toLowerCase() === "/ocr-test";
+  const delayOnHome = pathname === "/";
 
   React.useEffect(() => {
     if (disableOnThisPage) return;
+    if (!delayOnHome) {
+      setReadyToShow(true);
+      return;
+    }
+
+    function checkScroll() {
+      if (window.scrollY > 520) {
+        setReadyToShow(true);
+      }
+    }
+
+    checkScroll();
+    window.addEventListener("scroll", checkScroll, { passive: true });
+    return () => window.removeEventListener("scroll", checkScroll);
+  }, [delayOnHome, disableOnThisPage]);
+
+  React.useEffect(() => {
+    if (disableOnThisPage) return;
+    if (!readyToShow) return;
     if (open) return;
     if (isSuppressed()) return;
 
     const t = window.setTimeout(() => {
       setShowNudge(true);
-    }, 1200);
+    }, 9000);
 
     return () => window.clearTimeout(t);
-  }, [disableOnThisPage, open, pathname]);
+  }, [disableOnThisPage, open, pathname, readyToShow]);
 
   React.useEffect(() => {
     if (!showNudge) return;
@@ -216,46 +237,27 @@ export function AuditWidget() {
     }
   }
 
-  if (disableOnThisPage) return null;
+  if (disableOnThisPage || !readyToShow) return null;
 
   return (
     <div className="fixed bottom-5 right-5 z-[90] flex flex-col items-end gap-3">
       {showNudge && (
-        <div className="w-[min(420px,calc(100vw-40px))] overflow-hidden rounded-3xl border border-white/15 bg-[linear-gradient(180deg,rgba(17,24,37,0.96),rgba(10,16,25,0.99))] shadow-[0_24px_80px_rgba(0,0,0,0.4)] animate-in fade-in-0 slide-in-from-bottom-4 duration-500">
-          <div className="h-px w-full bg-gradient-to-r from-fuchsia-500/60 via-cyan-400/60 to-emerald-400/60" />
+        <div className="w-[min(360px,calc(100vw-40px))] overflow-hidden rounded-3xl border border-white/15 bg-[linear-gradient(180deg,rgba(17,24,37,0.96),rgba(10,16,25,0.99))] shadow-[0_24px_80px_rgba(0,0,0,0.4)] animate-in fade-in-0 slide-in-from-bottom-4 duration-500">
+          <div className="h-px w-full bg-gradient-to-r from-transparent via-sky-200/55 to-transparent" />
 
           <div className="p-5">
             <div className="flex items-start justify-between gap-3">
               <div>
                 <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/20 px-3 py-1 text-[11px] text-foreground/80">
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" aria-hidden="true" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-sky-300" aria-hidden="true" />
                   Diagnostico sin costo
                 </div>
                 <div className="mt-3 text-lg font-semibold leading-tight">
-                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-fuchsia-400 via-cyan-300 to-emerald-300">
-                    Analisis de automatizacion
-                  </span>
-                  <span className="text-white"> + ahorro HH</span>
+                  <span className="text-white">Analisis de automatizacion</span>
                 </div>
 
                 <div className="mt-2 text-sm text-muted-foreground">
-                  En 48h te enviamos oportunidades y quick wins con estimacion de horas-hombre.
-                </div>
-
-                <div className="mt-3 flex flex-wrap gap-2 text-xs">
-                  {[
-                    "Quick wins",
-                    "Integraciones",
-                    "Estimacion HH",
-                    "Roadmap",
-                  ].map((t) => (
-                    <span
-                      key={t}
-                      className="rounded-full border border-white/10 bg-black/20 px-3 py-1 text-foreground/80"
-                    >
-                      {t}
-                    </span>
-                  ))}
+                  En 48h te enviamos quick wins y una ruta clara.
                 </div>
               </div>
 
@@ -279,7 +281,7 @@ export function AuditWidget() {
                   track("Audit Nudge Click", { location: "nudge", page: pathname });
                   openSheet("nudge");
                 }}
-                className="bg-gradient-to-r from-fuchsia-500 via-cyan-400 to-emerald-400 text-white"
+                className="bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(223,234,255,0.92))] text-slate-950"
               >
                 Pedir analisis
                 <ArrowRight className="h-4 w-4" />
@@ -304,19 +306,19 @@ export function AuditWidget() {
 
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
-          <div className="rounded-full bg-gradient-to-r from-fuchsia-500 via-cyan-400 to-emerald-400 p-[1px] shadow-[0_18px_55px_rgba(0,0,0,0.45)]">
+          <div className="rounded-full border border-white/12 bg-white/[0.04] p-[1px] shadow-[0_18px_55px_rgba(0,0,0,0.32)]">
             <button
               type="button"
               onClick={() => openSheet("floating")}
-                  className="group inline-flex items-center gap-3 rounded-full border border-white/10 bg-slate-950/92 px-4 py-3 transition hover:bg-slate-900"
+              className="group inline-flex items-center gap-2 rounded-full border border-white/10 bg-slate-950/92 px-3 py-2.5 transition hover:bg-slate-900 sm:gap-3 sm:px-4"
               aria-label="Pedir analisis de automatizacion"
             >
-              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white ring-1 ring-white/10">
+              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-sky-300/10 text-sky-100 ring-1 ring-sky-200/20">
                 <Sparkles className="h-4 w-4" />
               </span>
-              <span className="text-left">
-                <span className="block text-sm font-semibold text-white">Analisis de automatizacion</span>
-                <span className="block text-xs text-foreground/75">Oportunidades + ahorro HH</span>
+              <span className="hidden text-left sm:block">
+                <span className="block text-sm font-semibold text-white">Diagnostico</span>
+                <span className="block text-xs text-foreground/75">Quick wins</span>
               </span>
             </button>
           </div>
@@ -401,7 +403,7 @@ export function AuditWidget() {
               <Button
                 type="submit"
                 disabled={loading}
-                className="mt-1 bg-gradient-to-r from-fuchsia-500 via-cyan-400 to-emerald-400 text-white"
+                className="mt-1 bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(223,234,255,0.92))] text-slate-950"
               >
                 {loading ? "Enviando..." : "Enviar para analisis"}
               </Button>

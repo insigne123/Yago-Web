@@ -14,13 +14,11 @@ export default function manifest(): MetadataRoute.Manifest {
     start_url: "/",
     scope: "/",
     display: "standalone",
-    background_color: "#000000",
-    theme_color: "#0ea5e9", // cyan-500
+    background_color: "#070b13",
+    theme_color: "#070b13",
     icons: [
-      { src: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
-      { src: "/icons/icon-512.png", sizes: "512x512", type: "image/png" },
-      { src: "/icons/apple-touch-icon.png", sizes: "180x180", type: "image/png", purpose: "any" },
-      { src: "/favicon.ico", sizes: "any", type: "image/x-icon" }
+      { src: "/logo-yago.png", sizes: "any", type: "image/png", purpose: "maskable" },
+      { src: "/favicon.ico", sizes: "any", type: "image/x-icon" },
     ],
   };
 }

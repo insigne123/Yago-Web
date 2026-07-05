@@ -38,7 +38,17 @@ export const OCR_PAGE = {
     { name: "Inicio", href: "#inicio" },
     { name: "Problema", href: "#problema" },
     { name: "Como funciona", href: "#como-funciona" },
-    { name: "Casos", href: "#casos-de-uso" },
+    {
+      name: "Apps",
+      href: "/#elige-ruta",
+      eyebrow: "Apps listas",
+      description: "OCR, SADT y AXIS para llegar rápido al servicio correcto.",
+      children: [
+        { name: "OCR", href: "/ocr", description: "Documentos y PDFs a datos útiles." },
+        { name: "SADT", href: "/sadt", description: "Portal DT con evidencia y reproceso." },
+        { name: "AXIS", href: "/axis", description: "Consulta PJUD a volumen con monitoreo." },
+      ],
+    },
     { name: "FAQ", href: "#faq" },
   ],
   hero: {

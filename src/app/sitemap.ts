@@ -1,6 +1,8 @@
 import type { MetadataRoute } from "next";
 import { SERVICES } from "@/config/services";
 import { PRODUCTS } from "@/config/productos";
+import { SEO_PAGES } from "@/config/seo-pages";
+import { AUTOMATION_PAGES } from "@/config/automation-pages";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = process.env.NEXT_PUBLIC_SITE_URL || "https://yago.cl";
@@ -8,9 +10,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const entries: MetadataRoute.Sitemap = [
     { url: `${base}/`, lastModified: now, changeFrequency: "monthly", priority: 1 },
+    { url: `${base}/soluciones`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/ocr`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${base}/ocr-master`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    ...AUTOMATION_PAGES.map(
+      (page): MetadataRoute.Sitemap[number] => ({
+        url: `${base}/${page.slug}`,
+        lastModified: now,
+        changeFrequency: "monthly",
+        priority: 0.9,
+      })
+    ),
     { url: `${base}/privacidad`, lastModified: now, changeFrequency: "yearly", priority: 0.5 },
+    ...SEO_PAGES.map(
+      (page): MetadataRoute.Sitemap[number] => ({
+        url: `${base}/soluciones/${page.slug}`,
+        lastModified: now,
+        changeFrequency: "monthly",
+        priority: 0.75,
+      })
+    ),
     ...SERVICES.map(
       (s): MetadataRoute.Sitemap[number] => ({
         url: `${base}/servicios/${s.slug}`,

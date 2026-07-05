@@ -27,28 +27,29 @@ const headlineFont = Instrument_Sans({
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: `${COMPANY.name} — Automatizacion de procesos con IA`,
+  title: `${COMPANY.name} — Automatizacion operativa con IA para backoffice y finanzas`,
   description:
-    "Automatizacion de procesos con IA para equipos de operaciones: menos trabajo manual, menos errores y mas velocidad operativa.",
+    "Automatizacion de procesos, OCR e integraciones para equipos de operaciones, backoffice y finanzas que quieren reducir trabajo manual, errores y tiempos de ciclo.",
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     url: "/",
     siteName: COMPANY.name,
-    title: `${COMPANY.name} — Automatizacion de procesos con IA`,
+    title: `${COMPANY.name} — Automatizacion operativa con IA para backoffice y finanzas`,
     description:
-      "Automatizacion de procesos, OCR e integraciones para reducir trabajo manual, errores y tiempos operativos.",
+      "Automatizacion de procesos, OCR e integraciones para reducir trabajo manual, errores y tiempos operativos en operaciones, backoffice y finanzas.",
     images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${COMPANY.name} — Automatizacion de procesos con IA`,
+    title: `${COMPANY.name} — Automatizacion operativa con IA para backoffice y finanzas`,
     description:
-      "Automatizacion de procesos, OCR e integraciones para equipos que necesitan operar mejor.",
+      "Automatizacion de procesos, OCR e integraciones para equipos que necesitan operar mejor sin depender de tanto trabajo manual.",
     images: ["/twitter-image"],
   },
   icons: {
-    icon: [{ url: "/favicon.ico" }],
+    icon: [{ url: "/logo-yago.png", type: "image/png" }],
+    apple: [{ url: "/logo-yago.png", type: "image/png" }],
   },
 };
 

@@ -97,10 +97,10 @@ export function Contacto() {
         <div className="grid items-start gap-8 md:grid-cols-2">
           <div>
             <p className="text-xs tracking-[0.22em] text-muted-foreground">CONTACTO</p>
-            <h2 className="mt-3 text-3xl font-semibold text-white md:text-5xl">Pide un analisis inicial</h2>
+            <h2 className="mt-3 text-3xl font-semibold text-white md:text-5xl">Coordina una sesion de descubrimiento</h2>
             <p className="mt-3 max-w-xl leading-relaxed text-slate-300">
-              Cuentanos tu proceso, cuello de botella o problema operativo y te respondemos con quick wins,
-              prioridades claras y el siguiente paso recomendado para tu caso.
+              Cuentanos el proceso, cuello de botella o problema operativo que quieres destrabar y te
+              respondemos con el siguiente paso recomendado para tu caso y una forma concreta de seguir.
             </p>
 
             <div className="mt-6 grid gap-3 sm:grid-cols-2">
@@ -130,24 +130,24 @@ export function Contacto() {
 
               <div className="hover-lift rounded-[1.5rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.88),rgba(10,16,25,0.96))] p-4 text-sm text-slate-300 sm:col-span-2">
                 <div className="flex items-center gap-2 text-white">
-                  <MapPin className="h-4 w-4 text-amber-100" />
-                  Operamos
+                  <MapPin className="h-4 w-4 text-sky-100" />
+                  Cobertura
                 </div>
-                <div className="mt-2">{COMPANY.location}</div>
+                <div className="mt-2">{COMPANY.location} · sesiones remotas para equipos de operaciones, backoffice y finanzas.</div>
               </div>
             </div>
           </div>
 
           <Card className="hover-lift rounded-[1.8rem] border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.9),rgba(10,16,25,0.98))] shadow-[0_20px_60px_rgba(0,0,0,0.14)]">
             <CardHeader>
-              <CardTitle>Cuentanos que quieres automatizar</CardTitle>
-              <CardDescription>Te respondemos con el siguiente paso recomendado para tu caso.</CardDescription>
+              <CardTitle>Cuentanos que quieres destrabar</CardTitle>
+              <CardDescription>Te respondemos con el siguiente paso recomendado y como coordinar la llamada.</CardDescription>
             </CardHeader>
             <CardContent>
               <form onSubmit={onSubmit} onFocusCapture={markStart} className="grid gap-4">
                 {/* Honeypot field for spam protection */}
                 <input type="text" name="hp" className="hidden" />
-                <input type="hidden" name="topic" value="Analisis automatizacion" />
+                <input type="hidden" name="topic" value="Sesion de descubrimiento" />
 
                 {/* Attribution (first touch / last touch) */}
                 <input type="hidden" name="ft_utm_source" value={attribution?.first.utm_source || ""} />
@@ -238,12 +238,12 @@ export function Contacto() {
                 </div>
 
                 <div className="grid gap-2">
-                  <Label htmlFor="mensaje" className="text-slate-200">¿Qué necesitas resolver?</Label>
+                  <Label htmlFor="mensaje" className="text-slate-200">¿Que proceso quieres destrabar?</Label>
                   <Textarea
                     id="mensaje"
                     name="mensaje"
                     autoComplete="off"
-                    placeholder="Describe brevemente el proceso, area o cuello de botella que quieres mejorar..."
+                    placeholder="Describe brevemente el proceso, area o cuello de botella que hoy te consume mas tiempo..."
                     rows={5}
                     required
                     className="rounded-2xl border-white/10 bg-white/[0.04] text-white placeholder:text-slate-500"
@@ -253,9 +253,9 @@ export function Contacto() {
                 <Button
                   type="submit"
                   disabled={loading}
-                  className="rounded-full border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(223,234,255,0.92))] text-slate-950 plausible-event-name=CTA+Enviar+Contacto plausible-event-location=contact_section"
+                  className="rounded-full border border-white/12 bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(241,247,255,0.94))] text-slate-950 shadow-[0_14px_34px_rgba(5,11,19,0.24)] plausible-event-name=CTA+Coordinar+Sesion plausible-event-location=contact_section"
                 >
-                  {loading ? "Enviando..." : "Pedir analisis"}
+                  {loading ? "Enviando..." : "Coordinar sesion"}
                 </Button>
               </form>
               <p className="mt-3 text-xs text-slate-400">

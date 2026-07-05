@@ -8,8 +8,8 @@ test.describe("landing smoke", () => {
 
     await expect(page).toHaveTitle(/YAGO/i);
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
-    await expect(hero.getByRole("link", { name: /Pedir analisis/i })).toBeVisible();
-    await expect(hero.getByRole("link", { name: /^Ver casos de uso$/i })).toBeVisible();
+    await expect(hero.getByRole("link", { name: /Agendar sesion/i })).toBeVisible();
+    await expect(hero.getByRole("link", { name: /^Ver casos reales$/i })).toBeVisible();
 
     await expect(page.locator("#casos")).toBeAttached();
     await expect(page.locator("#servicios")).toBeAttached();
@@ -20,7 +20,7 @@ test.describe("landing smoke", () => {
   test("scrolls to use cases from the hero CTA", async ({ page }) => {
     await page.goto("/");
 
-    await page.locator("#inicio").getByRole("link", { name: /^Ver casos de uso$/i }).click();
+    await page.locator("#inicio").getByRole("link", { name: /^Ver casos reales$/i }).click();
 
     await expect(page.locator("#casos")).toBeInViewport();
   });

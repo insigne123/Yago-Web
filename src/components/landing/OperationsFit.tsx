@@ -26,9 +26,9 @@ const pains = [
 ];
 
 const buyers = [
-  "Gerencias de operaciones y backoffice",
-  "Administracion y finanzas con alto flujo operativo",
-  "Equipos que dependen de documentos, aprobaciones o consolidacion de datos",
+  "Gerencias de operaciones y backoffice que todavia empujan procesos por correo y planillas",
+  "Administracion y finanzas con carga manual, validaciones y aprobaciones repetitivas",
+  "Empresas medianas con datos dispersos, muchos responsables y poco ownership visible",
   "Empresas que quieren automatizar sin reemplazar por completo su stack actual",
 ];
 
@@ -38,14 +38,15 @@ export function OperationsFit() {
       <div className="mx-auto grid max-w-7xl gap-6 px-4 xl:grid-cols-[0.96fr_1.04fr]">
         <div>
           <Badge variant="outline" className="border-white/12 bg-white/[0.04] px-3 py-1 text-[11px] uppercase tracking-[0.16em] text-slate-300">
-            Para operaciones
+            Donde mejor encaja
           </Badge>
           <h2 className="mt-4 text-4xl font-semibold text-white md:text-5xl">
-            Si tu operacion todavia depende de tareas repetitivas, hay una oportunidad clara.
+            Si operaciones, backoffice o finanzas siguen persiguiendo tareas manuales, hay una oportunidad clara.
           </h2>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-300">
             YAGO esta pensado para equipos que necesitan bajar carga manual, reducir errores y mover
-            procesos mas rapido, sin tener que rehacer toda la operacion desde cero.
+            procesos mas rapido, sin rehacer toda la operacion desde cero ni abrir un proyecto enorme
+            antes de ver valor.
           </p>
 
           <div className="mt-6 rounded-[1.7rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,24,37,0.86),rgba(10,16,25,0.96))] p-6">

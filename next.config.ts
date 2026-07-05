@@ -15,6 +15,16 @@ const nextConfig: NextConfig = {
         destination: '/productos/procedura',
         permanent: true,
       },
+      {
+        source: '/automatizacion-dt',
+        destination: '/sadt',
+        permanent: true,
+      },
+      {
+        source: '/consulta-pjud',
+        destination: '/axis',
+        permanent: true,
+      },
     ];
   },
   images: {

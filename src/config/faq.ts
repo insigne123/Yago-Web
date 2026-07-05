@@ -8,6 +8,10 @@ export type FAQItem = {
 
 export const FAQ_ITEMS: FAQItem[] = [
   {
+    q: "¿Que pasa en la sesion de descubrimiento?",
+    a: "Revisamos el proceso, donde se frena, cuanta carga manual tiene hoy y si conviene partir por OCR, automatizacion o una app interna. La salida es un siguiente paso recomendado, no una venta a ciegas."
+  },
+  {
     q: "¿Cómo sé qué procesos conviene automatizar primero?",
     a: "Priorizamos tareas repetitivas, de alto volumen y con reglas claras (por ejemplo: extracción/carga de datos, conciliaciones, generación de reportes, orquestación entre sistemas). Evaluamos impacto (HH ahorradas, errores evitados) vs. complejidad técnica y proponemos un roadmap por ‘quick wins’ y valor acumulado."
   },

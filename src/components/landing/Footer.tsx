@@ -11,8 +11,8 @@ export function Footer() {
             <div className="md:col-span-4">
               <div className="font-headline text-2xl font-semibold text-white">{COMPANY.name}</div>
               <p className="mt-3 max-w-sm text-sm leading-relaxed text-slate-300">
-                Automatización con IA, productos digitales e integraciones para equipos que necesitan
-                operar mejor sin perder control.
+                Automatizacion operativa, OCR e integraciones para equipos de operaciones, backoffice y
+                finanzas que necesitan operar mejor sin perder control.
               </p>
               <div className="mt-4 text-xs uppercase tracking-[0.16em] text-slate-400">{COMPANY.location}</div>
             </div>
