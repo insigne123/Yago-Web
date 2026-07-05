@@ -73,7 +73,7 @@ export default async function ProductPage({ params }: PageProps) {
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
               <p className="text-xs tracking-[0.22em] text-muted-foreground">PRODUCTO</p>
-              <h1 className="mt-3 bg-gradient-to-r from-fuchsia-500 via-cyan-400 to-emerald-400 bg-clip-text text-4xl font-semibold text-transparent md:text-5xl">
+              <h1 className="mt-3 bg-gradient-to-r from-sky-600 via-indigo-500 to-sky-500 bg-clip-text text-4xl font-semibold text-transparent md:text-5xl">
                 {heading}
               </h1>
             </div>
@@ -97,10 +97,10 @@ export default async function ProductPage({ params }: PageProps) {
             <img
               src={`/images/product_${p.slug}.png`}
               alt={`Banner de ${p.name}`}
-              className="h-full w-full object-cover opacity-90"
+              className="h-full w-full object-cover"
             />
             {/* Gradient Overlay sutil */}
-            <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#0a0a0a] to-transparent opacity-40" />
+            <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-white/60 to-transparent" />
             <div className="absolute inset-0 rounded-3xl ring-1 ring-inset ring-slate-900/10" />
           </div>
 
@@ -136,10 +136,10 @@ export default async function ProductPage({ params }: PageProps) {
             <div className="flex flex-wrap gap-3 mt-4">
               <a
                 href={mailHref}
-                className={`group relative inline-flex items-center overflow-hidden rounded-xl bg-white px-5 py-2.5 font-medium text-black transition hover:scale-105 hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] plausible-event-name=Product+CTA+Primary plausible-event-product=${p.slug} plausible-event-location=product_page`}
+                className={`btn-vibrant group relative inline-flex items-center overflow-hidden rounded-xl px-5 py-2.5 font-medium plausible-event-name=Product+CTA+Primary plausible-event-product=${p.slug} plausible-event-location=product_page`}
               >
                 <span className="relative z-10">{primaryLabel}</span>
-                <div className="absolute inset-0 h-full w-full animate-[shimmer_2s_infinite] bg-gradient-to-r from-transparent via-black/10 to-transparent -translate-x-full" />
+                <div className="absolute inset-0 h-full w-full animate-[shimmer_2s_infinite] bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full" />
               </a>
               <a
                 href="#modulos"
@@ -306,7 +306,7 @@ export default async function ProductPage({ params }: PageProps) {
             <div className="flex flex-wrap gap-3">
               <a
                 href={mailHref}
-                className={`inline-flex items-center rounded-xl bg-white px-4 py-2 text-black transition hover:opacity-90 plausible-event-name=Product+Contact plausible-event-method=email plausible-event-product=${p.slug} plausible-event-location=product_page`}
+                className={`btn-vibrant inline-flex items-center rounded-xl px-4 py-2 plausible-event-name=Product+Contact plausible-event-method=email plausible-event-product=${p.slug} plausible-event-location=product_page`}
               >
                 {p.closeCta?.primary || "Contactar por email"}
               </a>
@@ -321,7 +321,7 @@ export default async function ProductPage({ params }: PageProps) {
                 </a>
               ) : (
                 <span
-                  className="inline-flex cursor-not-allowed items-center rounded-xl bg-neutral-700 px-4 py-2 text-neutral-300"
+                  className="inline-flex cursor-not-allowed items-center rounded-xl border border-slate-900/10 bg-slate-100 px-4 py-2 text-slate-400"
                   title="Configura NEXT_PUBLIC_WHATSAPP_PHONE"
                 >
                   {p.closeCta?.secondary || "WhatsApp"}

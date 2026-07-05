@@ -46,7 +46,7 @@ export default function ServiciosPage() {
                     sizes="(max-width: 768px) 100vw, 50vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a1019] via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-white/80 via-transparent to-transparent" />
                 </div>
 
                 <div className="p-6 pt-4">

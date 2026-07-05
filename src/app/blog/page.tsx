@@ -55,7 +55,7 @@ export default function BlogPage() {
                 priority
                 className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0a1019]/60 via-transparent to-transparent md:bg-gradient-to-r" />
+              <div className="absolute inset-0 bg-gradient-to-t from-white/60 via-transparent to-transparent md:bg-gradient-to-r" />
             </div>
             <div className="flex flex-col justify-center p-6 md:p-10">
               <div className="flex flex-wrap items-center gap-3 text-xs text-slate-600">
@@ -98,7 +98,7 @@ export default function BlogPage() {
                     sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a1019] via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-white/80 via-transparent to-transparent" />
                 </div>
                 <div className="flex flex-1 flex-col p-6 pt-4">
                   <div className="flex flex-wrap items-center gap-2 text-xs text-slate-600">
