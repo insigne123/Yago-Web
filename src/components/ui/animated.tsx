@@ -1,12 +1,4 @@
-"use client";
-
 import * as React from "react";
-import {
-  LazyMotion,
-  domAnimation,
-  m,
-  useReducedMotion,
-} from "framer-motion";
 
 type SectionRevealProps = {
   children: React.ReactNode;
@@ -24,10 +16,6 @@ export function SectionReveal({
   className = "",
   surface,
 }: SectionRevealProps) {
-  const prefersReduced = useReducedMotion();
-  const [mounted, setMounted] = React.useState(false);
-  React.useEffect(() => setMounted(true), []);
-
   const SurfaceWrap = ({ children }: { children: React.ReactNode }) =>
     surface === "strong" ? (
       <div className="surface-strong">{children}</div>
@@ -37,33 +25,10 @@ export function SectionReveal({
       <>{children}</>
     );
 
-  if (!mounted || prefersReduced) {
-    return (
-      <Tag className={className}>
-        <SurfaceWrap>{children}</SurfaceWrap>
-      </Tag>
-    );
-  }
-
   return (
-    <LazyMotion features={domAnimation}>
-      <m.div
-        initial={{ opacity: 0, transform: "translateY(16px)" }}
-        whileInView={{ opacity: 1, transform: "translateY(0px)" }}
-        viewport={{ once: true, amount: 0.18, margin: "0px 0px -48px 0px" }}
-        transition={{
-          duration: 0.44,
-          delay: Math.min(delay, 0.12),
-          ease: [0.22, 1, 0.36, 1],
-        }}
-      >
-        <Tag className={className}>
-          <SurfaceWrap>
-            {children}
-          </SurfaceWrap>
-        </Tag>
-      </m.div>
-    </LazyMotion>
+    <Tag className={className} data-reveal-delay={Math.min(delay, 0.12)}>
+      <SurfaceWrap>{children}</SurfaceWrap>
+    </Tag>
   );
 }
 

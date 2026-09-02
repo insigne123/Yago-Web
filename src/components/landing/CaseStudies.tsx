@@ -14,7 +14,7 @@ export function CaseStudies() {
               Prueba y oportunidades
             </Badge>
             <h2 className="mt-4 text-4xl font-semibold text-slate-900 md:text-5xl">
-              Un caso real y los puntos donde solemos destrabar la operacion primero.
+              Cómo documentamos una automatización antes de prometer resultados.
             </h2>
           </div>
           <p className="max-w-xl text-sm leading-relaxed text-slate-600">
@@ -26,7 +26,7 @@ export function CaseStudies() {
         <div className="mt-10 rounded-[1.9rem] border border-slate-900/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.97),rgba(246,250,254,1))] p-6 shadow-[0_18px_50px_rgba(30,58,95,0.08)] md:p-7">
           <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
             <div className="max-w-2xl">
-              <div className="text-xs uppercase tracking-[0.18em] text-sky-700">Caso real · ANTON.IA LeadFlow</div>
+               <div className="text-xs uppercase tracking-[0.18em] text-sky-700">Flujo de referencia · ANTON.IA LeadFlow</div>
               <div className="mt-3 text-3xl font-semibold text-slate-900 md:text-[2.2rem]">
                 Pasar de prospeccion manual a un flujo comercial mucho mas enfocado.
               </div>
@@ -85,10 +85,10 @@ export function CaseStudies() {
             </div>
           </div>
           <Link
-            href="/soluciones"
+             href="/casos"
             className="inline-flex items-center gap-2 rounded-full border border-slate-900/10 bg-white/[0.04] px-4 py-2 text-sm font-medium text-slate-900 transition hover:bg-slate-50 hover:text-slate-900"
           >
-            Ver soluciones por problema
+             Ver metodología de casos
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>
         </div>

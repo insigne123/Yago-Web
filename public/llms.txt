@@ -1,0 +1,38 @@
+# YAGO
+
+YAGO es una empresa de Chile especializada en automatizacion de procesos, OCR e integraciones para equipos de operaciones, backoffice y finanzas.
+
+Sitio principal: https://yago.cl/
+Contacto: nicolas.yarur.g@yago.cl
+Idioma principal: espanol de Chile
+Mercado principal: Chile
+
+## Navegacion principal
+
+- Soluciones por problema: https://yago.cl/soluciones
+- Productos: https://yago.cl/productos
+- Servicios: https://yago.cl/servicios
+- Casos y metodologia: https://yago.cl/casos
+- Proceso de implementacion: https://yago.cl/proceso
+- Blog y guias: https://yago.cl/blog
+
+## Productos especializados
+
+- OCR para convertir documentos en datos: https://yago.cl/ocr
+- SADT para procesos del Portal Direccion del Trabajo: https://yago.cl/sadt
+- AXIS para consultas publicas y monitoreo PJUD: https://yago.cl/axis
+- OCR Master API: https://yago.cl/ocr-master
+
+## Criterios editoriales
+
+- YAGO no presenta estimaciones como resultados garantizados.
+- Las cifras de casos deben incluir contexto y metodologia de medicion.
+- El contenido regulatorio debe enlazar fuentes oficiales y mostrar fecha de revision.
+- Los precios y alcances vigentes se confirman en cada pagina de producto o propuesta comercial.
+
+## Informacion legal
+
+- Privacidad: https://yago.cl/privacidad
+- Terminos de uso: https://yago.cl/terminos
+
+Este archivo es un mapa auxiliar del contenido publico. Para informacion vigente, consulta siempre la pagina enlazada.

@@ -5,8 +5,11 @@ import { notFound } from "next/navigation";
 import { Navbar } from "@/components/landing/Navbar";
 import { Footer } from "@/components/landing/Footer";
 import { BrandStamp } from "@/components/BrandStamp";
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { COMPANY, PRIMARY_CTA } from "@/config/site";
 import { getSeoPageBySlug, SEO_PAGES } from "@/config/seo-pages";
+import { createPageMetadata } from "@/lib/seo";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -20,21 +23,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!page) return {};
 
-  return {
+  return createPageMetadata({
     title: page.seoTitle,
     description: page.seoDescription,
     keywords: page.keywords,
-    alternates: {
-      canonical: `/soluciones/${page.slug}`,
-    },
-    openGraph: {
-      title: page.seoTitle,
-      description: page.seoDescription,
-      url: `/soluciones/${page.slug}`,
-      siteName: COMPANY.name,
-      type: "article",
-    },
-  };
+    path: `/soluciones/${page.slug}`,
+  });
 }
 
 export default async function SeoSolutionPage({ params }: PageProps) {
@@ -43,12 +37,35 @@ export default async function SeoSolutionPage({ params }: PageProps) {
 
   if (!page) notFound();
 
+  const serviceJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `https://yago.cl/soluciones/${page.slug}#service`,
+    name: page.title,
+    description: page.seoDescription,
+    url: `https://yago.cl/soluciones/${page.slug}`,
+    areaServed: "Chile",
+    provider: { "@id": "https://yago.cl/#organization" },
+  };
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: page.faq.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: { "@type": "Answer", text: item.answer },
+    })),
+  };
+
   return (
     <div className="relative min-h-screen overflow-x-clip text-slate-900">
+      <JsonLd id={`jsonld-solution-${page.slug}`} data={serviceJsonLd} />
+      <JsonLd id={`jsonld-solution-faq-${page.slug}`} data={faqJsonLd} />
       <Navbar ctaHref={PRIMARY_CTA.href} ctaLabel={PRIMARY_CTA.label} />
 
       <main id="main-content" className="main-premium py-20 md:py-24">
         <div className="mx-auto max-w-7xl px-4">
+          <Breadcrumbs items={[{ name: "Inicio", href: "/" }, { name: "Soluciones", href: "/soluciones" }, { name: page.eyebrow, href: `/soluciones/${page.slug}` }]} />
           <section className="grid gap-8 lg:grid-cols-[0.98fr_1.02fr] lg:items-start">
             <div className="max-w-3xl">
               <p className="text-xs uppercase tracking-[0.22em] text-slate-600">{page.eyebrow}</p>

@@ -8,7 +8,7 @@ test.describe("landing smoke", () => {
 
     await expect(page).toHaveTitle(/YAGO/i);
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
-    await expect(hero.getByRole("link", { name: /Agendar sesion/i })).toBeVisible();
+    await expect(hero.getByRole("link", { name: /Solicitar diagnóstico/i })).toBeVisible();
     await expect(hero.getByRole("link", { name: /^Ver rutas$/i })).toBeVisible();
 
     await expect(page.locator("#elige-ruta")).toBeAttached();

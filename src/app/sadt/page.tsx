@@ -1,25 +1,18 @@
-import type { Metadata } from "next";
 import { AutomationLandingPage } from "@/components/automation/AutomationLandingPage";
 import { getAutomationPage } from "@/config/automation-pages";
 import { getDailyUfRate } from "@/lib/uf";
+import { createPageMetadata } from "@/lib/seo";
 
 const page = getAutomationPage("sadt")!;
 
 export const revalidate = 86400;
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: page.seoTitle,
   description: page.seoDescription,
   keywords: page.keywords,
-  alternates: { canonical: "/sadt" },
-  openGraph: {
-    title: page.seoTitle,
-    description: page.seoDescription,
-    url: "/sadt",
-    siteName: "Yago",
-    type: "website",
-  },
-};
+  path: "/sadt",
+});
 
 export default async function SadtPage() {
   const ufRate = await getDailyUfRate();

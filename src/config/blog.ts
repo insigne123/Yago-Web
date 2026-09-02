@@ -15,11 +15,18 @@ export type BlogPost = {
   image: string;
   category: string;
   date: string; // ISO
+  modifiedDate?: string; // ISO
   readingTime: string;
   keywords: string[];
   intro: string;
   sections: BlogSection[];
   conclusion: string;
+  sources?: { title: string; url: string }[];
+};
+
+export const BLOG_AUTHOR = {
+  name: "Equipo YAGO",
+  role: "Automatización de procesos e IA aplicada a operaciones",
 };
 
 export const BLOG_POSTS: BlogPost[] = [
@@ -33,6 +40,7 @@ export const BLOG_POSTS: BlogPost[] = [
     image: "/images/blog-automatizacion-ia.png",
     category: "Fundamentos",
     date: "2026-06-24",
+    modifiedDate: "2026-09-01",
     readingTime: "6 min",
     keywords: ["automatización de procesos", "IA para empresas", "automatización con IA", "procesos empresariales"],
     intro:
@@ -66,17 +74,22 @@ export const BLOG_POSTS: BlogPost[] = [
     ],
     conclusion:
       "La automatización con IA es hoy la palanca de eficiencia más accesible para equipos de operaciones, backoffice y finanzas. La clave está en partir por procesos de alto volumen y reglas claras, medir el ahorro en horas-hombre y escalar desde ahí.",
+    sources: [
+      { title: "NIST AI Risk Management Framework", url: "https://www.nist.gov/itl/ai-risk-management-framework" },
+      { title: "OECD AI Principles", url: "https://oecd.ai/en/ai-principles" },
+    ],
   },
   {
     slug: "como-calcular-el-roi-de-automatizar-procesos",
     title: "Cómo calcular el ROI de automatizar un proceso paso a paso",
     description:
-      "Aprende a calcular el retorno de inversión (ROI) de automatizar un proceso: fórmula, variables clave, ejemplo real y errores comunes al estimar el ahorro.",
+      "Aprende a calcular el retorno de inversión (ROI) de automatizar un proceso: fórmula, variables clave, ejemplo ilustrativo y errores comunes al estimar el ahorro.",
     excerpt:
       "La fórmula práctica para saber si automatizar un proceso se paga solo: horas ahorradas, costo de errores y un ejemplo con números reales.",
     image: "/images/blog-roi-automatizacion.png",
     category: "Negocio",
     date: "2026-06-17",
+    modifiedDate: "2026-09-01",
     readingTime: "7 min",
     keywords: ["ROI automatización", "retorno de inversión", "ahorro horas hombre", "costo automatización"],
     intro:
@@ -91,17 +104,17 @@ export const BLOG_POSTS: BlogPost[] = [
         ],
       },
       {
-        heading: "Ejemplo real: digitación de facturas",
+        heading: "Ejemplo ilustrativo: digitación de facturas",
         paragraphs: [
-          "Un equipo de backoffice procesa 800 facturas al mes. Cada una toma 6 minutos entre digitación y validación: 80 horas al mes. A un costo de $12.000 CLP por hora, son $960.000 mensuales solo en digitación.",
-          "Con OCR + validación automática, el tiempo por factura baja a menos de 1 minuto de revisión. El ahorro supera las 65 horas mensuales, y el proyecto típicamente se paga entre el segundo y cuarto mes.",
+          "Supongamos que un equipo de backoffice procesa 800 facturas al mes. Si cada una toma 6 minutos entre digitación y validación, el proceso ocupa 80 horas mensuales. Con un costo interno supuesto de $12.000 CLP por hora, la digitación representa $960.000 mensuales.",
+          "El ahorro no debe asumirse: se calcula midiendo cuánto baja el tiempo de revisión en un piloto y comparando ese resultado con el costo total de implementación, soporte y consumo. El periodo de recuperación depende de esa medición.",
         ],
       },
       {
         heading: "Errores comunes al estimar",
         paragraphs: ["Al calcular el retorno, evita estas trampas frecuentes:"],
         bullets: [
-          "Ignorar el costo del retrabajo: cada error manual cuesta 3–5 veces más que la tarea original",
+          "Ignorar el costo del retrabajo y no medir cuánto tiempo ocupa corregir cada error",
           "No valorizar el tiempo del equipo senior que revisa y corrige",
           "Medir solo el ahorro directo y olvidar la capacidad liberada para tareas de mayor valor",
           "Subestimar el costo de oportunidad de reportes lentos o datos atrasados",
@@ -109,7 +122,7 @@ export const BLOG_POSTS: BlogPost[] = [
       },
     ],
     conclusion:
-      "Si un proceso consume más de 20 horas mensuales del equipo y tiene reglas claras, casi siempre el ROI de automatizarlo es positivo dentro del primer año. El primer paso es medir: sin línea base, no hay caso de negocio.",
+      "Un proceso de alto volumen y reglas claras merece evaluación, pero el ROI no debe presumirse. El primer paso es medir: sin línea base y un piloto comparable, no hay caso de negocio verificable.",
   },
   {
     slug: "ocr-con-ia-digitalizar-documentos",
@@ -121,6 +134,7 @@ export const BLOG_POSTS: BlogPost[] = [
     image: "/images/blog-ocr-ia.png",
     category: "Tecnología",
     date: "2026-06-10",
+    modifiedDate: "2026-09-01",
     readingTime: "6 min",
     keywords: ["OCR con IA", "digitalización de documentos", "extracción de datos", "procesamiento de facturas"],
     intro:
@@ -129,7 +143,7 @@ export const BLOG_POSTS: BlogPost[] = [
       {
         heading: "Qué cambió con la IA",
         paragraphs: [
-          "Los modelos actuales de visión y lenguaje procesan documentos escaneados, fotos de celular y formatos irregulares con precisión sobre el 95% en campos clave. Ya no necesitas plantillas rígidas por cada proveedor.",
+          "Los modelos actuales de visión y lenguaje pueden procesar documentos escaneados, fotos de celular y formatos irregulares sin depender siempre de una plantilla rígida. La precisión varía por campo, calidad de imagen, idioma y tipo documental, por lo que debe medirse con una muestra representativa.",
           "Además, la IA valida el contexto: detecta montos inconsistentes, fechas imposibles o campos faltantes, y deriva esos casos a revisión humana en lugar de ingresarlos con errores.",
         ],
       },
@@ -152,7 +166,11 @@ export const BLOG_POSTS: BlogPost[] = [
       },
     ],
     conclusion:
-      "Si tu equipo digita datos desde documentos más de una hora al día, el OCR con IA es probablemente el quick win más rápido de implementar: los proyectos típicos están productivos en 2 a 4 semanas.",
+      "Si tu equipo digita datos desde documentos todos los días, OCR es un candidato razonable para un piloto. El plazo de puesta en marcha depende de la variedad documental, las validaciones y las integraciones necesarias.",
+    sources: [
+      { title: "Google Cloud Document AI documentation", url: "https://cloud.google.com/document-ai/docs" },
+      { title: "Azure AI Document Intelligence documentation", url: "https://learn.microsoft.com/azure/ai-services/document-intelligence/" },
+    ],
   },
   {
     slug: "agentes-de-ia-para-empresas",
@@ -164,6 +182,7 @@ export const BLOG_POSTS: BlogPost[] = [
     image: "/images/blog-agentes-ia.png",
     category: "Tecnología",
     date: "2026-06-03",
+    modifiedDate: "2026-09-01",
     readingTime: "7 min",
     keywords: ["agentes de IA", "agentes inteligentes", "IA empresarial", "asistentes virtuales empresas"],
     intro:
@@ -196,25 +215,29 @@ export const BLOG_POSTS: BlogPost[] = [
     ],
     conclusion:
       "Los agentes de IA son la evolución natural de la automatización: útiles cuando la tarea requiere entender contexto y tomar decisiones simples. Parte con un caso acotado, mide, y expande el alcance con evidencia.",
+    sources: [
+      { title: "NIST AI Risk Management Framework", url: "https://www.nist.gov/itl/ai-risk-management-framework" },
+    ],
   },
   {
     slug: "automatizacion-para-pymes-por-donde-partir",
     title: "Automatización para pymes: por dónde partir sin sobre-invertir",
     description:
-      "Guía práctica de automatización para pymes: los 5 procesos con mejor retorno, cuánto cuesta realmente y cómo partir con un piloto de bajo riesgo.",
+      "Guía práctica de automatización para pymes: cinco procesos candidatos, cómo evaluar el costo y cómo partir con un piloto de bajo riesgo.",
     excerpt:
       "No necesitas un ERP nuevo ni un equipo de TI: los 5 procesos donde una pyme obtiene retorno más rápido al automatizar.",
     image: "/images/blog-procesos-pyme.png",
     category: "Negocio",
     date: "2026-05-27",
+    modifiedDate: "2026-09-01",
     readingTime: "6 min",
     keywords: ["automatización pymes", "digitalización pyme", "procesos pyme", "eficiencia operacional"],
     intro:
       "La automatización dejó de ser exclusiva de grandes empresas. Hoy una pyme puede automatizar procesos clave con herramientas cloud y modelos de IA, sin proyectos millonarios ni equipos técnicos internos. La clave: partir por el proceso correcto.",
     sections: [
       {
-        heading: "Los 5 procesos con mejor retorno en pymes",
-        paragraphs: ["Según lo que vemos en terreno, estos procesos pagan la inversión más rápido:"],
+        heading: "Cinco procesos que conviene evaluar primero",
+        paragraphs: ["Estos procesos suelen ser buenos candidatos cuando tienen volumen, reglas claras y una línea base medible:"],
         bullets: [
           "Registro de facturas y conciliación: de horas de digitación a revisión de excepciones",
           "Cotizaciones y seguimiento comercial: respuestas en minutos, no días",
@@ -227,19 +250,22 @@ export const BLOG_POSTS: BlogPost[] = [
         heading: "Cuánto cuesta realmente",
         paragraphs: [
           "Una automatización acotada (un proceso, integraciones estándar) parte típicamente en el rango de un proyecto de semanas, no de meses. El costo relevante no es la herramienta: es el diseño del flujo y las integraciones con lo que ya usas.",
-          "La regla práctica: si el proceso consume más de 20 horas al mes del equipo, la automatización casi siempre se paga dentro del primer año.",
+          "Las horas mensuales ayudan a priorizar, pero no bastan para prometer retorno. También deben medirse errores, esperas, excepciones, costo de integración y mantenimiento.",
         ],
       },
       {
         heading: "Cómo partir con bajo riesgo",
         paragraphs: [
-          "Evita el error de intentar automatizar todo de una vez. El camino probado: elige un proceso doloroso y medible, implementa un piloto en 2–4 semanas, mide el ahorro real, y recién entonces escala al siguiente proceso.",
+          "Evita el error de intentar automatizar todo de una vez. El camino recomendado es elegir un proceso doloroso y medible, implementar un piloto acotado, medir el cambio real y recién entonces escalar al siguiente proceso.",
           "Exige entregables concretos en cada etapa: blueprint del flujo, MVP con datos reales y documentación operativa. Sin caja negra.",
         ],
       },
     ],
     conclusion:
       "Para una pyme, automatizar bien es cuestión de foco: un proceso a la vez, con retorno medido. El piloto correcto genera evidencia y financia el siguiente paso.",
+    sources: [
+      { title: "Digitaliza tu Pyme, Ministerio de Economía de Chile", url: "https://www.digitalizatupyme.cl/" },
+    ],
   },
   {
     slug: "herramientas-automatizacion-n8n-make-ia",
@@ -251,6 +277,7 @@ export const BLOG_POSTS: BlogPost[] = [
     image: "/images/blog-herramientas.png",
     category: "Tecnología",
     date: "2026-05-20",
+    modifiedDate: "2026-09-01",
     readingTime: "8 min",
     keywords: ["n8n", "Make", "herramientas automatización", "integración de sistemas", "workflows"],
     intro:
@@ -284,7 +311,11 @@ export const BLOG_POSTS: BlogPost[] = [
       },
     ],
     conclusion:
-      "Las herramientas importan menos que el diseño: un flujo bien diseñado en n8n o Make, con IA en los puntos correctos y manejo de errores serio, opera por años con mantención mínima.",
+      "Las herramientas importan menos que el diseño: un flujo con IA en los puntos correctos, manejo de errores explícito y documentación clara es más fácil de operar, auditar y mantener.",
+    sources: [
+      { title: "n8n documentation", url: "https://docs.n8n.io/" },
+      { title: "Make Help Center", url: "https://help.make.com/" },
+    ],
   },
 ];
 

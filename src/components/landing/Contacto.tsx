@@ -5,7 +5,8 @@ import Link from "next/link";
 import { useToast } from "@/hooks/use-toast";
 import { COMPANY } from "@/config/site";
 import { track } from "@/lib/analytics";
-import { useAttribution } from "@/lib/attribution";
+import { AttributionFields } from "@/components/forms/AttributionFields";
+import { LeadSuccess } from "@/components/forms/LeadSuccess";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -24,7 +25,7 @@ export function Contacto() {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const [started, setStarted] = useState(false);
-  const attribution = useAttribution();
+  const [leadId, setLeadId] = useState("");
 
   function markStart() {
     if (started) return;
@@ -34,6 +35,7 @@ export function Contacto() {
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setLeadId("");
     setLoading(true);
     const form = e.currentTarget;
     const formData = new FormData(form);
@@ -72,7 +74,8 @@ export function Contacto() {
       }
 
       form.reset();
-      track("Contact Form Success", { position: "contact_section" });
+      setLeadId(resData.leadId || "sin-referencia");
+      track("Contact Form Success", { position: "contact_section", lead_id: resData.leadId });
       toast({ title: "¡Mensaje enviado!", description: "Te responderemos muy pronto." });
     } catch (err: any) {
       if (!errorTracked) {
@@ -146,27 +149,9 @@ export function Contacto() {
             <CardContent>
               <form onSubmit={onSubmit} onFocusCapture={markStart} className="grid gap-4">
                 {/* Honeypot field for spam protection */}
-                <input type="text" name="hp" className="hidden" />
+                <input type="text" name="hp" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden="true" />
                 <input type="hidden" name="topic" value="Sesion de descubrimiento" />
-
-                {/* Attribution (first touch / last touch) */}
-                <input type="hidden" name="ft_utm_source" value={attribution?.first.utm_source || ""} />
-                <input type="hidden" name="ft_utm_medium" value={attribution?.first.utm_medium || ""} />
-                <input type="hidden" name="ft_utm_campaign" value={attribution?.first.utm_campaign || ""} />
-                <input type="hidden" name="ft_utm_term" value={attribution?.first.utm_term || ""} />
-                <input type="hidden" name="ft_utm_content" value={attribution?.first.utm_content || ""} />
-                <input type="hidden" name="ft_referrer" value={attribution?.first.referrer || ""} />
-                <input type="hidden" name="ft_landing" value={attribution?.first.landing || ""} />
-                <input type="hidden" name="ft_ts" value={attribution?.first.ts || ""} />
-
-                <input type="hidden" name="lt_utm_source" value={attribution?.last.utm_source || ""} />
-                <input type="hidden" name="lt_utm_medium" value={attribution?.last.utm_medium || ""} />
-                <input type="hidden" name="lt_utm_campaign" value={attribution?.last.utm_campaign || ""} />
-                <input type="hidden" name="lt_utm_term" value={attribution?.last.utm_term || ""} />
-                <input type="hidden" name="lt_utm_content" value={attribution?.last.utm_content || ""} />
-                <input type="hidden" name="lt_referrer" value={attribution?.last.referrer || ""} />
-                <input type="hidden" name="lt_landing" value={attribution?.last.landing || ""} />
-                <input type="hidden" name="lt_ts" value={attribution?.last.ts || ""} />
+                <AttributionFields />
 
                 <div className="grid gap-2">
                   <Label htmlFor="nombre" className="text-slate-800">Nombre</Label>
@@ -258,6 +243,7 @@ export function Contacto() {
                   {loading ? "Enviando..." : "Coordinar sesion"}
                 </Button>
               </form>
+              {leadId ? <LeadSuccess leadId={leadId} message="Revisaremos el proceso y te responderemos con el siguiente paso recomendado." /> : null}
               <p className="mt-3 text-xs text-slate-600">
                 Al enviar aceptas nuestra <Link href="/privacidad" className="underline hover:text-foreground">Política de Privacidad</Link>.
               </p>

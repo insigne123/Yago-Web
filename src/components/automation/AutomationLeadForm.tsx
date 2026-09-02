@@ -4,7 +4,8 @@ import { useId, useState } from "react";
 import type { AutomationPage } from "@/config/automation-pages";
 import { useToast } from "@/hooks/use-toast";
 import { track } from "@/lib/analytics";
-import { useAttribution } from "@/lib/attribution";
+import { AttributionFields } from "@/components/forms/AttributionFields";
+import { LeadSuccess } from "@/components/forms/LeadSuccess";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -23,9 +24,9 @@ type AutomationLeadFormProps = {
 
 export function AutomationLeadForm({ page }: AutomationLeadFormProps) {
   const { toast } = useToast();
-  const attribution = useAttribution();
   const [loading, setLoading] = useState(false);
   const [started, setStarted] = useState(false);
+  const [leadId, setLeadId] = useState("");
   const id = useId();
 
   function markStart() {
@@ -36,24 +37,26 @@ export function AutomationLeadForm({ page }: AutomationLeadFormProps) {
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setLeadId("");
     setLoading(true);
 
     const form = e.currentTarget;
     const formData = new FormData(form);
     const monthlyVolume = String(formData.get("volumen_mensual") || "").trim();
+    const process = String(formData.get("proceso_principal") || "").trim();
     const notes = String(formData.get("mensaje") || "").trim();
 
-    if (!notes) {
-      const generatedMessage = [
-        `Lead desde landing ${page.form.topic}.`,
-        monthlyVolume ? `${page.form.volumeLabel}: ${monthlyVolume}` : "",
-        "Solicita demo comercial.",
-      ]
-        .filter(Boolean)
-        .join("\n");
+    const generatedMessage = [
+      `Lead desde landing ${page.form.topic}.`,
+      process ? `${page.form.processLabel}: ${process}` : "",
+      monthlyVolume ? `${page.form.volumeLabel}: ${monthlyVolume}` : "",
+      notes,
+      "Solicita demo comercial.",
+    ]
+      .filter(Boolean)
+      .join("\n");
 
-      formData.set("mensaje", generatedMessage);
-    }
+    formData.set("mensaje", generatedMessage);
 
     formData.set("topic", page.form.topic);
 
@@ -82,7 +85,8 @@ export function AutomationLeadForm({ page }: AutomationLeadFormProps) {
       }
 
       form.reset();
-      track("Automation Lead Form Success", { position: "automation_form", slug: page.slug, topic: page.form.topic });
+      setLeadId(resData.leadId || "sin-referencia");
+      track("Automation Lead Form Success", { position: "automation_form", slug: page.slug, topic: page.form.topic, lead_id: resData.leadId });
       toast({
         title: "Solicitud enviada",
         description: "Te responderemos para coordinar la demo.",
@@ -115,26 +119,9 @@ export function AutomationLeadForm({ page }: AutomationLeadFormProps) {
       </CardHeader>
       <CardContent>
         <form onSubmit={onSubmit} onFocusCapture={markStart} className="grid gap-4">
-          <input type="text" name="hp" className="hidden" />
+          <input type="text" name="hp" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden="true" />
           <input type="hidden" name="topic" value={page.form.topic} />
-
-          <input type="hidden" name="ft_utm_source" value={attribution?.first.utm_source || ""} />
-          <input type="hidden" name="ft_utm_medium" value={attribution?.first.utm_medium || ""} />
-          <input type="hidden" name="ft_utm_campaign" value={attribution?.first.utm_campaign || ""} />
-          <input type="hidden" name="ft_utm_term" value={attribution?.first.utm_term || ""} />
-          <input type="hidden" name="ft_utm_content" value={attribution?.first.utm_content || ""} />
-          <input type="hidden" name="ft_referrer" value={attribution?.first.referrer || ""} />
-          <input type="hidden" name="ft_landing" value={attribution?.first.landing || ""} />
-          <input type="hidden" name="ft_ts" value={attribution?.first.ts || ""} />
-
-          <input type="hidden" name="lt_utm_source" value={attribution?.last.utm_source || ""} />
-          <input type="hidden" name="lt_utm_medium" value={attribution?.last.utm_medium || ""} />
-          <input type="hidden" name="lt_utm_campaign" value={attribution?.last.utm_campaign || ""} />
-          <input type="hidden" name="lt_utm_term" value={attribution?.last.utm_term || ""} />
-          <input type="hidden" name="lt_utm_content" value={attribution?.last.utm_content || ""} />
-          <input type="hidden" name="lt_referrer" value={attribution?.last.referrer || ""} />
-          <input type="hidden" name="lt_landing" value={attribution?.last.landing || ""} />
-          <input type="hidden" name="lt_ts" value={attribution?.last.ts || ""} />
+          <AttributionFields />
 
           <div className="grid gap-4 md:grid-cols-2">
             <div className="grid gap-2">
@@ -160,6 +147,20 @@ export function AutomationLeadForm({ page }: AutomationLeadFormProps) {
                 className="rounded-2xl border-slate-900/10 bg-white/[0.04] text-slate-900 placeholder:text-slate-500"
               />
             </div>
+          </div>
+
+          <div className="grid gap-2">
+            <Label htmlFor={`${id}-process`} className="text-slate-800">{page.form.processLabel}</Label>
+            <select
+              id={`${id}-process`}
+              name="proceso_principal"
+              required
+              defaultValue=""
+              className="h-11 rounded-2xl border border-slate-900/10 bg-white/[0.04] px-3 text-sm text-slate-900 outline-none transition-colors focus:border-sky-200/40 focus:ring-2 focus:ring-sky-200/30"
+            >
+              <option value="" disabled>Selecciona una opción</option>
+              {page.form.processOptions.map((option) => <option key={option} value={option}>{option}</option>)}
+            </select>
           </div>
 
           <div className="grid gap-4 md:grid-cols-2">
@@ -218,6 +219,7 @@ export function AutomationLeadForm({ page }: AutomationLeadFormProps) {
             {loading ? "Enviando..." : page.form.submitLabel}
           </Button>
         </form>
+        {leadId ? <LeadSuccess leadId={leadId} message="Te contactaremos para validar alcance, volumen y coordinar la demo." /> : null}
       </CardContent>
     </Card>
   );

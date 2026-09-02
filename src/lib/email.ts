@@ -87,6 +87,7 @@ export function escapeHTML(input: string) {
 }
 
 export function buildContactTemplate(data: {
+  leadId: string;
   name: string;
   email: string;
   phone?: string;
@@ -103,6 +104,9 @@ export function buildContactTemplate(data: {
       utm_campaign?: string;
       utm_term?: string;
       utm_content?: string;
+      gclid?: string;
+      fbclid?: string;
+      msclkid?: string;
       referrer?: string;
       landing?: string;
       ts?: string;
@@ -113,6 +117,9 @@ export function buildContactTemplate(data: {
       utm_campaign?: string;
       utm_term?: string;
       utm_content?: string;
+      gclid?: string;
+      fbclid?: string;
+      msclkid?: string;
       referrer?: string;
       landing?: string;
       ts?: string;
@@ -124,6 +131,7 @@ export function buildContactTemplate(data: {
   };
 }) {
   const safe = {
+    leadId: escapeHTML(data.leadId),
     name: escapeHTML(data.name || ""),
     email: escapeHTML(data.email || ""),
     phone: escapeHTML(data.phone || ""),
@@ -139,6 +147,9 @@ export function buildContactTemplate(data: {
     ft_utm_campaign: escapeHTML(data.attribution?.firstTouch?.utm_campaign || ""),
     ft_utm_term: escapeHTML(data.attribution?.firstTouch?.utm_term || ""),
     ft_utm_content: escapeHTML(data.attribution?.firstTouch?.utm_content || ""),
+    ft_gclid: escapeHTML(data.attribution?.firstTouch?.gclid || ""),
+    ft_fbclid: escapeHTML(data.attribution?.firstTouch?.fbclid || ""),
+    ft_msclkid: escapeHTML(data.attribution?.firstTouch?.msclkid || ""),
     ft_referrer: escapeHTML(data.attribution?.firstTouch?.referrer || ""),
     ft_landing: escapeHTML(data.attribution?.firstTouch?.landing || ""),
     ft_ts: escapeHTML(data.attribution?.firstTouch?.ts || ""),
@@ -148,6 +159,9 @@ export function buildContactTemplate(data: {
     lt_utm_campaign: escapeHTML(data.attribution?.lastTouch?.utm_campaign || ""),
     lt_utm_term: escapeHTML(data.attribution?.lastTouch?.utm_term || ""),
     lt_utm_content: escapeHTML(data.attribution?.lastTouch?.utm_content || ""),
+    lt_gclid: escapeHTML(data.attribution?.lastTouch?.gclid || ""),
+    lt_fbclid: escapeHTML(data.attribution?.lastTouch?.fbclid || ""),
+    lt_msclkid: escapeHTML(data.attribution?.lastTouch?.msclkid || ""),
     lt_referrer: escapeHTML(data.attribution?.lastTouch?.referrer || ""),
     lt_landing: escapeHTML(data.attribution?.lastTouch?.landing || ""),
     lt_ts: escapeHTML(data.attribution?.lastTouch?.ts || ""),
@@ -162,6 +176,9 @@ export function buildContactTemplate(data: {
     safe.ft_utm_campaign ||
     safe.ft_utm_term ||
     safe.ft_utm_content ||
+    safe.ft_gclid ||
+    safe.ft_fbclid ||
+    safe.ft_msclkid ||
     safe.ft_referrer ||
     safe.ft_landing ||
     safe.ft_ts
@@ -173,6 +190,9 @@ export function buildContactTemplate(data: {
     safe.lt_utm_campaign ||
     safe.lt_utm_term ||
     safe.lt_utm_content ||
+    safe.lt_gclid ||
+    safe.lt_fbclid ||
+    safe.lt_msclkid ||
     safe.lt_referrer ||
     safe.lt_landing ||
     safe.lt_ts
@@ -186,6 +206,7 @@ export function buildContactTemplate(data: {
     <p style="margin:0 0 16px">Has recibido un mensaje desde el formulario de Yago.</p>
     <table style="border-collapse:collapse;width:100%">
       <tbody>
+        <tr><td style="padding:6px 0;width:140px;color:#555">Lead ID</td><td>${safe.leadId}</td></tr>
         ${safe.topic ? `<tr><td style="padding:6px 0;width:140px;color:#555">Motivo</td><td>${safe.topic}</td></tr>` : ""}
         <tr><td style="padding:6px 0;width:140px;color:#555">Nombre</td><td>${safe.name}</td></tr>
         <tr><td style="padding:6px 0;color:#555">Email</td><td>${safe.email}</td></tr>
@@ -231,6 +252,9 @@ export function buildContactTemplate(data: {
           ${safe.ft_ts ? `<div><strong>TS:</strong> ${safe.ft_ts}</div>` : ""}
           ${safe.ft_landing ? `<div><strong>Landing:</strong> ${safe.ft_landing}</div>` : ""}
           ${safe.ft_referrer ? `<div><strong>Referrer:</strong> ${safe.ft_referrer}</div>` : ""}
+          ${safe.ft_gclid ? `<div><strong>gclid:</strong> ${safe.ft_gclid}</div>` : ""}
+          ${safe.ft_fbclid ? `<div><strong>fbclid:</strong> ${safe.ft_fbclid}</div>` : ""}
+          ${safe.ft_msclkid ? `<div><strong>msclkid:</strong> ${safe.ft_msclkid}</div>` : ""}
           ${
             safe.ft_utm_source ||
             safe.ft_utm_medium ||
@@ -251,6 +275,9 @@ export function buildContactTemplate(data: {
           ${safe.lt_ts ? `<div><strong>TS:</strong> ${safe.lt_ts}</div>` : ""}
           ${safe.lt_landing ? `<div><strong>Landing:</strong> ${safe.lt_landing}</div>` : ""}
           ${safe.lt_referrer ? `<div><strong>Referrer:</strong> ${safe.lt_referrer}</div>` : ""}
+          ${safe.lt_gclid ? `<div><strong>gclid:</strong> ${safe.lt_gclid}</div>` : ""}
+          ${safe.lt_fbclid ? `<div><strong>fbclid:</strong> ${safe.lt_fbclid}</div>` : ""}
+          ${safe.lt_msclkid ? `<div><strong>msclkid:</strong> ${safe.lt_msclkid}</div>` : ""}
           ${
             safe.lt_utm_source ||
             safe.lt_utm_medium ||
@@ -284,6 +311,7 @@ export function buildContactTemplate(data: {
   const text = `Nuevo contacto desde la web
 
 ${data.topic ? `Motivo: ${data.topic}\n` : ""}
+Lead ID: ${data.leadId}
 Nombre: ${data.name}
 Email: ${data.email}
 ${data.phone ? `Teléfono: ${data.phone}\n` : ""}${

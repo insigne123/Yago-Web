@@ -1,12 +1,14 @@
 "use client";
 
-import { useMemo, type ReactNode } from "react";
+import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ChevronDown, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetDescription,
   SheetHeader,
@@ -36,10 +38,20 @@ function isExternalHref(href: string) {
   return /^https?:\/\//.test(href);
 }
 
-function NavHref({ href, className, children }: { href: string; className: string; children: ReactNode }) {
+function NavHref({
+  href,
+  className,
+  children,
+  ariaCurrent,
+}: {
+  href: string;
+  className: string;
+  children: ReactNode;
+  ariaCurrent?: "page";
+}) {
   if (href.startsWith("#")) {
     return (
-      <a href={href} className={className}>
+      <a href={href} className={className} aria-current={ariaCurrent}>
         {children}
       </a>
     );
@@ -47,14 +59,14 @@ function NavHref({ href, className, children }: { href: string; className: strin
 
   if (isExternalHref(href)) {
     return (
-      <a href={href} className={className} target="_blank" rel="noreferrer">
+      <a href={href} className={className} target="_blank" rel="noreferrer" aria-current={ariaCurrent}>
         {children}
       </a>
     );
   }
 
   return (
-    <Link href={href} className={className}>
+    <Link href={href} className={className} aria-current={ariaCurrent}>
       {children}
     </Link>
   );
@@ -64,10 +76,18 @@ export function Navbar({
   links,
   ctaHref = "/#contacto",
   ctaLabel = "Contacto",
-  mobileDescription = "Elige entre apps listas, soluciones por problema, casos y contacto.",
+  mobileDescription = "Encuentra soluciones, productos, servicios, casos y recursos de YAGO.",
   homeHref = "/#inicio",
 }: NavbarProps = {}) {
-  const nav = useMemo(() => links ?? navLinks, [links]);
+  const pathname = usePathname();
+  const nav = links ?? navLinks;
+  const isCurrent = (href: string) => href.startsWith("/") && !href.startsWith("/#") && pathname === href;
+  const isActive = (item: NavbarLink) => {
+    const matches = (href: string) =>
+      href.startsWith("/") && !href.startsWith("/#") && (pathname === href || pathname.startsWith(`${href}/`));
+
+    return matches(item.href) || Boolean(item.children?.some((child) => matches(child.href)));
+  };
 
   return (
     <header className="sticky top-0 z-50 px-4 pt-3 md:pt-4">
@@ -101,14 +121,16 @@ export function Navbar({
             </span>
           </NavHref>
 
-          <nav className="hidden min-w-0 items-center gap-1 rounded-full border border-slate-900/10 bg-slate-900/5 px-2 py-2 lg:flex">
+          <nav aria-label="Navegación principal" className="hidden min-w-0 items-center gap-1 rounded-full border border-slate-900/10 bg-slate-900/5 px-2 py-2 lg:flex">
             {nav.map((item) => {
               const section = item.href.replace(/^\/?#/, "");
+              const active = isActive(item);
               return (
                 <div key={item.href} className="group relative">
                   <NavHref
                     href={item.href}
-                    className={`navlink-gradient inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-sm font-medium text-slate-600 transition-colors hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-200/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background xl:px-4 plausible-event-name=Nav+Click plausible-event-location=navbar plausible-event-section=${section}`}
+                    ariaCurrent={isCurrent(item.href) ? "page" : undefined}
+                    className={`navlink-gradient inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-sm font-medium transition-colors hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-200/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background xl:px-4 ${active ? "bg-slate-900/[0.08] text-slate-950" : "text-slate-600"} plausible-event-name=Nav+Click plausible-event-location=navbar plausible-event-section=${section}`}
                   >
                     {item.name}
                     {item.children?.length ? <ChevronDown className="h-3.5 w-3.5 text-slate-500 transition group-hover:text-sky-700" aria-hidden="true" /> : null}
@@ -118,13 +140,14 @@ export function Navbar({
                     <div className="pointer-events-none absolute left-1/2 top-full z-[60] mt-3 w-[24rem] -translate-x-1/2 translate-y-2 rounded-[1.35rem] border border-slate-900/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.97),rgba(246,250,254,1))] p-3 text-left opacity-0 shadow-[0_22px_70px_rgba(30,58,95,0.14)] ring-1 ring-sky-200/10 transition-[opacity,transform] duration-200 ease-out group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:translate-y-0 group-focus-within:opacity-100">
                       <div className="absolute left-1/2 top-[-0.35rem] h-3 w-3 -translate-x-1/2 rotate-45 border-l border-t border-slate-900/10 bg-white" aria-hidden="true" />
                       <div className="px-2 pb-2 text-[11px] font-medium uppercase tracking-[0.18em] text-sky-700">
-                        Apps listas
+                         {item.eyebrow ?? item.name}
                       </div>
                       <div className="grid gap-2">
                         {item.children.map((child) => (
                           <NavHref
                             key={child.href}
                             href={child.href}
+                            ariaCurrent={isCurrent(child.href) ? "page" : undefined}
                             className="rounded-[1.05rem] border border-slate-900/10 bg-white/[0.035] px-4 py-3 transition-colors hover:border-sky-200/20 hover:bg-sky-300/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-200/70"
                           >
                             <span className="block text-sm font-semibold text-slate-900">{child.name}</span>
@@ -196,7 +219,7 @@ export function Navbar({
             </SheetTrigger>
             <SheetContent
               side="right"
-              className="w-[300px] border-slate-900/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.97),rgba(246,250,254,1))] p-0 text-slate-900"
+              className="w-[min(22rem,calc(100vw-1rem))] overflow-y-auto border-slate-900/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.97),rgba(246,250,254,1))] p-0 text-slate-900"
             >
               <SheetHeader className="border-b border-slate-900/10 px-6 py-5 text-left">
                 <SheetTitle className="text-slate-900">Navegacion</SheetTitle>
@@ -205,17 +228,18 @@ export function Navbar({
                 </SheetDescription>
               </SheetHeader>
 
-              <nav className="flex flex-col gap-1 px-4 py-4">
+              <nav aria-label="Navegación principal móvil" className="flex flex-col gap-1 px-4 py-4">
                 {nav.map((item) => {
                   const section = item.href.replace(/^\/?#/, "");
 
                   if (item.children?.length) {
                     return (
                       <div key={item.href} className="rounded-[1.2rem] border border-slate-900/10 bg-white/[0.025] p-1">
-                        <SheetTrigger asChild>
+                        <SheetClose asChild>
                           {item.href.startsWith("#") ? (
                             <a
                               href={item.href}
+                              aria-current={isCurrent(item.href) ? "page" : undefined}
                               className={`block rounded-2xl px-4 py-3 text-sm text-slate-800 transition hover:bg-slate-50 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-200/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background plausible-event-name=Nav+Click plausible-event-location=navbar_mobile plausible-event-section=${section}`}
                             >
                               <span className="block font-medium text-slate-900">{item.name}</span>
@@ -224,27 +248,29 @@ export function Navbar({
                           ) : (
                             <Link
                               href={item.href}
+                              aria-current={isCurrent(item.href) ? "page" : undefined}
                               className={`block rounded-2xl px-4 py-3 text-sm text-slate-800 transition hover:bg-slate-50 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-200/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background plausible-event-name=Nav+Click plausible-event-location=navbar_mobile plausible-event-section=${section}`}
                             >
                               <span className="block font-medium text-slate-900">{item.name}</span>
                               {item.description ? <span className="mt-1 block text-xs leading-relaxed text-slate-600">{item.description}</span> : null}
                             </Link>
                           )}
-                        </SheetTrigger>
+                        </SheetClose>
 
                         <div className="grid gap-1 px-2 pb-2">
                           {item.children.map((child) => {
                             const childSection = child.href.replace(/^\/?#/, "");
                             return (
-                              <SheetTrigger asChild key={child.href}>
+                              <SheetClose asChild key={child.href}>
                                 <Link
                                   href={child.href}
+                                  aria-current={isCurrent(child.href) ? "page" : undefined}
                                   className={`rounded-2xl border border-slate-900/10 bg-slate-900/5 px-3 py-2.5 text-sm text-slate-800 transition hover:bg-slate-50 hover:text-slate-900 plausible-event-name=Nav+Click plausible-event-location=navbar_mobile plausible-event-section=${childSection}`}
                                 >
                                   <span className="block font-medium text-slate-900">{child.name}</span>
                                   {child.description ? <span className="mt-1 block text-xs leading-relaxed text-slate-600">{child.description}</span> : null}
                                 </Link>
-                              </SheetTrigger>
+                              </SheetClose>
                             );
                           })}
                         </div>
@@ -253,10 +279,11 @@ export function Navbar({
                   }
 
                   return (
-                    <SheetTrigger asChild key={item.href}>
+                    <SheetClose asChild key={item.href}>
                       {item.href.startsWith("#") ? (
                         <a
                           href={item.href}
+                          aria-current={isCurrent(item.href) ? "page" : undefined}
                           className={`rounded-2xl px-4 py-3 text-sm text-slate-800 transition hover:bg-slate-50 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-200/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background plausible-event-name=Nav+Click plausible-event-location=navbar_mobile plausible-event-section=${section}`}
                         >
                           <span className="block font-medium text-slate-900">{item.name}</span>
@@ -267,6 +294,7 @@ export function Navbar({
                       ) : (
                         <Link
                           href={item.href}
+                          aria-current={isCurrent(item.href) ? "page" : undefined}
                           className={`rounded-2xl px-4 py-3 text-sm text-slate-800 transition hover:bg-slate-50 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-200/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background plausible-event-name=Nav+Click plausible-event-location=navbar_mobile plausible-event-section=${section}`}
                         >
                           <span className="block font-medium text-slate-900">{item.name}</span>
@@ -275,7 +303,7 @@ export function Navbar({
                           ) : null}
                         </Link>
                       )}
-                    </SheetTrigger>
+                    </SheetClose>
                   );
                 })}
               </nav>

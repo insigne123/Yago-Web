@@ -1,11 +1,12 @@
 import { NextResponse } from "next/server";
 import { buildContactTemplate, sendEmail } from "@/lib/email";
 import { EmailFormPayload } from "@/types/contact";
+import { checkRateLimit } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-
+const MAX_CONTACT_BODY_BYTES = 64 * 1024;
 function isEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
@@ -49,6 +50,9 @@ async function readBody(req: Request): Promise<EmailFormPayload> {
       ft_utm_campaign: pick(body as any, ["ft_utm_campaign"]),
       ft_utm_term: pick(body as any, ["ft_utm_term"]),
       ft_utm_content: pick(body as any, ["ft_utm_content"]),
+      ft_gclid: pick(body as any, ["ft_gclid"]),
+      ft_fbclid: pick(body as any, ["ft_fbclid"]),
+      ft_msclkid: pick(body as any, ["ft_msclkid"]),
       ft_referrer: pick(body as any, ["ft_referrer"]),
       ft_landing: pick(body as any, ["ft_landing"]),
       ft_ts: pick(body as any, ["ft_ts"]),
@@ -58,6 +62,9 @@ async function readBody(req: Request): Promise<EmailFormPayload> {
       lt_utm_campaign: pick(body as any, ["lt_utm_campaign"]),
       lt_utm_term: pick(body as any, ["lt_utm_term"]),
       lt_utm_content: pick(body as any, ["lt_utm_content"]),
+      lt_gclid: pick(body as any, ["lt_gclid"]),
+      lt_fbclid: pick(body as any, ["lt_fbclid"]),
+      lt_msclkid: pick(body as any, ["lt_msclkid"]),
       lt_referrer: pick(body as any, ["lt_referrer"]),
       lt_landing: pick(body as any, ["lt_landing"]),
       lt_ts: pick(body as any, ["lt_ts"]),
@@ -92,6 +99,9 @@ async function readBody(req: Request): Promise<EmailFormPayload> {
       ft_utm_campaign: get("ft_utm_campaign"),
       ft_utm_term: get("ft_utm_term"),
       ft_utm_content: get("ft_utm_content"),
+      ft_gclid: get("ft_gclid"),
+      ft_fbclid: get("ft_fbclid"),
+      ft_msclkid: get("ft_msclkid"),
       ft_referrer: get("ft_referrer"),
       ft_landing: get("ft_landing"),
       ft_ts: get("ft_ts"),
@@ -101,6 +111,9 @@ async function readBody(req: Request): Promise<EmailFormPayload> {
       lt_utm_campaign: get("lt_utm_campaign"),
       lt_utm_term: get("lt_utm_term"),
       lt_utm_content: get("lt_utm_content"),
+      lt_gclid: get("lt_gclid"),
+      lt_fbclid: get("lt_fbclid"),
+      lt_msclkid: get("lt_msclkid"),
       lt_referrer: get("lt_referrer"),
       lt_landing: get("lt_landing"),
       lt_ts: get("lt_ts"),
@@ -134,6 +147,9 @@ async function readBody(req: Request): Promise<EmailFormPayload> {
       ft_utm_campaign: get("ft_utm_campaign"),
       ft_utm_term: get("ft_utm_term"),
       ft_utm_content: get("ft_utm_content"),
+      ft_gclid: get("ft_gclid"),
+      ft_fbclid: get("ft_fbclid"),
+      ft_msclkid: get("ft_msclkid"),
       ft_referrer: get("ft_referrer"),
       ft_landing: get("ft_landing"),
       ft_ts: get("ft_ts"),
@@ -143,6 +159,9 @@ async function readBody(req: Request): Promise<EmailFormPayload> {
       lt_utm_campaign: get("lt_utm_campaign"),
       lt_utm_term: get("lt_utm_term"),
       lt_utm_content: get("lt_utm_content"),
+      lt_gclid: get("lt_gclid"),
+      lt_fbclid: get("lt_fbclid"),
+      lt_msclkid: get("lt_msclkid"),
       lt_referrer: get("lt_referrer"),
       lt_landing: get("lt_landing"),
       lt_ts: get("lt_ts"),
@@ -168,11 +187,27 @@ async function readBody(req: Request): Promise<EmailFormPayload> {
 
 export async function POST(req: Request) {
   try {
+    const rateLimit = checkRateLimit(req, { namespace: "contact", limit: 6, windowMs: 10 * 60 * 1000 });
+    if (!rateLimit.allowed) {
+      return NextResponse.json(
+        { ok: false, error: "Demasiadas solicitudes. Intenta nuevamente en unos minutos." },
+        { status: 429, headers: { "Retry-After": String(rateLimit.retryAfterSeconds), "Cache-Control": "no-store" } }
+      );
+    }
+
+    const contentLength = Number(req.headers.get("content-length") || 0);
+    if (Number.isFinite(contentLength) && contentLength > MAX_CONTACT_BODY_BYTES) {
+      return NextResponse.json(
+        { ok: false, error: "La solicitud es demasiado grande." },
+        { status: 413, headers: { "Cache-Control": "no-store" } }
+      );
+    }
+
     const data = await readBody(req);
 
     // honeypot: si viene relleno, respondemos ok pero no enviamos
     if (data.hp && data.hp.trim().length > 0) {
-      return NextResponse.json({ ok: true, message: "¡Mensaje enviado con éxito!" }, { status: 200 });
+      return NextResponse.json({ ok: true, message: "Mensaje recibido." }, { status: 200, headers: { "Cache-Control": "no-store" } });
     }
 
     const name = clampText(data.name, 120);
@@ -191,6 +226,9 @@ export async function POST(req: Request) {
       utm_campaign: clampText(data.ft_utm_campaign, 200),
       utm_term: clampText(data.ft_utm_term, 200),
       utm_content: clampText(data.ft_utm_content, 200),
+      gclid: clampText(data.ft_gclid, 300),
+      fbclid: clampText(data.ft_fbclid, 300),
+      msclkid: clampText(data.ft_msclkid, 300),
       referrer: clampText(data.ft_referrer, 800),
       landing: clampText(data.ft_landing, 500),
       ts: clampText(data.ft_ts, 60),
@@ -202,6 +240,9 @@ export async function POST(req: Request) {
       utm_campaign: clampText(data.lt_utm_campaign, 200),
       utm_term: clampText(data.lt_utm_term, 200),
       utm_content: clampText(data.lt_utm_content, 200),
+      gclid: clampText(data.lt_gclid, 300),
+      fbclid: clampText(data.lt_fbclid, 300),
+      msclkid: clampText(data.lt_msclkid, 300),
       referrer: clampText(data.lt_referrer, 800),
       landing: clampText(data.lt_landing, 500),
       ts: clampText(data.lt_ts, 60),
@@ -219,6 +260,8 @@ export async function POST(req: Request) {
         { status: 400 }
       );
     }
+
+    const leadId = crypto.randomUUID();
 
     const TO =
       process.env.CONTACT_TO ||
@@ -240,8 +283,9 @@ export async function POST(req: Request) {
         );
     }
 
-    const subject = `📩 [Contacto Yago${topic ? ` | ${topic}` : ""}] ${name} — ${company || "sin empresa"}`;
+    const subject = `[Contacto YAGO${topic ? ` | ${topic}` : ""}] ${name} — ${company || "sin empresa"} — ${leadId}`;
     const { html, text } = buildContactTemplate({
+      leadId,
       name,
       email,
       phone,
@@ -269,12 +313,19 @@ export async function POST(req: Request) {
 
     const webhookUrl = (process.env.CONTACT_WEBHOOK_URL || "").trim();
     if (webhookUrl) {
+      const webhookController = new AbortController();
+      const webhookTimeout = setTimeout(() => webhookController.abort(), 5_000);
       try {
-        await fetch(webhookUrl, {
+        const webhookToken = (process.env.CONTACT_WEBHOOK_TOKEN || "").trim();
+        const webhookResponse = await fetch(webhookUrl, {
           method: "POST",
-          headers: { "content-type": "application/json" },
+          headers: {
+            "content-type": "application/json",
+            ...(webhookToken ? { authorization: `Bearer ${webhookToken}` } : {}),
+          },
           body: JSON.stringify({
             type: "contact_lead",
+            leadId,
             receivedAt: new Date().toISOString(),
             lead: { name, email, phone, company, role, documentType, monthlyVolume, message, topic },
             attribution: { firstTouch: ft, lastTouch: lt },
@@ -283,13 +334,22 @@ export async function POST(req: Request) {
               referer: req.headers.get("referer"),
             },
           }),
+          signal: webhookController.signal,
         });
+        if (!webhookResponse.ok) {
+          throw new Error(`Webhook respondió ${webhookResponse.status}`);
+        }
       } catch (err: any) {
         console.error("[contact] webhook error:", err?.message || err);
+      } finally {
+        clearTimeout(webhookTimeout);
       }
     }
 
-    return NextResponse.json({ ok: true, message: "¡Mensaje enviado con éxito!" }, { status: 200 });
+    return NextResponse.json(
+      { ok: true, leadId, message: "Solicitud recibida." },
+      { status: 200, headers: { "Cache-Control": "no-store" } }
+    );
   } catch (err: any) {
     console.error("[contact] error:", err?.message || err);
     return NextResponse.json(

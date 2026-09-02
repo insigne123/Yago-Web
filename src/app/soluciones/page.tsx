@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Navbar } from "@/components/landing/Navbar";
@@ -6,15 +5,14 @@ import { Footer } from "@/components/landing/Footer";
 import { BrandStamp } from "@/components/BrandStamp";
 import { PRIMARY_CTA } from "@/config/site";
 import { SEO_PAGES } from "@/config/seo-pages";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Soluciones de automatizacion para operaciones, backoffice y finanzas | YAGO",
   description:
     "Soluciones de YAGO para equipos que buscan automatizacion de backoffice, finanzas y aprobaciones con foco en menos trabajo manual y mas control operativo.",
-  alternates: {
-    canonical: "/soluciones",
-  },
-};
+  path: "/soluciones",
+});
 
 export default function SolutionsIndexPage() {
   return (

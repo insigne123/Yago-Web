@@ -37,12 +37,12 @@ const toneClasses = {
   amber: {
     accent: "bg-amber-200",
     border: "border-amber-200/20",
-    panel: "bg-amber-200/10 text-amber-50",
+    panel: "bg-amber-100 text-amber-900",
   },
   mint: {
     accent: "bg-emerald-200",
     border: "border-emerald-200/20",
-    panel: "bg-emerald-300/10 text-emerald-50",
+    panel: "bg-emerald-100 text-emerald-900",
   },
 };
 
@@ -54,7 +54,7 @@ export function OcrMaster() {
           <Card className="overflow-hidden rounded-[2rem] border-slate-900/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.97),rgba(246,250,254,1))] shadow-[0_28px_100px_rgba(30,58,95,0.08)]">
               <CardHeader className="pb-4 md:pb-5">
                 <div className="flex flex-wrap items-center justify-between gap-3">
-                  <Badge variant="outline" className="border-amber-200/20 bg-amber-100/8 px-3 py-1 text-[11px] uppercase tracking-[0.16em] text-amber-700">
+                  <Badge variant="outline" className="border-amber-200/20 bg-amber-100/[0.08] px-3 py-1 text-[11px] uppercase tracking-[0.16em] text-amber-700">
                     {OCR_MASTER.badge}
                   </Badge>
                   <div className="flex items-center gap-3">
@@ -116,7 +116,7 @@ export function OcrMaster() {
 
           <Card className="overflow-hidden rounded-[2rem] border-slate-900/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.97),rgba(246,250,254,1))] shadow-[0_28px_100px_rgba(30,58,95,0.08)]">
               <CardHeader className="pb-4 md:pb-5">
-                <Badge variant="outline" className="w-fit border-sky-200/20 bg-sky-200/8 px-3 py-1 text-[11px] uppercase tracking-[0.16em] text-sky-700">
+                <Badge variant="outline" className="w-fit border-sky-200/20 bg-sky-200/[0.08] px-3 py-1 text-[11px] uppercase tracking-[0.16em] text-sky-700">
                   {OCR_MASTER.apiBadge}
                 </Badge>
                 <CardTitle className="mt-4 text-3xl text-slate-900">{OCR_MASTER.apiTitle}</CardTitle>
@@ -135,7 +135,7 @@ export function OcrMaster() {
                   </div>
                 ))}
 
-                <div className="rounded-[1.4rem] border border-amber-200/20 bg-amber-100/8 px-4 py-5">
+                <div className="rounded-[1.4rem] border border-amber-200/20 bg-amber-100/[0.08] px-4 py-5">
                   <div className="text-xs uppercase tracking-[0.16em] text-amber-700">{OCR_MASTER.metaTitle}</div>
                   <div className="mt-2 text-3xl font-semibold text-slate-900">{OCR_MASTER.metaValue}</div>
                   <div className="mt-2 text-sm leading-relaxed text-slate-600">{OCR_MASTER.metaDescription}</div>
@@ -190,7 +190,7 @@ export function OcrMaster() {
               </p>
             </div>
 
-            <div className="inline-flex items-center gap-2 rounded-full border border-amber-200/20 bg-amber-100/8 px-4 py-2 text-sm text-amber-50">
+            <div className="inline-flex items-center gap-2 rounded-full border border-amber-300/30 bg-amber-100/40 px-4 py-2 text-sm text-amber-900">
               <DatabaseZap className="h-4 w-4 text-amber-700" aria-hidden="true" />
               {OCR_MASTER.metaValue}
             </div>

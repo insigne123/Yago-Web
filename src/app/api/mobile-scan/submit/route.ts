@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { checkRateLimit } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -11,7 +12,16 @@ type UploadFile = File & {
 };
 
 const OCR_TRIAL_PATH = "/api/public/trial/v1/front-back";
-const MAX_FILE_SIZE_BYTES = 18 * 1024 * 1024;
+const MAX_FILE_SIZE_BYTES = 12 * 1024 * 1024;
+const MAX_REQUEST_SIZE_BYTES = 25 * 1024 * 1024;
+const SUPPORTED_IMAGE_TYPES = new Set([
+  "image/jpeg",
+  "image/jpg",
+  "image/png",
+  "image/webp",
+  "image/heic",
+  "image/heif",
+]);
 
 function isUploadFile(value: FormDataEntryValue | null): value is UploadFile {
   if (!value || typeof value !== "object") return false;
@@ -21,13 +31,29 @@ function isUploadFile(value: FormDataEntryValue | null): value is UploadFile {
     typeof file.arrayBuffer === "function" &&
     typeof file.size === "number" &&
     file.size > 0 &&
-    typeof file.name === "string"
+    typeof file.name === "string" &&
+    typeof file.type === "string"
   );
 }
 
 function sanitizeFilename(name: string, fallback: string) {
   const safe = name.replace(/[^a-zA-Z0-9._-]/g, "_").slice(0, 120);
   return safe || fallback;
+}
+
+async function hasSupportedImageSignature(file: UploadFile) {
+  const bytes = new Uint8Array(await file.slice(0, 16).arrayBuffer());
+  const isJpeg = bytes[0] === 0xff && bytes[1] === 0xd8 && bytes[2] === 0xff;
+  const isPng = [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a].every(
+    (value, index) => bytes[index] === value
+  );
+  const ascii = String.fromCharCode(...bytes);
+  const isWebp = ascii.startsWith("RIFF") && ascii.slice(8, 12) === "WEBP";
+  const isHeif =
+    ascii.slice(4, 8) === "ftyp" &&
+    /^(heic|heix|hevc|hevx|mif1|msf1)$/.test(ascii.slice(8, 12));
+
+  return isJpeg || isPng || isWebp || isHeif;
 }
 
 function buildTrialUrl(req: Request) {
@@ -68,12 +94,28 @@ async function parseJsonSafely(response: Response) {
 }
 
 export async function POST(req: Request) {
+  const rateLimit = checkRateLimit(req, { namespace: "ocr-trial", limit: 3, windowMs: 15 * 60 * 1000 });
+  if (!rateLimit.allowed) {
+    return NextResponse.json(
+      { error: "Alcanzaste el límite temporal de pruebas. Intenta nuevamente más tarde.", retryable: false, status: 429 },
+      { status: 429, headers: { "Retry-After": String(rateLimit.retryAfterSeconds), "Cache-Control": "no-store" } }
+    );
+  }
+
   const token = process.env.OCR_MOBILE_SCAN_TRIAL_TOKEN?.trim();
 
   if (!token) {
     return NextResponse.json(
       { error: "Token trial OCR no configurado en el servidor." },
       { status: 500 }
+    );
+  }
+
+  const contentLength = Number(req.headers.get("content-length") || 0);
+  if (Number.isFinite(contentLength) && contentLength > MAX_REQUEST_SIZE_BYTES) {
+    return NextResponse.json(
+      { error: "La carga completa es demasiado grande. Usa imágenes más livianas." },
+      { status: 413, headers: { "Cache-Control": "no-store" } }
     );
   }
 
@@ -101,6 +143,19 @@ export async function POST(req: Request) {
     return NextResponse.json(
       { error: "Una de las imagenes es demasiado grande. Vuelve a tomarla o usa una version mas liviana." },
       { status: 400 }
+    );
+  }
+
+  if (
+    frontFile.size + backFile.size > MAX_FILE_SIZE_BYTES * 2 ||
+    !SUPPORTED_IMAGE_TYPES.has(frontFile.type.toLowerCase()) ||
+    !SUPPORTED_IMAGE_TYPES.has(backFile.type.toLowerCase()) ||
+    !(await hasSupportedImageSignature(frontFile)) ||
+    !(await hasSupportedImageSignature(backFile))
+  ) {
+    return NextResponse.json(
+      { error: "Formato de imagen no compatible. Usa JPG, PNG, WebP, HEIC o HEIF." },
+      { status: 400, headers: { "Cache-Control": "no-store" } }
     );
   }
 

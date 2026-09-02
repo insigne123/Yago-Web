@@ -251,9 +251,9 @@ function statusLabel(status: ScanStatus, hasFiles: boolean, hasConsent: boolean)
 }
 
 function statusTone(status: ScanStatus, hasFiles: boolean, hasConsent: boolean) {
-  if (status === "error") return "border-red-300/30 bg-red-400/10 text-red-100";
+  if (status === "error") return "border-red-300/40 bg-red-100 text-red-800";
   if (status === "processing") return "border-sky-200/30 bg-sky-300/10 text-sky-700";
-  if (status === "result") return "border-emerald-300/30 bg-emerald-300/10 text-emerald-100";
+  if (status === "result") return "border-emerald-300/40 bg-emerald-100 text-emerald-800";
   if (hasFiles && hasConsent) return "border-sky-200/30 bg-sky-300/10 text-sky-700";
   return "border-slate-900/10 bg-white/[0.04] text-slate-600";
 }
@@ -440,7 +440,7 @@ function ResultView({ response, onReset }: { response: TrialResponse; onReset: (
             <AlertTriangle className="h-4 w-4" aria-hidden="true" />
             Issues detectados
           </div>
-          <ul className="mt-3 space-y-2 text-sm leading-relaxed text-amber-50/90">
+          <ul className="mt-3 space-y-2 text-sm leading-relaxed text-amber-900">
             {issues.map((issue, index) => (
               <li key={`${index}-${formatIssue(issue)}`}>{formatIssue(issue)}</li>
             ))}
@@ -652,24 +652,24 @@ export function MobileCarnetScan() {
               </label>
 
               {status === "processing" && (
-                <div className="mt-4 rounded-2xl border border-sky-200/20 bg-sky-300/10 p-4 text-sm text-sky-50" aria-live="polite">
+                <div className="mt-4 rounded-2xl border border-sky-300/40 bg-sky-100 p-4 text-sm text-sky-900" aria-live="polite">
                   <div className="flex items-center gap-2 font-semibold">
                     <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
                     Procesando OCR
                   </div>
-                  <p className="mt-2 leading-relaxed text-sky-50/80">
+                  <p className="mt-2 leading-relaxed text-sky-800">
                     Puede tardar entre 15 y 60 segundos. Mantente en esta pantalla mientras se procesa.
                   </p>
                 </div>
               )}
 
               {status === "error" && error && (
-                <div className="mt-4 rounded-2xl border border-red-300/20 bg-red-400/10 p-4 text-sm text-red-50" role="alert">
+                <div className="mt-4 rounded-2xl border border-red-300/40 bg-red-100 p-4 text-sm text-red-900" role="alert">
                   <div className="flex items-center gap-2 font-semibold">
                     <AlertTriangle className="h-4 w-4" aria-hidden="true" />
                     No se pudo procesar
                   </div>
-                  <p className="mt-2 leading-relaxed text-red-50/85">{error.message}</p>
+                  <p className="mt-2 leading-relaxed text-red-800">{error.message}</p>
                   {error.retryable && (
                     <Button
                       type="button"

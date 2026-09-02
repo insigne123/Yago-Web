@@ -61,7 +61,7 @@ export function RouteChooser() {
               <Link
                 key={route.href}
                 href={route.href}
-                className="group rounded-[1.6rem] border border-slate-900/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(246,250,254,1))] p-5 transition-[border-color,background-color,transform] duration-200 hover:-translate-y-0.5 hover:border-sky-200/24 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-200/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                className="group rounded-[1.6rem] border border-slate-900/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(246,250,254,1))] p-5 transition-[border-color,background-color,transform] duration-200 hover:-translate-y-0.5 hover:border-sky-600/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-200/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
                 <div className="flex size-11 items-center justify-center rounded-2xl border border-slate-900/10 bg-white/[0.04] text-sky-700">
                   <Icon className="h-5 w-5" aria-hidden="true" />

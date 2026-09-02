@@ -11,7 +11,6 @@ import {
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
 import { PRIMARY_CTA } from "@/config/site";
 
@@ -48,34 +47,35 @@ const trustSignals = [
 
 export function Hero() {
   return (
-    <section id="inicio" className="relative overflow-hidden pb-20 pt-20 md:pb-24 md:pt-24 lg:pt-28">
+    <section id="inicio" className="relative px-4 pb-16 pt-8 md:pb-20 md:pt-10">
+      <div className="relative mx-auto max-w-[90rem] overflow-hidden rounded-[2rem] border border-white/10 bg-[#070b13] px-5 py-14 shadow-[0_32px_100px_rgba(7,11,19,0.28)] md:rounded-[2.75rem] md:px-9 md:py-20 lg:px-12">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
         <div className="absolute left-[-8rem] top-[8%] h-[18rem] w-[18rem] rounded-full bg-sky-300/10 blur-[88px]" />
-        <div className="absolute right-[-7rem] top-[12%] h-[16rem] w-[16rem] rounded-full bg-white/80 blur-[92px]" />
+        <div className="absolute right-[-7rem] top-[12%] h-[16rem] w-[16rem] rounded-full bg-sky-200/10 blur-[92px]" />
       </div>
 
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 hero-grid-overlay" />
 
-      <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-4 lg:grid-cols-[1.02fr_0.98fr] lg:gap-14">
+      <div className="relative mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[1.02fr_0.98fr] lg:gap-14">
         <div className="max-w-2xl">
-          <div className="inline-flex items-center gap-2 rounded-full border border-slate-900/10 bg-white/[0.04] px-3 py-1.5 text-[11px] uppercase tracking-[0.16em] text-slate-600">
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.05] px-3 py-1.5 text-[11px] uppercase tracking-[0.16em] text-slate-300">
             <span className="h-1.5 w-1.5 rounded-full bg-sky-300" aria-hidden="true" />
             YAGO · Operaciones, backoffice y finanzas
           </div>
 
-          <h1 className="mt-6 max-w-4xl text-balance font-headline text-5xl font-semibold leading-[0.94] text-slate-900 md:text-6xl lg:text-[5.15rem]">
+          <h1 className="mt-6 max-w-4xl text-balance font-headline text-5xl font-semibold leading-[0.94] text-white md:text-6xl lg:text-[5.15rem]">
             Automatiza operaciones sin perder control.
           </h1>
 
-          <p className="mt-5 max-w-xl text-lg leading-relaxed text-slate-600 md:text-[1.14rem]">
+          <p className="mt-5 max-w-xl text-lg leading-relaxed text-slate-300 md:text-[1.14rem]">
             Implementamos IA, OCR e integraciones para que backoffice, finanzas y operaciones reduzcan trabajo manual con trazabilidad desde el primer flujo.
           </p>
 
-          <div className="mt-6 flex flex-wrap gap-2 text-sm text-slate-800">
+          <div className="mt-6 flex flex-wrap gap-2 text-sm text-slate-200">
             {proofSignals.map((item) => (
               <div
                 key={item}
-                className="rounded-full border border-slate-900/10 bg-white/[0.04] px-4 py-2"
+                className="rounded-full border border-white/10 bg-white/[0.05] px-4 py-2"
               >
                 {item}
               </div>
@@ -86,7 +86,7 @@ export function Hero() {
             <Button
               asChild
               size="lg"
-              className="group rounded-full border border-slate-900/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(241,247,255,0.94))] px-6 text-slate-950 shadow-[0_14px_38px_rgba(5,11,19,0.24)] transition-transform hover:-translate-y-0.5 plausible-event-name=CTA+Agendar+Sesion plausible-event-location=hero"
+              className="group rounded-full border border-white bg-white px-6 text-slate-950 shadow-[0_14px_38px_rgba(0,0,0,0.3)] transition-transform hover:-translate-y-0.5 hover:bg-sky-50 plausible-event-name=CTA+Agendar+Sesion plausible-event-location=hero"
             >
               <a href={PRIMARY_CTA.href}>
                 {PRIMARY_CTA.label}
@@ -98,19 +98,19 @@ export function Hero() {
               asChild
               size="lg"
               variant="ghost"
-              className="rounded-full border border-slate-900/10 bg-white/[0.03] px-6 text-slate-900 hover:bg-slate-50 plausible-event-name=CTA+Ver+Casos plausible-event-location=hero"
+              className="rounded-full border border-white/20 bg-white/[0.04] px-6 text-white hover:bg-white/10 hover:text-white plausible-event-name=CTA+Ver+Casos plausible-event-location=hero"
             >
               <a href="#elige-ruta">Ver rutas</a>
             </Button>
           </div>
 
-          <div className="mt-8 flex flex-wrap gap-2 text-sm text-slate-600">
+          <div className="mt-8 flex flex-wrap gap-2 text-sm text-slate-300">
             {trustSignals.map((signal) => (
               <div
                 key={signal}
-                className="inline-flex items-center gap-2 rounded-full border border-slate-900/10 bg-white/[0.03] px-3 py-2"
+                className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-2"
               >
-                <BadgeCheck className="h-4 w-4 text-cyan-700" aria-hidden="true" />
+                <BadgeCheck className="h-4 w-4 text-sky-200" aria-hidden="true" />
                 <span>{signal}</span>
               </div>
             ))}
@@ -130,9 +130,9 @@ export function Hero() {
                   <span className="h-1.5 w-1.5 rounded-full bg-sky-300" aria-hidden="true" />
                   Vista simple del cambio
                 </div>
-                <CardTitle className="mt-3 text-[2rem] leading-none text-slate-900 md:text-[2.4rem]">
+                <h2 className="mt-3 text-[2rem] font-semibold leading-none text-slate-900 md:text-[2.4rem]">
                   De tarea manual a operación visible.
-                </CardTitle>
+                </h2>
                 <CardDescription className="max-w-md text-sm leading-relaxed text-slate-600">
                   Un recorrido claro: entrada, automatización y evidencia para decidir mejor.
                 </CardDescription>
@@ -190,6 +190,7 @@ export function Hero() {
             </Card>
           </div>
         </div>
+      </div>
       </div>
     </section>
   );

@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import {
   ArrowLeft,
   ArrowRight,
@@ -34,8 +33,9 @@ import {
 import { DividerGlow, SectionReveal } from "@/components/ui/animated";
 import { OCR_PAGE } from "@/config/ocr";
 import { COMPANY } from "@/config/site";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: OCR_PAGE.seoTitle,
   description: OCR_PAGE.seoDescription,
   keywords: [
@@ -46,17 +46,8 @@ export const metadata: Metadata = {
     "PDFs escaneados",
     "extraccion de datos",
   ],
-  alternates: {
-    canonical: "/ocr",
-  },
-  openGraph: {
-    title: OCR_PAGE.seoTitle,
-    description: OCR_PAGE.seoDescription,
-    url: "/ocr",
-    siteName: "Yago",
-    type: "website",
-  },
-};
+  path: "/ocr",
+});
 
 export default function OcrPage() {
   return (
@@ -70,11 +61,11 @@ export default function OcrPage() {
       />
 
       <main id="main-content" className="main-premium">
-        <section id="inicio" className="relative overflow-hidden pb-18 pt-10 md:pb-24 md:pt-16">
+        <section id="inicio" className="relative overflow-hidden pb-20 pt-10 md:pb-24 md:pt-16">
           <div aria-hidden="true" className="pointer-events-none absolute inset-0">
             <div className="absolute left-[-7rem] top-[6%] h-[18rem] w-[18rem] rounded-full bg-sky-300/10 blur-[84px]" />
             <div className="absolute right-[-6rem] top-[10%] h-[16rem] w-[16rem] rounded-full bg-indigo-300/10 blur-[96px]" />
-            <div className="absolute inset-x-[18%] bottom-[-6rem] h-[15rem] rounded-full bg-amber-200/6 blur-[88px]" />
+            <div className="absolute inset-x-[18%] bottom-[-6rem] h-[15rem] rounded-full bg-amber-200/[0.06] blur-[88px]" />
           </div>
 
           <div aria-hidden="true" className="pointer-events-none absolute inset-0 hero-grid-overlay" />
@@ -166,7 +157,7 @@ export default function OcrPage() {
                       <Waypoints className="h-4 w-4 text-sky-700" aria-hidden="true" />
                       Flujo OCR YAGO
                     </div>
-                    <CardTitle className="mt-3 text-[2rem] leading-none text-slate-900 md:text-[2.35rem]">
+                    <CardTitle as="h2" className="mt-3 text-[2rem] leading-none text-slate-900 md:text-[2.35rem]">
                       {OCR_PAGE.hero.previewTitle}
                     </CardTitle>
                     <CardDescription className="max-w-md text-sm leading-relaxed text-slate-600">
@@ -628,7 +619,7 @@ export default function OcrPage() {
             <div className="mx-auto grid max-w-7xl gap-6 px-4 lg:grid-cols-[0.92fr_1.08fr]">
               <Card className="rounded-[1.8rem] border-slate-900/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.97),rgba(246,250,254,1))] p-6">
                 <CardHeader className="px-0 pb-4 pt-0">
-                  <CardTitle className="text-3xl text-slate-900">Preguntas frecuentes</CardTitle>
+                  <CardTitle as="h2" className="text-3xl text-slate-900">Preguntas frecuentes</CardTitle>
                   <CardDescription className="text-base leading-relaxed text-slate-600">
                     Respuestas simples para resolver dudas comunes antes de una demo o evaluacion inicial.
                   </CardDescription>

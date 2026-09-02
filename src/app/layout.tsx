@@ -9,14 +9,14 @@ import { Plausible } from "@/components/analytics/Plausible";
 import { PlausiblePageview } from "@/components/analytics/PlausiblePageview";
 import { AttributionTracker } from "@/components/analytics/AttributionTracker";
 import { CloudflareWebAnalytics } from "@/components/analytics/CloudflareWebAnalytics";
-import { DeferredAuditWidget } from "@/components/landing/DeferredAuditWidget";
+import { PlausibleClickTracker } from "@/components/analytics/PlausibleClickTracker";
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://yago.cl";
 
 const bodyFont = Manrope({
   subsets: ["latin"],
   variable: "--font-body",
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["400", "500", "600", "700"],
 });
 
 const headlineFont = Instrument_Sans({
@@ -27,24 +27,23 @@ const headlineFont = Instrument_Sans({
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
-  title: `${COMPANY.name} — Automatizacion operativa con IA para backoffice y finanzas`,
+  title: `${COMPANY.name} | Automatización operativa con IA para empresas`,
   description:
-    "Automatizacion de procesos, OCR e integraciones para equipos de operaciones, backoffice y finanzas que quieren reducir trabajo manual, errores y tiempos de ciclo.",
-  alternates: { canonical: "/" },
+    "Automatización de procesos, OCR e integraciones para equipos de operaciones, backoffice y finanzas que quieren reducir trabajo manual, errores y tiempos de ciclo.",
   openGraph: {
     type: "website",
     url: "/",
     siteName: COMPANY.name,
-    title: `${COMPANY.name} — Automatizacion operativa con IA para backoffice y finanzas`,
+    title: `${COMPANY.name} | Automatización operativa con IA para empresas`,
     description:
-      "Automatizacion de procesos, OCR e integraciones para reducir trabajo manual, errores y tiempos operativos en operaciones, backoffice y finanzas.",
+      "Automatización de procesos, OCR e integraciones para reducir trabajo manual, errores y tiempos operativos en operaciones, backoffice y finanzas.",
     images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${COMPANY.name} — Automatizacion operativa con IA para backoffice y finanzas`,
+    title: `${COMPANY.name} | Automatización operativa con IA para empresas`,
     description:
-      "Automatizacion de procesos, OCR e integraciones para equipos que necesitan operar mejor sin depender de tanto trabajo manual.",
+      "Automatización de procesos, OCR e integraciones para equipos que necesitan operar mejor sin depender de tanto trabajo manual.",
     images: ["/twitter-image"],
   },
   icons: {
@@ -54,7 +53,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#e8edf4",
+  themeColor: "#070b13",
 };
 
 export default function RootLayout({
@@ -79,9 +78,9 @@ export default function RootLayout({
         <div className="relative z-10">
           <SEOJSONLD />
           <PlausiblePageview />
+          <PlausibleClickTracker />
           <AttributionTracker />
           {children}
-          <DeferredAuditWidget />
           <Toaster />
         </div>
       </body>

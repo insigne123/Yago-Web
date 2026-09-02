@@ -1,17 +1,17 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Clock } from "lucide-react";
 import { BLOG_POSTS } from "@/config/blog";
 import { Navbar } from "@/components/landing/Navbar";
 import { Footer } from "@/components/landing/Footer";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Blog — Yago | Automatización de procesos con IA",
+export const metadata = createPageMetadata({
+  title: "Blog de automatización de procesos e IA | YAGO",
   description:
     "Guías prácticas sobre automatización de procesos, IA para empresas, OCR, agentes inteligentes y ROI. Contenido sin humo para equipos de operaciones y backoffice.",
-  alternates: { canonical: "/blog" },
-};
+  path: "/blog",
+});
 
 function formatDate(iso: string) {
   return new Date(`${iso}T12:00:00`).toLocaleDateString("es-CL", {

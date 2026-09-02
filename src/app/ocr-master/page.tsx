@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -30,6 +29,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { COMPANY } from "@/config/site";
 import { OCR_MASTER } from "@/config/ocr-master";
+import { createPageMetadata } from "@/lib/seo";
 
 const toneClasses = {
   sky: {
@@ -40,24 +40,22 @@ const toneClasses = {
   amber: {
     accent: "bg-amber-200",
     border: "border-amber-200/20",
-    panel: "bg-amber-200/10 text-amber-50",
+    panel: "bg-amber-100 text-amber-900",
   },
   mint: {
     accent: "bg-emerald-200",
     border: "border-emerald-200/20",
-    panel: "bg-emerald-300/10 text-emerald-50",
+    panel: "bg-emerald-100 text-emerald-900",
   },
 };
 
 const buyerIcons = [Braces, ShieldCheck, FileJson2, Layers3];
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: OCR_MASTER.seoTitle,
   description: OCR_MASTER.seoDescription,
-  alternates: {
-    canonical: "/ocr-master",
-  },
-};
+  path: "/ocr-master",
+});
 
 export default function OcrMasterPage() {
   const mailHref = `mailto:${COMPANY.email}?subject=${encodeURIComponent("Interes en OCR Master")}&body=${encodeURIComponent(
@@ -68,7 +66,7 @@ export default function OcrMasterPage() {
     <div className="relative min-h-screen overflow-x-clip text-slate-900">
       <Navbar />
 
-      <main className="main-premium py-20 md:py-24">
+      <main id="main-content" className="main-premium py-20 md:py-24">
         <div className="mx-auto max-w-6xl space-y-8 px-4 md:space-y-10">
           <section className="grid gap-6 xl:grid-cols-[1.05fr_0.95fr] xl:items-start">
             <Card className="overflow-hidden rounded-[2rem] border-slate-900/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.97),rgba(246,250,254,1))] shadow-[0_28px_100px_rgba(30,58,95,0.08)]">
@@ -76,21 +74,21 @@ export default function OcrMasterPage() {
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <Badge
                     variant="outline"
-                    className="border-amber-200/20 bg-amber-100/8 px-3 py-1 text-[11px] uppercase tracking-[0.16em] text-amber-700"
+                    className="border-amber-200/20 bg-amber-100/[0.08] px-3 py-1 text-[11px] uppercase tracking-[0.16em] text-amber-700"
                   >
                     {OCR_MASTER.badge}
                   </Badge>
                   <Link
-                    href="/#ocr-master"
+                    href="/productos"
                     className="text-sm text-slate-600 underline underline-offset-4 transition hover:text-slate-900"
                   >
-                    Volver al home
+                    Volver a productos
                   </Link>
                 </div>
 
-                <CardTitle className="mt-6 text-5xl font-semibold tracking-[-0.04em] text-slate-900 md:text-6xl">
+                <h1 className="mt-6 text-5xl font-semibold tracking-[-0.04em] text-slate-900 md:text-6xl">
                   {OCR_MASTER.title}
-                </CardTitle>
+                </h1>
                 <CardDescription className="mt-3 text-2xl leading-tight text-slate-900 md:text-3xl">
                   {OCR_MASTER.pageTitle}
                 </CardDescription>
@@ -158,11 +156,11 @@ export default function OcrMasterPage() {
                 <CardHeader className="pb-4">
                   <Badge
                     variant="outline"
-                    className="w-fit border-sky-200/20 bg-sky-200/8 px-3 py-1 text-[11px] uppercase tracking-[0.16em] text-sky-700"
+                    className="w-fit border-sky-200/20 bg-sky-200/[0.08] px-3 py-1 text-[11px] uppercase tracking-[0.16em] text-sky-700"
                   >
                     {OCR_MASTER.apiBadge}
                   </Badge>
-                  <CardTitle className="mt-4 text-3xl text-slate-900">{OCR_MASTER.apiTitle}</CardTitle>
+                  <CardTitle as="h2" className="mt-4 text-3xl text-slate-900">{OCR_MASTER.apiTitle}</CardTitle>
                   <CardDescription className="max-w-lg text-base leading-relaxed text-slate-600">
                     {OCR_MASTER.apiDescription}
                   </CardDescription>
@@ -182,10 +180,10 @@ export default function OcrMasterPage() {
 
               <Card className="overflow-hidden rounded-[2rem] border-slate-900/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.97),rgba(246,250,254,1))]">
                 <CardHeader className="pb-4">
-                  <CardTitle className="text-2xl text-slate-900">{OCR_MASTER.metaTitle}</CardTitle>
+                  <CardTitle as="h2" className="text-2xl text-slate-900">{OCR_MASTER.metaTitle}</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <div className="rounded-[1.4rem] border border-amber-200/20 bg-amber-100/8 px-4 py-5">
+                  <div className="rounded-[1.4rem] border border-amber-200/20 bg-amber-100/[0.08] px-4 py-5">
                     <div className="text-3xl font-semibold text-slate-900">{OCR_MASTER.metaValue}</div>
                     <div className="mt-2 text-sm leading-relaxed text-slate-600">{OCR_MASTER.metaDescription}</div>
                   </div>
@@ -414,7 +412,7 @@ export default function OcrMasterPage() {
           <section id="faq" className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
             <Card className="rounded-[1.8rem] border-slate-900/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.97),rgba(246,250,254,1))] p-6">
               <CardHeader className="px-0 pb-4 pt-0">
-                <CardTitle className="text-3xl text-slate-900">Preguntas frecuentes</CardTitle>
+                <CardTitle as="h2" className="text-3xl text-slate-900">Preguntas frecuentes</CardTitle>
                 <CardDescription className="text-base leading-relaxed text-slate-600">
                   Objeciones, conversaciones comerciales y dudas tecnicas frecuentes para presentar OCR Master con claridad.
                 </CardDescription>

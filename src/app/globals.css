@@ -59,8 +59,8 @@ body {
   background-color: #e8edf4;
   background-image:
     radial-gradient(1000px 580px at 10% -4%, rgba(14, 165, 233, 0.09), transparent 56%),
-    radial-gradient(860px 420px at 92% 4%, rgba(99, 102, 241, 0.07), transparent 50%),
-    radial-gradient(760px 320px at 50% 108%, rgba(245, 158, 11, 0.05), transparent 62%),
+    radial-gradient(860px 420px at 92% 4%, rgba(125, 211, 252, 0.08), transparent 50%),
+    radial-gradient(760px 320px at 50% 108%, rgba(203, 213, 225, 0.12), transparent 62%),
     linear-gradient(180deg, #edf1f8 0%, #e6ecf4 36%, #dfe7f2 100%);
   overflow-x: hidden;
 }
@@ -78,8 +78,8 @@ body {
   z-index: 0;
   background:
     radial-gradient(780px 240px at 12% 12%, rgba(14, 165, 233, 0.06), transparent 72%),
-    radial-gradient(960px 280px at 86% 22%, rgba(99, 102, 241, 0.06), transparent 74%),
-    radial-gradient(760px 220px at 50% 100%, rgba(245, 158, 11, 0.04), transparent 76%);
+    radial-gradient(960px 280px at 86% 22%, rgba(125, 211, 252, 0.06), transparent 74%),
+    radial-gradient(760px 220px at 50% 100%, rgba(203, 213, 225, 0.08), transparent 76%);
   opacity: 0.8;
 }
 
@@ -89,9 +89,9 @@ body {
 }
 
 :root{
-  --fx-fuchsia: 99 102 241;
+  --fx-fuchsia: 125 211 252;
   --fx-cyan: 14 165 233;
-  --fx-emerald: 16 185 129;
+  --fx-emerald: 203 213 225;
   --fx-grid: 48px;
   --fx-grid-alpha: 0.05;
   --fx-noise-alpha: 0.012;
@@ -503,6 +503,13 @@ body {
 
 /* Respeto accesibilidad */
 @media (prefers-reduced-motion: reduce){
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
   .navlink-gradient::after{ transition: none; }
   .bg-fx-gradient { animation: none; }
   .fx-bg-aurora-shift,

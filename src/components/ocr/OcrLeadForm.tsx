@@ -4,7 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 import { useToast } from "@/hooks/use-toast";
 import { track } from "@/lib/analytics";
-import { useAttribution } from "@/lib/attribution";
+import { AttributionFields } from "@/components/forms/AttributionFields";
+import { LeadSuccess } from "@/components/forms/LeadSuccess";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -20,9 +21,9 @@ import { OCR_PAGE } from "@/config/ocr";
 
 export function OcrLeadForm() {
   const { toast } = useToast();
-  const attribution = useAttribution();
   const [loading, setLoading] = useState(false);
   const [started, setStarted] = useState(false);
+  const [leadId, setLeadId] = useState("");
 
   function markStart() {
     if (started) return;
@@ -32,6 +33,7 @@ export function OcrLeadForm() {
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setLeadId("");
     setLoading(true);
 
     const form = e.currentTarget;
@@ -80,7 +82,8 @@ export function OcrLeadForm() {
       }
 
       form.reset();
-      track("OCR Lead Form Success", { position: "ocr_form" });
+      setLeadId(resData.leadId || "sin-referencia");
+      track("OCR Lead Form Success", { position: "ocr_form", lead_id: resData.leadId });
       toast({
         title: "Solicitud enviada",
         description: "Te responderemos para coordinar la evaluacion inicial.",
@@ -111,26 +114,9 @@ export function OcrLeadForm() {
       </CardHeader>
       <CardContent>
         <form onSubmit={onSubmit} onFocusCapture={markStart} className="grid gap-4">
-          <input type="text" name="hp" className="hidden" />
+          <input type="text" name="hp" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden="true" />
           <input type="hidden" name="topic" value="OCR para empresas" />
-
-          <input type="hidden" name="ft_utm_source" value={attribution?.first.utm_source || ""} />
-          <input type="hidden" name="ft_utm_medium" value={attribution?.first.utm_medium || ""} />
-          <input type="hidden" name="ft_utm_campaign" value={attribution?.first.utm_campaign || ""} />
-          <input type="hidden" name="ft_utm_term" value={attribution?.first.utm_term || ""} />
-          <input type="hidden" name="ft_utm_content" value={attribution?.first.utm_content || ""} />
-          <input type="hidden" name="ft_referrer" value={attribution?.first.referrer || ""} />
-          <input type="hidden" name="ft_landing" value={attribution?.first.landing || ""} />
-          <input type="hidden" name="ft_ts" value={attribution?.first.ts || ""} />
-
-          <input type="hidden" name="lt_utm_source" value={attribution?.last.utm_source || ""} />
-          <input type="hidden" name="lt_utm_medium" value={attribution?.last.utm_medium || ""} />
-          <input type="hidden" name="lt_utm_campaign" value={attribution?.last.utm_campaign || ""} />
-          <input type="hidden" name="lt_utm_term" value={attribution?.last.utm_term || ""} />
-          <input type="hidden" name="lt_utm_content" value={attribution?.last.utm_content || ""} />
-          <input type="hidden" name="lt_referrer" value={attribution?.last.referrer || ""} />
-          <input type="hidden" name="lt_landing" value={attribution?.last.landing || ""} />
-          <input type="hidden" name="lt_ts" value={attribution?.last.ts || ""} />
+          <AttributionFields />
 
           <div className="grid gap-4 md:grid-cols-2">
             <div className="grid gap-2">
@@ -259,6 +245,7 @@ export function OcrLeadForm() {
             {loading ? "Enviando..." : OCR_PAGE.form.submitLabel}
           </Button>
         </form>
+        {leadId ? <LeadSuccess leadId={leadId} message="Revisaremos el tipo de documento, volumen y calidad de muestra para recomendar una evaluación." /> : null}
         <p className="mt-3 text-xs text-slate-600">
           Al enviar aceptas nuestra <Link href="/privacidad" className="underline hover:text-foreground">Politica de Privacidad</Link>.
         </p>

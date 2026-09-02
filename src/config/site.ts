@@ -16,7 +16,7 @@ import {
 const bookingLink = process.env.NEXT_PUBLIC_BOOKING_URL?.trim() || "";
 
 export const COMPANY = {
-  name: "Yago",
+  name: "YAGO",
   email: "nicolas.yarur.g@yago.cl",
   whatsapp: "+56963930231",
   whatsappLink: "https://wa.me/56963930231",
@@ -28,8 +28,8 @@ export const COMPANY = {
 };
 
 export const PRIMARY_CTA = {
-  href: bookingLink || "#contacto",
-  label: "Agendar sesion",
+  href: bookingLink || "/#contacto",
+  label: "Solicitar diagnóstico",
 };
 
 export const about = {
@@ -166,13 +166,19 @@ export const technologies = [
 export const testimonials = [];
 
 export const navLinks = [
-    { name: "Inicio", href: "/#inicio" },
     {
-      name: "Apps listas",
-      href: "/#elige-ruta",
-      eyebrow: "Servicios listos",
-      description: "OCR, SADT y AXIS para problemas operativos específicos.",
-      detail: "Elige esta ruta si ya sabes qué proceso quieres resolver.",
+      name: "Soluciones",
+      href: "/soluciones",
+      eyebrow: "Por problema",
+      description: "Rutas para backoffice, finanzas, reportes, aprobaciones, RRHH y procesos documentales.",
+      detail: "Parte por aquí si reconoces el problema, pero todavía no sabes qué tecnología necesitas.",
+    },
+    {
+      name: "Productos",
+      href: "/productos",
+      eyebrow: "Productos YAGO",
+      description: "Productos listos y configurables para procesos operativos frecuentes.",
+      detail: "Compara alternativas especializadas y solicita una demo según tu proceso.",
       children: [
         {
           name: "OCR",
@@ -195,35 +201,42 @@ export const navLinks = [
       ],
     },
     {
-      name: "Soluciones",
-      href: "/soluciones",
-      eyebrow: "Por problema",
-      description: "Rutas para backoffice, finanzas, reportes, aprobaciones, RRHH y procesos documentales.",
-      detail: "Útil si tu caso no calza exactamente con OCR, SADT o AXIS.",
+      name: "Servicios",
+      href: "/servicios",
+      eyebrow: "Implementación a medida",
+      description: "Automatización de procesos, aplicaciones internas, sitios y capacitación.",
+      detail: "Para procesos que requieren descubrimiento, integración y acompañamiento.",
     },
     {
       name: "Casos",
-      href: "/#casos",
-      eyebrow: "Prueba operativa",
-      description: "Ejemplos de procesos donde YAGO libera carga manual y ordena la trazabilidad.",
+      href: "/casos",
+      eyebrow: "Evidencia operativa",
+      description: "Escenarios, metodología y resultados que YAGO documenta antes y después de automatizar.",
     },
     {
-      name: "Blog",
+      name: "Recursos",
       href: "/blog",
       eyebrow: "Guías prácticas",
       description: "Automatización, IA, OCR y ROI explicados sin humo para equipos de operaciones.",
-    },
-    {
-      name: "FAQ",
-      href: "/#faq",
-      eyebrow: "Dudas comunes",
-      description: "Respuestas rápidas sobre seguridad, alcance, ROI, tiempos y la sesión inicial.",
+      children: [
+        {
+          name: "Blog",
+          href: "/blog",
+          description: "Guías sobre automatización, IA, OCR y retorno operativo.",
+        },
+        {
+          name: "Proceso YAGO",
+          href: "/proceso",
+          description: "Cómo priorizamos, construimos, validamos y ponemos en marcha una automatización.",
+        },
+      ],
     },
 ];
 
 export const footerLinks = [
-    { name: "Casos", href: "/#casos" },
+    { name: "Casos", href: "/casos" },
     { name: "Proceso", href: "/proceso" },
+    { name: "Productos", href: "/productos" },
     { name: "Servicios", href: "/servicios" },
     { name: "Soluciones", href: "/soluciones" },
     { name: "Blog", href: "/blog" },
@@ -233,5 +246,5 @@ export const footerLinks = [
     { name: "FAQ", href: "/#faq" },
     { name: "Contacto", href: "/#contacto" },
     { name: "Política de Privacidad", href: "/privacidad" },
-    { name: "Términos", href: "#" },
+    { name: "Términos", href: "/terminos" },
 ];

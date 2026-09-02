@@ -31,6 +31,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { DividerGlow, SectionReveal } from "@/components/ui/animated";
+import { JsonLd } from "@/components/seo/JsonLd";
 import type { AutomationPage } from "@/config/automation-pages";
 import { COMPANY } from "@/config/site";
 import {
@@ -85,9 +86,47 @@ export function AutomationLandingPage({ page, ufRate }: AutomationLandingPagePro
       text: `${primaryPlan.volume} · equivalente hoy ${formatClpFromUf(primaryPlan.priceUf, ufRate)} CLP`,
     },
   ];
+  const productJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "@id": `https://yago.cl/${page.slug}#software`,
+    name: page.hero.badge,
+    description: page.seoDescription,
+    applicationCategory: "BusinessApplication",
+    operatingSystem: "Web",
+    url: `https://yago.cl/${page.slug}`,
+    provider: { "@id": "https://yago.cl/#organization" },
+    offers: page.pricing.plans.map((plan) => ({
+      "@type": "Offer",
+      name: plan.name,
+      price: plan.priceUf,
+      priceCurrency: "CLF",
+      url: `https://yago.cl/${page.slug}#planes`,
+    })),
+  };
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: page.faqs.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: { "@type": "Answer", text: item.answer },
+    })),
+  };
+  const officialSources = page.slug === "sadt"
+    ? [
+        { label: "Dirección del Trabajo", href: "https://www.dt.gob.cl/portal/1626/w3-channel.html" },
+        { label: "Portal Mi DT", href: "https://midt.dirtrab.cl/" },
+      ]
+    : [
+        { label: "Poder Judicial de Chile", href: "https://www.pjud.cl/" },
+        { label: "Oficina Judicial Virtual", href: "https://oficinajudicialvirtual.pjud.cl/" },
+      ];
 
   return (
     <div className="relative min-h-screen overflow-x-clip text-slate-900">
+      <JsonLd id={`jsonld-automation-${page.slug}`} data={productJsonLd} />
+      <JsonLd id={`jsonld-automation-faq-${page.slug}`} data={faqJsonLd} />
       <Navbar
         links={page.nav}
         ctaHref="#formulario"
@@ -101,7 +140,7 @@ export function AutomationLandingPage({ page, ufRate }: AutomationLandingPagePro
           <div aria-hidden="true" className="pointer-events-none absolute inset-0">
             <div className="absolute left-[-7rem] top-[6%] h-[18rem] w-[18rem] rounded-full bg-sky-300/10 blur-[84px]" />
             <div className="absolute right-[-6rem] top-[10%] h-[16rem] w-[16rem] rounded-full bg-white/80 blur-[96px]" />
-            <div className="absolute inset-x-[18%] bottom-[-6rem] h-[15rem] rounded-full bg-sky-200/6 blur-[88px]" />
+            <div className="absolute inset-x-[18%] bottom-[-6rem] h-[15rem] rounded-full bg-sky-200/[0.06] blur-[88px]" />
           </div>
 
           <div aria-hidden="true" className="pointer-events-none absolute inset-0 hero-grid-overlay" />
@@ -188,7 +227,7 @@ export function AutomationLandingPage({ page, ufRate }: AutomationLandingPagePro
                       <Waypoints className="h-4 w-4 text-sky-700" aria-hidden="true" />
                       Flujo operativo YAGO
                     </div>
-                    <CardTitle className="mt-3 text-[1.8rem] leading-none text-slate-900 md:text-[2.15rem]">
+                    <CardTitle as="h2" className="mt-3 text-[1.8rem] leading-none text-slate-900 md:text-[2.15rem]">
                       {page.hero.previewTitle}
                     </CardTitle>
                     <CardDescription className="max-w-md text-sm leading-relaxed text-slate-600">
@@ -300,6 +339,29 @@ export function AutomationLandingPage({ page, ufRate }: AutomationLandingPagePro
                     </CardContent>
                   </Card>
                 ))}
+              </div>
+            </div>
+          </Section>
+        </SectionReveal>
+
+        <DividerGlow />
+
+        <SectionReveal as="div" surface="soft">
+          <Section className="z-10 py-10">
+            <div className="mx-auto max-w-7xl px-4">
+              <div className="rounded-[1.7rem] border border-slate-900/10 bg-white/70 p-6">
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sky-700">Fuentes oficiales</p>
+                <h2 className="mt-3 text-2xl font-semibold text-slate-950">Información pública y alcance</h2>
+                <p className="mt-3 max-w-3xl text-sm leading-relaxed text-slate-700">
+                  YAGO es un proveedor independiente y no representa a los organismos enlazados. Consulta siempre el portal oficial para requisitos, disponibilidad y vigencia del procedimiento.
+                </p>
+                <div className="mt-5 flex flex-wrap gap-3">
+                  {officialSources.map((source) => (
+                    <a key={source.href} href={source.href} target="_blank" rel="noreferrer" className="rounded-full border border-slate-900/15 bg-white px-4 py-2 text-sm font-semibold text-sky-800 underline-offset-4 hover:underline">
+                      {source.label}
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
           </Section>
@@ -763,7 +825,7 @@ export function AutomationLandingPage({ page, ufRate }: AutomationLandingPagePro
             <div className="mx-auto grid max-w-7xl gap-6 px-4 lg:grid-cols-[0.92fr_1.08fr]">
               <Card className="rounded-[1.8rem] border-slate-900/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.97),rgba(246,250,254,1))] p-6">
                 <CardHeader className="px-0 pb-4 pt-0">
-                  <CardTitle className="text-3xl text-slate-900">Preguntas frecuentes</CardTitle>
+                  <CardTitle as="h2" className="text-3xl text-slate-900">Preguntas frecuentes</CardTitle>
                   <CardDescription className="text-base leading-relaxed text-slate-600">
                     Respuestas simples para resolver dudas comunes antes de una demo.
                   </CardDescription>

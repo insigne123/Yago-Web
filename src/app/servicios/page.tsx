@@ -1,17 +1,17 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { SERVICES } from "@/config/services";
 import { Navbar } from "@/components/landing/Navbar";
 import { Footer } from "@/components/landing/Footer";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Servicios — Yago | Automatización de procesos con IA",
+export const metadata = createPageMetadata({
+  title: "Servicios de automatización de procesos con IA | YAGO",
   description:
     "Automatización de procesos, apps de gestión, páginas web y capacitación en IA. Conoce los servicios de Yago para reducir trabajo manual y errores.",
-  alternates: { canonical: "/servicios" },
-};
+  path: "/servicios",
+});
 
 export default function ServiciosPage() {
   return (

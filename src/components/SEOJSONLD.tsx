@@ -1,4 +1,3 @@
-import Script from "next/script";
 import { COMPANY } from "@/config/site";
 
 export function SEOJSONLD() {
@@ -8,9 +7,13 @@ export function SEOJSONLD() {
   const description =
     "Automatizacion de procesos, OCR e integraciones para equipos de operaciones, backoffice y finanzas en Chile y LATAM.";
 
+  const organizationId = `${SITE_URL}/#organization`;
+  const websiteId = `${SITE_URL}/#website`;
+  const serviceId = `${SITE_URL}/#professional-service`;
+
   const org = {
-    "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": organizationId,
     name: COMPANY.name,
     url: SITE_URL,
     logo: logoUrl,
@@ -21,23 +24,25 @@ export function SEOJSONLD() {
         "@type": "ContactPoint",
         contactType: "sales",
         email: COMPANY.email,
-        areaServed: "Latin America",
-        availableLanguage: ["es"],
+        telephone: COMPANY.whatsapp,
+        areaServed: ["CL", "Latin America"],
+        availableLanguage: ["es-CL", "es"],
       },
     ],
-    sameAs: [COMPANY.whatsappLink].filter(Boolean),
   };
 
   const website = {
-    "@context": "https://schema.org",
     "@type": "WebSite",
+    "@id": websiteId,
     name: COMPANY.name,
     url: SITE_URL,
+    inLanguage: "es-CL",
+    publisher: { "@id": organizationId },
   };
 
   const professionalService = {
-    "@context": "https://schema.org",
     "@type": "ProfessionalService",
+    "@id": serviceId,
     name: COMPANY.name,
     url: SITE_URL,
     logo: logoUrl,
@@ -45,16 +50,16 @@ export function SEOJSONLD() {
     description,
     areaServed: ["Chile", "Latin America"],
     email: COMPANY.email,
+    telephone: COMPANY.whatsapp,
+    parentOrganization: { "@id": organizationId },
+  };
+
+  const graph = {
+    "@context": "https://schema.org",
+    "@graph": [org, website, professionalService],
   };
 
   return (
-    <>
-      <Script id="jsonld-org" type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(org) }} />
-      <Script id="jsonld-website" type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(website) }} />
-      <Script id="jsonld-service" type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(professionalService) }} />
-    </>
+    <script id="jsonld-entity-graph" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }} />
   );
 }

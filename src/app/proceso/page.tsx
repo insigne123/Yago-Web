@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -14,13 +13,14 @@ import {
 } from "lucide-react";
 import { Navbar } from "@/components/landing/Navbar";
 import { Footer } from "@/components/landing/Footer";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Proceso — Yago | Cómo implementamos automatización con IA",
+export const metadata = createPageMetadata({
+  title: "Proceso YAGO | Cómo implementamos automatización con IA",
   description:
     "Nuestro método de 4 etapas para automatizar procesos con IA: descubrimiento, blueprint, build y go-live. Sin riesgos, con quick wins desde la primera semana.",
-  alternates: { canonical: "/proceso" },
-};
+  path: "/proceso",
+});
 
 const STAGES = [
   {

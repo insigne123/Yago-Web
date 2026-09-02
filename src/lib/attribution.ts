@@ -19,9 +19,11 @@ type Touch = {
 type StoredAttribution = {
   first: Touch;
   last: Touch;
+  expiresAt: string;
 };
 
 const STORAGE_KEY = "yago_attribution_v1";
+const ATTRIBUTION_TTL_MS = 90 * 24 * 60 * 60 * 1000;
 
 function nowISO() {
   return new Date().toISOString();
@@ -81,8 +83,22 @@ function readStored(): StoredAttribution | null {
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY);
     if (!raw) return null;
-    return JSON.parse(raw) as StoredAttribution;
+    const stored = JSON.parse(raw) as Partial<StoredAttribution>;
+    const expiresAt = stored.expiresAt ||
+      (stored.first?.ts ? new Date(new Date(stored.first.ts).getTime() + ATTRIBUTION_TTL_MS).toISOString() : "");
+
+    if (!stored.first || !stored.last || !expiresAt || new Date(expiresAt).getTime() <= Date.now()) {
+      window.localStorage.removeItem(STORAGE_KEY);
+      return null;
+    }
+
+    return { first: stored.first, last: stored.last, expiresAt };
   } catch {
+    try {
+      window.localStorage.removeItem(STORAGE_KEY);
+    } catch {
+      // Storage can be unavailable in private or restricted browser contexts.
+    }
     return null;
   }
 }
@@ -128,8 +144,8 @@ export function updateAttribution(): StoredAttribution | null {
   const stored = readStored();
 
   const next: StoredAttribution = stored
-    ? { first: stored.first, last: mergeLast(stored.last, current) }
-    : { first: current, last: current };
+    ? { first: stored.first, last: mergeLast(stored.last, current), expiresAt: stored.expiresAt }
+    : { first: current, last: current, expiresAt: new Date(Date.now() + ATTRIBUTION_TTL_MS).toISOString() };
 
   writeStored(next);
   return next;

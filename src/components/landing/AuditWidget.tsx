@@ -7,7 +7,8 @@ import Link from "next/link";
 import { COMPANY } from "@/config/site";
 import { useToast } from "@/hooks/use-toast";
 import { track } from "@/lib/analytics";
-import { useAttribution } from "@/lib/attribution";
+import { AttributionFields } from "@/components/forms/AttributionFields";
+import { LeadSuccess } from "@/components/forms/LeadSuccess";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 import { Button } from "@/components/ui/button";
@@ -56,7 +57,6 @@ export function AuditWidget() {
   const pathname = usePathname();
   const isMobile = useIsMobile();
   const { toast } = useToast();
-  const attribution = useAttribution();
 
   const [open, setOpen] = React.useState(false);
   const [showNudge, setShowNudge] = React.useState(false);
@@ -65,34 +65,11 @@ export function AuditWidget() {
 
   const [loading, setLoading] = React.useState(false);
   const [started, setStarted] = React.useState(false);
+  const [leadId, setLeadId] = React.useState("");
 
   const waHref = React.useMemo(() => buildWhatsAppHref(), []);
 
-  const hiddenAttribution = React.useMemo(() => {
-    const ft = attribution?.first;
-    const lt = attribution?.last;
-    return {
-      ft_utm_source: ft?.utm_source || "",
-      ft_utm_medium: ft?.utm_medium || "",
-      ft_utm_campaign: ft?.utm_campaign || "",
-      ft_utm_term: ft?.utm_term || "",
-      ft_utm_content: ft?.utm_content || "",
-      ft_referrer: ft?.referrer || "",
-      ft_landing: ft?.landing || "",
-      ft_ts: ft?.ts || "",
-
-      lt_utm_source: lt?.utm_source || "",
-      lt_utm_medium: lt?.utm_medium || "",
-      lt_utm_campaign: lt?.utm_campaign || "",
-      lt_utm_term: lt?.utm_term || "",
-      lt_utm_content: lt?.utm_content || "",
-      lt_referrer: lt?.referrer || "",
-      lt_landing: lt?.landing || "",
-      lt_ts: lt?.ts || "",
-    };
-  }, [attribution]);
-
-  const disableOnThisPage = pathname === "/privacidad" || pathname.toLowerCase() === "/ocr-test";
+  const disableOnThisPage = pathname !== "/";
   const delayOnHome = pathname === "/";
 
   React.useEffect(() => {
@@ -112,19 +89,6 @@ export function AuditWidget() {
     window.addEventListener("scroll", checkScroll, { passive: true });
     return () => window.removeEventListener("scroll", checkScroll);
   }, [delayOnHome, disableOnThisPage]);
-
-  React.useEffect(() => {
-    if (disableOnThisPage) return;
-    if (!readyToShow) return;
-    if (open) return;
-    if (isSuppressed()) return;
-
-    const t = window.setTimeout(() => {
-      setShowNudge(true);
-    }, 9000);
-
-    return () => window.clearTimeout(t);
-  }, [disableOnThisPage, open, pathname, readyToShow]);
 
   React.useEffect(() => {
     if (!showNudge) return;
@@ -160,6 +124,7 @@ export function AuditWidget() {
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setLeadId("");
     setLoading(true);
 
     const form = e.currentTarget;
@@ -212,13 +177,13 @@ export function AuditWidget() {
       }
 
       form.reset();
-      track("Audit Form Success", { location: "sheet", page: pathname });
+      setLeadId(resData.leadId || "sin-referencia");
+      track("Audit Form Success", { location: "sheet", page: pathname, lead_id: resData.leadId });
       toast({
         title: "Listo.",
         description: "Te contactaremos con un analisis de oportunidades y ahorro HH.",
       });
       dismissNudge("success");
-      setOpen(false);
     } catch (err: any) {
       if (!errorTracked) {
         track("Audit Form Error", {
@@ -326,7 +291,7 @@ export function AuditWidget() {
 
         <SheetContent
           side={isMobile ? "bottom" : "right"}
-          className="w-[92vw] border-slate-900/10 bg-slate-900/5 backdrop-blur sm:max-w-[460px]"
+          className="max-h-[92dvh] w-[92vw] overflow-y-auto border-slate-900/10 bg-slate-100/95 backdrop-blur sm:max-w-[460px]"
         >
           <SheetHeader>
             <SheetTitle className="text-slate-900">Analisis de automatizacion</SheetTitle>
@@ -338,66 +303,69 @@ export function AuditWidget() {
           <div className="mt-6">
             <form onSubmit={onSubmit} onFocusCapture={markStart} className="grid gap-3">
               {/* Honeypot */}
-              <input type="text" name="hp" className="hidden" />
+              <input type="text" name="hp" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden="true" />
+              <AttributionFields />
 
-              {/* Attribution */}
-              <input type="hidden" name="ft_utm_source" value={hiddenAttribution.ft_utm_source} />
-              <input type="hidden" name="ft_utm_medium" value={hiddenAttribution.ft_utm_medium} />
-              <input type="hidden" name="ft_utm_campaign" value={hiddenAttribution.ft_utm_campaign} />
-              <input type="hidden" name="ft_utm_term" value={hiddenAttribution.ft_utm_term} />
-              <input type="hidden" name="ft_utm_content" value={hiddenAttribution.ft_utm_content} />
-              <input type="hidden" name="ft_referrer" value={hiddenAttribution.ft_referrer} />
-              <input type="hidden" name="ft_landing" value={hiddenAttribution.ft_landing} />
-              <input type="hidden" name="ft_ts" value={hiddenAttribution.ft_ts} />
+              <label className="grid gap-1.5 text-sm font-medium text-slate-800">
+                Nombre
+                <Input
+                  name="nombre"
+                  autoComplete="name"
+                  placeholder="Nombre y apellido"
+                  required
+                  className="border-slate-900/10 bg-white/90"
+                />
+              </label>
+              <label className="grid gap-1.5 text-sm font-medium text-slate-800">
+                Email de trabajo
+                <Input
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  placeholder="nombre@empresa.cl"
+                  required
+                  className="border-slate-900/10 bg-white/90"
+                />
+              </label>
+              <label className="grid gap-1.5 text-sm font-medium text-slate-800">
+                Empresa <span className="font-normal text-slate-500">(opcional)</span>
+                <Input
+                  name="empresa"
+                  autoComplete="organization"
+                  placeholder="Nombre de la empresa"
+                  className="border-slate-900/10 bg-white/90"
+                />
+              </label>
 
-              <input type="hidden" name="lt_utm_source" value={hiddenAttribution.lt_utm_source} />
-              <input type="hidden" name="lt_utm_medium" value={hiddenAttribution.lt_utm_medium} />
-              <input type="hidden" name="lt_utm_campaign" value={hiddenAttribution.lt_utm_campaign} />
-              <input type="hidden" name="lt_utm_term" value={hiddenAttribution.lt_utm_term} />
-              <input type="hidden" name="lt_utm_content" value={hiddenAttribution.lt_utm_content} />
-              <input type="hidden" name="lt_referrer" value={hiddenAttribution.lt_referrer} />
-              <input type="hidden" name="lt_landing" value={hiddenAttribution.lt_landing} />
-              <input type="hidden" name="lt_ts" value={hiddenAttribution.lt_ts} />
-
-              <Input
-                name="nombre"
-                placeholder="Tu nombre"
-                required
-                className="border-slate-900/10 bg-white/80"
-              />
-              <Input
-                name="email"
-                type="email"
-                placeholder="Tu email"
-                required
-                className="border-slate-900/10 bg-white/80"
-              />
-              <Input
-                name="empresa"
-                placeholder="Empresa (opcional)"
-                className="border-slate-900/10 bg-white/80"
-              />
-
-              <Textarea
-                name="audit_process"
-                placeholder="Describe el proceso a automatizar (2-3 lineas)"
-                rows={4}
-                required
-                className="border-slate-900/10 bg-white/80"
-              />
+              <label className="grid gap-1.5 text-sm font-medium text-slate-800">
+                Proceso que quieres automatizar
+                <Textarea
+                  name="audit_process"
+                  placeholder="Describe brevemente las tareas, entradas y resultado esperado"
+                  rows={4}
+                  required
+                  className="border-slate-900/10 bg-white/90"
+                />
+              </label>
 
               <div className="grid gap-3 sm:grid-cols-2">
-                <Input
-                  name="audit_hours_week"
-                  inputMode="numeric"
-                  placeholder="Horas/semana (aprox)"
-                  className="border-slate-900/10 bg-white/80"
-                />
-                <Input
-                  name="audit_tools"
-                  placeholder="Herramientas (ej: Excel, ERP, WhatsApp)"
-                  className="border-slate-900/10 bg-white/80"
-                />
+                <label className="grid gap-1.5 text-sm font-medium text-slate-800">
+                  Horas por semana <span className="font-normal text-slate-500">(aprox.)</span>
+                  <Input
+                    name="audit_hours_week"
+                    inputMode="numeric"
+                    placeholder="Ej. 15"
+                    className="border-slate-900/10 bg-white/90"
+                  />
+                </label>
+                <label className="grid gap-1.5 text-sm font-medium text-slate-800">
+                  Herramientas actuales
+                  <Input
+                    name="audit_tools"
+                    placeholder="Excel, ERP, WhatsApp..."
+                    className="border-slate-900/10 bg-white/90"
+                  />
+                </label>
               </div>
 
               <Button
@@ -430,6 +398,7 @@ export function AuditWidget() {
                 </div>
               </div>
             </form>
+            {leadId ? <LeadSuccess leadId={leadId} message="Revisaremos tu proceso y te responderemos con oportunidades priorizadas." /> : null}
           </div>
         </SheetContent>
       </Sheet>

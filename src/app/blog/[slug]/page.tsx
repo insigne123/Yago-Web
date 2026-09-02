@@ -3,9 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, CheckCircle2, Clock } from "lucide-react";
-import { BLOG_POSTS, getBlogPostBySlug } from "@/config/blog";
+import { BLOG_AUTHOR, BLOG_POSTS, getBlogPostBySlug } from "@/config/blog";
 import { Navbar } from "@/components/landing/Navbar";
 import { Footer } from "@/components/landing/Footer";
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
+import { createPageMetadata } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -18,19 +20,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = getBlogPostBySlug(slug);
   if (!post) return {};
 
-  return {
+  return createPageMetadata({
     title: `${post.title} — Blog Yago`,
     description: post.description,
     keywords: post.keywords,
-    alternates: { canonical: `/blog/${post.slug}` },
-    openGraph: {
-      title: post.title,
-      description: post.description,
-      type: "article",
-      publishedTime: post.date,
-      images: [{ url: post.image }],
-    },
-  };
+    path: `/blog/${post.slug}`,
+    image: post.image,
+    type: "article",
+    publishedTime: post.date,
+    modifiedTime: post.modifiedDate || post.date,
+  });
 }
 
 function formatDate(iso: string) {
@@ -56,10 +55,11 @@ export default async function BlogPostPage({ params }: Props) {
     description: post.description,
     image: `${base}${post.image}`,
     datePublished: post.date,
+    dateModified: post.modifiedDate || post.date,
     keywords: post.keywords.join(", "),
     inLanguage: "es",
-    author: { "@type": "Organization", name: "Yago", url: base },
-    publisher: { "@type": "Organization", name: "Yago", url: base },
+    author: { "@type": "Organization", "@id": `${base}/#organization`, name: "YAGO", url: base },
+    publisher: { "@id": `${base}/#organization` },
     mainEntityOfPage: { "@type": "WebPage", "@id": `${base}/blog/${post.slug}` },
   };
 
@@ -72,6 +72,7 @@ export default async function BlogPostPage({ params }: Props) {
       <Navbar ctaHref="/#contacto" ctaLabel="Pedir análisis" />
       <main id="main-content" className="main-premium pb-24 pt-28 md:pt-32">
         <article className="mx-auto max-w-3xl px-4">
+          <Breadcrumbs items={[{ name: "Inicio", href: "/" }, { name: "Blog", href: "/blog" }, { name: post.title, href: `/blog/${post.slug}` }]} />
           <Link
             href="/blog"
             className="inline-flex items-center gap-2 text-sm text-slate-600 transition hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200/70 rounded-full"
@@ -86,6 +87,9 @@ export default async function BlogPostPage({ params }: Props) {
                 {post.category}
               </span>
               <time dateTime={post.date}>{formatDate(post.date)}</time>
+              {post.modifiedDate && post.modifiedDate !== post.date ? (
+                <span>Revisado el <time dateTime={post.modifiedDate}>{formatDate(post.modifiedDate)}</time></span>
+              ) : null}
               <span className="inline-flex items-center gap-1">
                 <Clock className="h-3.5 w-3.5" aria-hidden="true" />
                 {post.readingTime} de lectura
@@ -94,6 +98,10 @@ export default async function BlogPostPage({ params }: Props) {
             <h1 className="mt-4 text-balance font-headline text-3xl font-semibold leading-tight text-slate-900 md:text-5xl">
               {post.title}
             </h1>
+            <div className="mt-5 border-l-2 border-sky-500 pl-4 text-sm leading-relaxed text-slate-700">
+              <div className="font-semibold text-slate-950">{BLOG_AUTHOR.name}</div>
+              <div>{BLOG_AUTHOR.role}</div>
+            </div>
           </header>
 
           <div className="card-glow-border relative mt-8 overflow-hidden rounded-[1.8rem] border border-slate-900/10 shadow-[0_24px_90px_rgba(30,58,95,0.14)]">
@@ -131,6 +139,21 @@ export default async function BlogPostPage({ params }: Props) {
               ) : null}
             </section>
           ))}
+
+          {post.sources?.length ? (
+            <section className="mt-12 border-t border-slate-900/10 pt-8" aria-labelledby="fuentes-articulo">
+              <h2 id="fuentes-articulo" className="text-2xl font-semibold text-slate-950">Fuentes y referencias</h2>
+              <ul className="mt-4 space-y-3 text-sm leading-relaxed">
+                {post.sources.map((source) => (
+                  <li key={source.url}>
+                    <a href={source.url} target="_blank" rel="noreferrer" className="font-medium text-sky-800 underline underline-offset-4 hover:text-slate-950">
+                      {source.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ) : null}
 
           <div className="card-glow-border mt-12 rounded-[1.8rem] border border-slate-900/10 bg-[linear-gradient(120deg,rgba(34,211,238,0.08),rgba(139,92,246,0.08))] p-6 md:p-8">
             <h2 className="font-headline text-xl font-semibold text-slate-900 md:text-2xl">En resumen</h2>

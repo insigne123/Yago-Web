@@ -16,6 +16,9 @@ export type EmailFormPayload = {
   ft_utm_campaign?: string;
   ft_utm_term?: string;
   ft_utm_content?: string;
+  ft_gclid?: string;
+  ft_fbclid?: string;
+  ft_msclkid?: string;
   ft_referrer?: string;
   ft_landing?: string;
   ft_ts?: string;
@@ -25,6 +28,9 @@ export type EmailFormPayload = {
   lt_utm_campaign?: string;
   lt_utm_term?: string;
   lt_utm_content?: string;
+  lt_gclid?: string;
+  lt_fbclid?: string;
+  lt_msclkid?: string;
   lt_referrer?: string;
   lt_landing?: string;
   lt_ts?: string;

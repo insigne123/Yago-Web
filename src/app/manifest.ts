@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
   const name = `${COMPANY.name} — Automatización con IA`;
   const short_name = COMPANY.name;
   const description =
-    "Agentes, automatización de flujos y RAG para reducir costos y tiempos.";
+    "Automatización de procesos, OCR e integraciones para operaciones, backoffice y finanzas.";
 
   return {
     name,

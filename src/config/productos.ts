@@ -291,7 +291,7 @@ export const PRODUCTS: Product[] = [
     tagline:
       "Tu agencia de marketing digital automatizada: planifica campañas, analiza tendencias y crea contenidos sin fricción.",
     highlights: [
-      "Multiplica tu creación de contenido x10 de manera estratégica.",
+      "Aumenta la capacidad de creación de contenido con un flujo estratégico y medible.",
       "Alineación total entre la investigación y la ejecución automática multicanal.",
     ],
     pageTitle: "Marketing operativo con IA, de la idea al reporte.",

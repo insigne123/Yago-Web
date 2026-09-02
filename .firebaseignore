@@ -1,0 +1,25 @@
+# Keep Firebase App Hosting source uploads limited to the app source.
+.git
+.next
+node_modules
+out
+build
+coverage
+playwright-report
+test-results
+
+# Local-only files and assistant/tooling artifacts.
+.env*
+.agents
+.opencode
+.claude
+.idx
+.modified
+firebase-debug.log
+firestore-debug.log
+pglite-debug.log
+firepit-log.txt
+skills-lock.json
+
+# Ad-hoc brochure exports should not be deployed.
+brochure_*.html

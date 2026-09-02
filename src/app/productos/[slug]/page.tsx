@@ -1,10 +1,14 @@
 import { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PRODUCTS } from "@/config/productos";
 import { Navbar } from "@/components/landing/Navbar";
 import { Footer } from "@/components/landing/Footer";
 import { BrandStamp } from "@/components/BrandStamp";
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { createPageMetadata } from "@/lib/seo";
 
 const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "contacto@yago.cl";
 const WHATSAPP_PHONE = process.env.NEXT_PUBLIC_WHATSAPP_PHONE || "";
@@ -24,10 +28,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const p = getProductBySlug(slug);
   if (!p) return {};
 
-  return {
+  return createPageMetadata({
     title: p.seoTitle || `${p.name} — Yago`,
     description: p.seoDescription || p.pageSubtitle || p.tagline,
-  };
+    path: `/productos/${p.slug}`,
+    image: `/images/product_${p.slug}.png`,
+  });
 }
 
 export default async function ProductPage({ params }: PageProps) {
@@ -63,13 +69,37 @@ export default async function ProductPage({ params }: PageProps) {
     faqs.length ? { id: "faq", label: "FAQ" } : null,
   ].filter(Boolean) as { id: string; label: string }[];
   const relatedProducts = PRODUCTS.filter((x) => x.slug !== p.slug).slice(0, 3);
+  const productJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "@id": `https://yago.cl/productos/${p.slug}#software`,
+    name: p.name,
+    description: p.seoDescription || subtitle,
+    applicationCategory: "BusinessApplication",
+    operatingSystem: "Web",
+    url: `https://yago.cl/productos/${p.slug}`,
+    image: `https://yago.cl/images/product_${p.slug}.png`,
+    provider: { "@id": "https://yago.cl/#organization" },
+  };
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: { "@type": "Answer", text: item.answer },
+    })),
+  };
 
   return (
     <div className="relative min-h-screen overflow-x-clip text-slate-900">
+      <JsonLd id={`jsonld-product-${p.slug}`} data={productJsonLd} />
+      {faqs.length ? <JsonLd id={`jsonld-product-faq-${p.slug}`} data={faqJsonLd} /> : null}
       <Navbar />
 
-      <main className="main-premium py-24">
+      <main id="main-content" className="main-premium py-24">
         <div className="mx-auto max-w-6xl space-y-8 px-4">
+          <Breadcrumbs items={[{ name: "Inicio", href: "/" }, { name: "Productos", href: "/productos" }, { name: p.name, href: `/productos/${p.slug}` }]} />
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
               <p className="text-xs tracking-[0.22em] text-muted-foreground">PRODUCTO</p>
@@ -94,10 +124,13 @@ export default async function ProductPage({ params }: PageProps) {
 
           {/* Hero Banner Imagen Premium */}
           <div className="relative aspect-[21/9] w-full overflow-hidden rounded-3xl border border-slate-900/10 bg-slate-900/5 shadow-2xl">
-            <img
+            <Image
               src={`/images/product_${p.slug}.png`}
               alt={`Banner de ${p.name}`}
-              className="h-full w-full object-cover"
+              fill
+              priority
+              sizes="(max-width: 768px) 100vw, 1152px"
+              className="object-cover"
             />
             {/* Gradient Overlay sutil */}
             <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-white/60 to-transparent" />

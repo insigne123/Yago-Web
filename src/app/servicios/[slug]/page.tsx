@@ -6,6 +6,9 @@ import { ArrowLeft, ArrowRight, CheckCircle2, Clock } from "lucide-react";
 import { getServiceBySlug, SERVICES } from "@/config/services";
 import { Navbar } from "@/components/landing/Navbar";
 import { Footer } from "@/components/landing/Footer";
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { createPageMetadata } from "@/lib/seo";
 
 const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "contacto@yago.cl";
 const WHATSAPP_PHONE = process.env.NEXT_PUBLIC_WHATSAPP_PHONE || "";
@@ -21,11 +24,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const svc = getServiceBySlug(slug);
   if (!svc) return {};
 
-  return {
+  return createPageMetadata({
     title: svc.seoTitle || `${svc.title} — Yago`,
     description: svc.seoDescription || svc.pageSubtitle || svc.short,
-    alternates: { canonical: `/servicios/${svc.slug}` },
-  };
+    path: `/servicios/${svc.slug}`,
+    image: svc.image,
+  });
 }
 
 export default async function ServicePage({ params }: PageProps) {
@@ -44,12 +48,34 @@ export default async function ServicePage({ params }: PageProps) {
   const heading = svc.pageTitle || svc.title;
   const subtitle = svc.pageSubtitle || svc.short;
   const primaryLabel = svc.ctaPrimary || "Solicitar demo";
+  const serviceJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `https://yago.cl/servicios/${svc.slug}#service`,
+    name: svc.title,
+    description: svc.seoDescription || subtitle,
+    url: `https://yago.cl/servicios/${svc.slug}`,
+    areaServed: "Chile",
+    provider: { "@id": "https://yago.cl/#organization" },
+  };
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: (svc.faq || []).map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: { "@type": "Answer", text: item.answer },
+    })),
+  };
 
   return (
     <div className="relative min-h-screen overflow-x-clip text-slate-900">
+      <JsonLd id={`jsonld-service-${svc.slug}`} data={serviceJsonLd} />
+      {svc.faq?.length ? <JsonLd id={`jsonld-service-faq-${svc.slug}`} data={faqJsonLd} /> : null}
       <Navbar ctaHref="/#contacto" ctaLabel="Pedir analisis" />
       <main id="main-content" className="main-premium pb-24 pt-28 md:pt-32">
         <div className="mx-auto max-w-6xl space-y-14 px-4">
+          <Breadcrumbs items={[{ name: "Inicio", href: "/" }, { name: "Servicios", href: "/servicios" }, { name: svc.title, href: `/servicios/${svc.slug}` }]} />
           {/* Hero */}
           <section className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
             <div>
