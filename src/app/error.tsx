@@ -19,7 +19,7 @@ export default function ErrorPage({ error, reset }: { error: Error & { digest?: 
           Intenta nuevamente. Si el problema continúa, vuelve al inicio para retomar la navegación.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
-          <button type="button" onClick={reset} className="rounded-full bg-white px-5 py-3 text-sm font-semibold text-slate-950">
+          <button type="button" onClick={reset} className="rounded-full bg-white px-5 py-3 text-sm font-semibold text-[#070b13]">
             Intentar de nuevo
           </button>
           <Link href="/" className="rounded-full border border-white/20 px-5 py-3 text-sm font-semibold text-white">

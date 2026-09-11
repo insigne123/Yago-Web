@@ -24,7 +24,7 @@ export const metadata = createPageMetadata({
 
 export default function LandingIA() {
   return (
-    <div className="relative min-h-screen overflow-x-clip text-slate-900">
+    <div className="relative min-h-screen overflow-x-clip text-white">
       <Navbar ctaHref={PRIMARY_CTA.href} ctaLabel={PRIMARY_CTA.label} />
       <main id="main-content" className="main-premium">
         <Hero />

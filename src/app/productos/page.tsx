@@ -47,16 +47,16 @@ const specializedProducts = [
 
 export default function ProductsIndexPage() {
   return (
-    <div className="relative min-h-screen overflow-x-clip text-slate-900">
+    <div className="relative min-h-screen overflow-x-clip text-white">
       <Navbar ctaHref={PRIMARY_CTA.href} ctaLabel={PRIMARY_CTA.label} />
       <main id="main-content" className="main-premium pb-20 pt-20 md:pt-24">
         <section className="mx-auto max-w-7xl px-4">
           <div className="max-w-4xl">
-            <p className="text-xs uppercase tracking-[0.22em] text-sky-700">Productos YAGO</p>
-            <h1 className="mt-4 text-balance font-headline text-4xl font-semibold text-slate-950 md:text-6xl">
+            <p className="text-xs uppercase tracking-[0.22em] text-sky-300">Productos YAGO</p>
+            <h1 className="mt-4 text-balance font-headline text-4xl font-semibold text-white md:text-6xl">
               Elige por el proceso que necesitas resolver, no por la tecnología.
             </h1>
-            <p className="mt-5 max-w-3xl text-base leading-relaxed text-slate-700 md:text-lg">
+            <p className="mt-5 max-w-3xl text-base leading-relaxed text-slate-300 md:text-lg">
               Estas soluciones parten desde flujos ya definidos y se configuran para tu operación. Si tu caso no calza,
               revisamos una automatización o aplicación a medida.
             </p>
@@ -69,15 +69,15 @@ export default function ProductsIndexPage() {
                 <Link
                   key={product.href}
                   href={product.href}
-                  className="group rounded-[1.75rem] border border-slate-900/10 bg-white/75 p-6 shadow-[0_18px_50px_rgba(30,58,95,0.08)] transition-[transform,border-color,box-shadow] duration-200 hover:-translate-y-0.5 hover:border-sky-600/25 hover:shadow-[0_22px_60px_rgba(30,58,95,0.12)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
+                  className="group rounded-[1.75rem] border border-white/10 bg-white/[0.05] p-6 shadow-[0_18px_50px_rgba(0,0,0,0.08)] transition-[transform,border-color,box-shadow] duration-200 hover:-translate-y-0.5 hover:border-sky-600/25 hover:shadow-[0_22px_60px_rgba(0,0,0,0.12)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
                 >
                   <div className="flex size-12 items-center justify-center rounded-2xl bg-slate-950 text-sky-200">
                     <Icon className="size-5" aria-hidden="true" />
                   </div>
-                  <p className="mt-6 text-xs uppercase tracking-[0.18em] text-sky-700">{product.label}</p>
-                  <h2 className="mt-2 text-2xl font-semibold text-slate-950">{product.name}</h2>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-700">{product.description}</p>
-                  <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-slate-950">
+                  <p className="mt-6 text-xs uppercase tracking-[0.18em] text-sky-300">{product.label}</p>
+                  <h2 className="mt-2 text-2xl font-semibold text-white">{product.name}</h2>
+                  <p className="mt-3 text-sm leading-relaxed text-slate-300">{product.description}</p>
+                  <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-white">
                     Ver producto
                     <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
                   </span>

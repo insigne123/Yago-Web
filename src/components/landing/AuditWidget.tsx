@@ -207,18 +207,18 @@ export function AuditWidget() {
   return (
     <div className="fixed bottom-5 right-5 z-[90] flex flex-col items-end gap-3">
       {showNudge && (
-        <div className="w-[min(360px,calc(100vw-40px))] overflow-hidden rounded-3xl border border-slate-900/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.97),rgba(246,250,254,1))] shadow-[0_24px_80px_rgba(0,0,0,0.4)] animate-in fade-in-0 slide-in-from-bottom-4 duration-500">
+        <div className="w-[min(360px,calc(100vw-40px))] overflow-hidden rounded-3xl border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] shadow-[0_24px_80px_rgba(0,0,0,0.4)] animate-in fade-in-0 slide-in-from-bottom-4 duration-500">
           <div className="h-px w-full bg-gradient-to-r from-transparent via-sky-200/55 to-transparent" />
 
           <div className="p-5">
             <div className="flex items-start justify-between gap-3">
               <div>
-                <div className="inline-flex items-center gap-2 rounded-full border border-slate-900/10 bg-slate-900/5 px-3 py-1 text-[11px] text-slate-600">
+                <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] text-slate-300">
                   <span className="h-1.5 w-1.5 rounded-full bg-sky-300" aria-hidden="true" />
                   Diagnostico sin costo
                 </div>
                 <div className="mt-3 text-lg font-semibold leading-tight">
-                  <span className="text-slate-900">Analisis de automatizacion</span>
+                  <span className="text-white">Analisis de automatizacion</span>
                 </div>
 
                 <div className="mt-2 text-sm text-muted-foreground">
@@ -232,7 +232,7 @@ export function AuditWidget() {
                   track("Audit Nudge Dismiss", { location: "nudge", page: pathname });
                   dismissNudge("close");
                 }}
-                className="rounded-xl border border-slate-900/10 bg-slate-900/5 p-2 text-slate-600 transition hover:text-foreground"
+                className="rounded-xl border border-white/10 bg-white/5 p-2 text-slate-300 transition hover:text-foreground"
                 aria-label="Cerrar"
               >
                 <X className="h-4 w-4" />
@@ -246,13 +246,13 @@ export function AuditWidget() {
                   track("Audit Nudge Click", { location: "nudge", page: pathname });
                   openSheet("nudge");
                 }}
-                className="bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(223,234,255,0.92))] text-slate-950"
+                className="bg-white text-[#070b13]"
               >
                 Pedir analisis
                 <ArrowRight className="h-4 w-4" />
               </Button>
 
-              <Button asChild variant="ghost" className="border border-slate-900/10 bg-slate-900/5">
+              <Button asChild variant="ghost" className="border border-white/10 bg-white/5">
                 <a
                   href={waHref}
                   target="_blank"
@@ -271,19 +271,19 @@ export function AuditWidget() {
 
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
-          <div className="rounded-full border border-slate-900/10 bg-white/[0.04] p-[1px] shadow-[0_18px_55px_rgba(30,58,95,0.14)]">
+          <div className="rounded-full border border-white/10 bg-white/[0.04] p-[1px] shadow-[0_18px_55px_rgba(0,0,0,0.14)]">
             <button
               type="button"
               onClick={() => openSheet("floating")}
-              className="group inline-flex items-center gap-2 rounded-full border border-slate-900/10 bg-white/80 px-3 py-2.5 transition hover:bg-white sm:gap-3 sm:px-4"
+              className="group inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-3 py-2.5 transition hover:bg-white/15 sm:gap-3 sm:px-4"
               aria-label="Pedir analisis de automatizacion"
             >
-              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-sky-300/10 text-sky-700 ring-1 ring-sky-200/20">
+              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-sky-300/10 text-sky-300 ring-1 ring-sky-200/20">
                 <Sparkles className="h-4 w-4" />
               </span>
               <span className="hidden text-left sm:block">
-                <span className="block text-sm font-semibold text-slate-900">Diagnostico</span>
-                <span className="block text-xs text-slate-600">Quick wins</span>
+                <span className="block text-sm font-semibold text-white">Diagnostico</span>
+                <span className="block text-xs text-slate-300">Quick wins</span>
               </span>
             </button>
           </div>
@@ -291,10 +291,10 @@ export function AuditWidget() {
 
         <SheetContent
           side={isMobile ? "bottom" : "right"}
-          className="max-h-[92dvh] w-[92vw] overflow-y-auto border-slate-900/10 bg-slate-100/95 backdrop-blur sm:max-w-[460px]"
+          className="max-h-[92dvh] w-[92vw] overflow-y-auto border-white/10 bg-[#0b1220]/95 text-white backdrop-blur sm:max-w-[460px]"
         >
           <SheetHeader>
-            <SheetTitle className="text-slate-900">Analisis de automatizacion</SheetTitle>
+            <SheetTitle className="text-white">Analisis de automatizacion</SheetTitle>
             <SheetDescription>
               En 48h te enviamos oportunidades y una estimacion de ahorro de horas-hombre.
             </SheetDescription>
@@ -306,17 +306,17 @@ export function AuditWidget() {
               <input type="text" name="hp" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden="true" />
               <AttributionFields />
 
-              <label className="grid gap-1.5 text-sm font-medium text-slate-800">
+              <label className="grid gap-1.5 text-sm font-medium text-slate-200">
                 Nombre
                 <Input
                   name="nombre"
                   autoComplete="name"
                   placeholder="Nombre y apellido"
                   required
-                  className="border-slate-900/10 bg-white/90"
+                  className="border-white/10 bg-white/5 text-white placeholder:text-slate-400"
                 />
               </label>
-              <label className="grid gap-1.5 text-sm font-medium text-slate-800">
+              <label className="grid gap-1.5 text-sm font-medium text-slate-200">
                 Email de trabajo
                 <Input
                   name="email"
@@ -324,46 +324,46 @@ export function AuditWidget() {
                   autoComplete="email"
                   placeholder="nombre@empresa.cl"
                   required
-                  className="border-slate-900/10 bg-white/90"
+                  className="border-white/10 bg-white/5 text-white placeholder:text-slate-400"
                 />
               </label>
-              <label className="grid gap-1.5 text-sm font-medium text-slate-800">
-                Empresa <span className="font-normal text-slate-500">(opcional)</span>
+              <label className="grid gap-1.5 text-sm font-medium text-slate-200">
+                Empresa <span className="font-normal text-slate-400">(opcional)</span>
                 <Input
                   name="empresa"
                   autoComplete="organization"
                   placeholder="Nombre de la empresa"
-                  className="border-slate-900/10 bg-white/90"
+                  className="border-white/10 bg-white/5 text-white placeholder:text-slate-400"
                 />
               </label>
 
-              <label className="grid gap-1.5 text-sm font-medium text-slate-800">
+              <label className="grid gap-1.5 text-sm font-medium text-slate-200">
                 Proceso que quieres automatizar
                 <Textarea
                   name="audit_process"
                   placeholder="Describe brevemente las tareas, entradas y resultado esperado"
                   rows={4}
                   required
-                  className="border-slate-900/10 bg-white/90"
+                  className="border-white/10 bg-white/5 text-white placeholder:text-slate-400"
                 />
               </label>
 
               <div className="grid gap-3 sm:grid-cols-2">
-                <label className="grid gap-1.5 text-sm font-medium text-slate-800">
-                  Horas por semana <span className="font-normal text-slate-500">(aprox.)</span>
+                <label className="grid gap-1.5 text-sm font-medium text-slate-200">
+                  Horas por semana <span className="font-normal text-slate-400">(aprox.)</span>
                   <Input
                     name="audit_hours_week"
                     inputMode="numeric"
                     placeholder="Ej. 15"
-                    className="border-slate-900/10 bg-white/90"
+                    className="border-white/10 bg-white/5 text-white placeholder:text-slate-400"
                   />
                 </label>
-                <label className="grid gap-1.5 text-sm font-medium text-slate-800">
+                <label className="grid gap-1.5 text-sm font-medium text-slate-200">
                   Herramientas actuales
                   <Input
                     name="audit_tools"
                     placeholder="Excel, ERP, WhatsApp..."
-                    className="border-slate-900/10 bg-white/90"
+                    className="border-white/10 bg-white/5 text-white placeholder:text-slate-400"
                   />
                 </label>
               </div>
@@ -371,7 +371,7 @@ export function AuditWidget() {
               <Button
                 type="submit"
                 disabled={loading}
-                className="mt-1 bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(223,234,255,0.92))] text-slate-950"
+                className="mt-1 bg-white text-[#070b13]"
               >
                 {loading ? "Enviando..." : "Enviar para analisis"}
               </Button>

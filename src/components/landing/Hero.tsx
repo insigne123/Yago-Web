@@ -86,7 +86,7 @@ export function Hero() {
             <Button
               asChild
               size="lg"
-              className="group rounded-full border border-white bg-white px-6 text-slate-950 shadow-[0_14px_38px_rgba(0,0,0,0.3)] transition-transform hover:-translate-y-0.5 hover:bg-sky-50 plausible-event-name=CTA+Agendar+Sesion plausible-event-location=hero"
+              className="group rounded-full border border-white bg-white px-6 text-[#070b13] shadow-[0_14px_38px_rgba(0,0,0,0.3)] transition-transform hover:-translate-y-0.5 hover:bg-sky-50 plausible-event-name=CTA+Agendar+Sesion plausible-event-location=hero"
             >
               <a href={PRIMARY_CTA.href}>
                 {PRIMARY_CTA.label}
@@ -119,21 +119,21 @@ export function Hero() {
 
         <div className="relative lg:justify-self-end">
           <div
-            className="absolute inset-x-10 top-4 h-32 rounded-full bg-cyan-400/15 blur-[80px]"
+            className="absolute inset-x-10 top-4 h-32 rounded-full bg-sky-400/10 blur-[80px]"
             aria-hidden="true"
           />
 
-          <div className="relative overflow-hidden rounded-[2rem] border border-slate-900/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.97),rgba(246,250,254,1))] p-1 shadow-[0_30px_100px_rgba(30,58,95,0.14)]">
-            <Card className="relative overflow-hidden rounded-[1.75rem] border-slate-900/10 bg-transparent shadow-none">
+          <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-1 shadow-[0_30px_100px_rgba(0,0,0,0.14)]">
+            <Card className="relative overflow-hidden rounded-[1.75rem] border-white/10 bg-transparent shadow-none">
               <CardHeader className="pb-5">
-                <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.14em] text-slate-600">
+                <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.14em] text-slate-300">
                   <span className="h-1.5 w-1.5 rounded-full bg-sky-300" aria-hidden="true" />
                   Vista simple del cambio
                 </div>
-                <h2 className="mt-3 text-[2rem] font-semibold leading-none text-slate-900 md:text-[2.4rem]">
+                <h2 className="mt-3 text-[2rem] font-semibold leading-none text-white md:text-[2.4rem]">
                   De tarea manual a operación visible.
                 </h2>
-                <CardDescription className="max-w-md text-sm leading-relaxed text-slate-600">
+                <CardDescription className="max-w-md text-sm leading-relaxed text-slate-300">
                   Un recorrido claro: entrada, automatización y evidencia para decidir mejor.
                 </CardDescription>
               </CardHeader>
@@ -146,20 +146,20 @@ export function Hero() {
                     return (
                       <div
                         key={module.title}
-                        className="relative rounded-[1.35rem] border border-slate-900/10 bg-white/[0.04] p-4"
+                        className="relative rounded-[1.35rem] border border-white/10 bg-white/[0.04] p-4"
                       >
                         {index < flowSteps.length - 1 ? (
                           <div className="absolute bottom-[-0.85rem] left-9 h-4 w-px bg-gradient-to-b from-sky-200/40 to-transparent" aria-hidden="true" />
                         ) : null}
 
                         <div className="flex items-center gap-4">
-                          <div className="flex size-10 shrink-0 items-center justify-center rounded-2xl border border-slate-900/10 bg-white/[0.04] text-sky-700">
+                          <div className="flex size-10 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] text-sky-300">
                             <Icon className="h-4 w-4" aria-hidden="true" />
                           </div>
                           <div className="min-w-0 flex-1">
-                            <div className="text-[11px] uppercase tracking-[0.16em] text-slate-500">{module.label}</div>
-                            <div className="mt-1 text-sm font-semibold text-slate-900">{module.title}</div>
-                            <div className="mt-1 text-sm leading-relaxed text-slate-600">{module.detail}</div>
+                            <div className="text-[11px] uppercase tracking-[0.16em] text-slate-400">{module.label}</div>
+                            <div className="mt-1 text-sm font-semibold text-white">{module.title}</div>
+                            <div className="mt-1 text-sm leading-relaxed text-slate-300">{module.detail}</div>
                           </div>
                         </div>
                       </div>
@@ -167,20 +167,20 @@ export function Hero() {
                   })}
                 </div>
 
-                <div className="rounded-[1.5rem] border border-slate-900/10 bg-slate-900/5 p-5">
+                <div className="rounded-[1.5rem] border border-white/10 bg-white/5 p-5">
                   <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                     <div>
-                      <div className="inline-flex items-center gap-2 text-sm font-medium text-slate-900">
-                        <ShieldCheck className="h-4 w-4 text-sky-700" aria-hidden="true" />
+                      <div className="inline-flex items-center gap-2 text-sm font-medium text-white">
+                        <ShieldCheck className="h-4 w-4 text-sky-300" aria-hidden="true" />
                         Próximo paso claro
                       </div>
-                      <div className="mt-1 text-sm text-slate-600">
+                      <div className="mt-1 text-sm text-slate-300">
                         Detectamos el cuello de botella y definimos si conviene una app lista, OCR o automatización a medida.
                       </div>
                     </div>
                     <a
                       href="#contacto"
-                      className="rounded-full border border-slate-900/10 bg-white/[0.05] px-3 py-1 text-xs uppercase tracking-[0.16em] text-slate-600 transition hover:bg-slate-50 hover:text-slate-900"
+                      className="rounded-full border border-white/10 bg-white/[0.05] px-3 py-1 text-xs uppercase tracking-[0.16em] text-slate-300 transition hover:bg-white/10 hover:text-white"
                     >
                       Conversar
                     </a>

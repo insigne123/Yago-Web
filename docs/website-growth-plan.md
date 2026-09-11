@@ -330,10 +330,11 @@ Criterio de aceptacion: cualquier oferta publica se alcanza en tres clics o meno
 
 ### Fase 2: sistema visual y accesibilidad
 
-- [x] Aplicar la direccion institucional hibrida.
-- [x] Unificar componentes y CTA.
+- [x] Aplicar dark premium total (`#070b13`, texto Mist, unico acento `#7dd3fc`).
+- [x] Unificar componentes y CTA (primario blanco, secundario quieto).
 - [x] Corregir headings, labels, contraste, focus y mobile sheets.
 - [x] Reducir movimiento y respetar preferencias.
+- [x] Eliminar acentos fuera de marca (indigo, ambar, esmeralda, fucsia, violeta).
 
 Criterio de aceptacion: lectura y navegacion correctas en desktop, mobile, teclado y zoom 200%.
 
@@ -414,6 +415,7 @@ La implementacion tecnica puede dejar campos y estructuras preparadas, pero la p
 | 2026-09-01 | Dependencias | Runtime validado | `npm ci` reproducible y `npm audit --omit=dev` con 0 vulnerabilidades; el audit completo conserva hallazgos transitivos de Genkit CLI/OpenTelemetry usados en desarrollo |
 | 2026-09-01 | Pruebas | Verde | Next 15.5.25, build de 43 paginas, typecheck y Playwright: 61 passed, 1 mobile-only skipped en desktop |
 | 2026-09-11 | Parte 1 (trial+GEO+OG) | Desplegada | Commit `06d8d80`: eliminado trial OCR (API, pagina OCR-TEST, componente, env var); robots con 8 bots IA; `llms.txt` enriquecido; bloque Otros servicios; FAQs con fecha de revision; 4 OG por plantilla en estilo oscuro. Build 42 paginas, typecheck y Playwright 65 passed/1 skipped. Rollout App Hosting completo; smoke: trial en 404, robots/llms/OG nuevos en 200 y verificados en contenido |
+| 2026-09-11 | Parte 2 (dark premium) | Lista para rollout | Red diseno dark premium total: tokens y `globals.css` en `#070b13`/Mist con unico acento sky; Navbar, Hero, secciones, plantillas, formularios y estados 404/error migrados; `btn-vibrant` y `text-shimmer` redefinidos; screenshots desktop/mobile/`/ocr` revisados; a11y sin violaciones |
 | 2026-09-01 | Publicacion | Pendiente | Requiere verificar secretos de correo y OCR antes del smoke real |
 | 2026-09-11 | Publicacion | Desplegada, formularios pendientes de credenciales | Commit `28e6630` en `origin/main`; Vercel publico el commit con exito. Rollout manual a Firebase App Hosting `automata-ai/studio` completado con `deploy --only apphosting` (el backend no tiene repo conectado). Smoke en `yago.cl`: 14 rutas/documentos en 200 (`/productos`, `/casos`, `/terminos`, `/llms.txt` incluidos) y home con el build nuevo verificada. `/api/contact`: 400 ante datos incompletos y 500 ante solicitud valida por falta de proveedor. Verificado en Secret Manager que no existe ningun secreto y que `.env.local` tampoco tiene valores: falta obtener `RESEND_API_KEY` (o SMTP completo) real para activar formularios |
 

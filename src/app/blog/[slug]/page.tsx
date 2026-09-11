@@ -64,7 +64,7 @@ export default async function BlogPostPage({ params }: Props) {
   };
 
   return (
-    <div className="relative min-h-screen overflow-x-clip text-slate-900">
+    <div className="relative min-h-screen overflow-x-clip text-white">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -75,15 +75,15 @@ export default async function BlogPostPage({ params }: Props) {
           <Breadcrumbs items={[{ name: "Inicio", href: "/" }, { name: "Blog", href: "/blog" }, { name: post.title, href: `/blog/${post.slug}` }]} />
           <Link
             href="/blog"
-            className="inline-flex items-center gap-2 text-sm text-slate-600 transition hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200/70 rounded-full"
+            className="inline-flex items-center gap-2 text-sm text-slate-300 transition hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200/70 rounded-full"
           >
             <ArrowLeft className="h-4 w-4" aria-hidden="true" />
             Volver al blog
           </Link>
 
           <header className="mt-6">
-            <div className="flex flex-wrap items-center gap-3 text-xs text-slate-600">
-              <span className="rounded-full border border-cyan-300/20 bg-cyan-400/[0.08] px-3 py-1 font-medium text-cyan-700">
+            <div className="flex flex-wrap items-center gap-3 text-xs text-slate-300">
+              <span className="rounded-full border border-sky-300/20 bg-sky-400/10 px-3 py-1 font-medium text-sky-300">
                 {post.category}
               </span>
               <time dateTime={post.date}>{formatDate(post.date)}</time>
@@ -95,16 +95,16 @@ export default async function BlogPostPage({ params }: Props) {
                 {post.readingTime} de lectura
               </span>
             </div>
-            <h1 className="mt-4 text-balance font-headline text-3xl font-semibold leading-tight text-slate-900 md:text-5xl">
+            <h1 className="mt-4 text-balance font-headline text-3xl font-semibold leading-tight text-white md:text-5xl">
               {post.title}
             </h1>
-            <div className="mt-5 border-l-2 border-sky-500 pl-4 text-sm leading-relaxed text-slate-700">
-              <div className="font-semibold text-slate-950">{BLOG_AUTHOR.name}</div>
+            <div className="mt-5 border-l-2 border-sky-500 pl-4 text-sm leading-relaxed text-slate-300">
+              <div className="font-semibold text-white">{BLOG_AUTHOR.name}</div>
               <div>{BLOG_AUTHOR.role}</div>
             </div>
           </header>
 
-          <div className="card-glow-border relative mt-8 overflow-hidden rounded-[1.8rem] border border-slate-900/10 shadow-[0_24px_90px_rgba(30,58,95,0.14)]">
+          <div className="card-glow-border relative mt-8 overflow-hidden rounded-[1.8rem] border border-white/10 shadow-[0_24px_90px_rgba(30,58,95,0.14)]">
             <Image
               src={post.image || "/placeholder.svg"}
               alt={`Ilustración del artículo: ${post.title}`}
@@ -115,23 +115,23 @@ export default async function BlogPostPage({ params }: Props) {
             />
           </div>
 
-          <p className="mt-8 text-pretty text-lg leading-relaxed text-slate-800">{post.intro}</p>
+          <p className="mt-8 text-pretty text-lg leading-relaxed text-slate-200">{post.intro}</p>
 
           {post.sections.map((section) => (
             <section key={section.heading} className="mt-10">
-              <h2 className="text-balance font-headline text-2xl font-semibold text-slate-900 md:text-3xl">
+              <h2 className="text-balance font-headline text-2xl font-semibold text-white md:text-3xl">
                 {section.heading}
               </h2>
               {section.paragraphs.map((paragraph) => (
-                <p key={paragraph} className="mt-4 text-pretty leading-relaxed text-slate-600">
+                <p key={paragraph} className="mt-4 text-pretty leading-relaxed text-slate-300">
                   {paragraph}
                 </p>
               ))}
               {section.bullets ? (
                 <ul className="mt-4 grid gap-2.5">
                   {section.bullets.map((bullet) => (
-                    <li key={bullet} className="flex items-start gap-2.5 leading-relaxed text-slate-600">
-                      <CheckCircle2 className="mt-1 h-4 w-4 shrink-0 text-cyan-700" aria-hidden="true" />
+                    <li key={bullet} className="flex items-start gap-2.5 leading-relaxed text-slate-300">
+                      <CheckCircle2 className="mt-1 h-4 w-4 shrink-0 text-sky-300" aria-hidden="true" />
                       {bullet}
                     </li>
                   ))}
@@ -141,12 +141,12 @@ export default async function BlogPostPage({ params }: Props) {
           ))}
 
           {post.sources?.length ? (
-            <section className="mt-12 border-t border-slate-900/10 pt-8" aria-labelledby="fuentes-articulo">
-              <h2 id="fuentes-articulo" className="text-2xl font-semibold text-slate-950">Fuentes y referencias</h2>
+            <section className="mt-12 border-t border-white/10 pt-8" aria-labelledby="fuentes-articulo">
+              <h2 id="fuentes-articulo" className="text-2xl font-semibold text-white">Fuentes y referencias</h2>
               <ul className="mt-4 space-y-3 text-sm leading-relaxed">
                 {post.sources.map((source) => (
                   <li key={source.url}>
-                    <a href={source.url} target="_blank" rel="noreferrer" className="font-medium text-sky-800 underline underline-offset-4 hover:text-slate-950">
+                    <a href={source.url} target="_blank" rel="noreferrer" className="font-medium text-sky-300 underline underline-offset-4 hover:text-white">
                       {source.title}
                     </a>
                   </li>
@@ -155,9 +155,9 @@ export default async function BlogPostPage({ params }: Props) {
             </section>
           ) : null}
 
-          <div className="card-glow-border mt-12 rounded-[1.8rem] border border-slate-900/10 bg-[linear-gradient(120deg,rgba(34,211,238,0.08),rgba(139,92,246,0.08))] p-6 md:p-8">
-            <h2 className="font-headline text-xl font-semibold text-slate-900 md:text-2xl">En resumen</h2>
-            <p className="mt-3 text-pretty leading-relaxed text-slate-800">{post.conclusion}</p>
+          <div className="card-glow-border mt-12 rounded-[1.8rem] border border-white/10 bg-[linear-gradient(120deg,rgba(125,211,252,0.08),rgba(125,211,252,0.02))] p-6 md:p-8">
+            <h2 className="font-headline text-xl font-semibold text-white md:text-2xl">En resumen</h2>
+            <p className="mt-3 text-pretty leading-relaxed text-slate-200">{post.conclusion}</p>
             <a
               href="/#contacto"
               className="btn-vibrant mt-6 inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium"
@@ -170,7 +170,7 @@ export default async function BlogPostPage({ params }: Props) {
 
         {/* Artículos relacionados */}
         <aside className="mx-auto mt-20 max-w-7xl px-4" aria-label="Artículos relacionados">
-          <h2 className="text-center font-headline text-2xl font-semibold text-slate-900 md:text-3xl">
+          <h2 className="text-center font-headline text-2xl font-semibold text-white md:text-3xl">
             Sigue leyendo
           </h2>
           <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -178,7 +178,7 @@ export default async function BlogPostPage({ params }: Props) {
               <Link
                 key={rel.slug}
                 href={`/blog/${rel.slug}`}
-                className="group hover-lift card-glow-border relative flex flex-col overflow-hidden rounded-[1.8rem] border border-slate-900/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(246,250,254,1))] transition hover:border-slate-900/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                className="group hover-lift card-glow-border relative flex flex-col overflow-hidden rounded-[1.8rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] transition hover:border-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 aria-label={`Leer artículo: ${rel.title}`}
               >
                 <div className="relative h-36 overflow-hidden">
@@ -189,11 +189,11 @@ export default async function BlogPostPage({ params }: Props) {
                     sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-white/80 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#070b13]/80 via-transparent to-transparent" />
                 </div>
                 <div className="flex flex-1 flex-col p-5">
-                  <h3 className="text-balance text-base font-semibold leading-snug text-slate-900">{rel.title}</h3>
-                  <span className="mt-auto inline-flex items-center gap-2 pt-3 text-sm font-medium text-cyan-700">
+                  <h3 className="text-balance text-base font-semibold leading-snug text-white">{rel.title}</h3>
+                  <span className="mt-auto inline-flex items-center gap-2 pt-3 text-sm font-medium text-sky-300">
                     Leer
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                   </span>

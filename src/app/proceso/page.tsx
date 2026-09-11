@@ -101,18 +101,18 @@ const GUARANTEES = [
 
 export default function ProcesoPage() {
   return (
-    <div className="relative min-h-screen overflow-x-clip text-slate-900">
+    <div className="relative min-h-screen overflow-x-clip text-white">
       <Navbar ctaHref="/#contacto" ctaLabel="Pedir análisis" />
       <main id="main-content" className="main-premium pb-24 pt-28 md:pt-32">
         {/* Hero */}
         <section className="mx-auto max-w-7xl px-4">
           <div className="grid items-center gap-10 lg:grid-cols-2">
             <div>
-              <p className="text-xs uppercase tracking-[0.22em] text-cyan-700/80">Nuestro método</p>
-              <h1 className="mt-4 text-balance font-headline text-4xl font-semibold text-slate-900 md:text-6xl">
+              <p className="text-xs uppercase tracking-[0.22em] text-sky-300/80">Nuestro método</p>
+              <h1 className="mt-4 text-balance font-headline text-4xl font-semibold text-white md:text-6xl">
                 De la idea al go-live <span className="text-shimmer">sin sorpresas</span>
               </h1>
-              <p className="mt-5 max-w-xl text-pretty text-lg leading-relaxed text-slate-600">
+              <p className="mt-5 max-w-xl text-pretty text-lg leading-relaxed text-slate-300">
                 Un proceso probado de 4 etapas que reduce el riesgo de implementación: validamos el
                 retorno antes de construir y entregas funcionando cada semana.
               </p>
@@ -126,13 +126,13 @@ export default function ProcesoPage() {
                 </a>
                 <Link
                   href="/servicios"
-                  className="inline-flex items-center gap-2 rounded-full border border-slate-900/10 bg-white/[0.04] px-6 py-3 text-sm font-medium text-slate-800 transition hover:border-slate-900/10 hover:bg-slate-50 hover:text-slate-900"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-6 py-3 text-sm font-medium text-slate-200 transition hover:border-white/10 hover:bg-white/10 hover:text-white"
                 >
                   Ver servicios
                 </Link>
               </div>
             </div>
-            <div className="card-glow-border relative overflow-hidden rounded-[2rem] border border-slate-900/10 shadow-[0_24px_90px_rgba(30,58,95,0.14)]">
+            <div className="card-glow-border relative overflow-hidden rounded-[2rem] border border-white/10 shadow-[0_24px_90px_rgba(0,0,0,0.14)]">
               <Image
                 src="/images/proceso-hero.png"
                 alt="Equipo de Yago diseñando un flujo de automatización"
@@ -141,7 +141,7 @@ export default function ProcesoPage() {
                 priority
                 className="h-auto w-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-white/40 via-transparent to-transparent" aria-hidden="true" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#070b13]/60 via-transparent to-transparent" aria-hidden="true" />
             </div>
           </div>
         </section>
@@ -149,10 +149,10 @@ export default function ProcesoPage() {
         {/* Timeline de etapas */}
         <section className="mx-auto mt-20 max-w-7xl px-4 md:mt-28">
           <div className="mx-auto max-w-3xl text-center">
-            <h2 className="text-balance font-headline text-3xl font-semibold text-slate-900 md:text-5xl">
+            <h2 className="text-balance font-headline text-3xl font-semibold text-white md:text-5xl">
               Las 4 etapas, en detalle
             </h2>
-            <p className="mt-4 text-pretty leading-relaxed text-slate-600">
+            <p className="mt-4 text-pretty leading-relaxed text-slate-300">
               Cada etapa tiene entregables concretos. Sabes exactamente qué recibes y cuándo.
             </p>
           </div>
@@ -160,7 +160,7 @@ export default function ProcesoPage() {
           <div className="relative mt-14">
             <div
               aria-hidden="true"
-              className="absolute bottom-8 left-6 top-8 hidden w-px bg-gradient-to-b from-cyan-300/40 via-indigo-300/30 to-transparent md:block"
+              className="absolute bottom-8 left-6 top-8 hidden w-px bg-gradient-to-b from-sky-300/40 via-sky-300/20 to-transparent md:block"
             />
             <div className="grid gap-6">
               {STAGES.map((stage) => {
@@ -168,50 +168,50 @@ export default function ProcesoPage() {
                 return (
                   <article
                     key={stage.title}
-                    className="hover-lift card-glow-border relative rounded-[1.8rem] border border-slate-900/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.97),rgba(246,250,254,1))] p-6 shadow-[0_18px_50px_rgba(30,58,95,0.08)] md:ml-16 md:p-8"
+                    className="hover-lift card-glow-border relative rounded-[1.8rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-6 shadow-[0_18px_50px_rgba(0,0,0,0.08)] md:ml-16 md:p-8"
                   >
                     <div
                       aria-hidden="true"
-                      className="absolute -left-16 top-8 hidden size-12 items-center justify-center rounded-2xl border border-cyan-300/25 bg-white text-cyan-700 shadow-[0_0_24px_rgba(94,198,255,0.18)] md:flex"
+                      className="absolute -left-16 top-8 hidden size-12 items-center justify-center rounded-2xl border border-sky-300/25 bg-white/10 text-sky-300 shadow-[0_0_24px_rgba(94,198,255,0.18)] md:flex"
                     >
                       <Icon className="h-5 w-5" />
                     </div>
 
                     <div className="flex flex-wrap items-center justify-between gap-3">
                       <div className="flex items-center gap-3">
-                        <div className="flex size-11 items-center justify-center rounded-2xl border border-cyan-300/20 bg-cyan-400/[0.08] text-cyan-700 md:hidden">
+                        <div className="flex size-11 items-center justify-center rounded-2xl border border-sky-300/20 bg-sky-400/10 text-sky-300 md:hidden">
                           <Icon className="h-5 w-5" aria-hidden="true" />
                         </div>
                         <div>
-                          <div className="text-xs font-medium uppercase tracking-[0.16em] text-slate-600">
+                          <div className="text-xs font-medium uppercase tracking-[0.16em] text-slate-300">
                             {stage.step}
                           </div>
-                          <h3 className="mt-0.5 text-xl font-semibold text-slate-900 md:text-2xl">{stage.title}</h3>
+                          <h3 className="mt-0.5 text-xl font-semibold text-white md:text-2xl">{stage.title}</h3>
                         </div>
                       </div>
-                      <span className="rounded-full border border-slate-900/10 bg-white/[0.04] px-3 py-1 text-xs text-slate-600">
+                      <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-xs text-slate-300">
                         {stage.duration}
                       </span>
                     </div>
 
-                    <p className="mt-4 max-w-2xl text-sm leading-relaxed text-slate-600 md:text-base">
+                    <p className="mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
                       {stage.summary}
                     </p>
 
                     <div className="mt-5 grid gap-5 md:grid-cols-[1.4fr_1fr]">
                       <ul className="grid gap-2.5">
                         {stage.activities.map((activity) => (
-                          <li key={activity} className="flex items-start gap-2.5 text-sm leading-relaxed text-slate-600">
-                            <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-cyan-700" aria-hidden="true" />
+                          <li key={activity} className="flex items-start gap-2.5 text-sm leading-relaxed text-slate-300">
+                            <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-sky-300" aria-hidden="true" />
                             {activity}
                           </li>
                         ))}
                       </ul>
-                      <div className="rounded-2xl border border-amber-300/15 bg-amber-400/[0.05] p-4">
-                        <div className="text-[11px] font-medium uppercase tracking-[0.16em] text-amber-700/90">
+                      <div className="rounded-2xl border border-sky-300/20 bg-sky-400/[0.07] p-4">
+                        <div className="text-[11px] font-medium uppercase tracking-[0.16em] text-sky-300">
                           Entregable
                         </div>
-                        <p className="mt-2 text-sm leading-relaxed text-slate-800">{stage.deliverable}</p>
+                        <p className="mt-2 text-sm leading-relaxed text-slate-200">{stage.deliverable}</p>
                       </div>
                     </div>
                   </article>
@@ -229,13 +229,13 @@ export default function ProcesoPage() {
               return (
                 <div
                   key={item.title}
-                  className="hover-lift rounded-[1.8rem] border border-slate-900/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.97),rgba(246,250,254,1))] p-6"
+                  className="hover-lift rounded-[1.8rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-6"
                 >
-                  <div className="flex size-12 items-center justify-center rounded-2xl border border-cyan-300/20 bg-cyan-400/[0.08] text-cyan-700">
+                  <div className="flex size-12 items-center justify-center rounded-2xl border border-sky-300/20 bg-sky-400/10 text-sky-300">
                     <Icon className="h-5 w-5" aria-hidden="true" />
                   </div>
-                  <h3 className="mt-4 text-lg font-semibold text-slate-900">{item.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-slate-600">{item.desc}</p>
+                  <h3 className="mt-4 text-lg font-semibold text-white">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-slate-300">{item.desc}</p>
                 </div>
               );
             })}
@@ -244,11 +244,11 @@ export default function ProcesoPage() {
 
         {/* CTA final */}
         <section className="mx-auto mt-20 max-w-7xl px-4 md:mt-28">
-          <div className="card-glow-border flex flex-col items-center gap-4 rounded-[2rem] border border-slate-900/10 bg-[linear-gradient(120deg,rgba(34,211,238,0.08),rgba(139,92,246,0.08))] p-8 text-center md:p-12">
-            <h2 className="text-balance font-headline text-2xl font-semibold text-slate-900 md:text-4xl">
+          <div className="card-glow-border flex flex-col items-center gap-4 rounded-[2rem] border border-white/10 bg-[linear-gradient(120deg,rgba(125,211,252,0.08),rgba(125,211,252,0.02))] p-8 text-center md:p-12">
+            <h2 className="text-balance font-headline text-2xl font-semibold text-white md:text-4xl">
               ¿Listo para la Etapa 1?
             </h2>
-            <p className="max-w-xl text-pretty text-sm leading-relaxed text-slate-600 md:text-base">
+            <p className="max-w-xl text-pretty text-sm leading-relaxed text-slate-300 md:text-base">
               El descubrimiento inicial es gratuito: cuéntanos tu proceso más lento y te respondemos con
               el quick win recomendado en 48 horas.
             </p>

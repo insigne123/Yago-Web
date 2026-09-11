@@ -23,16 +23,16 @@ const USES_ANALYTICS = Boolean(PLAUSIBLE_DOMAIN || CF_TOKEN);
 
 export default function PrivacyPage() {
   return (
-    <div className="min-h-screen bg-transparent text-slate-900">
+    <div className="min-h-screen bg-transparent text-white">
       <Navbar />
       <main id="main-content" className="mx-auto max-w-3xl px-4 py-20 md:py-24">
-        <p className="text-xs uppercase tracking-[0.22em] text-sky-700">Información legal</p>
-        <h1 className="mt-4 text-4xl font-semibold tracking-tight text-slate-950 md:text-5xl">
+        <p className="text-xs uppercase tracking-[0.22em] text-sky-300">Información legal</p>
+        <h1 className="mt-4 text-4xl font-semibold tracking-tight text-white md:text-5xl">
           Política de Privacidad
         </h1>
-        <p className="mt-2 text-sm text-slate-600">Última actualización: {UPDATED_AT}</p>
+        <p className="mt-2 text-sm text-slate-300">Última actualización: {UPDATED_AT}</p>
 
-        <article className="mt-10 text-base leading-7 text-slate-700 [&_a]:font-medium [&_a]:text-sky-800 [&_a]:underline [&_a]:underline-offset-4 [&_h2]:mb-3 [&_h2]:mt-10 [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:text-slate-950 [&_li]:pl-1 [&_strong]:font-semibold [&_strong]:text-slate-900 [&_ul]:mt-3 [&_ul]:list-disc [&_ul]:space-y-2 [&_ul]:pl-6">
+        <article className="mt-10 text-base leading-7 text-slate-300 [&_a]:font-medium [&_a]:text-sky-300 [&_a]:underline [&_a]:underline-offset-4 [&_h2]:mb-3 [&_h2]:mt-10 [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:text-white [&_li]:pl-1 [&_strong]:font-semibold [&_strong]:text-white [&_ul]:mt-3 [&_ul]:list-disc [&_ul]:space-y-2 [&_ul]:pl-6">
           <p>
             En {COMPANY.name} valoramos tu privacidad. Este documento explica cómo
             tratamos tus datos personales cuando navegas nuestro sitio o nos
@@ -140,7 +140,7 @@ export default function PrivacyPage() {
         <div className="mt-10">
            <Link
              href="/"
-             className="inline-flex rounded-xl border border-slate-900/10 bg-white/80 px-4 py-2 text-sm font-medium hover:bg-white/80 focus:outline-none focus:ring-2 focus:ring-offset-2"
+             className="inline-flex rounded-xl border border-slate-900/10 bg-white/10 px-4 py-2 text-sm font-medium hover:bg-white/15 focus:outline-none focus:ring-2 focus:ring-offset-2"
            >
              Volver al inicio
            </Link>

@@ -50,7 +50,7 @@ export default {
         ring: 'hsl(var(--ring))',
 
         // Custom surfaces used across the landing
-        surface: 'rgba(255, 255, 255, 0.85)',
+        surface: 'rgba(255, 255, 255, 0.05)',
         chart: {
           '1': 'hsl(var(--chart-1))',
           '2': 'hsl(var(--chart-2))',

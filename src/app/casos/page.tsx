@@ -38,36 +38,36 @@ const method = [
 
 export default function CasesPage() {
   return (
-    <div className="relative min-h-screen overflow-x-clip text-slate-900">
+    <div className="relative min-h-screen overflow-x-clip text-white">
       <Navbar ctaHref={PRIMARY_CTA.href} ctaLabel={PRIMARY_CTA.label} />
       <main id="main-content" className="main-premium pb-24 pt-20 md:pt-24">
         <div className="mx-auto max-w-7xl px-4">
           <section className="max-w-4xl">
-            <p className="text-xs uppercase tracking-[0.22em] text-sky-700">Casos y evidencia</p>
-            <h1 className="mt-4 text-balance font-headline text-4xl font-semibold text-slate-950 md:text-6xl">
+            <p className="text-xs uppercase tracking-[0.22em] text-sky-300">Casos y evidencia</p>
+            <h1 className="mt-4 text-balance font-headline text-4xl font-semibold text-white md:text-6xl">
               Un caso útil muestra qué cambió y cómo se midió.
             </h1>
-            <p className="mt-5 max-w-3xl text-base leading-relaxed text-slate-700 md:text-lg">
+            <p className="mt-5 max-w-3xl text-base leading-relaxed text-slate-300 md:text-lg">
               YAGO no publica cifras sin contexto. Esta es la metodología que usamos para convertir una mejora operativa
               en evidencia comparable y preparar casos públicos cuando existe autorización del cliente.
             </p>
           </section>
 
           <section aria-labelledby="metodologia-casos" className="mt-12">
-            <h2 id="metodologia-casos" className="text-3xl font-semibold text-slate-950 md:text-4xl">
+            <h2 id="metodologia-casos" className="text-3xl font-semibold text-white md:text-4xl">
               Metodología de medición
             </h2>
             <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
               {method.map((step, index) => {
                 const Icon = step.icon;
                 return (
-                  <article key={step.title} className="rounded-[1.6rem] border border-slate-900/10 bg-white/75 p-5">
+                  <article key={step.title} className="rounded-[1.6rem] border border-white/10 bg-white/[0.05] p-5">
                     <div className="flex items-center justify-between gap-3">
-                      <span className="text-xs font-semibold uppercase tracking-[0.16em] text-sky-700">Paso {index + 1}</span>
-                      <Icon className="size-5 text-slate-700" aria-hidden="true" />
+                      <span className="text-xs font-semibold uppercase tracking-[0.16em] text-sky-300">Paso {index + 1}</span>
+                      <Icon className="size-5 text-slate-300" aria-hidden="true" />
                     </div>
-                    <h3 className="mt-5 text-xl font-semibold text-slate-950">{step.title}</h3>
-                    <p className="mt-3 text-sm leading-relaxed text-slate-700">{step.description}</p>
+                    <h3 className="mt-5 text-xl font-semibold text-white">{step.title}</h3>
+                    <p className="mt-3 text-sm leading-relaxed text-slate-300">{step.description}</p>
                   </article>
                 );
               })}
@@ -76,27 +76,27 @@ export default function CasesPage() {
 
           <section aria-labelledby="escenarios" className="mt-16">
             <div className="max-w-3xl">
-              <p className="text-xs uppercase tracking-[0.18em] text-sky-700">Escenarios de referencia</p>
-              <h2 id="escenarios" className="mt-3 text-3xl font-semibold text-slate-950 md:text-4xl">
+              <p className="text-xs uppercase tracking-[0.18em] text-sky-300">Escenarios de referencia</p>
+              <h2 id="escenarios" className="mt-3 text-3xl font-semibold text-white md:text-4xl">
                 Procesos donde evaluamos automatización con frecuencia
               </h2>
-              <p className="mt-4 text-sm leading-relaxed text-slate-700 md:text-base">
+              <p className="mt-4 text-sm leading-relaxed text-slate-300 md:text-base">
                 Estos bloques describen patrones operativos, no testimonios ni resultados atribuidos a un cliente específico.
               </p>
             </div>
 
             <div className="mt-7 grid gap-5 lg:grid-cols-3">
               {caseStudies.map((item) => (
-                <article key={item.title} className="rounded-[1.75rem] border border-slate-900/10 bg-white/75 p-6">
-                  <p className="text-xs uppercase tracking-[0.18em] text-sky-700">{item.company}</p>
-                  <h3 className="mt-3 text-2xl font-semibold text-slate-950">{item.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-700">{item.description}</p>
+                <article key={item.title} className="rounded-[1.75rem] border border-white/10 bg-white/[0.05] p-6">
+                  <p className="text-xs uppercase tracking-[0.18em] text-sky-300">{item.company}</p>
+                  <h3 className="mt-3 text-2xl font-semibold text-white">{item.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-slate-300">{item.description}</p>
                   <ul className="mt-5 space-y-3">
                     {item.stats.map((stat) => {
                       const Icon = stat.icon;
                       return (
-                        <li key={stat.text} className="flex items-start gap-3 text-sm leading-relaxed text-slate-700">
-                          <Icon className="mt-0.5 size-4 shrink-0 text-sky-700" aria-hidden="true" />
+                        <li key={stat.text} className="flex items-start gap-3 text-sm leading-relaxed text-slate-300">
+                          <Icon className="mt-0.5 size-4 shrink-0 text-sky-300" aria-hidden="true" />
                           <span>{stat.text}</span>
                         </li>
                       );
@@ -116,7 +116,7 @@ export default function CasesPage() {
                   Revisamos el flujo actual y definimos qué medir antes de recomendar una implementación.
                 </p>
               </div>
-              <Link href="/#contacto" className="inline-flex shrink-0 items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-slate-950">
+              <Link href="/#contacto" className="inline-flex shrink-0 items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-[#070b13]">
                 Solicitar diagnóstico
                 <ArrowRight className="size-4" aria-hidden="true" />
               </Link>

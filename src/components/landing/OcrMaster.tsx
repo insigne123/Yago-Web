@@ -31,18 +31,18 @@ const benefitIcons = {
 const toneClasses = {
   sky: {
     accent: "bg-sky-300",
-    border: "border-sky-200/20",
-    panel: "bg-sky-400/10 text-sky-700",
+    border: "border-sky-300/20",
+    panel: "bg-sky-400/10 text-sky-200",
   },
   amber: {
-    accent: "bg-amber-200",
-    border: "border-amber-200/20",
-    panel: "bg-amber-100 text-amber-900",
+    accent: "bg-sky-300",
+    border: "border-sky-300/20",
+    panel: "bg-sky-400/10 text-sky-200",
   },
   mint: {
-    accent: "bg-emerald-200",
-    border: "border-emerald-200/20",
-    panel: "bg-emerald-100 text-emerald-900",
+    accent: "bg-sky-300",
+    border: "border-sky-300/20",
+    panel: "bg-sky-400/10 text-sky-200",
   },
 };
 
@@ -51,39 +51,39 @@ export function OcrMaster() {
     <Section id="ocr-master" className="z-10">
       <div className="mx-auto flex max-w-7xl flex-col gap-5 px-4 md:gap-6">
         <div className="grid gap-5 xl:grid-cols-[1.08fr_0.92fr] xl:gap-6">
-          <Card className="overflow-hidden rounded-[2rem] border-slate-900/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.97),rgba(246,250,254,1))] shadow-[0_28px_100px_rgba(30,58,95,0.08)]">
+          <Card className="overflow-hidden rounded-[2rem] border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] shadow-[0_28px_100px_rgba(0,0,0,0.08)]">
               <CardHeader className="pb-4 md:pb-5">
                 <div className="flex flex-wrap items-center justify-between gap-3">
-                  <Badge variant="outline" className="border-amber-200/20 bg-amber-100/[0.08] px-3 py-1 text-[11px] uppercase tracking-[0.16em] text-amber-700">
+                  <Badge variant="outline" className="border-sky-300/20 bg-sky-400/[0.07] px-3 py-1 text-[11px] uppercase tracking-[0.16em] text-sky-300">
                     {OCR_MASTER.badge}
                   </Badge>
                   <div className="flex items-center gap-3">
-                    <div className="rounded-[1.35rem] border border-slate-900/10 bg-white/[0.05] px-4 py-3 text-right">
-                      <div className="text-xs uppercase tracking-[0.16em] text-slate-600">{OCR_MASTER.footerTitle}</div>
-                      <div className="mt-1 text-sm text-slate-800">Version premium comercial</div>
+                    <div className="rounded-[1.35rem] border border-white/10 bg-white/[0.05] px-4 py-3 text-right">
+                      <div className="text-xs uppercase tracking-[0.16em] text-slate-300">{OCR_MASTER.footerTitle}</div>
+                      <div className="mt-1 text-sm text-slate-200">Version premium comercial</div>
                     </div>
                     <Button
                       asChild
                       variant="ghost"
-                      className="rounded-full border border-slate-900/10 bg-white/[0.04] text-slate-900 hover:bg-slate-50"
+                      className="rounded-full border border-white/10 bg-white/[0.04] text-white hover:bg-white/10"
                     >
                       <Link href="/ocr">Ver landing OCR</Link>
                     </Button>
                   </div>
                 </div>
-                <CardTitle className="mt-6 text-4xl font-semibold tracking-[-0.04em] text-slate-900 md:mt-8 md:text-6xl">
+                <CardTitle className="mt-6 text-4xl font-semibold tracking-[-0.04em] text-white md:mt-8 md:text-6xl">
                   {OCR_MASTER.title}
                 </CardTitle>
-                <CardDescription className="mt-3 text-xl leading-tight text-slate-900 md:text-3xl">
+                <CardDescription className="mt-3 text-xl leading-tight text-white md:text-3xl">
                   {OCR_MASTER.subtitle}
                 </CardDescription>
               </CardHeader>
 
               <CardContent className="space-y-5 md:space-y-6">
-                <p className="max-w-3xl text-lg leading-relaxed text-slate-600">
+                <p className="max-w-3xl text-lg leading-relaxed text-slate-300">
                   {OCR_MASTER.description}
                 </p>
-                <p className="text-sm uppercase tracking-[0.14em] text-slate-600">
+                <p className="text-sm uppercase tracking-[0.14em] text-slate-300">
                   {OCR_MASTER.supportingText}
                 </p>
 
@@ -91,21 +91,21 @@ export function OcrMaster() {
                   {OCR_MASTER.featurePills.map((pill) => (
                     <div
                       key={pill}
-                      className="rounded-full border border-slate-900/10 bg-white/[0.04] px-4 py-2 text-sm font-medium text-slate-900"
+                      className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm font-medium text-white"
                     >
                       {pill}
                     </div>
                   ))}
                 </div>
 
-                <div className="rounded-[1.6rem] border border-slate-900/10 bg-slate-900/5 p-4 md:p-5">
-                  <div className="text-sm font-semibold text-sky-700">{OCR_MASTER.proposalTitle}</div>
-                  <p className="mt-2 max-w-2xl text-sm leading-relaxed text-slate-600">
+                <div className="rounded-[1.6rem] border border-white/10 bg-white/5 p-4 md:p-5">
+                  <div className="text-sm font-semibold text-sky-300">{OCR_MASTER.proposalTitle}</div>
+                  <p className="mt-2 max-w-2xl text-sm leading-relaxed text-slate-300">
                     {OCR_MASTER.proposalDescription}
                   </p>
                   <Link
                     href="/ocr"
-                    className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-slate-900 transition hover:text-sky-700"
+                    className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-white transition hover:text-sky-300"
                   >
                     Explorar la landing completa
                     <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -114,13 +114,13 @@ export function OcrMaster() {
               </CardContent>
             </Card>
 
-          <Card className="overflow-hidden rounded-[2rem] border-slate-900/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.97),rgba(246,250,254,1))] shadow-[0_28px_100px_rgba(30,58,95,0.08)]">
+          <Card className="overflow-hidden rounded-[2rem] border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] shadow-[0_28px_100px_rgba(0,0,0,0.08)]">
               <CardHeader className="pb-4 md:pb-5">
-                <Badge variant="outline" className="w-fit border-sky-200/20 bg-sky-200/[0.08] px-3 py-1 text-[11px] uppercase tracking-[0.16em] text-sky-700">
+                <Badge variant="outline" className="w-fit border-sky-200/20 bg-sky-200/[0.08] px-3 py-1 text-[11px] uppercase tracking-[0.16em] text-sky-300">
                   {OCR_MASTER.apiBadge}
                 </Badge>
-                <CardTitle className="mt-4 text-3xl text-slate-900">{OCR_MASTER.apiTitle}</CardTitle>
-                <CardDescription className="max-w-lg text-base leading-relaxed text-slate-600">
+                <CardTitle className="mt-4 text-3xl text-white">{OCR_MASTER.apiTitle}</CardTitle>
+                <CardDescription className="max-w-lg text-base leading-relaxed text-slate-300">
                   {OCR_MASTER.apiDescription}
                 </CardDescription>
               </CardHeader>
@@ -128,22 +128,22 @@ export function OcrMaster() {
                 {OCR_MASTER.apiDetails.map((item) => (
                   <div
                     key={item.label}
-                    className="flex flex-col gap-2 rounded-[1.2rem] border border-slate-900/10 bg-white/[0.05] px-4 py-4 md:flex-row md:items-center md:justify-between"
+                    className="flex flex-col gap-2 rounded-[1.2rem] border border-white/10 bg-white/[0.05] px-4 py-4 md:flex-row md:items-center md:justify-between"
                   >
-                    <div className="text-xs uppercase tracking-[0.16em] text-slate-600">{item.label}</div>
-                    <div className="text-base font-semibold text-slate-900">{item.value}</div>
+                    <div className="text-xs uppercase tracking-[0.16em] text-slate-300">{item.label}</div>
+                    <div className="text-base font-semibold text-white">{item.value}</div>
                   </div>
                 ))}
 
-                <div className="rounded-[1.4rem] border border-amber-200/20 bg-amber-100/[0.08] px-4 py-5">
-                  <div className="text-xs uppercase tracking-[0.16em] text-amber-700">{OCR_MASTER.metaTitle}</div>
-                  <div className="mt-2 text-3xl font-semibold text-slate-900">{OCR_MASTER.metaValue}</div>
-                  <div className="mt-2 text-sm leading-relaxed text-slate-600">{OCR_MASTER.metaDescription}</div>
+                <div className="rounded-[1.4rem] border border-sky-300/20 bg-sky-400/[0.07] px-4 py-5">
+                  <div className="text-xs uppercase tracking-[0.16em] text-sky-300">{OCR_MASTER.metaTitle}</div>
+                  <div className="mt-2 text-3xl font-semibold text-white">{OCR_MASTER.metaValue}</div>
+                  <div className="mt-2 text-sm leading-relaxed text-slate-300">{OCR_MASTER.metaDescription}</div>
                 </div>
               </CardContent>
               <CardFooter className="pt-2">
-                <div className="flex items-center gap-2 rounded-full border border-slate-900/10 bg-white/[0.04] px-4 py-2 text-sm text-slate-800">
-                  <FileJson2 className="h-4 w-4 text-sky-700" aria-hidden="true" />
+                <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-slate-200">
+                  <FileJson2 className="h-4 w-4 text-sky-300" aria-hidden="true" />
                   Integracion lista para portales, backoffice y automatizacion documental.
                 </div>
               </CardFooter>
@@ -158,16 +158,16 @@ export function OcrMaster() {
             return (
               <Card
                 key={benefit.title}
-                className={`rounded-[1.7rem] border-slate-900/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.97),rgba(246,250,254,1))] ${tone.border}`}
+                className={`rounded-[1.7rem] border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] ${tone.border}`}
               >
                 <CardHeader>
-                  <div className={`flex size-12 items-center justify-center rounded-2xl border border-slate-900/10 ${tone.panel}`}>
+                  <div className={`flex size-12 items-center justify-center rounded-2xl border border-white/10 ${tone.panel}`}>
                     <Icon className="h-5 w-5" aria-hidden="true" />
                   </div>
-                  <CardTitle className="pt-4 text-2xl text-slate-900">{benefit.title}</CardTitle>
+                  <CardTitle className="pt-4 text-2xl text-white">{benefit.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription className="text-base leading-relaxed text-slate-600">
+                  <CardDescription className="text-base leading-relaxed text-slate-300">
                     {benefit.description}
                   </CardDescription>
                 </CardContent>
@@ -176,22 +176,22 @@ export function OcrMaster() {
           })}
         </div>
 
-        <div className="overflow-hidden rounded-[2rem] border border-slate-900/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.97),rgba(246,250,254,1))] px-5 py-7 shadow-[0_28px_90px_rgba(30,58,95,0.08)] md:px-8 md:py-10">
+        <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] px-5 py-7 shadow-[0_28px_90px_rgba(0,0,0,0.08)] md:px-8 md:py-10">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div>
-              <Badge variant="outline" className="border-slate-900/10 bg-white/[0.04] px-3 py-1 text-[11px] uppercase tracking-[0.16em] text-slate-600">
+              <Badge variant="outline" className="border-white/10 bg-white/[0.04] px-3 py-1 text-[11px] uppercase tracking-[0.16em] text-slate-300">
                 OCR Master Pricing
               </Badge>
-              <h3 className="mt-4 text-4xl font-semibold text-slate-900 md:text-5xl">
+              <h3 className="mt-4 text-4xl font-semibold text-white md:text-5xl">
                 {OCR_MASTER.pricingTitle}
               </h3>
-              <p className="mt-3 max-w-2xl text-base leading-relaxed text-slate-600">
+              <p className="mt-3 max-w-2xl text-base leading-relaxed text-slate-300">
                 {OCR_MASTER.pricingDescription}
               </p>
             </div>
 
-            <div className="inline-flex items-center gap-2 rounded-full border border-amber-300/30 bg-amber-100/40 px-4 py-2 text-sm text-amber-900">
-              <DatabaseZap className="h-4 w-4 text-amber-700" aria-hidden="true" />
+            <div className="inline-flex items-center gap-2 rounded-full border border-sky-300/30 bg-sky-400/10 px-4 py-2 text-sm text-white">
+              <DatabaseZap className="h-4 w-4 text-sky-300" aria-hidden="true" />
               {OCR_MASTER.metaValue}
             </div>
           </div>
@@ -203,44 +203,44 @@ export function OcrMaster() {
               return (
                 <Card
                   key={plan.name}
-                  className={`overflow-hidden rounded-[1.8rem] border-slate-900/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.97),rgba(246,250,254,1))] ${tone.border}`}
+                  className={`overflow-hidden rounded-[1.8rem] border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] ${tone.border}`}
                 >
                     <div className={`h-1.5 w-full ${tone.accent}`} />
                     <CardHeader className="pb-4 md:pb-5">
-                      <Badge variant="outline" className="w-fit border-slate-900/10 bg-white/[0.04] px-3 py-1 text-[11px] uppercase tracking-[0.16em] text-slate-600">
+                      <Badge variant="outline" className="w-fit border-white/10 bg-white/[0.04] px-3 py-1 text-[11px] uppercase tracking-[0.16em] text-slate-300">
                         Plan
                       </Badge>
-                      <CardTitle className="mt-4 text-3xl font-semibold text-slate-900 md:text-4xl">{plan.name}</CardTitle>
-                      <div className="mt-3 text-4xl font-semibold tracking-[-0.04em] text-slate-900 md:text-5xl">
+                      <CardTitle className="mt-4 text-3xl font-semibold text-white md:text-4xl">{plan.name}</CardTitle>
+                      <div className="mt-3 text-4xl font-semibold tracking-[-0.04em] text-white md:text-5xl">
                         {plan.documentsPerMonth}
                       </div>
-                      <CardDescription className="text-base text-slate-600">documentos / mes</CardDescription>
-                      <p className="pt-4 text-sm leading-relaxed text-slate-600">{plan.summary}</p>
+                      <CardDescription className="text-base text-slate-300">documentos / mes</CardDescription>
+                      <p className="pt-4 text-sm leading-relaxed text-slate-300">{plan.summary}</p>
                     </CardHeader>
 
                     <CardContent className="space-y-4">
                       <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-2">
-                        <div className="rounded-[1.35rem] border border-slate-900/10 bg-white/[0.05] px-4 py-4">
-                          <div className="text-xs uppercase tracking-[0.16em] text-slate-600">Pago anual</div>
-                          <div className="mt-2 text-3xl font-semibold text-slate-900">{plan.annualPrice}</div>
-                          <div className="mt-1 text-xs text-slate-600">por mes con pago anual</div>
+                        <div className="rounded-[1.35rem] border border-white/10 bg-white/[0.05] px-4 py-4">
+                          <div className="text-xs uppercase tracking-[0.16em] text-slate-300">Pago anual</div>
+                          <div className="mt-2 text-3xl font-semibold text-white">{plan.annualPrice}</div>
+                          <div className="mt-1 text-xs text-slate-300">por mes con pago anual</div>
                         </div>
-                        <div className="rounded-[1.35rem] border border-slate-900/10 bg-white/[0.05] px-4 py-4">
-                          <div className="text-xs uppercase tracking-[0.16em] text-slate-600">Pago mensual</div>
-                          <div className="mt-2 text-3xl font-semibold text-slate-900">{plan.monthlyPrice}</div>
-                          <div className="mt-1 text-xs text-slate-600">por mes con pago mensual</div>
+                        <div className="rounded-[1.35rem] border border-white/10 bg-white/[0.05] px-4 py-4">
+                          <div className="text-xs uppercase tracking-[0.16em] text-slate-300">Pago mensual</div>
+                          <div className="mt-2 text-3xl font-semibold text-white">{plan.monthlyPrice}</div>
+                          <div className="mt-1 text-xs text-slate-300">por mes con pago mensual</div>
                         </div>
                       </div>
 
-                      <div className="rounded-[1.35rem] border border-slate-900/10 bg-slate-900/5 px-4 py-4 text-sm font-medium text-slate-900">
+                      <div className="rounded-[1.35rem] border border-white/10 bg-white/5 px-4 py-4 text-sm font-medium text-white">
                         {plan.extraDocPrice}
                       </div>
 
-                      <div className="grid gap-2 text-sm text-slate-600">
-                        <div className="rounded-full border border-slate-900/10 bg-white/[0.04] px-4 py-2">
+                      <div className="grid gap-2 text-sm text-slate-300">
+                        <div className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2">
                           Uso comercial vía API
                         </div>
-                        <div className="rounded-full border border-slate-900/10 bg-white/[0.04] px-4 py-2">
+                        <div className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2">
                           Meta operativa: hasta 99% de confianza
                         </div>
                       </div>
@@ -249,7 +249,7 @@ export function OcrMaster() {
                     <CardFooter>
                       <Button
                         asChild
-                        className="w-full rounded-full border border-slate-900/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(223,234,255,0.92))] text-slate-950"
+                        className="w-full rounded-full border border-white/10 bg-white text-[#070b13]"
                       >
                         <a href="#contacto">
                           {plan.cta}
@@ -263,18 +263,18 @@ export function OcrMaster() {
           </div>
         </div>
 
-        <div className="overflow-hidden rounded-[1.9rem] border border-slate-900/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.97),rgba(246,250,254,1))] px-6 py-6 md:px-8">
+        <div className="overflow-hidden rounded-[1.9rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] px-6 py-6 md:px-8">
             <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
               <div className="max-w-3xl">
-                <div className="text-3xl font-semibold text-slate-900">{OCR_MASTER.footerTitle}</div>
-                <p className="mt-3 text-sm leading-relaxed text-slate-600">{OCR_MASTER.footerDescription}</p>
+                <div className="text-3xl font-semibold text-white">{OCR_MASTER.footerTitle}</div>
+                <p className="mt-3 text-sm leading-relaxed text-slate-300">{OCR_MASTER.footerDescription}</p>
               </div>
 
               <div className="flex flex-col gap-3 lg:min-w-[22rem]">
                 {OCR_MASTER.footerHighlights.map((item) => (
                   <div
                     key={item}
-                    className="rounded-full border border-slate-900/10 bg-white/[0.04] px-4 py-3 text-center text-sm font-medium text-slate-900"
+                    className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-3 text-center text-sm font-medium text-white"
                   >
                     {item}
                   </div>
@@ -282,24 +282,24 @@ export function OcrMaster() {
               </div>
             </div>
 
-            <Separator className="my-6 bg-white/80" />
+            <Separator className="my-6 bg-white/10" />
 
             <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-              <div className="text-sm text-slate-600">
+              <div className="text-sm text-slate-300">
                 ¿Quieres integrarlo en un portal, flujo interno o servicio comercial de YAGO?
               </div>
 
               <div className="flex flex-wrap gap-3">
                 <Button
                   asChild
-                  className="rounded-full border border-slate-900/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(223,234,255,0.92))] text-slate-950"
+                  className="rounded-full border border-white/10 bg-white text-[#070b13]"
                 >
                   <a href="#contacto">Agendar Demo</a>
                 </Button>
                 <Button
                   asChild
                   variant="ghost"
-                  className="rounded-full border border-slate-900/10 bg-white/[0.04] text-slate-900 hover:bg-slate-50"
+                  className="rounded-full border border-white/10 bg-white/[0.04] text-white hover:bg-white/10"
                 >
                   <a href={COMPANY.whatsappLink} target="_blank" rel="noreferrer">
                     Solicitar Propuesta

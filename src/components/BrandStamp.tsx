@@ -8,13 +8,13 @@ export function BrandStamp() {
   return (
     <section aria-label="Marca Yago" className="py-12">
       <div className="mx-auto flex max-w-7xl items-center gap-4 px-4">
-        <div className="relative w-full overflow-hidden rounded-3xl border border-slate-900/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.97),rgba(246,250,254,1))] p-6">
+          <div className="relative w-full overflow-hidden rounded-3xl border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-6">
           <div
             aria-hidden="true"
             className="absolute inset-0 opacity-70"
             style={{
               background:
-                "radial-gradient(700px 260px at 12% 20%, rgba(16,185,129,.14), transparent 60%), radial-gradient(720px 280px at 88% 80%, rgba(217,70,239,.14), transparent 60%)",
+                "radial-gradient(700px 260px at 12% 20%, rgba(125,211,252,.1), transparent 60%), radial-gradient(720px 280px at 88% 80%, rgba(125,211,252,.07), transparent 60%)",
             }}
           />
 
@@ -28,18 +28,18 @@ export function BrandStamp() {
                 className="rounded-xl"
               />
               <div>
-                <h3 className="text-xl font-semibold text-slate-900">{COMPANY.name}</h3>
-                <p className="mt-1 text-sm text-slate-600">
+                <h3 className="text-xl font-semibold text-white">{COMPANY.name}</h3>
+                <p className="mt-1 text-sm text-slate-300">
                   Automatizacion con IA: agentes, flujos y datos para acelerar tu operacion.
                 </p>
               </div>
             </div>
 
-            <div className="flex flex-wrap gap-2 text-xs text-slate-600">
+            <div className="flex flex-wrap gap-2 text-xs text-slate-300">
               {["Agentes IA", "Automatizacion", "RAG", "Integraciones", "Analitica"].map((t) => (
                 <span
                   key={t}
-                  className="rounded-full border border-slate-900/10 bg-slate-900/5 px-4 py-2"
+                  className="rounded-full border border-white/10 bg-white/5 px-4 py-2"
                 >
                   {t}
                 </span>
