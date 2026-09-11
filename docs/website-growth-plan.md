@@ -425,3 +425,39 @@ El plan se considera tecnicamente ejecutado cuando:
 2. Los elementos que dependan de datos del negocio quedan documentados y no contienen informacion inventada.
 3. El sitio puede navegarse, rastrearse, medirse y convertirse sin rutas, metadata o formularios ambiguos.
 4. Existe una linea base de 28 dias para iniciar el ciclo continuo de SEO, contenido y CRO.
+
+## 17. Runbook de publicacion en Firebase App Hosting
+
+Backend: proyecto `automata-ai`, backendId `studio` (`us-central1`). No tiene repositorio
+conectado y ABIU esta deshabilitado: el push a GitHub NO autodespliega. El rollout es manual.
+
+### Pre-despliegue
+
+1. `npm ci`, `npm run typecheck`, `npm run build` y `npm run test:ui` en verde.
+2. Confirmar secretos en App Hosting (solo nombres; nunca valores en el repo):
+   - `RESEND_API_KEY` con remitente `RESEND_FROM` verificado, o SMTP completo
+     (`SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `SMTP_FROM`).
+   - `CONTACT_WEBHOOK_URL` y `CONTACT_WEBHOOK_TOKEN` si se usa webhook (opcional).
+   - `OCR_MOBILE_SCAN_TRIAL_TOKEN` (requerido para `/api/mobile-scan/submit`; sin el
+     responde 500 controlado).
+3. Declarar cada secreto en `apphosting.yaml` antes del rollout, por ejemplo:
+   `variable: RESEND_API_KEY` con `secret: RESEND_API_KEY` y `availability: [RUNTIME]`.
+4. Verificar que `.firebaseignore` excluye `.env*`, `brochure_*.html` y artefactos
+   (`firepit-log.txt`, `test-results`, `playwright-report`).
+
+### Despliegue
+
+`npx -y firebase-tools@latest deploy --only apphosting --project automata-ai`
+
+### Smoke post-deploy en `https://yago.cl`
+
+- `/`, `/productos`, `/casos`, `/terminos` responden 200.
+- `/robots.txt`, `/sitemap.xml` y `/llms.txt` responden 200.
+- Envio de prueba del formulario de contacto: llega el correo y retorna `leadId`.
+- Probar el trial OCR solo si el token esta configurado.
+
+### Notas
+
+- `maxInstances: 1`: el rate limit local es una defensa complementaria, no una cuota
+  distribuida. Usar un limitador compartido antes de aumentar instancias.
+- No commitear `.env.local` ni los `brochure_*.html`; permanecen solo locales.
