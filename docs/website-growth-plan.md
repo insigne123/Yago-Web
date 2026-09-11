@@ -414,7 +414,8 @@ La implementacion tecnica puede dejar campos y estructuras preparadas, pero la p
 | 2026-09-01 | Fases 0 a 6 | Implementacion local terminada | Arquitectura, visual, SEO, GEO, conversion, privacidad, seguridad y rendimiento actualizados |
 | 2026-09-01 | Dependencias | Runtime validado | `npm ci` reproducible y `npm audit --omit=dev` con 0 vulnerabilidades; el audit completo conserva hallazgos transitivos de Genkit CLI/OpenTelemetry usados en desarrollo |
 | 2026-09-01 | Pruebas | Verde | Next 15.5.25, build de 43 paginas, typecheck y Playwright: 61 passed, 1 mobile-only skipped en desktop |
-| 2026-09-01 | Publicacion | Pendiente | Requiere autenticacion Firebase y verificar secretos de correo y OCR antes del smoke real |
+| 2026-09-01 | Publicacion | Pendiente | Requiere verificar secretos de correo y OCR antes del smoke real |
+| 2026-09-11 | Publicacion | Bloqueada por decision | Commit `28e6630` en `origin/main`; Vercel publico el commit con exito (preview con SSO, no validable anonimamente). Firebase App Hosting `automata-ai/studio` no tiene repo conectado (ABIU deshabilitado): el push no autodespliega, se requiere `firebase deploy --only apphosting`. Produccion `yago.cl` sigue con el build anterior (`/productos`, `/casos`, `/terminos` y `/llms.txt` en 404). `apphosting.yaml` no declara secretos: falta confirmar `RESEND_API_KEY` o SMTP, `CONTACT_WEBHOOK_URL/TOKEN` y `OCR_MOBILE_SCAN_TRIAL_TOKEN` en App Hosting antes del rollout |
 
 ## 16. Definicion de terminado
 
