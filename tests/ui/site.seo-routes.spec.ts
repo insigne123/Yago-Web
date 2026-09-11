@@ -53,7 +53,11 @@ test.describe("public routes and SEO", () => {
   test("robots, sitemap and llms discovery files are available", async ({ request }) => {
     const robots = await request.get("/robots.txt");
     expect(robots.status()).toBe(200);
-    expect(await robots.text()).toContain("Sitemap: https://yago.cl/sitemap.xml");
+    const robotsText = await robots.text();
+    expect(robotsText).toContain("Sitemap: https://yago.cl/sitemap.xml");
+    for (const bot of ["OAI-SearchBot", "ChatGPT-User", "GPTBot", "ClaudeBot", "Claude-Web", "PerplexityBot", "Perplexity-User", "Meta-ExternalAgent"]) {
+      expect(robotsText).toContain(bot);
+    }
 
     const sitemap = await request.get("/sitemap.xml");
     expect(sitemap.status()).toBe(200);
@@ -64,7 +68,23 @@ test.describe("public routes and SEO", () => {
 
     const llms = await request.get("/llms.txt");
     expect(llms.status()).toBe(200);
-    expect(await llms.text()).toContain("YAGO");
+    const llmsText = await llms.text();
+    expect(llmsText).toContain("YAGO");
+    expect(llmsText).toContain("https://yago.cl/sadt");
+    expect(llmsText).toContain("https://yago.cl/axis");
+    expect(llmsText).toContain("https://yago.cl/blog/ocr-con-ia-digitalizar-documentos");
+  });
+
+  test("key templates use their own social image", async ({ page }) => {
+    for (const [route, imagePath] of [
+      ["/ocr", "/ocr/opengraph-image"],
+      ["/sadt", "/sadt/opengraph-image"],
+      ["/axis", "/axis/opengraph-image"],
+      ["/blog", "/blog/opengraph-image"],
+    ] as const) {
+      await page.goto(route);
+      await expect(page.locator("meta[property='og:image']").first()).toHaveAttribute("content", new RegExp(`${imagePath}`));
+    }
   });
 
   test("unknown route renders the recovery page", async ({ page }) => {
@@ -72,5 +92,14 @@ test.describe("public routes and SEO", () => {
     expect(response?.status()).toBe(404);
     await expect(page.getByRole("heading", { level: 1, name: /no está disponible/i })).toBeVisible();
     await expect(page.getByRole("link", { name: /volver al inicio/i })).toBeVisible();
+  });
+
+  test("removed OCR trial surfaces return the recovery page", async ({ page, request }) => {
+    const trialPage = await page.goto("/OCR-TEST");
+    expect(trialPage?.status()).toBe(404);
+    await expect(page.getByRole("heading", { level: 1, name: /no está disponible/i })).toBeVisible();
+
+    const trialApi = await request.post("/api/mobile-scan/submit", { data: {} });
+    expect(trialApi.status()).toBe(404);
   });
 });

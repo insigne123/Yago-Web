@@ -31,7 +31,3 @@ env:
     value: "nicolas.yarur.g@yago.cl"
     availability:
       - RUNTIME
-  - variable: OCR_MOBILE_SCAN_API_BASE_URL
-    value: "https://ocr-test.yago.cl"
-    availability:
-      - RUNTIME

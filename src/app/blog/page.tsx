@@ -11,6 +11,7 @@ export const metadata = createPageMetadata({
   description:
     "Guías prácticas sobre automatización de procesos, IA para empresas, OCR, agentes inteligentes y ROI. Contenido sin humo para equipos de operaciones y backoffice.",
   path: "/blog",
+  image: "/blog/opengraph-image",
 });
 
 function formatDate(iso: string) {

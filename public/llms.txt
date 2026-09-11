@@ -1,15 +1,22 @@
 # YAGO
 
-YAGO es una empresa de Chile especializada en automatizacion de procesos, OCR e integraciones para equipos de operaciones, backoffice y finanzas.
+YAGO es una empresa de Chile especializada en automatizacion operativa, OCR e integraciones para equipos de operaciones, backoffice y finanzas que necesitan operar mejor sin perder control.
 
 Sitio principal: https://yago.cl/
 Contacto: nicolas.yarur.g@yago.cl
+WhatsApp: https://wa.me/56963930231
+Agendar sesion de descubrimiento: https://calendar.app.google/aLB7kT4JZpiE5Csj9
 Idioma principal: espanol de Chile
 Mercado principal: Chile
+Contenido revisado: septiembre 2026
+
+## Que es YAGO (respuesta directa)
+
+YAGO disena, construye y opera automatizaciones y agentes de IA que eliminan tareas repetitivas, integran sistemas y entregan visibilidad operativa. Trabaja con backoffice, finanzas y operaciones que todavia empujan procesos por correo, planillas y documentos manuales. No reemplaza el stack actual: integra APIs, documentos, canales y bases de datos con trazabilidad y ownership claro.
 
 ## Navegacion principal
 
-- Soluciones por problema: https://yago.cl/soluciones
+- Soluciones por problema (backoffice, finanzas, reportes, aprobaciones, RRHH, procesos documentales): https://yago.cl/soluciones
 - Productos: https://yago.cl/productos
 - Servicios: https://yago.cl/servicios
 - Casos y metodologia: https://yago.cl/casos
@@ -18,10 +25,37 @@ Mercado principal: Chile
 
 ## Productos especializados
 
-- OCR para convertir documentos en datos: https://yago.cl/ocr
-- SADT para procesos del Portal Direccion del Trabajo: https://yago.cl/sadt
-- AXIS para consultas publicas y monitoreo PJUD: https://yago.cl/axis
-- OCR Master API: https://yago.cl/ocr-master
+- OCR: convierte facturas, contratos, formularios y PDFs escaneados en datos utiles para operar: https://yago.cl/ocr
+- SADT: convierte el Portal Direccion del Trabajo en una operacion orquestada, visible y reprocesable; automatiza contratos, desvinculaciones y certificados F30/F30-1: https://yago.cl/sadt
+- AXIS: consulta de causas penales publicas (PJUD) a volumen, con evidencia auditable y monitoreo diario: https://yago.cl/axis
+- OCR Master API: API de extraccion estructurada para integrar OCR en aplicaciones y flujos empresariales existentes: https://yago.cl/ocr-master
+
+## Productos configurables
+
+- SOF.IA: asistente corporativo que responde dudas internas usando solo los documentos de la empresa: https://yago.cl/productos/sofia
+- ANTON.IA LeadFlow: prospeccion B2B que busca, califica y contacta prospectos en piloto automatico: https://yago.cl/productos/antonia
+- MASSIMO: flujo automatizado de marketing digital, campanas y contenidos: https://yago.cl/productos/massimo
+- PROCEDURA: software que automatiza el cumplimiento ISO 9001 con trazabilidad y control por roles: https://yago.cl/productos/procedura
+
+## Servicios
+
+- Automatizacion de procesos: https://yago.cl/servicios/automatizacion-procesos
+- Apps que centralizan automatizacion: https://yago.cl/servicios/apps-automatizacion
+- Paginas web personalizadas: https://yago.cl/servicios/paginas-web
+- Capacitacion de equipos en IA: https://yago.cl/servicios/capacitacion-ia
+
+## Blog y guias
+
+- Que es la automatizacion de procesos con IA (y que no es): https://yago.cl/blog/que-es-la-automatizacion-de-procesos-con-ia
+- Como calcular el ROI de automatizar un proceso paso a paso: https://yago.cl/blog/como-calcular-el-roi-de-automatizar-procesos
+- OCR con IA: como convertir documentos en datos utiles: https://yago.cl/blog/ocr-con-ia-digitalizar-documentos
+- Agentes de IA para empresas: que hacen y cuando usarlos: https://yago.cl/blog/agentes-de-ia-para-empresas
+- Automatizacion para pymes: por donde partir sin sobre-invertir: https://yago.cl/blog/automatizacion-para-pymes-por-donde-partir
+- n8n, Make y IA: las herramientas detras de la automatizacion moderna: https://yago.cl/blog/herramientas-automatizacion-n8n-make-ia
+
+## Preguntas frecuentes
+
+Cada pagina de producto, servicio y solucion incluye sus preguntas frecuentes visibles con respuestas y datos estructurados FAQPage. El proceso de trabajo en cuatro pasos (descubrimiento, blueprint, build, go-live) esta en https://yago.cl/proceso.
 
 ## Criterios editoriales
 

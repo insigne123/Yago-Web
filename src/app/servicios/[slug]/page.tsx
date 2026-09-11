@@ -207,6 +207,7 @@ export default async function ServicePage({ params }: PageProps) {
               <h2 className="text-balance text-3xl font-semibold text-slate-900 md:text-4xl">
                 Preguntas frecuentes
               </h2>
+              <p className="mt-2 text-xs text-slate-500">Contenido revisado en septiembre de 2026.</p>
               <div className="mt-8 space-y-3">
                 {svc.faq.map((item) => (
                   <article
@@ -220,6 +221,32 @@ export default async function ServicePage({ params }: PageProps) {
               </div>
             </section>
           )}
+
+          {/* Otros servicios */}
+          <section aria-label="Otros servicios">
+            <h2 className="text-balance text-3xl font-semibold text-slate-900 md:text-4xl">
+              Otros servicios
+            </h2>
+            <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
+              {SERVICES.filter((s) => s.slug !== svc.slug)
+                .slice(0, 3)
+                .map((rel) => (
+                  <Link
+                    key={rel.slug}
+                    href={`/servicios/${rel.slug}`}
+                    className="group rounded-[1.5rem] border border-slate-900/10 bg-white/[0.03] p-5 transition hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200/70"
+                    aria-label={`Ver servicio: ${rel.title}`}
+                  >
+                    <div className="text-base font-semibold text-slate-900">{rel.title}</div>
+                    <p className="mt-2 text-sm leading-relaxed text-slate-600">{rel.short}</p>
+                    <span className="mt-3 inline-flex items-center gap-2 text-sm font-medium text-cyan-700">
+                      Ver detalle
+                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+                    </span>
+                  </Link>
+                ))}
+            </div>
+          </section>
 
           {/* CTA final */}
           <section className="card-glow-border flex flex-col items-center gap-4 rounded-[2rem] border border-slate-900/10 bg-[linear-gradient(120deg,rgba(34,211,238,0.1),rgba(139,92,246,0.1))] p-8 text-center md:p-12">

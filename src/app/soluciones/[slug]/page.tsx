@@ -185,6 +185,7 @@ export default async function SeoSolutionPage({ params }: PageProps) {
           <section className="mt-12 grid gap-5 lg:grid-cols-[1.08fr_0.92fr]">
             <div className="rounded-[2rem] border border-slate-900/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.97),rgba(246,250,254,1))] p-6 shadow-[0_18px_50px_rgba(30,58,95,0.08)] md:p-8">
               <h2 className="text-3xl font-semibold text-slate-900 md:text-4xl">Preguntas frecuentes</h2>
+              <p className="mt-2 text-xs text-slate-500">Contenido revisado en septiembre de 2026.</p>
               <div className="mt-6 space-y-3">
                 {page.faq.map((item) => (
                   <article key={item.question} className="rounded-[1.4rem] border border-slate-900/10 bg-slate-900/5 p-4">

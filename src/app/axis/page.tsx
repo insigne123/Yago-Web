@@ -12,6 +12,7 @@ export const metadata = createPageMetadata({
   description: page.seoDescription,
   keywords: page.keywords,
   path: "/axis",
+  image: "/axis/opengraph-image",
 });
 
 export default async function AxisPage() {

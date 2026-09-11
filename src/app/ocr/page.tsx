@@ -47,6 +47,7 @@ export const metadata = createPageMetadata({
     "extraccion de datos",
   ],
   path: "/ocr",
+  image: "/ocr/opengraph-image",
 });
 
 export default function OcrPage() {

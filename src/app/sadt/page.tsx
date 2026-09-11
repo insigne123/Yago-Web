@@ -12,6 +12,7 @@ export const metadata = createPageMetadata({
   description: page.seoDescription,
   keywords: page.keywords,
   path: "/sadt",
+  image: "/sadt/opengraph-image",
 });
 
 export default async function SadtPage() {

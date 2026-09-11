@@ -299,6 +299,7 @@ export default async function ProductPage({ params }: PageProps) {
           {faqs.length ? (
             <section id="faq" className="rounded-3xl border border-slate-900/10 bg-white/80 p-6 backdrop-blur">
               <h2 className="mb-4 text-xl font-semibold text-slate-900 md:text-2xl">Preguntas frecuentes</h2>
+              <p className="mb-4 text-xs text-slate-500">Contenido revisado en septiembre de 2026.</p>
               <div className="space-y-3">
                 {faqs.map((item) => (
                   <article key={item.question} className="rounded-2xl border border-slate-900/10 bg-slate-900/5 p-4">

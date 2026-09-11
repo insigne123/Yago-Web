@@ -398,7 +398,6 @@ Estos elementos requieren confirmacion del negocio y no deben inventarse:
 - Permisos para publicar nombres, logos y testimonios de clientes.
 - Metricas verificables de casos.
 - Fuentes y revision profesional para contenido legal o regulatorio.
-- Politica de retencion y proveedor del flujo OCR de carnets.
 - Credenciales de email, analitica, Search Console, Bing y CRM.
 - Integraciones realmente soportadas y mercados LATAM activos.
 - Rate limiting compartido antes de aumentar `maxInstances`; el limite local actual es una defensa complementaria, no una cuota distribuida.
@@ -415,7 +414,7 @@ La implementacion tecnica puede dejar campos y estructuras preparadas, pero la p
 | 2026-09-01 | Dependencias | Runtime validado | `npm ci` reproducible y `npm audit --omit=dev` con 0 vulnerabilidades; el audit completo conserva hallazgos transitivos de Genkit CLI/OpenTelemetry usados en desarrollo |
 | 2026-09-01 | Pruebas | Verde | Next 15.5.25, build de 43 paginas, typecheck y Playwright: 61 passed, 1 mobile-only skipped en desktop |
 | 2026-09-01 | Publicacion | Pendiente | Requiere verificar secretos de correo y OCR antes del smoke real |
-| 2026-09-11 | Publicacion | Desplegada, formularios pendientes de credenciales | Commit `28e6630` en `origin/main`; Vercel publico el commit con exito. Rollout manual a Firebase App Hosting `automata-ai/studio` completado con `deploy --only apphosting` (el backend no tiene repo conectado). Smoke en `yago.cl`: 14 rutas/documentos en 200 (`/productos`, `/casos`, `/terminos`, `/llms.txt` incluidos) y home con el build nuevo verificada. `/api/contact`: 400 ante datos incompletos y 500 ante solicitud valida por falta de proveedor. `/api/mobile-scan/submit`: 500 controlado por falta de token. Verificado en Secret Manager que no existe ningun secreto y que `.env.local` tampoco tiene valores: falta obtener `RESEND_API_KEY` (o SMTP completo) y `OCR_MOBILE_SCAN_TRIAL_TOKEN` reales para activar formularios y trial OCR |
+| 2026-09-11 | Publicacion | Desplegada, formularios pendientes de credenciales | Commit `28e6630` en `origin/main`; Vercel publico el commit con exito. Rollout manual a Firebase App Hosting `automata-ai/studio` completado con `deploy --only apphosting` (el backend no tiene repo conectado). Smoke en `yago.cl`: 14 rutas/documentos en 200 (`/productos`, `/casos`, `/terminos`, `/llms.txt` incluidos) y home con el build nuevo verificada. `/api/contact`: 400 ante datos incompletos y 500 ante solicitud valida por falta de proveedor. Verificado en Secret Manager que no existe ningun secreto y que `.env.local` tampoco tiene valores: falta obtener `RESEND_API_KEY` (o SMTP completo) real para activar formularios |
 
 ## 16. Definicion de terminado
 
@@ -438,8 +437,6 @@ conectado y ABIU esta deshabilitado: el push a GitHub NO autodespliega. El rollo
    - `RESEND_API_KEY` con remitente `RESEND_FROM` verificado, o SMTP completo
      (`SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `SMTP_FROM`).
    - `CONTACT_WEBHOOK_URL` y `CONTACT_WEBHOOK_TOKEN` si se usa webhook (opcional).
-   - `OCR_MOBILE_SCAN_TRIAL_TOKEN` (requerido para `/api/mobile-scan/submit`; sin el
-     responde 500 controlado).
 3. Declarar cada secreto en `apphosting.yaml` antes del rollout, por ejemplo:
    `variable: RESEND_API_KEY` con `secret: RESEND_API_KEY` y `availability: [RUNTIME]`.
 4. Verificar que `.firebaseignore` excluye `.env*`, `brochure_*.html` y artefactos
@@ -454,7 +451,6 @@ conectado y ABIU esta deshabilitado: el push a GitHub NO autodespliega. El rollo
 - `/`, `/productos`, `/casos`, `/terminos` responden 200.
 - `/robots.txt`, `/sitemap.xml` y `/llms.txt` responden 200.
 - Envio de prueba del formulario de contacto: llega el correo y retorna `leadId`.
-- Probar el trial OCR solo si el token esta configurado.
 
 ### Notas
 
