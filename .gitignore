@@ -54,3 +54,4 @@ skills-lock.json
 
 # ChileCompra script output
 /chilecompra-out/
+__pycache__/
