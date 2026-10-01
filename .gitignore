@@ -51,3 +51,6 @@ firestore-debug.log
 .opencode/
 firepit-log.txt
 skills-lock.json
+
+# ChileCompra script output
+/chilecompra-out/
