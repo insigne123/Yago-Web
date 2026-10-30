@@ -1,0 +1,4 @@
+Prueba tecnica del correo asistido de YAGO.
+Direccion publica prevista: pgongora@yago.cl
+Este archivo comprueba la recepcion y el envio de adjuntos.
+Uso interno; no es un documento comercial.

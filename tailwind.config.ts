@@ -10,9 +10,10 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        body: ['var(--font-body)', 'sans-serif'],
-        headline: ['var(--font-headline)', 'sans-serif'],
-        code: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', 'monospace'],
+        body: ['var(--font-body)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        headline: ['var(--font-headline)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        mono: ['var(--font-mono)', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
+        code: ['var(--font-mono)', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', 'monospace'],
       },
       colors: {
         background: 'hsl(var(--background))',
@@ -51,6 +52,21 @@ export default {
 
         // Custom surfaces used across the landing
         surface: 'rgba(255, 255, 255, 0.05)',
+        // Paleta YAGO 2026
+        ink: {
+          DEFAULT: '#070b13',
+          900: '#070b13',
+          800: '#0b1220',
+          700: '#111a2b',
+          600: '#1a2638',
+        },
+        mist: {
+          DEFAULT: '#f4f7fa',
+          50: '#f8fafc',
+          100: '#f4f7fa',
+          200: '#eaf0f6',
+        },
+        slateink: '#0b1220',
         chart: {
           '1': 'hsl(var(--chart-1))',
           '2': 'hsl(var(--chart-2))',
@@ -96,11 +112,16 @@ export default {
             transform: "translateX(100%)",
           },
         },
+        'y-pulse': {
+          '0%, 100%': { opacity: '1', transform: 'scale(1)' },
+          '50%': { opacity: '.45', transform: 'scale(.82)' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
         shimmer: "shimmer 2s infinite",
+        'y-pulse': 'y-pulse 2.2s ease-in-out infinite',
       },
     },
   },

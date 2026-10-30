@@ -41,6 +41,7 @@ next-env.d.ts
 
 .genkit/*
 .env*
+!.env.example
 
 # firebase
 firebase-debug.log
@@ -51,3 +52,6 @@ firestore-debug.log
 .opencode/
 firepit-log.txt
 skills-lock.json
+
+# Private SEO/API reports and local credentials.
+.local/

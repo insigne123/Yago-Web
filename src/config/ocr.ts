@@ -20,9 +20,12 @@ export type OcrBenefit = {
   description: string;
 };
 
-export type OcrDifferentiator = {
+export type OcrCapability = {
+  service: string;
   title: string;
   description: string;
+  label: string;
+  href: string;
 };
 
 export type OcrFaq = {
@@ -30,283 +33,288 @@ export type OcrFaq = {
   answer: string;
 };
 
+const EVALUATION_CTA = "Solicitar evaluación";
+
 export const OCR_PAGE = {
-  seoTitle: "OCR para empresas | Automatizacion documental | YAGO",
+  modifiedDate: "2026-10-25",
+  seoTitle: "OCR y digitalización de documentos en Chile | YAGO",
   seoDescription:
-    "OCR para empresas en YAGO. Convierte facturas, contratos, formularios y PDFs escaneados en datos utiles para reducir digitacion manual, errores y tiempos operativos.",
+    "OCR y procesamiento inteligente de documentos para empresas en Chile. Extrae y valida datos de facturas, contratos y PDFs para planillas, ERP y aplicaciones.",
   nav: [
-    { name: "Inicio", href: "#inicio" },
-    { name: "Problema", href: "#problema" },
-    { name: "Como funciona", href: "#como-funciona" },
-    {
-      name: "Apps",
-      href: "/#elige-ruta",
-      eyebrow: "Apps listas",
-      description: "OCR, SADT y AXIS para llegar rápido al servicio correcto.",
-      children: [
-        { name: "OCR", href: "/ocr", description: "Documentos y PDFs a datos útiles." },
-        { name: "SADT", href: "/sadt", description: "Portal DT con evidencia y reproceso." },
-        { name: "AXIS", href: "/axis", description: "Consulta PJUD a volumen con monitoreo." },
-      ],
-    },
-    { name: "FAQ", href: "#faq" },
+    { name: "Resumen", href: "#resumen" },
+    { name: "El problema", href: "#problema" },
+    { name: "Cómo funciona", href: "#como-funciona" },
+    { name: "Casos de uso", href: "#casos-de-uso" },
+    { name: "Más que OCR", href: "#mas-que-ocr" },
+    { name: "Preguntas", href: "#faq" },
+    { name: "Evaluación", href: "#formulario" },
   ],
   hero: {
     badge: "OCR para empresas",
-    title: "Automatiza la lectura de documentos en tu empresa",
+    title: "OCR y digitalización de documentos para empresas",
     description:
-      "Convierte facturas, contratos, formularios y PDFs escaneados en datos utiles para tu operacion, reduciendo digitacion manual, errores y tiempos de gestion.",
+      "Convierte facturas, contratos y PDFs escaneados en datos estructurados para tu planilla, ERP o aplicación. Evaluamos tus archivos, definimos campos y validaciones, e integramos el resultado en tu proceso.",
     proofSignals: [
       "Facturas, contratos y formularios",
-      "PDFs e imagenes escaneadas",
-      "Integracion a planillas, sistemas y flujos",
+      "PDFs e imágenes escaneadas",
+      "Integración a planillas, sistemas y flujos",
     ],
     trustSignals: [
-      "Evaluacion con documentos reales",
+      "Evaluación con documentos reales",
       "Pensado para operaciones y backoffice",
-      "Implementacion adaptable al proceso actual",
+      "Implementación adaptable al proceso actual",
     ],
-    primaryCta: "Solicitar demo",
+    primaryCta: EVALUATION_CTA,
     secondaryCta: "Hablar por WhatsApp",
-    tertiaryCta: "Probar con mis documentos",
-    previewTitle: "Documento escaneado -> datos listos para operar",
+    tertiaryCta: EVALUATION_CTA,
+    previewTitle: "Documento escaneado → datos listos para operar",
     previewDescription:
-      "La idea no es solo leer texto. La idea es dejar informacion util, revisable e integrable para tu proceso.",
+      "No se trata solo de leer texto: la información queda útil, revisable e integrable para tu proceso.",
     previewFields: [
-      { label: "Proveedor", value: "Transporte Andino" },
+      { label: "Proveedor", value: "Proveedor de ejemplo SpA" },
       { label: "Folio", value: "FC-20481" },
       { label: "Monto", value: "CLP 1.248.000" },
       { label: "Fecha", value: "08/04/2026" },
     ],
     previewTargets: ["Planilla", "ERP", "Backoffice", "Workflow"],
   },
-  problem: {
-    title: "Muchos procesos siguen dependiendo de la digitacion manual",
-    description:
-      "Las empresas siguen perdiendo tiempo al revisar documentos, copiar datos desde PDFs o imagenes, validar informacion manualmente y traspasarla a planillas o sistemas internos.",
+  documentExample: {
+    title: "Una factura, de entrada a salida.",
+    label: "Ejemplo ilustrativo · datos ficticios",
+    filename: "factura_ejemplo_20481.pdf",
+    stages: [
+      { title: "Documento de entrada", description: "PDF escaneado de una factura de proveedor." },
+      { title: "Campos extraídos", description: "Información estructurada que se puede revisar." },
+      { title: "Validación", description: "Se marca la excepción para que tu equipo complete el dato. La carga queda pendiente." },
+      { title: "Salida prevista", description: "Una vez revisados y aprobados, los datos pueden enviarse a una planilla o ERP por la conexión acordada." },
+    ],
+    exception: "Orden de compra no identificada",
+    note: "Las reglas, la revisión y la conexión se definen para tu proceso.",
   },
+  problem: {
+    title: "Muchos procesos siguen dependiendo de la digitación manual",
+    description:
+      "Las empresas siguen perdiendo tiempo al revisar documentos, copiar datos desde PDFs o imágenes, validar información a mano y traspasarla a planillas o sistemas internos.",
+  },
+  comparison: [
+    {
+      today: "Equipos copiando datos documento por documento para poder operar.",
+      withProduct: "Los campos se extraen desde el PDF o la imagen y quedan listos para revisar.",
+    },
+    {
+      today: "Montos, fechas o campos mal ingresados que después generan retrabajo.",
+      withProduct: "Datos estructurados y validados antes de llegar a tu planilla o sistema.",
+    },
+    {
+      today: "La información llega tarde a quienes deben revisar, aprobar o cargar.",
+      withProduct: "El dato está disponible apenas entra el documento.",
+    },
+    {
+      today: "Datos atrapados en imágenes, PDFs escaneados o archivos históricos.",
+      withProduct: "Documentos convertidos en información fácil de buscar y reutilizar.",
+    },
+  ],
   pains: [
     {
       eyebrow: "01",
-      title: "Digitacion manual",
+      title: "Digitación manual",
       description: "Equipos copiando datos documento por documento para poder operar.",
     },
     {
       eyebrow: "02",
       title: "Errores operativos",
-      description: "Montos, fechas o campos mal ingresados que despues generan retrabajo.",
+      description: "Montos, fechas o campos mal ingresados que después generan retrabajo.",
     },
     {
       eyebrow: "03",
       title: "Procesos lentos",
-      description: "La informacion llega tarde a quienes la necesitan para revisar, aprobar o cargar.",
+      description: "La información llega tarde a quienes la necesitan para revisar, aprobar o cargar.",
     },
     {
       eyebrow: "04",
-      title: "Informacion poco accesible",
-      description: "Datos atrapados en imagenes, PDFs escaneados o archivos historicos no estructurados.",
+      title: "Información poco accesible",
+      description: "Datos atrapados en imágenes, PDFs escaneados o archivos históricos no estructurados.",
     },
   ] as OcrPain[],
   solution: {
-    title: "Yago convierte documentos en datos utiles para tu operacion",
+    title: "YAGO convierte documentos en datos útiles para tu operación",
     description:
-      "Recibimos PDFs, imagenes o documentos escaneados, identificamos informacion relevante, la ordenamos y la dejamos lista para revision, planillas o integracion a sistemas internos.",
+      "Recibimos PDFs, imágenes o documentos escaneados, identificamos la información relevante, la ordenamos y la dejamos lista para revisión, planillas o integración a sistemas internos.",
     inputLabel: "Lo que entra",
     inputItems: [
-      "Facturas y ordenes de compra",
+      "Facturas y órdenes de compra",
       "Contratos y formularios",
-      "Guias y documentos administrativos",
-      "PDFs, imagenes y archivos escaneados",
+      "Guías y documentos administrativos",
+      "PDFs, imágenes y archivos escaneados",
     ],
     outputLabel: "Lo que sale",
     outputItems: [
       "Campos estructurados para revisar o validar",
       "Datos listos para planillas y sistemas",
-      "Informacion mas facil de buscar y reutilizar",
-      "Base para automatizacion documental",
+      "Información más fácil de buscar y reutilizar",
+      "Base para automatización documental",
     ],
     support: [
-      "OCR e IA subordinados al resultado operativo",
-      "Salida util para procesos reales, no solo lectura de texto",
+      "OCR e IA al servicio del resultado operativo",
+      "Salida útil para procesos reales, no solo lectura de texto",
       "Adaptable al flujo actual de tu empresa",
     ],
   },
   steps: [
     {
       name: "Recibe tus documentos",
-      description:
-        "Facturas, ordenes de compra, contratos, formularios, guias y otros documentos administrativos.",
+      description: "Facturas, órdenes de compra, contratos, formularios, guías y otros documentos administrativos.",
       outputs: ["PDF", "Imagen", "Escaneado"],
     },
     {
-      name: "Extrae la informacion automaticamente",
-      description:
-        "Leemos texto, campos relevantes y datos utiles desde archivos documentales de uso cotidiano.",
+      name: "Extrae la información",
+      description: "Leemos texto, campos relevantes y datos útiles desde los archivos de uso cotidiano.",
       outputs: ["Campos", "Texto", "Datos clave"],
     },
     {
-      name: "Estructura la informacion",
-      description:
-        "Ordenamos los datos para que sean faciles de revisar, buscar o reutilizar en tu operacion.",
-      outputs: ["Revision", "Busqueda", "Reutilizacion"],
+      name: "Estructura los datos",
+      description: "Ordenamos la información para que sea fácil de revisar, buscar o reutilizar en tu operación.",
+      outputs: ["Revisión", "Búsqueda", "Reutilización"],
     },
     {
-      name: "Integra a tu operacion",
-      description:
-        "La informacion puede conectarse a planillas, sistemas internos o flujos administrativos.",
+      name: "Integra a tu operación",
+      description: "La información se conecta a planillas, sistemas internos o flujos administrativos.",
       outputs: ["Planillas", "Sistemas", "Flujos"],
     },
   ] as OcrStep[],
   useCases: [
-    {
-      title: "Facturas",
-      description: "Extrae datos clave para acelerar revision, registro y validacion.",
-    },
-    {
-      title: "Ordenes de compra",
-      description: "Organiza informacion para comparar, aprobar y continuar el proceso mas rapido.",
-    },
-    {
-      title: "Contratos",
-      description: "Convierte documentos extensos en informacion mas accesible y utilizable.",
-    },
-    {
-      title: "Formularios",
-      description: "Digitaliza informacion capturada manualmente y la ordena automaticamente.",
-    },
-    {
-      title: "Guias y logistica",
-      description: "Facilita seguimiento documental y reduce trabajo manual en operaciones logisticas.",
-    },
-    {
-      title: "Documentacion administrativa",
-      description: "Mejora acceso, trazabilidad y consistencia sobre documentos de uso interno.",
-    },
-    {
-      title: "Archivos historicos escaneados",
-      description: "Recupera informacion util desde documentos antiguos que hoy son dificiles de consultar.",
-    },
+    { title: "Facturas", description: "Extrae datos clave para acelerar revisión, registro y validación." },
+    { title: "Órdenes de compra", description: "Organiza la información para comparar, aprobar y continuar el proceso más rápido." },
+    { title: "Contratos", description: "Convierte documentos extensos en información accesible y utilizable." },
+    { title: "Formularios", description: "Digitaliza información capturada a mano y la ordena automáticamente." },
+    { title: "Guías y logística", description: "Facilita el seguimiento documental y reduce trabajo manual en operaciones logísticas." },
+    { title: "Documentación administrativa", description: "Mejora acceso, trazabilidad y consistencia sobre documentos de uso interno." },
+    { title: "Archivos históricos escaneados", description: "Recupera información útil desde documentos antiguos que hoy son difíciles de consultar." },
   ] as OcrUseCase[],
   benefits: [
-    {
-      title: "Reduce digitacion manual",
-      description: "Menos tiempo copiando datos y mas tiempo en tareas que si agregan valor.",
-    },
-    {
-      title: "Disminuye errores operativos",
-      description: "Menos retrabajo por campos mal ingresados o informacion traspasada de forma inconsistente.",
-    },
-    {
-      title: "Acelera procesos administrativos",
-      description: "La informacion llega antes a quienes deben revisar, validar o cargar datos.",
-    },
-    {
-      title: "Mejora trazabilidad",
-      description: "Datos mas ordenados y faciles de seguir a lo largo del flujo documental.",
-    },
-    {
-      title: "Facilita busqueda y reutilizacion",
-      description: "La informacion deja de quedar atrapada en archivos no estructurados.",
-    },
-    {
-      title: "Permite escalar procesos",
-      description: "Procesos documentales mas preparados para crecer sin multiplicar trabajo manual.",
-    },
+    { title: "Reduce digitación manual", description: "Menos tiempo copiando datos y más tiempo en tareas que sí agregan valor." },
+    { title: "Disminuye errores operativos", description: "Menos retrabajo por campos mal ingresados o información traspasada de forma inconsistente." },
+    { title: "Acelera procesos administrativos", description: "La información llega antes a quienes deben revisar, validar o cargar datos." },
+    { title: "Mejora trazabilidad", description: "Datos más ordenados y fáciles de seguir a lo largo del flujo documental." },
+    { title: "Facilita búsqueda y reutilización", description: "La información deja de quedar atrapada en archivos no estructurados." },
+    { title: "Permite escalar procesos", description: "Procesos documentales preparados para crecer sin multiplicar el trabajo manual." },
   ] as OcrBenefit[],
-  differentiators: [
-    {
-      title: "Pensado para negocio, no para impresionar tecnicamente",
-      description: "Priorizamos el impacto en tu operacion antes que una narrativa tecnica compleja.",
-    },
-    {
-      title: "Trabajamos con documentos reales del cliente",
-      description: "La evaluacion inicial se hace sobre casos concretos, no sobre promesas abstractas.",
-    },
-    {
-      title: "Mirada de automatizacion, no solo lectura",
-      description: "Buscamos que el dato quede util para el siguiente paso del proceso.",
-    },
-    {
-      title: "Implementacion adaptable",
-      description: "Se puede conectar a planillas, sistemas internos o flujos ya existentes segun el caso.",
-    },
-  ] as OcrDifferentiator[],
+  capabilities: {
+    title: "Leer el documento es el primer paso. Podemos conectar lo que sigue.",
+    description: "En YAGO convertimos documentos en datos y conectamos esa información con sistemas, aprobaciones, aplicaciones y asistentes de IA. Podemos implementar una parte o definir el flujo completo según tu operación.",
+    items: [
+      {
+        service: "integracion-ia",
+        title: "Llevar los datos a tu ERP o CRM",
+        description: "Conectamos la información revisada con tus sistemas mediante las interfaces disponibles.",
+        label: "Ver integración de sistemas e IA",
+        href: "/servicios/integracion-ia",
+      },
+      {
+        service: "automatizacion-procesos",
+        title: "Continuar con aprobaciones y avisos",
+        description: "Unimos recepción, validaciones, responsables y seguimiento en un flujo de trabajo trazable.",
+        label: "Ver automatización de procesos",
+        href: "/servicios/automatizacion-procesos",
+      },
+      {
+        service: "apps-automatizacion",
+        title: "Gestionar documentos en tu propio portal",
+        description: "Desarrollamos aplicaciones para cargar archivos, revisar excepciones y operar con distintos roles.",
+        label: "Ver aplicaciones a medida",
+        href: "/servicios/apps-automatizacion",
+      },
+      {
+        service: "agentes-ia",
+        title: "Consultar documentos con referencias",
+        description: "Implementamos asistentes conectados a tu información, como SOF.IA, con fuentes y permisos definidos.",
+        label: "Ver agentes y asistentes de IA",
+        href: "/servicios/agentes-ia",
+      },
+    ] as OcrCapability[],
+    prompt: "Cuéntanos qué debería pasar después de leer tu documento.",
+    companyLabel: "Conoce cómo trabaja YAGO",
+  },
   demo: {
-    title: "Te mostramos una prueba con tus propios documentos",
+    title: "Evaluemos tus documentos y el siguiente paso",
     description:
-      "Podemos revisar una muestra real de tu operacion y mostrarte como se extrae la informacion, que campos pueden estructurarse y como eso podria integrarse a tu flujo actual.",
+      "Cuéntanos qué documentos recibes y qué necesitas hacer con sus datos. Revisamos formatos, campos, validaciones y conexiones para proponerte un alcance y coordinar la evaluación de una muestra.",
     bullets: [
-      "Evaluacion inicial con documentos reales",
-      "Definicion de campos utiles para tu operacion",
-      "Siguiente paso claro para demo, piloto o implementacion",
+      "Evaluación inicial con documentos reales",
+      "Definición de campos útiles para tu operación",
+      "Siguiente paso claro: muestra, piloto o implementación",
     ],
-    primaryCta: "Solicitar demo",
+    primaryCta: EVALUATION_CTA,
     secondaryCta: "Hablar por WhatsApp",
   },
   form: {
-    title: "Pide una evaluacion inicial",
-    description:
-      "Cuentanos que documentos quieres procesar y te respondemos con el siguiente paso recomendado para tu caso.",
-    submitLabel: "Solicitar evaluacion",
+    title: "Solicita una evaluación inicial",
+    description: "Cuéntanos qué documentos quieres procesar y qué debería pasar con sus datos. Te responderemos para definir el siguiente paso.",
+    submitLabel: EVALUATION_CTA,
     documentOptions: [
       "Facturas",
-      "Ordenes de compra",
+      "Órdenes de compra",
       "Contratos",
       "Formularios",
-      "Guias y logistica",
-      "Documentacion administrativa",
-      "Archivos historicos escaneados",
+      "Guías y logística",
+      "Documentación administrativa",
+      "Archivos históricos escaneados",
       "Mixto / varios tipos",
     ],
     volumeOptions: [
       "Menos de 500 documentos / mes",
       "500 a 2.000 documentos / mes",
       "2.000 a 10.000 documentos / mes",
-      "Mas de 10.000 documentos / mes",
-      "Aun no lo se",
+      "Más de 10.000 documentos / mes",
+      "Aún no lo sé",
     ],
   },
   faqs: [
     {
-      question: "Que tipo de documentos pueden procesar?",
-      answer:
-        "Podemos evaluar facturas, contratos, formularios, ordenes de compra, guias y otros documentos administrativos o escaneados.",
+      question: "¿Qué significa digitalizar documentos con OCR?",
+      answer: "Significa convertir el texto y los campos de un PDF o imagen en información que un sistema puede buscar y procesar. Nuestro servicio parte de archivos digitales o ya escaneados y añade extracción, estructuración y validación de datos.",
     },
     {
-      question: "Funciona con PDFs escaneados e imagenes?",
-      answer:
-        "Si. La idea es precisamente convertir PDFs, imagenes y documentos escaneados en informacion util para la operacion.",
+      question: "¿Cómo se evalúa la precisión del OCR?",
+      answer: "Con una muestra representativa de tus formatos y calidad de archivos, comparando los campos extraídos con valores revisados. Medimos errores por campo, documentos que requieren intervención y tiempo de revisión; el resultado depende de los documentos y del alcance acordado.",
     },
     {
-      question: "Se puede adaptar a distintos formatos?",
-      answer:
-        "Si. La evaluacion inicial nos permite revisar variaciones de formato y proponer el mejor enfoque para tu flujo documental.",
+      question: "¿En qué se diferencia OCR de automatización documental?",
+      answer: "OCR lee y extrae información. La automatización documental conecta ese paso con recepción, clasificación, validación, aprobación y carga a sistemas. Podemos implementar la extracción o integrarla en el flujo completo según tu necesidad.",
     },
     {
-      question: "La informacion se puede integrar a otros sistemas?",
-      answer:
-        "Si. Dependiendo del caso, los datos pueden quedar listos para planillas, sistemas internos o flujos administrativos.",
+      question: "¿YAGO puede implementar lo que viene después del OCR?",
+      answer: "Sí. Además de extraer datos, YAGO implementa integraciones con sistemas, flujos de aprobación y avisos, aplicaciones a medida y asistentes que consultan documentos con referencias. La evaluación define las conexiones, los permisos y las revisiones que necesita tu proceso.",
     },
     {
-      question: "Como se realiza la evaluacion inicial?",
-      answer:
-        "Revisamos tu tipo de documento, volumen aproximado y objetivo operativo para proponerte un siguiente paso claro.",
+      question: "¿Qué tipo de documentos pueden procesar?",
+      answer: "Podemos evaluar facturas, contratos, formularios, órdenes de compra, guías y otros documentos administrativos o escaneados.",
     },
     {
-      question: "Sirve para facturas, contratos y formularios?",
-      answer:
-        "Si, esos son precisamente algunos de los casos de uso mas frecuentes que podemos evaluar contigo.",
+      question: "¿Funciona con PDFs escaneados e imágenes?",
+      answer: "Sí. La idea es precisamente convertir PDFs, imágenes y documentos escaneados en información útil para la operación.",
     },
     {
-      question: "Necesito cambiar mis sistemas actuales?",
-      answer:
-        "No necesariamente. La idea es adaptarnos a tu operacion actual y definir la integracion que tenga mas sentido para el proceso.",
+      question: "¿Se puede adaptar a distintos formatos?",
+      answer: "Sí. La evaluación inicial nos permite revisar variaciones de formato y proponer el mejor enfoque para tu flujo documental.",
+    },
+    {
+      question: "¿La información se puede integrar a otros sistemas?",
+      answer: "Sí. Según el caso, los datos quedan listos para planillas, sistemas internos o flujos administrativos. También existe OCR Master API para integrarlo en tus aplicaciones.",
+    },
+    {
+      question: "¿Cómo se realiza la evaluación inicial?",
+      answer: "Revisamos tu tipo de documento, volumen aproximado y objetivo operativo para proponerte un siguiente paso claro.",
+    },
+    {
+      question: "¿Necesito cambiar mis sistemas actuales?",
+      answer: "No necesariamente. Nos adaptamos a tu operación actual y definimos la integración que tenga más sentido para el proceso.",
     },
   ] as OcrFaq[],
   finalCta: {
-    title: "Reduce trabajo manual y convierte tus documentos en datos utiles",
-    text: "Agenda una demo y revisemos como aplicar OCR y automatizacion documental en tu operacion.",
-    primary: "Solicitar demo",
+    title: "Reduce trabajo manual y convierte tus documentos en datos útiles",
+    text: "Solicita una evaluación y revisemos cómo aplicar OCR y automatización documental en tu operación.",
+    primary: EVALUATION_CTA,
     secondary: "Hablar por WhatsApp",
   },
 };

@@ -1,7 +1,8 @@
 import { defineConfig, devices } from "@playwright/test";
 
 const PORT = 9002;
-const baseURL = `http://localhost:${PORT}`;
+const externalBaseURL = process.env.PLAYWRIGHT_BASE_URL;
+const baseURL = externalBaseURL || `http://localhost:${PORT}`;
 
 export default defineConfig({
   testDir: "./tests/ui",
@@ -32,7 +33,7 @@ export default defineConfig({
       },
     },
   ],
-  webServer: {
+  webServer: externalBaseURL ? undefined : {
     command: "npm run test:ui:server",
     url: baseURL,
     reuseExistingServer: false,

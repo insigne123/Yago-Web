@@ -15,6 +15,7 @@ test-results
 .claude
 .idx
 .modified
+.local
 firebase-debug.log
 firestore-debug.log
 pglite-debug.log

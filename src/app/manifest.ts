@@ -17,8 +17,10 @@ export default function manifest(): MetadataRoute.Manifest {
     background_color: "#070b13",
     theme_color: "#070b13",
     icons: [
-      { src: "/logo-yago.png", sizes: "any", type: "image/png", purpose: "maskable" },
-      { src: "/favicon.ico", sizes: "any", type: "image/x-icon" },
+      { src: "/icon.svg", sizes: "any", type: "image/svg+xml" },
+      { src: "/brand/icon-192.png", sizes: "192x192", type: "image/png" },
+      { src: "/brand/icon-512.png", sizes: "512x512", type: "image/png" },
+      { src: "/brand/icon-maskable-512.png", sizes: "512x512", type: "image/png", purpose: "maskable" },
     ],
   };
 }

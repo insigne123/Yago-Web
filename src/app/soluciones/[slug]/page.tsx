@@ -1,13 +1,24 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, BadgeCheck, CheckCircle2 } from "lucide-react";
+import { ArrowRight, BadgeCheck, Check, Target } from "lucide-react";
 import { notFound } from "next/navigation";
-import { Navbar } from "@/components/landing/Navbar";
-import { Footer } from "@/components/landing/Footer";
-import { BrandStamp } from "@/components/BrandStamp";
+import { ColumnHeader, ListCard, stepGridClass } from "@/components/catalog/CatalogKit";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { COMPANY, PRIMARY_CTA } from "@/config/site";
+import {
+  ActionLink,
+  BOOKING_ACTION,
+  CtaBand,
+  FaqSection,
+  IconTile,
+  PageHero,
+  PageSection,
+  PageShell,
+  SectionHeader,
+  StepCard,
+  TextLink,
+  WHATSAPP_ACTION,
+} from "@/components/site/PageKit";
 import { getSeoPageBySlug, SEO_PAGES } from "@/config/seo-pages";
 import { createPageMetadata } from "@/lib/seo";
 
@@ -58,165 +69,148 @@ export default async function SeoSolutionPage({ params }: PageProps) {
   };
 
   return (
-    <div className="relative min-h-screen overflow-x-clip text-white">
+    <PageShell>
       <JsonLd id={`jsonld-solution-${page.slug}`} data={serviceJsonLd} />
       <JsonLd id={`jsonld-solution-faq-${page.slug}`} data={faqJsonLd} />
-      <Navbar ctaHref={PRIMARY_CTA.href} ctaLabel={PRIMARY_CTA.label} />
 
-      <main id="main-content" className="main-premium py-20 md:py-24">
-        <div className="mx-auto max-w-7xl px-4">
-          <Breadcrumbs items={[{ name: "Inicio", href: "/" }, { name: "Soluciones", href: "/soluciones" }, { name: page.eyebrow, href: `/soluciones/${page.slug}` }]} />
-          <section className="grid gap-8 lg:grid-cols-[0.98fr_1.02fr] lg:items-start">
-            <div className="max-w-3xl">
-              <p className="text-xs uppercase tracking-[0.22em] text-slate-300">{page.eyebrow}</p>
-              <h1 className="mt-4 text-balance font-headline text-4xl font-semibold text-white md:text-6xl">
-                {page.title}
-              </h1>
-              <p className="mt-5 max-w-2xl text-base leading-relaxed text-slate-300 md:text-lg">
-                {page.description}
-              </p>
+      {/* ---------------- HERO ---------------- */}
+      <PageHero
+        top={
+          <Breadcrumbs
+            items={[
+              { name: "Inicio", href: "/" },
+              { name: "Soluciones", href: "/soluciones" },
+              { name: page.name, href: `/soluciones/${page.slug}` },
+            ]}
+          />
+        }
+        eyebrow={`${page.eyebrow} · ${page.name}`}
+        title={page.title}
+        description={page.description}
+        actions={
+          <>
+            <ActionLink action={BOOKING_ACTION} arrow />
+            <ActionLink action={WHATSAPP_ACTION} variant="glass" />
+          </>
+        }
+      >
+        <ul className="mt-2 grid w-full max-w-5xl grid-cols-1 gap-4 border-t border-white/[0.08] pt-6 sm:grid-cols-3 sm:gap-6">
+          {page.proof.map((item) => (
+            <li key={item} className="flex gap-2.5 text-[14.5px] leading-snug text-slate-300">
+              <Check className="mt-0.5 h-4 w-4 shrink-0 text-sky-300" strokeWidth={2.4} aria-hidden="true" />
+              {item}
+            </li>
+          ))}
+        </ul>
+      </PageHero>
 
-              <div className="mt-6 flex flex-wrap gap-2 text-sm text-slate-300">
-                {page.proof.map((item) => (
-                  <span key={item} className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2">
-                    {item}
-                  </span>
-                ))}
-              </div>
-
-              <div className="mt-8 flex flex-wrap gap-3">
-                <a
-                  href={PRIMARY_CTA.href}
-                  className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.07),rgba(255,255,255,0.02))] px-6 py-3 text-sm font-medium text-white shadow-[0_14px_34px_rgba(5,11,19,0.24)] transition hover:-translate-y-0.5"
-                >
-                  {PRIMARY_CTA.label}
-                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                </a>
-                <a
-                  href={COMPANY.whatsappLink}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-6 py-3 text-sm font-medium text-white transition hover:bg-slate-50"
-                >
-                  Hablar por WhatsApp
-                </a>
-              </div>
-            </div>
-
-            <div className="rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-6 shadow-[0_20px_60px_rgba(0,0,0,0.08)]">
-              <div className="text-xs uppercase tracking-[0.16em] text-slate-300">Donde tiene mejor fit</div>
-              <div className="mt-4 grid gap-3">
-                {page.fitItems.map((item) => (
-                  <div key={item} className="flex items-start gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-4 text-sm text-slate-200">
-                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-sky-300" aria-hidden="true" />
-                    <span>{item}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
-
-          <section className="mt-12 grid gap-5 lg:grid-cols-[0.94fr_1.06fr]">
-            <div className="rounded-[1.9rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-6 shadow-[0_18px_50px_rgba(0,0,0,0.08)]">
-              <div className="text-xs uppercase tracking-[0.18em] text-slate-300">{page.problemTitle}</div>
-              <p className="mt-4 text-sm leading-relaxed text-slate-300 md:text-base">{page.problemDescription}</p>
-            </div>
-
-            <div className="grid gap-4 md:grid-cols-2">
-              {page.painPoints.map((item) => (
-                <div
-                  key={item}
-                  className="rounded-[1.6rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-5 shadow-[0_18px_50px_rgba(0,0,0,0.08)]"
-                >
-                  <div className="text-sm font-medium text-white">{item}</div>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          <section className="mt-12 rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-6 shadow-[0_18px_50px_rgba(0,0,0,0.08)] md:p-8">
-            <div className="max-w-3xl">
-              <h2 className="text-3xl font-semibold text-white md:text-4xl">{page.startingTitle}</h2>
-              <p className="mt-3 text-sm leading-relaxed text-slate-300 md:text-base">
-                La mejor primera automatizacion no siempre es la mas grande. Normalmente es la que mueve un cuello de botella real con poco riesgo y mucho aprendizaje.
-              </p>
-            </div>
-
-            <div className="mt-6 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
-              {page.startingItems.map((item) => (
-                <div key={item} className="rounded-[1.4rem] border border-white/10 bg-white/5 p-4 text-sm leading-relaxed text-slate-200">
-                  {item}
-                </div>
-              ))}
-            </div>
-          </section>
-
-          <section className="mt-12">
-            <div className="max-w-3xl">
-              <h2 className="text-3xl font-semibold text-white md:text-4xl">{page.outcomesTitle}</h2>
-            </div>
-
-            <div className="mt-6 grid gap-4 md:grid-cols-3">
-              {page.outcomes.map((item) => (
-                <div key={item.title} className="rounded-[1.7rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-6 shadow-[0_18px_50px_rgba(0,0,0,0.08)]">
-                  <div className="inline-flex size-10 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] text-sky-300">
-                    <BadgeCheck className="h-4 w-4" aria-hidden="true" />
-                  </div>
-                  <div className="mt-4 text-xl font-semibold text-white">{item.title}</div>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-300">{item.description}</p>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          <section className="mt-12 rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-6 shadow-[0_18px_50px_rgba(0,0,0,0.08)] md:p-8">
-            <h2 className="text-3xl font-semibold text-white md:text-4xl">{page.processTitle}</h2>
-            <div className="mt-6 grid gap-4 md:grid-cols-3">
-              {page.processSteps.map((step, index) => (
-                <div key={step.title} className="rounded-[1.6rem] border border-white/10 bg-white/5 p-5">
-                  <div className="text-xs uppercase tracking-[0.16em] text-slate-300">Paso {index + 1}</div>
-                  <div className="mt-3 text-lg font-semibold text-white">{step.title}</div>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-300">{step.description}</p>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          <section className="mt-12 grid gap-5 lg:grid-cols-[1.08fr_0.92fr]">
-            <div className="rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-6 shadow-[0_18px_50px_rgba(0,0,0,0.08)] md:p-8">
-              <h2 className="text-3xl font-semibold text-white md:text-4xl">Preguntas frecuentes</h2>
-              <p className="mt-2 text-xs text-slate-500">Contenido revisado en septiembre de 2026.</p>
-              <div className="mt-6 space-y-3">
-                {page.faq.map((item) => (
-                  <article key={item.question} className="rounded-[1.4rem] border border-white/10 bg-white/5 p-4">
-                    <h3 className="text-sm font-medium text-white">{item.question}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-slate-300">{item.answer}</p>
-                  </article>
-                ))}
-              </div>
-            </div>
-
-            <div className="rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-6 shadow-[0_18px_50px_rgba(0,0,0,0.08)] md:p-8">
-              <div className="text-sm font-medium text-white">Links relacionados</div>
-              <div className="mt-5 grid gap-3">
-                {page.relatedLinks.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className="inline-flex items-center justify-between gap-3 rounded-[1.3rem] border border-white/10 bg-white/5 px-4 py-4 text-sm text-slate-200 transition hover:bg-slate-50 hover:text-white"
-                  >
-                    <span>{item.label}</span>
-                    <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </section>
+      {/* ---------------- EL PROBLEMA ---------------- */}
+      <PageSection id="problema" tone="light">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-10">
+          <div className="lg:col-span-5">
+            <ColumnHeader eyebrow="El problema" title={page.problemTitle} description={page.problemDescription} />
+          </div>
+          <div className="min-w-0 lg:col-span-7">
+            <ListCard items={page.painPoints} numbered />
+          </div>
         </div>
-      </main>
+      </PageSection>
 
-      <BrandStamp />
-      <Footer />
-    </div>
+      {/* ---------------- POR DÓNDE PARTIR + ENCAJE ---------------- */}
+      <PageSection id="por-donde-partir" tone="mist">
+        <SectionHeader
+          eyebrow="Por dónde partir"
+          title={page.startingTitle}
+          description="La mejor primera automatización no siempre es la más grande. Normalmente es la que mueve un cuello de botella real con poco riesgo y mucho aprendizaje."
+        />
+        <ol className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
+          {page.startingItems.map((item, index) => (
+            <li key={item} className="y-card y-reveal flex flex-col gap-4 p-7">
+              <span className="font-mono text-[13px] text-sky-700">{String(index + 1).padStart(2, "0")}</span>
+              <p className="text-[16.5px] font-medium leading-relaxed text-slate-900">{item}</p>
+            </li>
+          ))}
+        </ol>
+
+        <div className="y-card y-reveal mt-5 grid grid-cols-1 gap-8 p-7 sm:p-9 lg:grid-cols-12 lg:gap-10">
+          <div className="flex flex-col items-start gap-4 lg:col-span-4">
+            <IconTile icon={Target} />
+            <h3 className="y-h3 text-[1.35rem] text-slate-950">{page.fitTitle}</h3>
+          </div>
+          <ul className="grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2 lg:col-span-8">
+            {page.fitItems.map((item) => (
+              <li key={item} className="flex gap-2.5 text-[15.5px] leading-snug text-slate-700">
+                <Check className="mt-0.5 h-4 w-4 shrink-0 text-sky-600" strokeWidth={2.4} aria-hidden="true" />
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </PageSection>
+
+      {/* ---------------- RESULTADOS ---------------- */}
+      <PageSection id="resultados" tone="light">
+        <SectionHeader eyebrow="Resultados" title={page.outcomesTitle} />
+        <div className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-3">
+          {page.outcomes.map((item) => (
+            <article key={item.title} className="y-card y-reveal flex flex-col gap-4 p-7">
+              <IconTile icon={BadgeCheck} />
+              <h3 className="y-h3 mt-1 text-[1.25rem] text-slate-950">{item.title}</h3>
+              <p className="text-[15px] leading-relaxed text-slate-600">{item.description}</p>
+            </article>
+          ))}
+        </div>
+      </PageSection>
+
+      {/* ---------------- CÓMO TRABAJAMOS ---------------- */}
+      <PageSection id="como-trabajamos" tone="dark">
+        <SectionHeader
+          dark
+          eyebrow="Cómo trabajamos"
+          title={page.processTitle}
+          action={<TextLink href="/proceso">Ver el proceso completo</TextLink>}
+        />
+        <ol className={`mt-14 ${stepGridClass(page.processSteps.length)}`}>
+          {page.processSteps.map((step, index) => (
+            <StepCard key={step.title} index={index} title={step.title} description={step.description} />
+          ))}
+        </ol>
+      </PageSection>
+
+      {/* ---------------- PREGUNTAS + RELACIONADOS ---------------- */}
+      <FaqSection
+        items={page.faq}
+        aside={
+          <div className="flex w-full flex-col gap-5">
+            <p className="text-[14px] text-slate-600">Contenido revisado en septiembre de 2026.</p>
+            <nav aria-label="Páginas relacionadas" className="w-full rounded-2xl bg-mist p-5 shadow-[inset_0_0_0_1px_rgba(15,23,42,0.06)]">
+              <p className="font-mono text-[11.5px] font-medium uppercase tracking-[0.12em] text-slate-600">Relacionado</p>
+              <ul className="mt-3 flex flex-col">
+                {page.relatedLinks.map((item, index) => (
+                  <li key={item.href} className={index ? "border-t border-slate-200/80" : ""}>
+                    <Link
+                      href={item.href}
+                      className="group flex items-center justify-between gap-3 py-3 text-[15px] font-medium text-slate-900 transition-colors hover:text-sky-700"
+                    >
+                      <span className="min-w-0">{item.label}</span>
+                      <ArrowRight
+                        className="h-4 w-4 shrink-0 text-sky-700 transition-transform duration-300 group-hover:translate-x-0.5"
+                        aria-hidden="true"
+                      />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </div>
+        }
+      />
+
+      {/* ---------------- CIERRE ---------------- */}
+      <CtaBand
+        title="Ubiquemos tu cuello de botella."
+        text="En una sesión de diagnóstico revisamos tu flujo y te decimos si conviene partir por OCR, automatización o una app interna."
+      />
+    </PageShell>
   );
 }

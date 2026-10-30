@@ -1,37 +1,43 @@
+import Link from "next/link";
 import {
-  ArrowLeft,
+  Archive,
   ArrowRight,
   BadgeCheck,
-  Building2,
-  CheckCircle2,
-  FileJson2,
+  Braces,
+  CircleCheck,
+  ClipboardList,
+  FileText,
+  FolderOpen,
   Mail,
   MessageCircle,
-  ShieldCheck,
-  Waypoints,
-  Workflow,
+  Plus,
+  ShoppingCart,
+  Signature,
+  Truck,
+  type LucideIcon,
 } from "lucide-react";
-import { Footer } from "@/components/landing/Footer";
-import { Navbar } from "@/components/landing/Navbar";
-import { Section } from "@/components/landing/Section";
+import { OcrDocumentExample } from "@/components/ocr/OcrDocumentExample";
+import { OcrCapabilities } from "@/components/ocr/OcrCapabilities";
+import { SpotlightGroup } from "@/components/home/SpotlightGroup";
 import { OcrLeadForm } from "@/components/ocr/OcrLeadForm";
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { Testimonials } from "@/components/cases/Testimonials";
+import { RelatedCases } from "@/components/cases/RelatedCases";
 import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { DividerGlow, SectionReveal } from "@/components/ui/animated";
+  ComparisonCard,
+  FaqSection,
+  IconTile,
+  PageShell,
+  ProductHero,
+  StepCard,
+  faqJsonLd,
+} from "@/components/site/PageKit";
 import { OCR_PAGE } from "@/config/ocr";
+import { KeyFactsSection, RelatedGuides } from "@/components/site/KeyFacts";
+import { KEY_FACTS, mergeFaqs } from "@/config/key-facts";
+import { FlowDiagram } from "@/components/site/FlowDiagram";
+import { FLOWS } from "@/config/flows";
 import { COMPANY } from "@/config/site";
 import { createPageMetadata } from "@/lib/seo";
 
@@ -40,672 +46,323 @@ export const metadata = createPageMetadata({
   description: OCR_PAGE.seoDescription,
   keywords: [
     "OCR para empresas",
-    "automatizacion documental",
+    "automatización documental",
     "lectura de documentos",
-    "digitalizacion de procesos",
+    "digitalización de procesos",
     "PDFs escaneados",
-    "extraccion de datos",
+    "extracción de datos",
   ],
   path: "/ocr",
   image: "/ocr/opengraph-image",
 });
 
+const USE_CASE_ICONS: LucideIcon[] = [FileText, ShoppingCart, Signature, ClipboardList, Truck, FolderOpen, Archive];
+
+const REVIEW_ITEMS = [
+  "Tipo de documento y variaciones de formato",
+  "Campos que realmente importan para tu proceso",
+  "Volumen, equipo involucrado y punto de integración",
+  "Siguiente paso recomendado: muestra, piloto o implementación",
+];
+
+const FACTS = KEY_FACTS.ocr;
+const FAQS = mergeFaqs(FACTS.faqs, OCR_PAGE.faqs);
+
+const SERVICE_JSONLD = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": "https://yago.cl/ocr#service",
+  name: "OCR para empresas",
+  alternateName: "OCR de YAGO",
+  serviceType: "Procesamiento inteligente de documentos (OCR)",
+  description: FACTS.definition,
+  url: "https://yago.cl/ocr",
+  image: "https://yago.cl/ocr/opengraph-image",
+  inLanguage: "es-CL",
+  areaServed: { "@type": "Country", name: "Chile" },
+  audience: { "@type": "BusinessAudience", audienceType: "Operaciones, finanzas y backoffice" },
+  provider: { "@id": "https://yago.cl/#organization" },
+  dateModified: OCR_PAGE.modifiedDate,
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Casos de uso de OCR",
+    itemListElement: OCR_PAGE.useCases.map((useCase) => ({
+      "@type": "Offer",
+      itemOffered: { "@type": "Service", name: `OCR de ${useCase.title.toLowerCase()}`, description: useCase.description },
+    })),
+  },
+};
+
 export default function OcrPage() {
+  const { hero } = OCR_PAGE;
+
   return (
-    <div className="relative min-h-screen overflow-x-clip text-white">
-      <Navbar
-        links={OCR_PAGE.nav}
-        ctaHref="#formulario"
-        ctaLabel="Solicitar demo"
-        mobileDescription="Explora OCR para empresas, casos de uso, FAQ y evaluacion inicial."
-        homeHref="/"
+    <PageShell
+      navbar={{
+        links: OCR_PAGE.nav,
+        subnavLabel: "OCR",
+        ctaHref: "#formulario",
+        ctaLabel: hero.primaryCta,
+        mobileDescription: "OCR para empresas: cómo funciona, casos de uso, preguntas y evaluación inicial.",
+      }}
+    >
+      <JsonLd id="jsonld-ocr-faq" data={faqJsonLd(FAQS)} />
+      <JsonLd id="jsonld-ocr-service" data={SERVICE_JSONLD} />
+
+      {/* ---------------- HERO ---------------- */}
+      <ProductHero
+        top={
+          <Breadcrumbs
+            tone="light"
+            items={[
+              { name: "Inicio", href: "/" },
+              { name: "Productos", href: "/productos" },
+              { name: "OCR", href: "/ocr" },
+            ]}
+          />
+        }
+        pill={hero.badge}
+          title={<>{hero.title} <span className="text-sky-600">en Chile.</span></>}
+        description={hero.description}
+        actions={
+          <>
+            <a href="#formulario" className="y-btn y-btn-primary plausible-event-name=OCR+Evaluation+Click plausible-event-location=ocr_hero plausible-event-service=ocr">
+              {hero.primaryCta}
+              <ArrowRight className="y-arrow h-[18px] w-[18px]" aria-hidden="true" />
+            </a>
+            <a
+              href={COMPANY.whatsappLink}
+              target="_blank"
+              rel="noreferrer"
+              className="y-btn y-btn-outline plausible-event-name=CTA+WhatsApp plausible-event-location=hero"
+            >
+              <MessageCircle className="h-[18px] w-[18px]" aria-hidden="true" />
+              {hero.secondaryCta}
+            </a>
+          </>
+        }
+        facts={[
+          { label: "Para quién", value: "Operaciones, finanzas y backoffice" },
+          { label: "Lee", value: "PDFs, imágenes y documentos escaneados" },
+          { label: "Primer paso", value: "Evaluación con tus documentos" },
+        ]}
+        aside={<OcrDocumentExample />}
       />
 
-      <main id="main-content" className="main-premium">
-        <section id="inicio" className="relative overflow-hidden pb-20 pt-10 md:pb-24 md:pt-16">
-          <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-            <div className="absolute left-[-7rem] top-[6%] h-[18rem] w-[18rem] rounded-full bg-sky-300/10 blur-[84px]" />
-            <div className="absolute right-[-6rem] top-[10%] h-[16rem] w-[16rem] rounded-full bg-sky-400/[0.07] blur-[96px]" />
-            <div className="absolute inset-x-[18%] bottom-[-6rem] h-[15rem] rounded-full bg-sky-300/[0.05] blur-[88px]" />
+      {/* ---------------- EN RESUMEN ---------------- */}
+      <KeyFactsSection data={FACTS} updated={OCR_PAGE.modifiedDate} />
+      <RelatedCases service="ocr" />
+      <Testimonials service="ocr" />
+
+      {/* ---------------- EL PROBLEMA ---------------- */}
+      <section id="problema" className="y-mist y-sheet">
+        <div className="y-container">
+          <div className="flex max-w-3xl flex-col gap-5">
+            <span className="y-eyebrow">El problema</span>
+            <h2 className="y-h2 text-slate-950">{OCR_PAGE.problem.title}.</h2>
+            <p className="y-lead">{OCR_PAGE.problem.description}</p>
+          </div>
+          <div className="mt-12">
+            <ComparisonCard rows={OCR_PAGE.comparison} productLabel="OCR de YAGO" />
+          </div>
+        </div>
+      </section>
+
+      {/* ---------------- CÓMO FUNCIONA ---------------- */}
+      <section id="como-funciona" className="y-dark y-sheet y-grain overflow-hidden">
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+          <div className="absolute left-1/2 top-0 h-[26rem] w-[60rem] -translate-x-1/2 rounded-full bg-sky-400/[0.07] blur-[120px]" />
+        </div>
+        <div className="y-container relative">
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-end">
+            <div className="flex flex-col gap-5 lg:col-span-7">
+              <span className="y-eyebrow">Cómo funciona</span>
+              <h2 className="y-h2 text-white">De un documento a un dato útil, en cuatro pasos.</h2>
+            </div>
+            <p className="y-lead lg:col-span-4 lg:col-start-9">{OCR_PAGE.solution.description}</p>
           </div>
 
-          <div aria-hidden="true" className="pointer-events-none absolute inset-0 hero-grid-overlay" />
+          <div className="y-glass y-reveal mt-14 px-4 py-6 sm:p-8 lg:px-12 lg:py-10">
+            <FlowDiagram {...FLOWS["ocr"]} />
+          </div>
+          <ol className="mt-5 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
+            {OCR_PAGE.steps.map((step, index) => (
+              <StepCard key={step.name} index={index} title={step.name} description={step.description} chips={step.outputs} />
+            ))}
+          </ol>
 
-          <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-4 lg:grid-cols-[1.03fr_0.97fr] lg:gap-14">
-            <div className="max-w-2xl">
-              <div className="flex flex-wrap items-center gap-3">
-                <a
-                  href="/"
-                  className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-2 text-xs font-medium uppercase tracking-[0.14em] text-slate-300 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-200/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-                >
-                  <ArrowLeft className="h-3.5 w-3.5" aria-hidden="true" />
-                  Volver a YAGO
-                </a>
-
-                <Badge
-                  variant="outline"
-                  className="border-sky-200/20 bg-white/[0.04] px-3 py-1 text-[11px] uppercase tracking-[0.16em] text-sky-300"
-                >
-                  {OCR_PAGE.hero.badge}
-                </Badge>
-              </div>
-
-              <h1 className="mt-6 max-w-4xl text-balance font-headline text-5xl font-semibold leading-[0.92] text-white md:text-7xl lg:text-[5.35rem]">
-                {OCR_PAGE.hero.title}
-              </h1>
-
-              <p className="mt-5 max-w-2xl text-lg leading-relaxed text-slate-300 md:text-[1.14rem]">
-                {OCR_PAGE.hero.description}
-              </p>
-
-              <div className="mt-6 flex flex-wrap gap-2 text-sm text-slate-300">
-                {OCR_PAGE.hero.proofSignals.map((item) => (
-                  <div key={item} className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2">
+          {/* Lo que entra → lo que sale */}
+          <div className="mt-16 grid grid-cols-1 items-stretch gap-4 border-t border-white/[0.08] pt-12 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]">
+            <div className="y-glass flex flex-col gap-5 p-7">
+              <h3 className="font-mono text-[12px] uppercase tracking-[0.12em] text-slate-400">{OCR_PAGE.solution.inputLabel}</h3>
+              <ul className="flex flex-col gap-2.5">
+                {OCR_PAGE.solution.inputItems.map((item) => (
+                  <li key={item} className="flex items-center gap-3 text-[15.5px] text-slate-200">
+                    <FileText className="h-4 w-4 shrink-0 text-slate-400" strokeWidth={1.8} aria-hidden="true" />
                     {item}
-                  </div>
+                  </li>
                 ))}
-              </div>
-
-              <div className="mt-8 flex flex-wrap items-center gap-3">
-                <Button
-                  asChild
-                  size="lg"
-                  className="group rounded-full border border-white/10 bg-white px-6 text-[#070b13] shadow-[0_14px_38px_rgba(0,0,0,0.4)] transition-[transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:shadow-[0_18px_40px_rgba(125,211,252,0.2)] active:scale-[0.98]"
-                >
-                  <a href="#formulario">
-                    {OCR_PAGE.hero.primaryCta}
-                    <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
-                  </a>
-                </Button>
-
-                <Button
-                  asChild
-                  size="lg"
-                  variant="ghost"
-                  className="rounded-full border border-white/10 bg-white/[0.03] px-6 text-white transition-colors hover:bg-white/10"
-                >
-                  <a href={COMPANY.whatsappLink} target="_blank" rel="noreferrer">
-                    {OCR_PAGE.hero.secondaryCta}
-                  </a>
-                </Button>
-
-                <a
-                  href="#formulario"
-                  className="inline-flex items-center gap-2 rounded-full px-1 text-sm font-medium text-slate-300 transition hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-200/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-                >
-                  {OCR_PAGE.hero.tertiaryCta}
-                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                </a>
-              </div>
-
-              <div className="mt-8 flex flex-wrap gap-2 text-sm text-slate-300">
-                {OCR_PAGE.hero.trustSignals.map((signal) => (
-                  <div key={signal} className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-2">
-                    <BadgeCheck className="h-4 w-4 text-sky-300" aria-hidden="true" />
-                    <span>{signal}</span>
-                  </div>
-                ))}
-              </div>
+              </ul>
             </div>
-
-            <div className="relative lg:justify-self-end">
-              <div className="absolute inset-x-10 top-6 h-24 rounded-full bg-sky-300/10 blur-[72px]" aria-hidden="true" />
-
-              <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-1 shadow-[0_30px_100px_rgba(0,0,0,0.14)]">
-                <Card className="relative overflow-hidden rounded-[1.75rem] border-white/10 bg-transparent shadow-none">
-                  <CardHeader className="pb-5">
-                    <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.14em] text-slate-300">
-                      <Waypoints className="h-4 w-4 text-sky-300" aria-hidden="true" />
-                      Flujo OCR YAGO
-                    </div>
-                    <CardTitle as="h2" className="mt-3 text-[2rem] leading-none text-white md:text-[2.35rem]">
-                      {OCR_PAGE.hero.previewTitle}
-                    </CardTitle>
-                    <CardDescription className="max-w-md text-sm leading-relaxed text-slate-300">
-                      {OCR_PAGE.hero.previewDescription}
-                    </CardDescription>
-                  </CardHeader>
-
-                  <CardContent className="space-y-4">
-                    <div className="grid gap-4 xl:grid-cols-[0.88fr_1.12fr]">
-                      <div className="rounded-[1.45rem] border border-white/10 bg-white/[0.04] p-4">
-                        <div className="flex items-center justify-between gap-3">
-                          <div>
-                            <div className="text-xs uppercase tracking-[0.16em] text-slate-300">Documento escaneado</div>
-                            <div className="mt-2 text-sm font-semibold text-white">Factura proveedor</div>
-                          </div>
-                          <div className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-slate-300">
-                            PDF
-                          </div>
-                        </div>
-
-                        <div className="mt-4 rounded-[1.25rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-4">
-                          <div className="space-y-2">
-                            {[
-                              "Factura No. FC-20481",
-                              "Proveedor: Transporte Andino",
-                              "Monto total: CLP 1.248.000",
-                              "Fecha emision: 08/04/2026",
-                            ].map((line, index) => (
-                              <div
-                                key={line}
-                                className={`h-3 rounded-full ${index === 1 || index === 2 ? "bg-sky-200/25" : "bg-white/[0.08]"}`}
-                                style={{ width: `${92 - index * 12}%` }}
-                              >
-                                <span className="sr-only">{line}</span>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="space-y-4">
-                        <div className="rounded-[1.45rem] border border-white/10 bg-white/5 p-4">
-                          <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.16em] text-sky-300">
-                            <Workflow className="h-4 w-4" aria-hidden="true" />
-                            Extraccion de campos
-                          </div>
-
-                          <div className="mt-4 grid gap-2">
-                            {OCR_PAGE.hero.previewFields.map((field) => (
-                              <div key={field.label} className="flex items-center justify-between gap-3 rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm">
-                                <span className="text-slate-300">{field.label}</span>
-                                <span className="font-medium text-white">{field.value}</span>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-
-                        <div className="rounded-[1.45rem] border border-white/10 bg-white/[0.04] p-4">
-                          <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.16em] text-sky-300">
-                            <FileJson2 className="h-4 w-4" aria-hidden="true" />
-                            Datos listos para usar
-                          </div>
-                          <div className="mt-4 flex flex-wrap gap-2">
-                            {OCR_PAGE.hero.previewTargets.map((target) => (
-                              <span key={target} className="rounded-full border border-white/10 bg-white/5 px-3 py-2 text-xs uppercase tracking-[0.14em] text-slate-200">
-                                {target}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
+            <div className="flex items-center justify-center" aria-hidden="true">
+              <span className="grid h-12 w-12 rotate-90 place-items-center rounded-full bg-[#0b1220] text-sky-300 shadow-[inset_0_0_0_1px_rgba(125,211,252,0.45),0_0_24px_rgba(56,189,248,0.3)] lg:rotate-0">
+                <ArrowRight className="h-5 w-5" />
+              </span>
+            </div>
+            <div className="y-beam">
+              <div className="y-beam__inner flex h-full flex-col gap-5 bg-[#0b1220] p-7">
+                <h3 className="font-mono text-[12px] uppercase tracking-[0.12em] text-sky-300">{OCR_PAGE.solution.outputLabel}</h3>
+                <ul className="flex flex-col gap-2.5">
+                  {OCR_PAGE.solution.outputItems.map((item) => (
+                    <li key={item} className="flex items-center gap-3 text-[15.5px] text-white">
+                      <Braces className="h-4 w-4 shrink-0 text-sky-300" strokeWidth={1.8} aria-hidden="true" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </div>
-        </section>
 
-        <DividerGlow />
+          <ul className="mt-10 flex flex-wrap justify-center gap-2">
+            {OCR_PAGE.solution.support.map((item) => (
+              <li key={item} className="inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-[13.5px] text-slate-200 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.14)]">
+                <BadgeCheck className="h-4 w-4 text-sky-300" strokeWidth={1.8} aria-hidden="true" />
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
 
-        <SectionReveal as="div" surface="soft">
-          <Section id="problema" className="z-10">
-            <div className="mx-auto max-w-7xl px-4">
-              <div className="max-w-3xl">
-                <p className="text-xs uppercase tracking-[0.22em] text-slate-300">Problema</p>
-                <h2 className="mt-3 text-4xl font-semibold text-white md:text-5xl">{OCR_PAGE.problem.title}</h2>
-                <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-300">
-                  {OCR_PAGE.problem.description}
-                </p>
+      {/* ---------------- CASOS DE USO ---------------- */}
+      <section id="casos-de-uso" className="y-light y-sheet">
+        <div className="y-container">
+          <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <div className="flex max-w-3xl flex-col gap-5">
+              <span className="y-eyebrow">Casos de uso</span>
+              <h2 className="y-h2 text-slate-950">Dónde el OCR genera valor más rápido.</h2>
+            </div>
+            <p className="max-w-md text-[16px] leading-relaxed text-slate-600">
+              El foco no es la tecnología: es que el dato llegue listo al siguiente paso del proceso.
+            </p>
+          </div>
+
+          <SpotlightGroup className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {OCR_PAGE.useCases.map((useCase, index) => (
+              <div key={useCase.title} className="y-spot y-card y-card-hover y-reveal flex flex-col gap-3 p-7">
+                <IconTile icon={USE_CASE_ICONS[index % USE_CASE_ICONS.length]} />
+                <h3 className="y-h3 mt-2 text-[1.15rem] text-slate-950">{useCase.title}</h3>
+                <p className="text-[15px] leading-relaxed text-slate-600">{useCase.description}</p>
               </div>
+            ))}
+            <a
+              href="#formulario"
+              className="group flex flex-col justify-between gap-6 rounded-[1.5rem] border-[1.5px] border-dashed border-slate-300 p-7 transition-colors hover:border-sky-400 hover:bg-sky-50/50"
+            >
+              <span className="grid h-11 w-11 place-items-center rounded-2xl bg-slate-100 text-slate-700 transition-colors group-hover:bg-sky-100 group-hover:text-sky-700">
+                <Plus className="h-5 w-5" aria-hidden="true" />
+              </span>
+              <span className="flex flex-col gap-2">
+                <span className="y-h3 text-[1.15rem] text-slate-950">¿Otro tipo de documento?</span>
+                <span className="inline-flex items-center gap-1.5 text-[15px] font-semibold text-sky-700">
+                  Evalúalo con nosotros
+                  <ArrowRight className="y-arrow h-4 w-4" aria-hidden="true" />
+                </span>
+              </span>
+            </a>
+          </SpotlightGroup>
+        </div>
+      </section>
 
-              <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-                {OCR_PAGE.pains.map((pain) => (
-                  <Card
-                    key={pain.title}
-                    className="rounded-[1.7rem] border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))]"
-                  >
-                    <CardHeader>
-                      <div className="text-xs uppercase tracking-[0.2em] text-slate-300">{pain.eyebrow}</div>
-                      <CardTitle className="pt-3 text-2xl text-white">{pain.title}</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <CardDescription className="text-base leading-relaxed text-slate-300">
-                        {pain.description}
-                      </CardDescription>
-                    </CardContent>
-                  </Card>
+      {/* ---------------- BENEFICIOS + POR QUÉ YAGO ---------------- */}
+      <section id="beneficios" className="y-mist y-sheet">
+        <div className="y-container">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-10">
+            <div className="flex flex-col gap-5 lg:col-span-4">
+              <span className="y-eyebrow">Beneficios</span>
+              <h2 className="y-h2 text-slate-950">Menos digitación, más control.</h2>
+              <p className="y-lead">Lo que cambia en el día a día cuando los documentos dejan de copiarse a mano.</p>
+            </div>
+            <ul className="grid grid-cols-1 gap-x-10 gap-y-8 sm:grid-cols-2 lg:col-span-8">
+              {OCR_PAGE.benefits.map((benefit, index) => (
+                <li key={benefit.title} className="flex gap-4 border-t border-slate-200 pt-6">
+                  <span className="font-mono text-[13px] text-sky-700">{String(index + 1).padStart(2, "0")}</span>
+                  <span className="flex flex-col gap-1.5">
+                    <span className="font-headline text-[1.1rem] font-semibold tracking-[-0.01em] text-slate-950">{benefit.title}</span>
+                    <span className="text-[15px] leading-relaxed text-slate-600">{benefit.description}</span>
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <OcrCapabilities />
+        </div>
+      </section>
+
+      {/* ---------------- PREGUNTAS ---------------- */}
+      <FaqSection
+        title="Dudas comunes sobre OCR."
+        items={FAQS}
+        aside={
+          <>
+          <RelatedGuides guides={FACTS.guides.filter((guide) => guide.href !== "/ocr-master")} />
+          <div className="mt-2 flex flex-col gap-3 rounded-2xl bg-mist p-5 text-[14.5px] leading-relaxed text-slate-600">
+            <p className="font-semibold text-slate-900">¿Necesitas integrarlo en tu propio software?</p>
+            <p>OCR Master es la versión API: envías el documento y recibes los datos estructurados en JSON.</p>
+            <Link href="/ocr-master" className="y-link w-fit">
+              Ver OCR Master API
+              <ArrowRight className="y-arrow h-4 w-4" aria-hidden="true" />
+            </Link>
+          </div>
+          </>
+        }
+      />
+
+      {/* ---------------- DEMO + FORMULARIO ---------------- */}
+      <section id="formulario" className="y-dark y-sheet y-grain overflow-hidden">
+        <span id="demo" className="absolute -top-24" aria-hidden="true" />
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+          <div className="absolute right-[-8%] top-[-10%] h-[36rem] w-[36rem] rounded-full bg-sky-400/[0.12] blur-[120px]" />
+        </div>
+        <div className="y-container relative grid grid-cols-1 items-start gap-14 lg:grid-cols-12">
+          <div className="flex flex-col gap-6 lg:col-span-5 lg:pt-4">
+            <span className="y-eyebrow">Evaluación inicial</span>
+            <h2 className="y-h2 text-white">{OCR_PAGE.demo.title}.</h2>
+            <p className="y-lead">{OCR_PAGE.demo.description}</p>
+            <div className="y-glass flex flex-col gap-4 p-6">
+              <p className="font-mono text-[12px] uppercase tracking-[0.12em] text-slate-400">Qué revisamos contigo</p>
+              <ul className="flex flex-col gap-3">
+                {REVIEW_ITEMS.map((item) => (
+                  <li key={item} className="flex gap-3 text-[15.5px] text-white">
+                    <CircleCheck className="mt-0.5 h-5 w-5 shrink-0 text-sky-300" strokeWidth={1.8} aria-hidden="true" />
+                    {item}
+                  </li>
                 ))}
-              </div>
+              </ul>
             </div>
-          </Section>
-        </SectionReveal>
-
-        <DividerGlow />
-
-        <SectionReveal as="div" surface="strong">
-          <Section id="solucion" className="z-10">
-            <div className="mx-auto grid max-w-7xl gap-6 px-4 xl:grid-cols-[0.92fr_1.08fr] xl:items-start">
-              <div>
-                <p className="text-xs uppercase tracking-[0.22em] text-slate-300">Solucion</p>
-                <h2 className="mt-3 text-4xl font-semibold text-white md:text-5xl">{OCR_PAGE.solution.title}</h2>
-                <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-300">
-                  {OCR_PAGE.solution.description}
-                </p>
-
-                <div className="mt-6 grid gap-3">
-                  {OCR_PAGE.solution.support.map((item) => (
-                    <div
-                      key={item}
-                      className="inline-flex w-fit items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-slate-200"
-                    >
-                      <CheckCircle2 className="h-4 w-4 text-sky-300" aria-hidden="true" />
-                      {item}
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <Card className="overflow-hidden rounded-[2rem] border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] shadow-[0_24px_90px_rgba(0,0,0,0.08)]">
-                <CardContent className="grid gap-4 p-6 lg:grid-cols-[0.95fr_auto_1.05fr] lg:items-center">
-                  <div className="rounded-[1.45rem] border border-white/10 bg-white/[0.04] p-5">
-                    <div className="text-xs uppercase tracking-[0.16em] text-slate-300">{OCR_PAGE.solution.inputLabel}</div>
-                    <div className="mt-4 grid gap-3 text-sm text-slate-200">
-                      {OCR_PAGE.solution.inputItems.map((item) => (
-                        <div key={item} className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
-                          {item}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="hidden lg:flex lg:flex-col lg:items-center lg:gap-3">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full border border-sky-200/20 bg-sky-300/10 text-sky-300">
-                      <Workflow className="h-5 w-5" aria-hidden="true" />
-                    </div>
-                    <div className="h-20 w-px bg-gradient-to-b from-sky-200/30 to-transparent" />
-                    <div className="rounded-full border border-white/10 bg-white/5 px-3 py-2 text-xs uppercase tracking-[0.16em] text-slate-300">
-                      OCR + estructura
-                    </div>
-                  </div>
-
-                  <div className="rounded-[1.45rem] border border-white/10 bg-white/5 p-5">
-                    <div className="text-xs uppercase tracking-[0.16em] text-slate-300">{OCR_PAGE.solution.outputLabel}</div>
-                    <div className="mt-4 grid gap-3 text-sm text-slate-200">
-                      {OCR_PAGE.solution.outputItems.map((item) => (
-                        <div key={item} className="rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3">
-                          {item}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+            <div className="flex flex-wrap gap-x-7 gap-y-3">
+              <a
+                href={COMPANY.whatsappLink}
+                target="_blank"
+                rel="noreferrer"
+                className="y-link plausible-event-name=CTA+WhatsApp plausible-event-location=ocr_demo"
+              >
+                <MessageCircle className="h-[18px] w-[18px]" aria-hidden="true" />
+                {OCR_PAGE.demo.secondaryCta}
+              </a>
+              <a href={`mailto:${COMPANY.email}`} className="y-link">
+                <Mail className="h-[18px] w-[18px]" aria-hidden="true" />
+                {COMPANY.email}
+              </a>
             </div>
-          </Section>
-        </SectionReveal>
-
-        <DividerGlow />
-
-        <SectionReveal as="div" surface="soft">
-          <Section id="como-funciona" className="z-10">
-            <div className="mx-auto max-w-7xl px-4">
-              <div className="max-w-3xl">
-                <p className="text-xs uppercase tracking-[0.22em] text-slate-300">Como funciona</p>
-                <h2 className="mt-3 text-4xl font-semibold text-white md:text-5xl">
-                  De un documento a un dato util en cuatro pasos claros
-                </h2>
-              </div>
-
-              <div className="mt-10 grid gap-4 lg:grid-cols-4">
-                {OCR_PAGE.steps.map((step, index) => (
-                  <Card
-                    key={step.name}
-                    className="rounded-[1.7rem] border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))]"
-                  >
-                    <CardHeader>
-                      <div className="text-xs uppercase tracking-[0.16em] text-slate-300">Paso {index + 1}</div>
-                      <CardTitle className="pt-3 text-2xl text-white">{step.name}</CardTitle>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                      <CardDescription className="text-sm leading-relaxed text-slate-300">
-                        {step.description}
-                      </CardDescription>
-                      <div className="flex flex-wrap gap-2">
-                        {step.outputs.map((output) => (
-                          <span
-                            key={output}
-                            className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-xs uppercase tracking-[0.12em] text-slate-200"
-                          >
-                            {output}
-                          </span>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </div>
-          </Section>
-        </SectionReveal>
-
-        <DividerGlow />
-
-        <SectionReveal as="div" surface="strong">
-          <Section id="casos-de-uso" className="z-10">
-            <div className="mx-auto max-w-7xl px-4">
-              <div className="max-w-3xl">
-                <p className="text-xs uppercase tracking-[0.22em] text-slate-300">Casos de uso</p>
-                <h2 className="mt-3 text-4xl font-semibold text-white md:text-5xl">Casos de uso frecuentes</h2>
-                <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-300">
-                  El foco no es mostrar tecnologia. El foco es mostrar donde OCR y automatizacion documental generan valor real para la empresa.
-                </p>
-              </div>
-
-              <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-                {OCR_PAGE.useCases.map((useCase) => (
-                  <Card
-                    key={useCase.title}
-                    className="rounded-[1.7rem] border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))]"
-                  >
-                    <CardHeader>
-                      <CardTitle className="text-2xl text-white">{useCase.title}</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <CardDescription className="text-base leading-relaxed text-slate-300">
-                        {useCase.description}
-                      </CardDescription>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </div>
-          </Section>
-        </SectionReveal>
-
-        <DividerGlow />
-
-        <SectionReveal as="div" surface="soft">
-          <Section id="beneficios" className="z-10">
-            <div className="mx-auto max-w-7xl px-4">
-              <div className="max-w-3xl">
-                <p className="text-xs uppercase tracking-[0.22em] text-slate-300">Beneficios</p>
-                <h2 className="mt-3 text-4xl font-semibold text-white md:text-5xl">Beneficios para tu empresa</h2>
-              </div>
-
-              <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-                {OCR_PAGE.benefits.map((benefit) => (
-                  <Card
-                    key={benefit.title}
-                    className="rounded-[1.7rem] border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))]"
-                  >
-                    <CardHeader>
-                      <div className="flex size-11 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] text-sky-300">
-                        <CheckCircle2 className="h-5 w-5" aria-hidden="true" />
-                      </div>
-                      <CardTitle className="pt-4 text-2xl text-white">{benefit.title}</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <CardDescription className="text-base leading-relaxed text-slate-300">
-                        {benefit.description}
-                      </CardDescription>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </div>
-          </Section>
-        </SectionReveal>
-
-        <DividerGlow />
-
-        <SectionReveal as="div" surface="strong">
-          <Section id="diferenciadores" className="z-10">
-            <div className="mx-auto max-w-7xl px-4">
-              <div className="max-w-3xl">
-                <p className="text-xs uppercase tracking-[0.22em] text-slate-300">Por que YAGO</p>
-                <h2 className="mt-3 text-4xl font-semibold text-white md:text-5xl">
-                  Mas que OCR: automatizacion pensada para tu operacion
-                </h2>
-              </div>
-
-              <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-                {OCR_PAGE.differentiators.map((item, index) => (
-                  <Card
-                    key={item.title}
-                    className="rounded-[1.7rem] border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))]"
-                  >
-                    <CardHeader>
-                      <div className="flex size-11 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] text-sky-300">
-                        {index % 2 === 0 ? (
-                          <Building2 className="h-5 w-5" aria-hidden="true" />
-                        ) : (
-                          <ShieldCheck className="h-5 w-5" aria-hidden="true" />
-                        )}
-                      </div>
-                      <CardTitle className="pt-4 text-2xl text-white">{item.title}</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <CardDescription className="text-base leading-relaxed text-slate-300">
-                        {item.description}
-                      </CardDescription>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </div>
-          </Section>
-        </SectionReveal>
-
-        <DividerGlow />
-
-        <SectionReveal as="div" surface="strong">
-          <Section id="demo" className="z-10">
-            <div className="mx-auto grid max-w-7xl gap-6 px-4 lg:grid-cols-[0.92fr_1.08fr] lg:items-start">
-              <div>
-                <p className="text-xs uppercase tracking-[0.22em] text-slate-300">Prueba o demo</p>
-                <h2 className="mt-3 text-4xl font-semibold text-white md:text-5xl">{OCR_PAGE.demo.title}</h2>
-                <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-300">
-                  {OCR_PAGE.demo.description}
-                </p>
-
-                <div className="mt-6 grid gap-3">
-                  {OCR_PAGE.demo.bullets.map((item) => (
-                    <div
-                      key={item}
-                      className="inline-flex w-fit items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-slate-200"
-                    >
-                      <BadgeCheck className="h-4 w-4 text-sky-300" aria-hidden="true" />
-                      {item}
-                    </div>
-                  ))}
-                </div>
-
-                <div className="mt-8 flex flex-wrap items-center gap-3">
-                  <Button
-                    asChild
-                    size="lg"
-                    className="rounded-full border border-white/10 bg-white text-white transition-[transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:shadow-[0_18px_40px_rgba(125,211,252,0.2)] active:scale-[0.98]"
-                  >
-                    <a href="#formulario">{OCR_PAGE.demo.primaryCta}</a>
-                  </Button>
-                  <Button
-                    asChild
-                    size="lg"
-                    variant="ghost"
-                    className="rounded-full border border-white/10 bg-white/[0.03] px-6 text-white transition-colors hover:bg-white/10"
-                  >
-                    <a href={COMPANY.whatsappLink} target="_blank" rel="noreferrer">
-                      {OCR_PAGE.demo.secondaryCta}
-                    </a>
-                  </Button>
-                </div>
-              </div>
-
-              <Card className="overflow-hidden rounded-[2rem] border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] shadow-[0_24px_90px_rgba(0,0,0,0.08)]">
-                <CardHeader>
-                  <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.16em] text-slate-300">
-                    <Workflow className="h-4 w-4 text-sky-300" aria-hidden="true" />
-                    Que revisamos contigo
-                  </div>
-                  <CardTitle className="mt-3 text-3xl text-white">Una conversacion comercial con contexto real</CardTitle>
-                </CardHeader>
-                <CardContent className="grid gap-3 text-sm text-slate-300">
-                  {[
-                    "Tipo de documento y variaciones de formato",
-                    "Campos que realmente importan para tu proceso",
-                    "Volumen, equipo involucrado y punto de integracion",
-                    "Siguiente paso recomendado: demo, piloto o implementacion",
-                  ].map((item) => (
-                    <div key={item} className="rounded-[1.3rem] border border-white/10 bg-white/[0.04] px-4 py-4">
-                      {item}
-                    </div>
-                  ))}
-                </CardContent>
-              </Card>
-            </div>
-          </Section>
-        </SectionReveal>
-
-        <DividerGlow />
-
-        <SectionReveal as="div" surface="strong">
-          <Section id="formulario" className="z-10">
-            <div className="mx-auto grid max-w-7xl items-start gap-8 px-4 lg:grid-cols-[0.92fr_1.08fr]">
-              <div>
-                <p className="text-xs uppercase tracking-[0.22em] text-slate-300">Contacto</p>
-                <h2 className="mt-3 text-4xl font-semibold text-white md:text-5xl">Cuentanos tu caso</h2>
-                <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-300">
-                  Si manejas facturas, contratos, formularios o documentos escaneados en volumen, podemos revisar como aplicar OCR y automatizacion documental sin partir de cero.
-                </p>
-
-                <div className="mt-6 grid gap-3 sm:grid-cols-2">
-                  <a
-                    href={`mailto:${COMPANY.email}`}
-                    className="hover-lift rounded-[1.5rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-4 text-sm text-slate-300 transition hover:border-white/10"
-                  >
-                    <div className="flex items-center gap-2 text-white">
-                      <Mail className="h-4 w-4 text-sky-300" aria-hidden="true" />
-                      Correo directo
-                    </div>
-                    <div className="mt-2 underline underline-offset-4">{COMPANY.email}</div>
-                  </a>
-
-                  <a
-                    href={COMPANY.whatsappLink}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="hover-lift rounded-[1.5rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-4 text-sm text-slate-300 transition hover:border-white/10"
-                  >
-                    <div className="flex items-center gap-2 text-white">
-                      <MessageCircle className="h-4 w-4 text-sky-300" aria-hidden="true" />
-                      WhatsApp
-                    </div>
-                    <div className="mt-2 underline underline-offset-4">{COMPANY.whatsapp}</div>
-                  </a>
-
-                  <div className="hover-lift rounded-[1.5rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-4 text-sm text-slate-300 sm:col-span-2">
-                    <div className="flex items-center gap-2 text-white">
-                      <ShieldCheck className="h-4 w-4 text-sky-300" aria-hidden="true" />
-                      Enfoque de la evaluacion inicial
-                    </div>
-                    <div className="mt-2 leading-relaxed">
-                      Conversamos sobre documentos, volumen, campos utiles y forma de integracion. La meta es ayudarte a decidir rapido si hay fit y cual deberia ser el siguiente paso.
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <OcrLeadForm />
-            </div>
-          </Section>
-        </SectionReveal>
-
-        <DividerGlow />
-
-        <SectionReveal as="div" surface="soft">
-          <Section id="faq" className="z-10">
-            <div className="mx-auto grid max-w-7xl gap-6 px-4 lg:grid-cols-[0.92fr_1.08fr]">
-              <Card className="rounded-[1.8rem] border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-6">
-                <CardHeader className="px-0 pb-4 pt-0">
-                  <CardTitle as="h2" className="text-3xl text-white">Preguntas frecuentes</CardTitle>
-                  <CardDescription className="text-base leading-relaxed text-slate-300">
-                    Respuestas simples para resolver dudas comunes antes de una demo o evaluacion inicial.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="px-0 pb-0">
-                  <div className="rounded-[1.4rem] border border-white/10 bg-white/5 p-5 text-sm leading-relaxed text-slate-300">
-                    Si tu proceso depende de PDFs, imagenes o documentos escaneados, la evaluacion inicial nos permite ver rapidamente si el caso vale la pena y como aterrizarlo.
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="rounded-[1.8rem] border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-2 md:p-4">
-                <Accordion type="single" collapsible className="w-full">
-                  {OCR_PAGE.faqs.map((item, idx) => (
-                    <AccordionItem key={item.question} value={`item-${idx}`} className="border-white/10 px-4">
-                      <AccordionTrigger className="text-left text-white hover:no-underline">
-                        {item.question}
-                      </AccordionTrigger>
-                      <AccordionContent className="text-slate-300">{item.answer}</AccordionContent>
-                    </AccordionItem>
-                  ))}
-                </Accordion>
-              </Card>
-            </div>
-          </Section>
-        </SectionReveal>
-
-        <DividerGlow />
-
-        <SectionReveal as="div" surface="strong">
-          <Section className="z-10 pt-0">
-            <div className="mx-auto max-w-7xl px-4">
-              <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] px-6 py-6 md:px-8">
-                <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-                  <div className="max-w-3xl">
-                    <div className="text-3xl font-semibold text-white">{OCR_PAGE.finalCta.title}</div>
-                    <p className="mt-3 text-base leading-relaxed text-slate-300">{OCR_PAGE.finalCta.text}</p>
-                  </div>
-
-                  <div className="flex flex-col gap-3 lg:min-w-[22rem]">
-                    {[
-                      "OCR para empresas con foco operativo",
-                      "PDFs escaneados, facturas, contratos y formularios",
-                    ].map((item) => (
-                      <div
-                        key={item}
-                        className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-3 text-center text-sm font-medium text-white"
-                      >
-                        {item}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="my-6 h-px bg-border" />
-
-                <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-                  <div className="text-sm text-slate-300">
-                    Si quieres, revisamos tus documentos y te proponemos el siguiente paso con criterio comercial y operativo.
-                  </div>
-                  <div className="flex flex-wrap gap-3">
-                    <Button
-                      asChild
-                      className="rounded-full border border-white/10 bg-white text-white transition-[transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:shadow-[0_18px_40px_rgba(125,211,252,0.2)] active:scale-[0.98]"
-                    >
-                      <a href="#formulario">{OCR_PAGE.finalCta.primary}</a>
-                    </Button>
-                    <Button
-                      asChild
-                      variant="ghost"
-                      className="rounded-full border border-white/10 bg-white/[0.04] text-white transition-colors hover:bg-white/10"
-                    >
-                      <a href={COMPANY.whatsappLink} target="_blank" rel="noreferrer">
-                        {OCR_PAGE.finalCta.secondary}
-                      </a>
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Section>
-        </SectionReveal>
-      </main>
-
-      <Footer />
-    </div>
+          </div>
+          <div className="lg:col-span-6 lg:col-start-7">
+            <OcrLeadForm />
+          </div>
+        </div>
+      </section>
+    </PageShell>
   );
 }

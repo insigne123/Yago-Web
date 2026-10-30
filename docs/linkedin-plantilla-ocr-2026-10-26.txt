@@ -1,0 +1,17 @@
+¿Qué conviene medir en una evaluación OCR?
+
+Para decidir si un flujo documental sirve para tu operación, conviene comprobar:
+
+• Qué campos llegan correctamente al proceso.
+• Qué documentos y excepciones necesitan revisión.
+• Cuánto trabajo humano sigue requiriendo cada archivo.
+• Cómo se valida y entrega la información a una planilla o sistema.
+
+En YAGO publicamos una guía con una plantilla CSV editable para registrar la muestra, los valores esperados, la extracción y el tiempo de revisión.
+
+La plantilla parte con resultados vacíos para completar con tus propios documentos y criterios. La evaluación permite definir el alcance antes de proyectar ahorro o ampliar el volumen.
+
+Guía y plantilla:
+https://yago.cl/blog/evaluar-piloto-ocr-precision-costos?utm_source=linkedin&utm_medium=social&utm_campaign=evaluacion_ocr_20261026
+
+#OCR #Automatización #InteligenciaArtificial

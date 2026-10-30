@@ -1,18 +1,16 @@
-import Image from "next/image";
-import Link from "next/link";
+import { Bot, ClipboardList, Clock3, Layers, PackageCheck, Rocket, ShieldCheck, Timer, Workflow } from "lucide-react";
+import { ColumnHeader, FramedImage } from "@/components/catalog/CatalogKit";
 import {
-  ArrowRight,
-  Bot,
-  CheckCircle2,
-  ClipboardList,
-  Layers,
-  Rocket,
-  ShieldCheck,
-  Timer,
-  Workflow,
-} from "lucide-react";
-import { Navbar } from "@/components/landing/Navbar";
-import { Footer } from "@/components/landing/Footer";
+  ActionLink,
+  BOOKING_ACTION,
+  CheckList,
+  CtaBand,
+  IconTile,
+  PageHero,
+  PageSection,
+  PageShell,
+  SectionHeader,
+} from "@/components/site/PageKit";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata = createPageMetadata({
@@ -57,7 +55,7 @@ const STAGES = [
     title: "Build",
     duration: "1–4 semanas",
     summary:
-      "Construimos en iteraciones cortas con datos reales. Ves avances funcionando cada semana, no un informe al final.",
+      "Construimos en iteraciones cortas con datos reales. Ves avances funcionando en cada iteración, no un informe al final.",
     activities: [
       "MVP funcionando con datos reales de tu operación",
       "Control de errores, logs y alertas desde el día uno",
@@ -68,7 +66,7 @@ const STAGES = [
   {
     icon: Rocket,
     step: "Etapa 4",
-    title: "Go-Live",
+    title: "Go-live",
     duration: "Continuo",
     summary:
       "Desplegamos a producción con monitoreo, documentación y acompañamiento. El equipo queda capacitado para operar con autonomía.",
@@ -101,168 +99,150 @@ const GUARANTEES = [
 
 export default function ProcesoPage() {
   return (
-    <div className="relative min-h-screen overflow-x-clip text-white">
-      <Navbar ctaHref="/#contacto" ctaLabel="Pedir análisis" />
-      <main id="main-content" className="main-premium pb-24 pt-28 md:pt-32">
-        {/* Hero */}
-        <section className="mx-auto max-w-7xl px-4">
-          <div className="grid items-center gap-10 lg:grid-cols-2">
-            <div>
-              <p className="text-xs uppercase tracking-[0.22em] text-sky-300/80">Nuestro método</p>
-              <h1 className="mt-4 text-balance font-headline text-4xl font-semibold text-white md:text-6xl">
-                De la idea al go-live <span className="text-shimmer">sin sorpresas</span>
-              </h1>
-              <p className="mt-5 max-w-xl text-pretty text-lg leading-relaxed text-slate-300">
-                Un proceso probado de 4 etapas que reduce el riesgo de implementación: validamos el
-                retorno antes de construir y entregas funcionando cada semana.
+    <PageShell>
+      {/* ---------------- HERO ---------------- */}
+      <PageHero
+        eyebrow="Cómo trabajamos"
+        title="De la idea al go&#8209;live"
+        highlight="sin sorpresas."
+        description="Un proceso probado de 4 etapas que reduce el riesgo de implementación: validamos el retorno antes de construir y ves avances funcionando en cada iteración."
+        actions={
+          <>
+            <ActionLink action={BOOKING_ACTION} arrow />
+            <ActionLink action={{ label: "Ver servicios", href: "/servicios" }} variant="glass" />
+          </>
+        }
+        aside={
+          <div className="y-beam">
+            <div className="y-beam__inner bg-[#0b1220] p-3 sm:p-4">
+              <p className="flex items-center justify-between gap-3 px-3 pb-3 pt-2 font-mono text-[12px] uppercase tracking-[0.12em] text-slate-400">
+                <span>Plan de trabajo</span>
+                <span className="text-slate-300">{STAGES.length} etapas</span>
               </p>
-              <div className="mt-8 flex flex-wrap items-center gap-3">
-                <a
-                  href="/#contacto"
-                  className="btn-vibrant inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium"
-                >
-                  Pedir análisis gratuito
-                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                </a>
-                <Link
-                  href="/servicios"
-                  className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-6 py-3 text-sm font-medium text-slate-200 transition hover:border-white/10 hover:bg-white/10 hover:text-white"
-                >
-                  Ver servicios
-                </Link>
-              </div>
-            </div>
-            <div className="card-glow-border relative overflow-hidden rounded-[2rem] border border-white/10 shadow-[0_24px_90px_rgba(0,0,0,0.14)]">
-              <Image
-                src="/images/proceso-hero.png"
-                alt="Equipo de Yago diseñando un flujo de automatización"
-                width={720}
-                height={520}
-                priority
-                className="h-auto w-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#070b13]/60 via-transparent to-transparent" aria-hidden="true" />
-            </div>
-          </div>
-        </section>
-
-        {/* Timeline de etapas */}
-        <section className="mx-auto mt-20 max-w-7xl px-4 md:mt-28">
-          <div className="mx-auto max-w-3xl text-center">
-            <h2 className="text-balance font-headline text-3xl font-semibold text-white md:text-5xl">
-              Las 4 etapas, en detalle
-            </h2>
-            <p className="mt-4 text-pretty leading-relaxed text-slate-300">
-              Cada etapa tiene entregables concretos. Sabes exactamente qué recibes y cuándo.
-            </p>
-          </div>
-
-          <div className="relative mt-14">
-            <div
-              aria-hidden="true"
-              className="absolute bottom-8 left-6 top-8 hidden w-px bg-gradient-to-b from-sky-300/40 via-sky-300/20 to-transparent md:block"
-            />
-            <div className="grid gap-6">
-              {STAGES.map((stage) => {
-                const Icon = stage.icon;
-                return (
-                  <article
-                    key={stage.title}
-                    className="hover-lift card-glow-border relative rounded-[1.8rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-6 shadow-[0_18px_50px_rgba(0,0,0,0.08)] md:ml-16 md:p-8"
-                  >
-                    <div
-                      aria-hidden="true"
-                      className="absolute -left-16 top-8 hidden size-12 items-center justify-center rounded-2xl border border-sky-300/25 bg-white/10 text-sky-300 shadow-[0_0_24px_rgba(94,198,255,0.18)] md:flex"
-                    >
-                      <Icon className="h-5 w-5" />
-                    </div>
-
-                    <div className="flex flex-wrap items-center justify-between gap-3">
-                      <div className="flex items-center gap-3">
-                        <div className="flex size-11 items-center justify-center rounded-2xl border border-sky-300/20 bg-sky-400/10 text-sky-300 md:hidden">
-                          <Icon className="h-5 w-5" aria-hidden="true" />
-                        </div>
-                        <div>
-                          <div className="text-xs font-medium uppercase tracking-[0.16em] text-slate-300">
-                            {stage.step}
-                          </div>
-                          <h3 className="mt-0.5 text-xl font-semibold text-white md:text-2xl">{stage.title}</h3>
-                        </div>
-                      </div>
-                      <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-xs text-slate-300">
-                        {stage.duration}
+              <ol className="flex flex-col">
+                {STAGES.map((stage, index) => (
+                  <li key={stage.title} className="relative flex items-start gap-4 px-3 py-3.5">
+                    {index < STAGES.length - 1 ? (
+                      <span
+                        aria-hidden="true"
+                        className="absolute -bottom-3.5 left-[1.75rem] top-[2.875rem] w-px bg-gradient-to-b from-sky-300/45 to-sky-300/15"
+                      />
+                    ) : null}
+                    <span className="relative z-[1] grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[#0b1220] font-mono text-[12px] font-medium text-sky-300 shadow-[inset_0_0_0_1px_rgba(125,211,252,0.45),0_0_16px_rgba(56,189,248,0.22)]">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <span className="flex min-w-0 flex-1 flex-col gap-1">
+                      <span className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-0.5">
+                        <span className="font-headline text-[1.05rem] font-semibold text-white">{stage.title}</span>
+                        <span className="font-mono text-[12.5px] text-sky-300">{stage.duration}</span>
                       </span>
-                    </div>
-
-                    <p className="mt-4 max-w-2xl text-sm leading-relaxed text-slate-300 md:text-base">
-                      {stage.summary}
-                    </p>
-
-                    <div className="mt-5 grid gap-5 md:grid-cols-[1.4fr_1fr]">
-                      <ul className="grid gap-2.5">
-                        {stage.activities.map((activity) => (
-                          <li key={activity} className="flex items-start gap-2.5 text-sm leading-relaxed text-slate-300">
-                            <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-sky-300" aria-hidden="true" />
-                            {activity}
-                          </li>
-                        ))}
-                      </ul>
-                      <div className="rounded-2xl border border-sky-300/20 bg-sky-400/[0.07] p-4">
-                        <div className="text-[11px] font-medium uppercase tracking-[0.16em] text-sky-300">
-                          Entregable
-                        </div>
-                        <p className="mt-2 text-sm leading-relaxed text-slate-200">{stage.deliverable}</p>
-                      </div>
-                    </div>
-                  </article>
-                );
-              })}
+                      <span className="text-[13.5px] leading-snug text-slate-400">{stage.deliverable}</span>
+                    </span>
+                  </li>
+                ))}
+              </ol>
             </div>
           </div>
-        </section>
+        }
+      />
 
-        {/* Garantías */}
-        <section className="mx-auto mt-20 max-w-7xl px-4 md:mt-28">
-          <div className="grid gap-5 md:grid-cols-3">
-            {GUARANTEES.map((item) => {
-              const Icon = item.icon;
-              return (
-                <div
-                  key={item.title}
-                  className="hover-lift rounded-[1.8rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-6"
-                >
-                  <div className="flex size-12 items-center justify-center rounded-2xl border border-sky-300/20 bg-sky-400/10 text-sky-300">
-                    <Icon className="h-5 w-5" aria-hidden="true" />
+      {/* ---------------- ETAPAS ---------------- */}
+      <PageSection id="etapas" tone="light">
+        <SectionHeader
+          eyebrow="Las etapas"
+          title="Las 4 etapas, en detalle."
+          description="Cada etapa tiene entregables concretos. Sabes exactamente qué recibes y cuándo."
+        />
+
+        <ol className="mt-14 flex flex-col gap-5 md:gap-6">
+          {STAGES.map((stage, index) => (
+            <li key={stage.title} className="relative grid grid-cols-1 md:grid-cols-[3rem_minmax(0,1fr)] md:gap-8">
+              {index < STAGES.length - 1 ? (
+                <span
+                  aria-hidden="true"
+                  className="absolute -bottom-14 left-6 top-20 hidden w-px bg-gradient-to-b from-sky-300 to-sky-200 md:block"
+                />
+              ) : null}
+              <div className="relative z-[1] hidden pt-8 md:block">
+                <IconTile icon={stage.icon} size="lg" />
+              </div>
+              <article className="y-card y-reveal min-w-0 p-7 sm:p-9">
+                <div className="flex flex-wrap items-center justify-between gap-4">
+                  <div className="flex items-center gap-4">
+                    <span className="md:hidden">
+                      <IconTile icon={stage.icon} />
+                    </span>
+                    <div className="flex flex-col gap-1">
+                      <span className="font-mono text-[12px] uppercase tracking-[0.12em] text-sky-700">{stage.step}</span>
+                      <h3 className="y-h3 text-[1.5rem] text-slate-950 md:text-[1.75rem]">{stage.title}</h3>
+                    </div>
                   </div>
-                  <h3 className="mt-4 text-lg font-semibold text-white">{item.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-slate-300">{item.desc}</p>
+                  <span className="inline-flex items-center gap-2 rounded-full bg-mist px-3 py-1.5 font-mono text-xs text-slate-700 shadow-[inset_0_0_0_1px_rgba(15,23,42,0.08)]">
+                    <Clock3 className="h-3.5 w-3.5 text-sky-700" aria-hidden="true" />
+                    {stage.duration}
+                  </span>
                 </div>
-              );
-            })}
-          </div>
-        </section>
 
-        {/* CTA final */}
-        <section className="mx-auto mt-20 max-w-7xl px-4 md:mt-28">
-          <div className="card-glow-border flex flex-col items-center gap-4 rounded-[2rem] border border-white/10 bg-[linear-gradient(120deg,rgba(125,211,252,0.08),rgba(125,211,252,0.02))] p-8 text-center md:p-12">
-            <h2 className="text-balance font-headline text-2xl font-semibold text-white md:text-4xl">
-              ¿Listo para la Etapa 1?
-            </h2>
-            <p className="max-w-xl text-pretty text-sm leading-relaxed text-slate-300 md:text-base">
-              El descubrimiento inicial es gratuito: cuéntanos tu proceso más lento y te respondemos con
-              el quick win recomendado en 48 horas.
-            </p>
-            <a
-              href="/#contacto"
-              className="btn-vibrant inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-medium"
-            >
-              Comenzar el descubrimiento
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </a>
+                <p className="mt-5 max-w-3xl text-[16.5px] leading-relaxed text-slate-600">{stage.summary}</p>
+
+                <div className="mt-7 grid grid-cols-1 gap-6 border-t border-slate-200/80 pt-7 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] lg:gap-8">
+                  <div>
+                    <p className="font-mono text-[11.5px] uppercase tracking-[0.12em] text-slate-600">Qué hacemos</p>
+                    <CheckList items={stage.activities} className="mt-4" />
+                  </div>
+                  <div className="flex flex-col gap-3 rounded-2xl bg-sky-50 p-5 shadow-[inset_0_0_0_1px_rgba(14,165,233,0.18)] sm:p-6">
+                    <p className="flex items-center gap-2 font-mono text-[11.5px] uppercase tracking-[0.12em] text-sky-800">
+                      <PackageCheck className="h-4 w-4" strokeWidth={1.8} aria-hidden="true" />
+                      Qué recibes
+                    </p>
+                    <p className="text-[16.5px] font-semibold leading-snug text-slate-950">{stage.deliverable}</p>
+                  </div>
+                </div>
+              </article>
+            </li>
+          ))}
+        </ol>
+      </PageSection>
+
+      {/* ---------------- PRINCIPIOS ---------------- */}
+      <PageSection id="principios" tone="mist">
+        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-10">
+          <div className="lg:col-span-5">
+            <FramedImage
+              src="/images/proceso-hero.png"
+              alt="Ilustración del recorrido en cuatro etapas: descubrimiento, blueprint, construcción y puesta en marcha"
+              sizes="(min-width: 1024px) 40vw, 100vw"
+              aspect="aspect-square"
+            />
           </div>
-        </section>
-      </main>
-      <Footer />
-    </div>
+          <div className="flex flex-col gap-10 lg:col-span-6 lg:col-start-7">
+            <ColumnHeader
+              eyebrow="Principios"
+              title="Lo que se mantiene en todas las etapas."
+              description="Partimos por el cuello de botella con más impacto y lo dejamos funcionando antes de pasar al siguiente."
+            />
+            <ul className="flex flex-col gap-3.5">
+              {GUARANTEES.map((item) => (
+                <li key={item.title} className="y-card y-reveal flex items-start gap-4 p-5 sm:gap-5 sm:p-6">
+                  <IconTile icon={item.icon} />
+                  <div className="flex min-w-0 flex-col gap-1">
+                    <h3 className="y-h3 text-[1.2rem] text-slate-950">{item.title}</h3>
+                    <p className="text-[15px] leading-relaxed text-slate-600">{item.desc}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </PageSection>
+
+      {/* ---------------- CIERRE ---------------- */}
+      <CtaBand
+        eyebrow="Primer paso"
+        title="¿Listo para la Etapa 1?"
+        text="El descubrimiento inicial es gratuito: cuéntanos tu proceso más lento y te respondemos con el quick win recomendado en 48 horas."
+        primary={{ ...BOOKING_ACTION, label: "Comenzar el descubrimiento" }}
+      />
+    </PageShell>
   );
 }

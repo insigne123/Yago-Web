@@ -1,69 +1,128 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { Navbar } from "@/components/landing/Navbar";
-import { Footer } from "@/components/landing/Footer";
-import { BrandStamp } from "@/components/BrandStamp";
-import { PRIMARY_CTA } from "@/config/site";
-import { SEO_PAGES } from "@/config/seo-pages";
+import { SpotlightGroup } from "@/components/home/SpotlightGroup";
+import { ActionLink, BOOKING_ACTION, CtaBand, IconTile, PageHero, PageSection, PageShell, SectionHeader } from "@/components/site/PageKit";
+import { solutionIcon } from "@/components/solutions/solutionIcons";
+import { SEO_PAGES, type SeoPage } from "@/config/seo-pages";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata = createPageMetadata({
-  title: "Soluciones de automatizacion para operaciones, backoffice y finanzas | YAGO",
+  title: "Soluciones de automatización por proceso e industria | YAGO",
   description:
-    "Soluciones de YAGO para equipos que buscan automatizacion de backoffice, finanzas y aprobaciones con foco en menos trabajo manual y mas control operativo.",
+    "Soluciones de YAGO para equipos que buscan automatización de backoffice, finanzas y aprobaciones con foco en menos trabajo manual y más control operativo.",
   path: "/soluciones",
 });
 
+const BY_PROCESS = SEO_PAGES.filter((page) => page.eyebrow !== "Industria");
+const BY_INDUSTRY = SEO_PAGES.filter((page) => page.eyebrow === "Industria");
+
+const GROUPS = [
+  { label: "Por proceso", pages: BY_PROCESS },
+  { label: "Por industria", pages: BY_INDUSTRY },
+];
+
+function SolutionCard({ page }: { page: SeoPage }) {
+  return (
+    <Link
+      href={`/soluciones/${page.slug}`}
+      className="y-spot y-card y-card-hover y-reveal group flex flex-col gap-4 p-7"
+    >
+      <IconTile icon={solutionIcon(page.slug)} />
+      <h3 className="y-h3 mt-1 text-[1.3rem] text-slate-950">{page.name}</h3>
+      <p className="text-[15px] leading-relaxed text-slate-600">{page.seoDescription}</p>
+      <span className="mt-auto inline-flex items-center gap-1.5 pt-2 text-[15px] font-semibold text-sky-700">
+        Ver solución
+        <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true" />
+      </span>
+    </Link>
+  );
+}
+
 export default function SolutionsIndexPage() {
   return (
-    <div className="relative min-h-screen overflow-x-clip text-white">
-      <Navbar ctaHref={PRIMARY_CTA.href} ctaLabel={PRIMARY_CTA.label} />
-
-      <main id="main-content" className="main-premium py-20 md:py-24">
-        <div className="mx-auto max-w-7xl px-4">
-          <section className="max-w-4xl">
-            <p className="text-xs uppercase tracking-[0.22em] text-slate-300">Soluciones</p>
-            <h1 className="mt-4 text-balance font-headline text-4xl font-semibold text-white md:text-6xl">
-              Paginas pensadas para problemas operativos concretos.
-            </h1>
-            <p className="mt-5 max-w-3xl text-base leading-relaxed text-slate-300 md:text-lg">
-              Si llegaste buscando una necesidad mas especifica, aqui reunimos las soluciones con mejor fit
-              para equipos de operaciones, backoffice y finanzas que quieren reducir trabajo manual,
-              errores y tiempos de ciclo.
-            </p>
-          </section>
-
-          <section className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-            {SEO_PAGES.map((page) => (
-              <Link
-                key={page.slug}
-                href={`/soluciones/${page.slug}`}
-                className="group rounded-[1.8rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-6 shadow-[0_18px_50px_rgba(0,0,0,0.08)] transition hover:-translate-y-0.5 hover:border-white/10"
-              >
-                <div className="text-xs uppercase tracking-[0.18em] text-sky-300">{page.eyebrow}</div>
-                <h2 className="mt-4 text-2xl font-semibold text-white">{page.title}</h2>
-                <p className="mt-3 text-sm leading-relaxed text-slate-300">{page.seoDescription}</p>
-
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {page.proof.slice(0, 2).map((item) => (
-                    <span key={item} className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-slate-200">
-                      {item}
-                    </span>
-                  ))}
+    <PageShell>
+      {/* ---------------- HERO ---------------- */}
+      <PageHero
+        eyebrow="Soluciones"
+        title="Soluciones para problemas operativos"
+        highlight="concretos."
+        description="Si llegaste buscando una necesidad más específica, aquí reunimos las soluciones con mejor fit para equipos de operaciones, backoffice y finanzas que quieren reducir trabajo manual, errores y tiempos de ciclo."
+        actions={
+          <>
+            <ActionLink action={BOOKING_ACTION} arrow />
+            <ActionLink action={{ label: "Cómo trabajamos", href: "/proceso" }} variant="glass" />
+          </>
+        }
+        aside={
+          <nav aria-label="Índice de soluciones" className="y-beam">
+            <div className="y-beam__inner bg-[#0b1220] p-3 sm:p-4">
+              {GROUPS.map((group, groupIndex) => (
+                <div key={group.label} className={groupIndex ? "mt-2 border-t border-white/[0.08] pt-2" : ""}>
+                  <p className="flex items-center justify-between gap-3 px-3 pb-2 pt-3 font-mono text-[12px] uppercase tracking-[0.12em] text-slate-400">
+                    <span>{group.label}</span>
+                    <span className="text-slate-300">{group.pages.length}</span>
+                  </p>
+                  <ul className="grid grid-cols-1 gap-0.5 sm:grid-cols-2 lg:grid-cols-1">
+                    {group.pages.map((page) => {
+                      const Icon = solutionIcon(page.slug);
+                      return (
+                        <li key={page.slug} className="min-w-0">
+                          <Link
+                            href={`/soluciones/${page.slug}`}
+                            className="group flex items-center gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-white/[0.05] focus-visible:bg-white/[0.05]"
+                          >
+                            <Icon className="h-4 w-4 shrink-0 text-sky-300" strokeWidth={1.8} aria-hidden="true" />
+                            <span className="min-w-0 flex-1 text-[15px] font-medium leading-snug text-white">{page.name}</span>
+                            <ArrowRight
+                              className="h-4 w-4 shrink-0 text-slate-400 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:text-sky-300"
+                              aria-hidden="true"
+                            />
+                          </Link>
+                        </li>
+                      );
+                    })}
+                  </ul>
                 </div>
+              ))}
+            </div>
+          </nav>
+        }
+      />
 
-                <div className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-white">
-                  Ver pagina
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
-                </div>
-              </Link>
-            ))}
-          </section>
-        </div>
-      </main>
+      {/* ---------------- POR PROCESO ---------------- */}
+      <PageSection id="por-proceso" tone="mist">
+        <SectionHeader
+          eyebrow="Por proceso"
+          title="Soluciones por proceso."
+          description="Backoffice, finanzas, aprobaciones, carga de datos, documentos y reportes: elige el flujo que hoy depende de más trabajo manual."
+        />
+        <SpotlightGroup className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
+          {BY_PROCESS.map((page) => (
+            <SolutionCard key={page.slug} page={page} />
+          ))}
+        </SpotlightGroup>
+      </PageSection>
 
-      <BrandStamp />
-      <Footer />
-    </div>
+      {/* ---------------- POR INDUSTRIA ---------------- */}
+      <PageSection id="por-industria" tone="light">
+        <SectionHeader
+          eyebrow="Por industria"
+          title="Soluciones por industria."
+          description="Logística, empresas de servicios y RRHH: operaciones donde los documentos, el seguimiento y la coordinación manual pesan más."
+        />
+        <SpotlightGroup className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
+          {BY_INDUSTRY.map((page) => (
+            <SolutionCard key={page.slug} page={page} />
+          ))}
+        </SpotlightGroup>
+      </PageSection>
+
+      {/* ---------------- CIERRE ---------------- */}
+      <CtaBand
+        eyebrow="A medida"
+        title="¿Tu proceso no aparece aquí?"
+        text="Revisamos tu flujo y te decimos si conviene partir con un producto listo, con OCR o con una automatización a medida."
+      />
+    </PageShell>
   );
 }

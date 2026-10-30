@@ -6,17 +6,6 @@ import { useToast } from "@/hooks/use-toast";
 import { track } from "@/lib/analytics";
 import { AttributionFields } from "@/components/forms/AttributionFields";
 import { LeadSuccess } from "@/components/forms/LeadSuccess";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import { OCR_PAGE } from "@/config/ocr";
 
 export function OcrLeadForm() {
@@ -49,7 +38,7 @@ export function OcrLeadForm() {
         role ? `Cargo: ${role}` : "",
         documentType ? `Tipo de documento: ${documentType}` : "",
         monthlyVolume ? `Volumen mensual: ${monthlyVolume}` : "",
-        "Solicita evaluacion inicial.",
+        "Solicita evaluación inicial.",
       ]
         .filter(Boolean)
         .join("\n");
@@ -86,7 +75,7 @@ export function OcrLeadForm() {
       track("OCR Lead Form Success", { position: "ocr_form", lead_id: resData.leadId });
       toast({
         title: "Solicitud enviada",
-        description: "Te responderemos para coordinar la evaluacion inicial.",
+        description: "Te responderemos para coordinar la evaluación inicial.",
       });
     } catch (err: any) {
       if (!errorTracked) {
@@ -98,7 +87,7 @@ export function OcrLeadForm() {
 
       toast({
         title: "No pudimos enviar tu solicitud",
-        description: err?.message ?? "Intenta nuevamente o escribenos por WhatsApp.",
+        description: err?.message ?? "Intenta nuevamente o escríbenos por WhatsApp.",
         variant: "destructive",
       });
     } finally {
@@ -107,149 +96,141 @@ export function OcrLeadForm() {
   }
 
   return (
-    <Card className="hover-lift rounded-[1.9rem] border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] shadow-[0_20px_60px_rgba(30,58,95,0.08)]">
-      <CardHeader>
-        <CardTitle>{OCR_PAGE.form.title}</CardTitle>
-        <CardDescription>{OCR_PAGE.form.description}</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <form onSubmit={onSubmit} onFocusCapture={markStart} className="grid gap-4">
-          <input type="text" name="hp" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden="true" />
-          <input type="hidden" name="topic" value="OCR para empresas" />
-          <AttributionFields />
+    <div className="y-form-card rounded-[1.75rem] bg-white p-6 text-slate-950 shadow-[0_50px_100px_-40px_rgba(0,0,0,0.8),0_0_0_1px_rgba(255,255,255,0.1)] sm:p-9">
+      <div className="flex flex-col gap-1.5">
+        <h3 className="y-h3 text-2xl">{OCR_PAGE.form.title}</h3>
+        <p className="text-[15px] leading-relaxed text-slate-600">{OCR_PAGE.form.description}</p>
+      </div>
+      <form onSubmit={onSubmit} onFocusCapture={markStart} className="mt-6 grid gap-4">
+        <input type="text" name="hp" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden="true" />
+        <input type="hidden" name="topic" value="OCR para empresas" />
+        <AttributionFields />
 
-          <div className="grid gap-4 md:grid-cols-2">
-            <div className="grid gap-2">
-              <Label htmlFor="ocr-nombre" className="text-slate-200">Nombre</Label>
-              <Input
-                id="ocr-nombre"
-                name="nombre"
-                autoComplete="name"
-                placeholder="Tu nombre"
-                required
-                className="rounded-2xl border-white/10 bg-white/[0.04] text-white placeholder:text-slate-400"
-              />
-            </div>
-
-            <div className="grid gap-2">
-              <Label htmlFor="ocr-empresa" className="text-slate-200">Empresa</Label>
-              <Input
-                id="ocr-empresa"
-                name="empresa"
-                autoComplete="organization"
-                placeholder="Nombre de la empresa"
-                required
-                className="rounded-2xl border-white/10 bg-white/[0.04] text-white placeholder:text-slate-400"
-              />
-            </div>
-          </div>
-
-          <div className="grid gap-4 md:grid-cols-2">
-            <div className="grid gap-2">
-              <Label htmlFor="ocr-email" className="text-slate-200">Correo</Label>
-              <Input
-                id="ocr-email"
-                name="email"
-                type="email"
-                autoComplete="email"
-                inputMode="email"
-                placeholder="tu@empresa.com"
-                required
-                className="rounded-2xl border-white/10 bg-white/[0.04] text-white placeholder:text-slate-400"
-              />
-            </div>
-
-            <div className="grid gap-2">
-              <Label htmlFor="ocr-phone" className="text-slate-200">Telefono o WhatsApp</Label>
-              <Input
-                id="ocr-phone"
-                name="telefono"
-                autoComplete="tel"
-                inputMode="tel"
-                placeholder="Tu numero de contacto"
-                className="rounded-2xl border-white/10 bg-white/[0.04] text-white placeholder:text-slate-400"
-              />
-            </div>
-          </div>
-
-          <div className="grid gap-4 md:grid-cols-2">
-            <div className="grid gap-2">
-              <Label htmlFor="ocr-role" className="text-slate-200">Cargo</Label>
-              <Input
-                id="ocr-role"
-                name="cargo"
-                autoComplete="organization-title"
-                placeholder="Ej. Operaciones, Finanzas, Backoffice"
-                className="rounded-2xl border-white/10 bg-white/[0.04] text-white placeholder:text-slate-400"
-              />
-            </div>
-
-            <div className="grid gap-2">
-              <Label htmlFor="ocr-document-type" className="text-slate-200">Tipo de documento</Label>
-              <select
-                id="ocr-document-type"
-                name="tipo_documento"
-                required
-                defaultValue=""
-                className="h-11 rounded-2xl border border-white/10 bg-white/[0.04] px-3 text-sm text-white outline-none transition-colors focus:border-sky-200/40 focus:ring-2 focus:ring-sky-200/30"
-              >
-                <option value="" disabled className="bg-[#0b1220] text-slate-300">
-                  Selecciona una opcion
-                </option>
-                {OCR_PAGE.form.documentOptions.map((option) => (
-                  <option key={option} value={option} className="bg-[#0b1220] text-white">
-                    {option}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div className="grid gap-2">
-            <Label htmlFor="ocr-volume" className="text-slate-200">Volumen aproximado mensual</Label>
-            <select
-              id="ocr-volume"
-              name="volumen_mensual"
+            <label htmlFor="ocr-nombre" className="y-label">Nombre</label>
+            <input id="ocr-nombre" name="nombre" autoComplete="name" placeholder="Tu nombre" required className="y-field" />
+          </div>
+          <div className="grid gap-2">
+            <label htmlFor="ocr-empresa" className="y-label">Empresa</label>
+            <input
+              id="ocr-empresa"
+              name="empresa"
+              autoComplete="organization"
+              placeholder="Nombre de la empresa"
               required
-              defaultValue=""
-              className="h-11 rounded-2xl border border-white/10 bg-white/[0.04] px-3 text-sm text-white outline-none transition-colors focus:border-sky-200/40 focus:ring-2 focus:ring-sky-200/30"
-            >
-              <option value="" disabled className="bg-[#0b1220] text-slate-300">
-                Selecciona una opcion
+              className="y-field"
+            />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div className="grid gap-2">
+            <label htmlFor="ocr-email" className="y-label">Email de trabajo</label>
+            <input
+              id="ocr-email"
+              name="email"
+              type="email"
+              autoComplete="email"
+              inputMode="email"
+              placeholder="nombre@empresa.cl"
+              required
+              className="y-field"
+            />
+          </div>
+          <div className="grid gap-2">
+            <label htmlFor="ocr-phone" className="y-label">
+              Teléfono o WhatsApp <span className="font-normal text-slate-500">(opcional)</span>
+            </label>
+            <input
+              id="ocr-phone"
+              name="telefono"
+              autoComplete="tel"
+              inputMode="tel"
+              placeholder="+56 9 …"
+              className="y-field"
+            />
+          </div>
+        </div>
+
+        <div className="grid gap-2">
+          <label htmlFor="ocr-role" className="y-label">
+            Cargo <span className="font-normal text-slate-500">(opcional)</span>
+          </label>
+          <input
+            id="ocr-role"
+            name="cargo"
+            autoComplete="organization-title"
+            placeholder="Ej.: Operaciones, Finanzas, Backoffice"
+            className="y-field"
+          />
+        </div>
+
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div className="grid gap-2">
+            <label htmlFor="ocr-document-type" className="y-label">Tipo de documento</label>
+            <select id="ocr-document-type" name="tipo_documento" required defaultValue="" className="y-field pr-8">
+              <option value="" disabled>
+                Selecciona una opción
               </option>
-              {OCR_PAGE.form.volumeOptions.map((option) => (
-                <option key={option} value={option} className="bg-[#0b1220] text-white">
+              {OCR_PAGE.form.documentOptions.map((option) => (
+                <option key={option} value={option}>
                   {option}
                 </option>
               ))}
             </select>
           </div>
-
           <div className="grid gap-2">
-            <Label htmlFor="ocr-message" className="text-slate-200">Mensaje opcional</Label>
-            <Textarea
-              id="ocr-message"
-              name="mensaje"
-              autoComplete="off"
-              placeholder="Si quieres, cuentanos brevemente el proceso o el problema que quieres resolver..."
-              rows={4}
-              className="rounded-2xl border-white/10 bg-white/[0.04] text-white placeholder:text-slate-400"
-            />
+            <label htmlFor="ocr-volume" className="y-label">Volumen mensual</label>
+            <select id="ocr-volume" name="volumen_mensual" required defaultValue="" className="y-field pr-8">
+              <option value="" disabled>
+                Selecciona una opción
+              </option>
+              {OCR_PAGE.form.volumeOptions.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
           </div>
+        </div>
 
-          <Button
-            type="submit"
-            disabled={loading}
-            className="rounded-full border border-white/10 bg-white text-[#070b13] transition-[transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:shadow-[0_16px_38px_rgba(0,0,0,0.18)] active:scale-[0.98]"
-          >
-            {loading ? "Enviando..." : OCR_PAGE.form.submitLabel}
-          </Button>
-        </form>
-        {leadId ? <LeadSuccess leadId={leadId} message="Revisaremos el tipo de documento, volumen y calidad de muestra para recomendar una evaluación." /> : null}
-        <p className="mt-3 text-xs text-slate-300">
-          Al enviar aceptas nuestra <Link href="/privacidad" className="underline hover:text-foreground">Politica de Privacidad</Link>.
+        <div className="grid gap-2">
+          <label htmlFor="ocr-message" className="y-label">
+            ¿Qué debería pasar después de leer los documentos? <span className="font-normal text-slate-500">(opcional)</span>
+          </label>
+          <textarea
+            id="ocr-message"
+            name="mensaje"
+            autoComplete="off"
+            placeholder="Ej.: revisar montos, pedir una aprobación o cargar los datos a nuestro ERP."
+            rows={3}
+            className="y-field"
+          />
+        </div>
+
+        <button
+          type="submit"
+          disabled={loading}
+          className="y-btn y-btn-primary mt-1 w-full disabled:cursor-wait disabled:opacity-70 plausible-event-name=OCR+Evaluation+Submit+Click plausible-event-location=ocr_form plausible-event-service=ocr"
+        >
+          {loading ? "Enviando…" : OCR_PAGE.form.submitLabel}
+        </button>
+        <p className="text-[13px] text-slate-600">
+          Al enviar aceptas nuestra{" "}
+          <Link href="/privacidad" className="text-sky-700 underline underline-offset-2 hover:text-sky-800">
+            Política de Privacidad
+          </Link>
+          .
         </p>
-      </CardContent>
-    </Card>
+      </form>
+      {leadId ? (
+        <LeadSuccess
+          tone="light"
+          leadId={leadId}
+          message="Revisaremos tu solicitud y coordinaremos la evaluación de documentos, campos e integración."
+        />
+      ) : null}
+    </div>
   );
 }

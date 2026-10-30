@@ -1,0 +1,21 @@
+{
+  "site": "https://yago.cl",
+  "searchConsoleProperty": "sc-domain:yago.cl",
+  "firebaseProject": "automata-ai",
+  "projectNumber": "26260323805",
+  "readerAccountId": "yago-seo-reader",
+  "readerEmail": "yago-seo-reader@automata-ai.iam.gserviceaccount.com",
+  "measurementId": "G-DSNXKXMCKX",
+  "ga4PropertyId": "557294618",
+  "bingSecret": "YAGO_BING_WEBMASTER_API_KEY",
+  "routes": [
+    "/",
+    "/servicios/automatizacion-procesos",
+    "/servicios/integracion-ia",
+    "/servicios/apps-automatizacion",
+    "/servicios/agentes-ia",
+    "/ocr",
+    "/ocr-master",
+    "/soluciones/automatizacion-para-servicios"
+  ]
+}

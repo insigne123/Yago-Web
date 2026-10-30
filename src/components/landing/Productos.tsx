@@ -1,10 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { PRODUCTS } from "@/config/productos";
+import { COMPANY } from "@/config/site";
 import { Section } from "./Section";
 import { ArrowRight, Bot, FileCheck2, Megaphone, Target } from "lucide-react";
 
-const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "contacto@yago.cl";
+const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL || COMPANY.email;
 const WHATSAPP_PHONE = process.env.NEXT_PUBLIC_WHATSAPP_PHONE || ""; // ej: 56912345678
 
 const PRODUCT_ICON: Record<string, any> = {

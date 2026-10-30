@@ -44,8 +44,11 @@ const AccordionContent = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>
 >(({ className, children, ...props }, ref) => (
+  // forceMount: las respuestas cerradas quedan en el HTML (con el atributo hidden),
+  // así buscadores y asistentes de IA pueden leerlas aunque la pregunta esté contraída.
   <AccordionPrimitive.Content
     ref={ref}
+    forceMount
     className="overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
     {...props}
   >

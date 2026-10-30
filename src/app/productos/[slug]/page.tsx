@@ -1,17 +1,26 @@
 import { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ArrowRight, CircleCheck, Info } from "lucide-react";
 import { PRODUCTS } from "@/config/productos";
-import { Navbar } from "@/components/landing/Navbar";
-import { Footer } from "@/components/landing/Footer";
-import { BrandStamp } from "@/components/BrandStamp";
+import { HOME_AGENTS } from "@/config/home";
+import { ChipList, ColumnHeader, ImageLinkCard, ListCard, stepGridClass } from "@/components/catalog/CatalogKit";
+import { DetailHeroAside, StatRow, contactLinks, countWord } from "@/components/catalog/DetailKit";
+import { SpotlightGroup } from "@/components/home/SpotlightGroup";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { JsonLd } from "@/components/seo/JsonLd";
+import {
+  CheckList,
+  CtaBand,
+  FaqSection,
+  PageHero,
+  PageSection,
+  PageShell,
+  SectionHeader,
+  StepCard,
+  TextLink,
+  WhatsAppLink,
+} from "@/components/site/PageKit";
 import { createPageMetadata } from "@/lib/seo";
-
-const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "contacto@yago.cl";
-const WHATSAPP_PHONE = process.env.NEXT_PUBLIC_WHATSAPP_PHONE || "";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -41,13 +50,13 @@ export default async function ProductPage({ params }: PageProps) {
   const p = getProductBySlug(slug);
   if (!p) notFound();
 
-  const baseMsg = `Hola YAGO, me interesa ${p.name}. ¿Podemos revisar una demo?`;
-  const waHref = WHATSAPP_PHONE
-    ? `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(baseMsg)}`
-    : undefined;
-  const mailHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(`Interés en ${p.name}`)}&body=${encodeURIComponent(baseMsg)}`;
+  const { mailHref, waHref } = contactLinks({
+    subject: `Interés en ${p.name}`,
+    message: `Hola YAGO, me interesa ${p.name}. ¿Podemos revisar una demo?`,
+  });
 
   const heading = p.pageTitle || p.name;
+  const [headingLead, ...headingRest] = heading.split(", ");
   const subtitle = p.pageSubtitle || p.details.description;
   const primaryLabel = p.ctaPrimary || "Solicitar demo";
   const secondaryLabel = p.ctaSecondary || "Ver módulos";
@@ -60,15 +69,18 @@ export default async function ProductPage({ params }: PageProps) {
     }));
   const idealFor = p.idealFor?.length ? p.idealFor : p.details.notes || [];
   const faqs = p.faq || [];
-  const quickLinks = [
-    { id: "impacto", label: "Impacto" },
-    { id: "modulos", label: "Módulos" },
-    p.details.integrations?.length ? { id: "integraciones", label: "Integraciones" } : null,
-    p.details.stages?.length ? { id: "implementacion", label: "Implementación" } : null,
-    idealFor.length ? { id: "ideal", label: "Ideal para" } : null,
-    faqs.length ? { id: "faq", label: "FAQ" } : null,
-  ].filter(Boolean) as { id: string; label: string }[];
+  const stages = p.details.stages ?? [];
+  const integrations = p.details.integrations ?? [];
+  const notes = p.idealFor?.length ? p.details.notes ?? [] : [];
+  const tag = HOME_AGENTS.find((agent) => agent.href === `/productos/${p.slug}`)?.tag;
+  const badge = p.badge && p.badge !== "—" ? p.badge : undefined;
+  const stats = [
+    { value: String(p.details.modules.length), label: "módulos clave" },
+    integrations.length ? { value: String(integrations.length), label: "integraciones" } : null,
+    stages.length ? { value: String(stages.length), label: "etapas" } : null,
+  ].filter(Boolean) as { value: string; label: string }[];
   const relatedProducts = PRODUCTS.filter((x) => x.slug !== p.slug).slice(0, 3);
+
   const productJsonLd = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
@@ -92,282 +104,216 @@ export default async function ProductPage({ params }: PageProps) {
   };
 
   return (
-    <div className="relative min-h-screen overflow-x-clip text-white">
+    <PageShell>
       <JsonLd id={`jsonld-product-${p.slug}`} data={productJsonLd} />
       {faqs.length ? <JsonLd id={`jsonld-product-faq-${p.slug}`} data={faqJsonLd} /> : null}
-      <Navbar />
 
-      <main id="main-content" className="main-premium py-24">
-        <div className="mx-auto max-w-6xl space-y-8 px-4">
-          <Breadcrumbs items={[{ name: "Inicio", href: "/" }, { name: "Productos", href: "/productos" }, { name: p.name, href: `/productos/${p.slug}` }]} />
-          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-            <div>
-              <p className="text-xs tracking-[0.22em] text-muted-foreground">PRODUCTO</p>
-              <h1 className="mt-3 bg-gradient-to-r from-white via-sky-200 to-sky-400 bg-clip-text text-4xl font-semibold text-transparent md:text-5xl">
-                {heading}
-              </h1>
-            </div>
-
-            <div className="flex items-center gap-4 text-sm">
-              <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-slate-300">
-                {p.badge || "Producto"}
-              </span>
-              <Link
-                href="/#productos"
-                className="text-muted-foreground underline underline-offset-4 transition hover:text-foreground"
-                aria-label="Volver a productos"
-              >
-                ← Volver
-              </Link>
-            </div>
-          </div>
-
-          {/* Hero Banner Imagen Premium */}
-          <div className="relative aspect-[21/9] w-full overflow-hidden rounded-3xl border border-white/10 bg-white/5 shadow-2xl">
-            <Image
-              src={`/images/product_${p.slug}.png`}
-              alt={`Banner de ${p.name}`}
-              fill
-              priority
-              sizes="(max-width: 768px) 100vw, 1152px"
-              className="object-cover"
+      {/* ---------------- HERO ---------------- */}
+      <PageHero
+        top={
+          <>
+            <Breadcrumbs
+              items={[
+                { name: "Inicio", href: "/" },
+                { name: "Productos", href: "/productos" },
+                { name: p.name, href: `/productos/${p.slug}` },
+              ]}
             />
-            {/* Gradient Overlay sutil */}
-            <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#070b13]/70 to-transparent" />
-            <div className="absolute inset-0 rounded-3xl ring-1 ring-inset ring-white/10" />
-          </div>
-
-          <section className="space-y-5 rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur">
-            <p className="text-base text-slate-300 md:text-lg">{subtitle}</p>
-
-            <div className="flex flex-col gap-2 text-sm text-muted-foreground md:flex-row md:flex-wrap md:items-center md:gap-6">
-              <div>
-                <span className="font-medium text-slate-300">Tiempo de puesta en marcha:</span> {p.details.timeToValue}
-              </div>
-              <div>
-                <span className="font-medium text-slate-300">Módulos:</span> {p.details.modules.length}
-              </div>
-              {p.details.integrations?.length ? (
-                <div>
-                  <span className="font-medium text-slate-300">Integraciones:</span> {p.details.integrations.length}
-                </div>
+            <div className="flex flex-wrap items-center gap-3">
+              <span className="y-eyebrow">
+                {p.name}
+                {tag ? ` · ${tag}` : ""}
+              </span>
+              {badge ? (
+                <span className="rounded-full bg-sky-400/10 px-2.5 py-1 font-mono text-[11px] uppercase tracking-[0.12em] text-sky-200 shadow-[inset_0_0_0_1px_rgba(125,211,252,0.3)]">
+                  {badge}
+                </span>
               ) : null}
             </div>
+          </>
+        }
+        title={headingRest.length ? `${headingLead},` : heading}
+        highlight={headingRest.length ? headingRest.join(", ") : undefined}
+        description={subtitle}
+        actions={
+          <>
+            <a
+              href={mailHref}
+              className={`y-btn y-btn-primary plausible-event-name=Product+CTA+Primary plausible-event-product=${p.slug} plausible-event-location=product_page`}
+            >
+              {primaryLabel}
+              <ArrowRight className="y-arrow h-4 w-4" aria-hidden="true" />
+            </a>
+            <a
+              href="#modulos"
+              className={`y-btn y-btn-glass plausible-event-name=Product+CTA+Secondary plausible-event-product=${p.slug} plausible-event-location=product_page`}
+            >
+              {secondaryLabel}
+            </a>
+          </>
+        }
+        aside={
+          <DetailHeroAside
+            src={`/images/product_${p.slug}.png`}
+            alt={`Ilustración de ${p.name}`}
+            card={stats.length ? <StatRow items={stats} /> : undefined}
+          />
+        }
+      >
+        {supportPoints.length ? <ChipList items={supportPoints} dark className="mt-2 max-w-xl" /> : null}
+      </PageHero>
 
-            <div className="flex flex-wrap gap-2">
-              {quickLinks.map((item) => (
-                <a
-                  key={item.id}
-                  href={`#${item.id}`}
-                  className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-slate-300 transition hover:bg-white/5"
-                >
-                  {item.label}
-                </a>
-              ))}
-            </div>
-
-            <div className="flex flex-wrap gap-3 mt-4">
-              <a
-                href={mailHref}
-                className={`btn-vibrant group relative inline-flex items-center overflow-hidden rounded-xl px-5 py-2.5 font-medium plausible-event-name=Product+CTA+Primary plausible-event-product=${p.slug} plausible-event-location=product_page`}
-              >
-                <span className="relative z-10">{primaryLabel}</span>
-                <div className="absolute inset-0 h-full w-full animate-[shimmer_2s_infinite] bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full" />
-              </a>
-              <a
-                href="#modulos"
-                className={`group relative inline-flex items-center overflow-hidden rounded-xl border border-white/10 bg-white/5 px-5 py-2.5 font-medium text-white transition hover:bg-white/[0.04] plausible-event-name=Product+CTA+Secondary plausible-event-product=${p.slug} plausible-event-location=product_page`}
-              >
-                <span className="relative z-10">{secondaryLabel}</span>
-              </a>
-            </div>
-
-            {supportPoints.length > 0 && (
-              <ul className="flex flex-wrap gap-2 text-xs text-slate-300">
-                {supportPoints.map((point) => (
-                  <li key={point} className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5">
-                    {point}
-                  </li>
-                ))}
-              </ul>
-            )}
-          </section>
-
-          {/* Sección Bento Box Combinada: Impacto y Módulos */}
-          <section className="mt-12">
-            <div className="mb-6 flex flex-col gap-2">
-              <h2 className="text-2xl font-semibold text-white md:text-3xl">Por qué y cómo funciona</h2>
-              <p className="text-sm text-muted-foreground">El impacto directo en tu operación y los módulos técnicos que lo hacen posible.</p>
-            </div>
-
-            <div className="grid grid-cols-1 gap-4 lg:grid-cols-12 lg:grid-rows-2">
-
-              {/* Bento: Impacto Principal (Ocupa más espacio) */}
-              <div id="impacto" className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur transition hover:border-white/10 hover:bg-white/10 lg:col-span-8 lg:row-span-2">
-                <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-sky-400/10 blur-[80px] pointer-events-none" />
-                <h3 className="mb-6 text-xl font-medium text-white flex items-center gap-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-sky-300"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" /></svg>
-                  Impacto Operativo
-                </h3>
-
-                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-                  {results.map((result) => (
-                    <div key={result.title} className="flex flex-col gap-2">
-                      <div className="h-0.5 w-8 bg-gradient-to-r from-sky-400/70 to-transparent rounded-full" />
-                      <div className="font-medium text-slate-200">{result.title}</div>
-                      <p className="text-sm leading-relaxed text-muted-foreground">{result.description}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Bento: Módulos (Sidebar) */}
-              <div id="modulos" className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur transition hover:border-white/10 lg:col-span-4 lg:row-span-2">
-                <div className="absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-cyan-500/10 blur-[60px] pointer-events-none" />
-                <h3 className="mb-6 text-xl font-medium text-white flex items-center gap-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-cyan-600"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" /><polyline points="3.27 6.96 12 12.01 20.73 6.96" /><line x1="12" y1="22.08" x2="12" y2="12" /></svg>
-                  Módulos Clave
-                </h3>
-
-                <ul className="flex flex-col gap-4 relative z-10">
-                  {p.details.modules.map((module, index) => (
-                    <li key={module} className="flex items-start gap-3 text-sm text-muted-foreground">
-                      <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-white/[0.04] text-[10px] font-medium text-white ring-1 ring-white/10">
-                        {index + 1}
-                      </span>
-                      <span className="leading-snug pt-0.5">{module}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-            </div>
-          </section>
-
-          {p.details.integrations?.length ? (
-            <section id="integraciones" className="rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur">
-              <h2 className="mb-4 text-xl font-semibold text-white md:text-2xl">Integraciones frecuentes</h2>
-              <ul className="flex flex-wrap gap-2 text-sm text-muted-foreground">
-                {p.details.integrations.map((integration) => (
-                  <li key={integration} className="rounded-full border border-white/10 bg-white/5 px-4 py-2">
-                    {integration}
-                  </li>
-                ))}
-              </ul>
-            </section>
-          ) : null}
-
-          {p.details.stages?.length ? (
-            <section id="implementacion" className="rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur">
-              <h2 className="mb-4 text-xl font-semibold text-white md:text-2xl">Cómo se implementa</h2>
-              <ol className="space-y-4">
-                {p.details.stages.map((stage, index) => (
-                  <li key={stage.name} className="rounded-2xl border border-white/10 bg-white/5 p-5">
-                    <div className="font-medium text-white">Paso {index + 1} - {stage.name}</div>
-                    <p className="mt-1 text-sm text-muted-foreground">{stage.description}</p>
-                    {stage.outputs?.length ? (
-                      <ul className="mt-3 flex flex-wrap gap-2">
-                        {stage.outputs.map((output) => (
-                          <li
-                            key={output}
-                            className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-slate-300"
-                          >
-                            {output}
-                          </li>
-                        ))}
-                      </ul>
-                    ) : null}
-                  </li>
-                ))}
-              </ol>
-            </section>
-          ) : null}
-
-          {idealFor.length ? (
-            <section id="ideal" className="rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur">
-              <h2 className="mb-4 text-xl font-semibold text-white md:text-2xl">Ideal para</h2>
-              <ul className="grid grid-cols-1 gap-3 md:grid-cols-2">
-                {idealFor.map((item) => (
-                  <li key={item} className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-muted-foreground">
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </section>
-          ) : null}
-
-          {faqs.length ? (
-            <section id="faq" className="rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur">
-              <h2 className="mb-4 text-xl font-semibold text-white md:text-2xl">Preguntas frecuentes</h2>
-              <p className="mb-4 text-xs text-slate-400">Contenido revisado en septiembre de 2026.</p>
-              <div className="space-y-3">
-                {faqs.map((item) => (
-                  <article key={item.question} className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                    <h3 className="text-sm font-medium text-white">{item.question}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.answer}</p>
-                  </article>
-                ))}
-              </div>
-            </section>
-          ) : null}
-
-          {relatedProducts.length ? (
-            <section className="rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur">
-              <h2 className="mb-4 text-xl font-semibold text-white md:text-2xl">Otros productos de Yago</h2>
-              <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-                {relatedProducts.map((related) => (
-                  <Link
-                    key={related.slug}
-                    href={`/productos/${related.slug}`}
-                    className="group hover-lift rounded-2xl border border-white/10 bg-white/5 p-4 transition hover:border-white/10"
-                  >
-                    <div className="text-sm font-medium text-white">{related.name}</div>
-                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{related.tagline}</p>
-                    <div className="mt-3 text-xs text-slate-300">Ver detalle →</div>
-                  </Link>
-                ))}
-              </div>
-            </section>
-          ) : null}
-
-          <section className="flex flex-col gap-4 rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur md:flex-row md:items-start md:justify-between">
-            <div className="max-w-3xl text-muted-foreground">
-              <div className="font-semibold text-white">{p.closeCta?.title || `¿Listo para implementar ${p.name}?`}</div>
-              <p className="mt-2">
-                {p.closeCta?.text || "Te ayudamos a evaluar alcance, tiempos y el mejor plan de adopción para tu equipo."}
-              </p>
-            </div>
-            <div className="flex flex-wrap gap-3">
-              <a
-                href={mailHref}
-                className={`btn-vibrant inline-flex items-center rounded-xl px-4 py-2 plausible-event-name=Product+Contact plausible-event-method=email plausible-event-product=${p.slug} plausible-event-location=product_page`}
-              >
-                {p.closeCta?.primary || "Contactar por email"}
-              </a>
-              {waHref ? (
-                <a
-                  href={waHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`inline-flex items-center rounded-xl bg-white/10 px-4 py-2 text-white transition hover:bg-white/15 plausible-event-name=Product+Contact plausible-event-method=whatsapp plausible-event-product=${p.slug} plausible-event-location=product_page`}
-                >
-                  {p.closeCta?.secondary || "WhatsApp"}
-                </a>
-              ) : (
-                <span
-                  className="inline-flex cursor-not-allowed items-center rounded-xl border border-white/10 bg-slate-100 px-4 py-2 text-slate-400"
-                  title="Configura NEXT_PUBLIC_WHATSAPP_PHONE"
-                >
-                  {p.closeCta?.secondary || "WhatsApp"}
-                </span>
-              )}
-            </div>
-          </section>
+      {/* ---------------- QUÉ HACE + MÓDULOS ---------------- */}
+      <PageSection id="modulos" tone="light">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-10">
+          <div className="lg:col-span-5">
+            <ColumnHeader eyebrow="Qué hace" title="Lo que resuelve en tu equipo." description={p.details.description}>
+              {p.highlights.length ? <CheckList items={p.highlights} /> : null}
+            </ColumnHeader>
+          </div>
+          <div className="flex flex-col gap-5 lg:col-span-7">
+            <h3 className="font-mono text-[12px] uppercase tracking-[0.12em] text-slate-600">Módulos clave</h3>
+            <ListCard items={p.details.modules} numbered />
+          </div>
         </div>
-      </main>
+      </PageSection>
 
-      <BrandStamp />
-      <Footer />
-    </div>
+      {/* ---------------- IMPACTO + IDEAL PARA ---------------- */}
+      <PageSection id="impacto" tone="mist">
+        <SectionHeader
+          eyebrow="Impacto"
+          title="Lo que cambia en tu operación."
+          description={p.tagline}
+        />
+
+        <SpotlightGroup className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
+          {results.map((result, index) => (
+            <article key={result.title} className="y-spot y-card y-reveal flex flex-col gap-3 p-7">
+              <span className="font-mono text-[13px] text-sky-700">{String(index + 1).padStart(2, "0")}</span>
+              <h3 className="y-h3 mt-1 text-[1.2rem] text-slate-950">{result.title}</h3>
+              <p className="text-[15px] leading-relaxed text-slate-600">{result.description}</p>
+            </article>
+          ))}
+        </SpotlightGroup>
+
+        {idealFor.length ? (
+          <div id="ideal" className="mt-16 overflow-hidden rounded-[1.75rem] bg-[#0b1220] text-white shadow-[0_40px_80px_-40px_rgba(11,18,32,0.7)]">
+            <div className="flex flex-col gap-2 border-b border-white/[0.08] px-7 py-6 sm:px-9">
+              <span className="font-mono text-[12px] uppercase tracking-[0.12em] text-sky-300">Ideal para</span>
+              <h3 className="y-h3 text-[1.5rem] text-white">Dónde {p.name} rinde más.</h3>
+            </div>
+            <ul
+              className={`grid grid-cols-1 divide-y divide-white/[0.08] md:divide-x md:divide-y-0 ${
+                idealFor.length >= 3 ? "md:grid-cols-3" : idealFor.length === 2 ? "md:grid-cols-2" : ""
+              }`}
+            >
+              {idealFor.map((item) => (
+                <li key={item} className="flex gap-3 px-7 py-7 sm:px-9">
+                  <CircleCheck className="mt-0.5 h-5 w-5 shrink-0 text-sky-300" strokeWidth={1.8} aria-hidden="true" />
+                  <span className="min-w-0 text-[15.5px] leading-relaxed text-slate-200">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
+      </PageSection>
+
+      {/* ---------------- CÓMO FUNCIONA ---------------- */}
+      <PageSection id="implementacion" tone="dark">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-end">
+          <div className="flex flex-col gap-5 lg:col-span-7">
+            <span className="y-eyebrow">Cómo funciona</span>
+            <h2 className="y-h2 text-white">
+              {stages.length ? `Paso a paso, en ${countWord(stages.length)} etapas.` : "Cómo se pone en marcha."}
+            </h2>
+          </div>
+          <div className="flex flex-col gap-2 lg:col-span-4 lg:col-start-9">
+            <span className="font-mono text-[12px] uppercase tracking-[0.12em] text-slate-400">Puesta en marcha</span>
+            <p className="y-lead">{p.details.timeToValue}</p>
+          </div>
+        </div>
+
+        {stages.length ? (
+          <ol className={`mt-16 ${stepGridClass(stages.length)}`}>
+            {stages.map((stage, index) => (
+              <StepCard key={stage.name} index={index} title={stage.name} description={stage.description} chips={stage.outputs} />
+            ))}
+          </ol>
+        ) : null}
+
+        {integrations.length ? (
+          <div id="integraciones" className="mt-16 flex flex-col gap-5 border-t border-white/[0.08] pt-10 lg:flex-row lg:items-center">
+            <h3 className="shrink-0 text-[15px] font-medium leading-snug text-slate-300 lg:w-52">Integraciones frecuentes</h3>
+            <ChipList items={integrations} dark className="min-w-0 flex-1" />
+          </div>
+        ) : null}
+
+        {notes.length ? (
+          <ul className={`flex flex-col gap-2.5 ${integrations.length ? "mt-8" : "mt-16 border-t border-white/[0.08] pt-10"}`}>
+            {notes.map((note) => (
+              <li key={note} className="flex gap-2.5 text-[14.5px] leading-relaxed text-slate-400">
+                <Info className="mt-0.5 h-4 w-4 shrink-0 text-slate-400" strokeWidth={1.8} aria-hidden="true" />
+                {note}
+              </li>
+            ))}
+          </ul>
+        ) : null}
+      </PageSection>
+
+      {/* ---------------- PREGUNTAS ---------------- */}
+      {faqs.length ? (
+        <FaqSection
+          title={`Dudas comunes sobre ${p.name}.`}
+          items={faqs}
+          aside={
+            <div className="mt-2 flex flex-col items-start gap-3 rounded-2xl bg-mist p-5 text-[14.5px] leading-relaxed text-slate-600">
+              <p>Contenido revisado en septiembre de 2026.</p>
+              <WhatsAppLink label="Hacer otra pregunta" location="product_faq" />
+            </div>
+          }
+        />
+      ) : null}
+
+      {/* ---------------- OTROS PRODUCTOS ---------------- */}
+      {relatedProducts.length ? (
+        <PageSection id="otros-productos" tone="mist">
+          <SectionHeader
+            eyebrow="Más productos"
+            title="Otros productos de YAGO."
+            action={<TextLink href="/productos">Ver todos los productos</TextLink>}
+          />
+          <SpotlightGroup className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {relatedProducts.map((related) => (
+              <ImageLinkCard
+                key={related.slug}
+                href={`/productos/${related.slug}`}
+                image={`/images/product_${related.slug}.png`}
+                tag={HOME_AGENTS.find((agent) => agent.href === `/productos/${related.slug}`)?.tag}
+                title={related.name}
+                description={related.tagline}
+                meta={related.badge && related.badge !== "—" ? related.badge : undefined}
+                className={`plausible-event-name=Product+More+Info plausible-event-product=${related.slug} plausible-event-location=product_related`}
+              />
+            ))}
+          </SpotlightGroup>
+        </PageSection>
+      ) : null}
+
+      {/* ---------------- CIERRE ---------------- */}
+      <CtaBand
+        title={p.closeCta?.title || `¿Listo para implementar ${p.name}?`}
+        text={p.closeCta?.text || "Te ayudamos a evaluar alcance, tiempos y el mejor plan de adopción para tu equipo."}
+        primary={{
+          label: p.closeCta?.primary || "Contactar por email",
+          href: mailHref,
+          event: `plausible-event-name=Product+Contact plausible-event-method=email plausible-event-product=${p.slug} plausible-event-location=product_page`,
+        }}
+        secondary={{
+          label: p.closeCta?.secondary || "WhatsApp",
+          href: waHref,
+          event: `plausible-event-name=Product+Contact plausible-event-method=whatsapp plausible-event-product=${p.slug} plausible-event-location=product_page`,
+        }}
+      />
+    </PageShell>
   );
 }

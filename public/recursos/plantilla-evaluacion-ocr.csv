@@ -1,0 +1,4 @@
+documento_id;tipo_documento;campo;valor_esperado;valor_extraido;coincide;requiere_revision;segundos_revision;observacion
+DOC-001;Factura;Folio;;;;;;
+DOC-001;Factura;Monto total;;;;;;
+DOC-002;Contrato;Fecha;;;;;;

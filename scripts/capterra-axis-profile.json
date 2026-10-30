@@ -1,0 +1,102 @@
+{
+  "product": {
+    "publicName": "AXIS",
+    "disambiguatedName": "AXIS by YAGO",
+    "website": "https://yago.cl/axis",
+    "language": "Spanish",
+    "market": "Chile",
+    "deployment": "Web-based / Cloud",
+    "shortDescriptionEs": "AXIS automatiza consultas de causas penales públicas del PJUD de Chile, con carga individual o por lote, reportes, evidencia y monitoreo diario.",
+    "descriptionEs": "AXIS es un software de Yago SpA para consultar causas penales públicas del Poder Judicial de Chile (PJUD). Permite cargar personas individualmente o por lote, revisar coincidencias mediante búsqueda semántica y verificar los resultados contra fuentes públicas. Entrega resultados estructurados, historial y evidencia de las consultas, y seguimiento diario de personas seleccionadas. Está dirigido a equipos de RRHH, operaciones, control interno y cumplimiento que necesitan organizar revisiones a volumen. Su alcance publicado se centra en causas penales públicas de Chile; no se presenta como un certificado oficial de antecedentes ni como una consulta de todos los registros judiciales. Se contrata con suscripción mensual por créditos, sin cobro inicial.",
+    "shortDescriptionEn": "AXIS automates Chilean public criminal court case checks with individual or batch queries, structured reports, evidence and daily monitoring.",
+    "descriptionEn": "AXIS is web-based software by Yago SpA for checking publicly available criminal court cases from Chile's Judicial Branch (PJUD). Teams can submit individual or batch queries, review semantic search matches and verify results against public sources. The product provides structured results, query history, evidence and daily monitoring for selected people. It supports HR, operations, internal control and compliance teams handling recurring or high-volume reviews. Its published scope is public criminal court case information in Chile; it is not presented as an official criminal record certificate or coverage of every judicial record. AXIS uses a monthly credit-based subscription with no initial setup charge.",
+    "categoryCandidates": [
+      {
+        "name": "Background Check",
+        "status": "Propuesta pendiente de revisar en el catálogo y con el equipo de Capterra",
+        "reason": "Consulta de causas públicas sobre personas, con uso en revisiones de postulantes y control interno"
+      },
+      {
+        "name": "Compliance",
+        "status": "Alternativa a evaluar solo si la definición del catálogo coincide con el alcance real",
+        "reason": "Evidencia y seguimiento para procesos internos de revisión"
+      }
+    ],
+    "publishedFeatures": [
+      "Portal web multiusuario",
+      "Consulta individual y por lote",
+      "Búsqueda semántica en base histórica",
+      "Verificación contra fuentes públicas PJUD",
+      "Reportes y resultados estructurados",
+      "Historial y evidencia de consultas",
+      "Monitoreo diario de personas seleccionadas",
+      "Alertas según el proceso publicado"
+    ],
+    "pricing": {
+      "model": "Suscripción mensual por créditos",
+      "startingPriceUfExcludingVat": 22.13397053,
+      "startingPriceDisplay": "Desde 22,13 UF + IVA al mes",
+      "includedCredits": 2000,
+      "unit": "Un crédito equivale a una persona revisada; monitoreo diario de personas seleccionadas incluido",
+      "setupFee": "Sin cobro inicial según la oferta publicada",
+      "freeVersion": null,
+      "freeTrial": null,
+      "note": "Confirmar campos del portal. No sustituir UF por USD ni afirmar precio por usuario. La ausencia de cobro inicial no equivale a una prueba gratuita."
+    }
+  },
+  "vendor": {
+    "name": "YAGO",
+    "legalName": "Yago SpA",
+    "website": "https://yago.cl",
+    "country": "Chile",
+    "contactName": "Nicolas Yarur",
+    "contactEmail": "nicolas.yarur.g@yago.cl",
+    "phone": "+56963930231",
+    "linkedin": "https://www.linkedin.com/company/yago-spa",
+    "logo": "https://yago.cl/logo-yago.png",
+    "foundedYear": null,
+    "contactJobTitle": null
+  },
+  "submission": {
+    "status": "paused_by_owner",
+    "pause": {
+      "date": "2026-10-21",
+      "lastObservedStatus": "screenshots_step_not_submitted",
+      "reason": "El propietario indicó que el portal comenzó a pedir cosas que no desea completar ahora y pidió investigar open-seo en GitHub. No se confirmó envío del registro."
+    },
+    "officialRegistrationUrl": "https://www.capterra.com/vendors/sign-up",
+    "currentRegistrationUrl": "https://www.g2.com/add_product_requests/new",
+    "registrationType": "Software",
+    "screenshotsStep": {
+      "observedFields": ["Upload Screenshots", "Title", "Description"],
+      "required": null,
+      "note": "La captura no muestra asterisco de obligatoriedad y Next: Contact Information aparece habilitado. No se confirma que el servidor permita omitir capturas hasta avanzar.",
+      "assetsAvailable": false,
+      "sourceRequirement": "Capturas reales de AXIS con datos de prueba o anonimizados; no usar maquetas comerciales como si fueran pantallas reales."
+    },
+    "urlVerification": {
+      "status": "accepted_after_owner_used_pricing_url",
+      "submittedVisibleUrl": "https://yago.cl/axis",
+      "portalError": "Oops, that URL is not valid, please try again",
+      "publicCheck": "La URL canónica respondió 200 sin redirección, con título de AXIS y contenido del producto.",
+      "resolution": "El propietario confirmó que pudo continuar al usar la URL de pricing. El valor exacto de esa URL no aparece en la captura y no se inventa.",
+      "acceptedPricingUrl": null,
+      "nextAction": "Completar Product Name, Vendor Domain, Vendor Name, LinkedIn Company Page URL, Description of Product y logo si corresponde.",
+      "verifiedAlias": "https://www.yago.cl/axis",
+      "aliasBehavior": "301 a https://yago.cl/axis, seguido de 200"
+    },
+    "marketplacesNamedInRegistration": ["G2", "Capterra", "GetApp", "Software Advice"],
+    "flowEvidence": "Captura del propietario muestra Get listed on G2 Marketplaces y nombra expresamente Capterra. La consulta pública del acceso de vendedores confirma ese alcance. Publicación sujeta a aprobación.",
+    "existingListing": null,
+    "reviewUrl": null,
+    "paidCampaignAuthorized": false,
+    "unknownRequiredFields": [
+      "Categoría aceptada y elegibilidad del producto",
+      "Existencia de una ficha previa bajo otra denominación",
+      "Capturas reales del producto con datos ficticios o anonimizados",
+      "Logo de producto si es obligatorio",
+      "Prueba gratuita o versión gratuita, si el formulario exige respuesta",
+      "Datos societarios adicionales solo si el portal los exige"
+    ]
+  }
+}

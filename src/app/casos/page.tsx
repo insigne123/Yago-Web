@@ -1,10 +1,12 @@
-import Link from "next/link";
-import { ArrowRight, ChartNoAxesColumnIncreasing, CheckCircle2, ClipboardCheck, Search } from "lucide-react";
-import { Navbar } from "@/components/landing/Navbar";
-import { Footer } from "@/components/landing/Footer";
-import { BrandStamp } from "@/components/BrandStamp";
-import { caseStudies, PRIMARY_CTA } from "@/config/site";
+import { ArrowRight } from "lucide-react";
+import { CaseSpotlight } from "@/components/cases/CaseSpotlight";
+import { ActionLink, BOOKING_ACTION, CtaBand, IconTile, PageHero, PageSection, PageShell, SectionHeader, TextLink } from "@/components/site/PageKit";
+import { CASE_METHOD, CASE_SCENARIOS } from "@/config/casos";
+import { FEATURED_CASE } from "@/config/home";
 import { createPageMetadata } from "@/lib/seo";
+import { getPublishedCaseStudies } from "@/config/evidence";
+import { CaseStudyCard } from "@/components/cases/CaseStudyCard";
+import { Testimonials } from "@/components/cases/Testimonials";
 
 export const metadata = createPageMetadata({
   title: "Casos y metodología de automatización empresarial | YAGO",
@@ -13,119 +15,117 @@ export const metadata = createPageMetadata({
   path: "/casos",
 });
 
-const method = [
-  {
-    title: "Línea base",
-    description: "Medimos volumen, tiempo manual, errores, esperas y responsables antes de automatizar.",
-    icon: Search,
-  },
-  {
-    title: "Alcance verificable",
-    description: "Acordamos qué hará el flujo, qué seguirá revisando una persona y cómo se manejarán las excepciones.",
-    icon: ClipboardCheck,
-  },
-  {
-    title: "Validación operativa",
-    description: "Probamos con datos y usuarios del proceso antes de considerar terminada la implementación.",
-    icon: CheckCircle2,
-  },
-  {
-    title: "Resultado comparable",
-    description: "Comparamos la operación contra la línea base y documentamos el método de cálculo.",
-    icon: ChartNoAxesColumnIncreasing,
-  },
-];
+/* Nota: en esta página no se usa `y-reveal`, para que el control de contraste (axe) vea todo el texto con opacidad completa. */
 
 export default function CasesPage() {
+  const published = getPublishedCaseStudies();
   return (
-    <div className="relative min-h-screen overflow-x-clip text-white">
-      <Navbar ctaHref={PRIMARY_CTA.href} ctaLabel={PRIMARY_CTA.label} />
-      <main id="main-content" className="main-premium pb-24 pt-20 md:pt-24">
-        <div className="mx-auto max-w-7xl px-4">
-          <section className="max-w-4xl">
-            <p className="text-xs uppercase tracking-[0.22em] text-sky-300">Casos y evidencia</p>
-            <h1 className="mt-4 text-balance font-headline text-4xl font-semibold text-white md:text-6xl">
-              Un caso útil muestra qué cambió y cómo se midió.
-            </h1>
-            <p className="mt-5 max-w-3xl text-base leading-relaxed text-slate-300 md:text-lg">
-              YAGO no publica cifras sin contexto. Esta es la metodología que usamos para convertir una mejora operativa
-              en evidencia comparable y preparar casos públicos cuando existe autorización del cliente.
-            </p>
-          </section>
+    <PageShell>
+      {/* ---------------- HERO ---------------- */}
+      <PageHero
+        eyebrow="Casos y evidencia"
+        title="Un caso útil muestra qué cambió"
+        highlight="y cómo se midió."
+        description="YAGO no publica cifras sin contexto. Esta es la metodología que usamos para convertir una mejora operativa en evidencia comparable y preparar casos públicos cuando existe autorización del cliente."
+        actions={
+          <>
+            <ActionLink action={BOOKING_ACTION} arrow />
+            <ActionLink action={{ label: "Ver la metodología", href: "#metodologia" }} variant="glass" />
+          </>
+        }
+      >
+        <ol
+          aria-label="Etapas de la medición"
+          className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-2 border-t border-white/[0.08] pt-6 font-mono text-[12.5px] uppercase tracking-[0.1em] text-slate-400"
+        >
+          {CASE_METHOD.map((step, index) => (
+            <li key={step.title} className="inline-flex items-center gap-3">
+              <span>
+                <span className="text-sky-300">{String(index + 1).padStart(2, "0")}</span> {step.title}
+              </span>
+              {index < CASE_METHOD.length - 1 ? <ArrowRight className="h-3.5 w-3.5 text-slate-400" aria-hidden="true" /> : null}
+            </li>
+          ))}
+        </ol>
+      </PageHero>
 
-          <section aria-labelledby="metodologia-casos" className="mt-12">
-            <h2 id="metodologia-casos" className="text-3xl font-semibold text-white md:text-4xl">
-              Metodología de medición
-            </h2>
-            <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-              {method.map((step, index) => {
-                const Icon = step.icon;
-                return (
-                  <article key={step.title} className="rounded-[1.6rem] border border-white/10 bg-white/[0.05] p-5">
-                    <div className="flex items-center justify-between gap-3">
-                      <span className="text-xs font-semibold uppercase tracking-[0.16em] text-sky-300">Paso {index + 1}</span>
-                      <Icon className="size-5 text-slate-300" aria-hidden="true" />
-                    </div>
-                    <h3 className="mt-5 text-xl font-semibold text-white">{step.title}</h3>
-                    <p className="mt-3 text-sm leading-relaxed text-slate-300">{step.description}</p>
-                  </article>
-                );
-              })}
-            </div>
-          </section>
+      {published.length ? (
+        <PageSection id="casos-publicados" tone="light">
+          <SectionHeader eyebrow="Implementaciones" title="Casos con resultado y método de medición." />
+          <div className="mt-10 grid gap-5 md:grid-cols-2">{published.map((item) => <CaseStudyCard key={item.slug} item={item} />)}</div>
+        </PageSection>
+      ) : null}
 
-          <section aria-labelledby="escenarios" className="mt-16">
-            <div className="max-w-3xl">
-              <p className="text-xs uppercase tracking-[0.18em] text-sky-300">Escenarios de referencia</p>
-              <h2 id="escenarios" className="mt-3 text-3xl font-semibold text-white md:text-4xl">
-                Procesos donde evaluamos automatización con frecuencia
-              </h2>
-              <p className="mt-4 text-sm leading-relaxed text-slate-300 md:text-base">
-                Estos bloques describen patrones operativos, no testimonios ni resultados atribuidos a un cliente específico.
-              </p>
-            </div>
-
-            <div className="mt-7 grid gap-5 lg:grid-cols-3">
-              {caseStudies.map((item) => (
-                <article key={item.title} className="rounded-[1.75rem] border border-white/10 bg-white/[0.05] p-6">
-                  <p className="text-xs uppercase tracking-[0.18em] text-sky-300">{item.company}</p>
-                  <h3 className="mt-3 text-2xl font-semibold text-white">{item.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-300">{item.description}</p>
-                  <ul className="mt-5 space-y-3">
-                    {item.stats.map((stat) => {
-                      const Icon = stat.icon;
-                      return (
-                        <li key={stat.text} className="flex items-start gap-3 text-sm leading-relaxed text-slate-300">
-                          <Icon className="mt-0.5 size-4 shrink-0 text-sky-300" aria-hidden="true" />
-                          <span>{stat.text}</span>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </article>
-              ))}
-            </div>
-          </section>
-
-          <section className="mt-16 rounded-[2rem] bg-slate-950 px-6 py-9 text-white md:px-10 md:py-11">
-            <p className="text-xs uppercase tracking-[0.18em] text-sky-200">Próximo paso</p>
-            <div className="mt-3 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-              <div className="max-w-3xl">
-                <h2 className="text-3xl font-semibold md:text-4xl">Construyamos la línea base de tu proceso.</h2>
-                <p className="mt-4 text-sm leading-relaxed text-slate-300 md:text-base">
-                  Revisamos el flujo actual y definimos qué medir antes de recomendar una implementación.
-                </p>
+      {/* ---------------- METODOLOGÍA ---------------- */}
+      <PageSection id="metodologia" tone="light">
+        <SectionHeader
+          eyebrow="Metodología"
+          title="Metodología de medición."
+          description="Antes de automatizar definimos qué se va a medir; al terminar, comparamos contra ese punto de partida."
+        />
+        <ol className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
+          {CASE_METHOD.map((step, index) => (
+            <li key={step.title} className="y-card flex flex-col gap-4 p-7">
+              <div className="flex items-center justify-between gap-3">
+                <span className="font-mono text-[12px] uppercase tracking-[0.12em] text-sky-700">
+                  Paso {String(index + 1).padStart(2, "0")}
+                </span>
+                <IconTile icon={step.icon} />
               </div>
-              <Link href="/#contacto" className="inline-flex shrink-0 items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-[#070b13]">
-                Solicitar diagnóstico
-                <ArrowRight className="size-4" aria-hidden="true" />
-              </Link>
-            </div>
-          </section>
+              <h3 className="y-h3 mt-2 text-[1.3rem] text-slate-950">{step.title}</h3>
+              <p className="text-[15px] leading-relaxed text-slate-600">{step.description}</p>
+            </li>
+          ))}
+        </ol>
+      </PageSection>
+
+      {/* ---------------- ESCENARIOS ---------------- */}
+      <PageSection id="escenarios" tone="mist">
+        <SectionHeader
+          eyebrow="Escenarios de referencia"
+          title="Procesos donde evaluamos automatización con frecuencia."
+          description="Estos bloques describen patrones operativos, no testimonios ni resultados atribuidos a un cliente específico."
+        />
+        <div className="mt-14 grid grid-cols-1 gap-5 lg:grid-cols-3">
+          {CASE_SCENARIOS.map((item) => (
+            <article key={item.title} className="y-card flex flex-col gap-4 p-7 sm:p-8">
+              <span className="font-mono text-[11.5px] uppercase tracking-[0.12em] text-sky-700">{item.area}</span>
+              <h3 className="y-h3 text-[1.35rem] text-slate-950">{item.title}</h3>
+              <p className="text-[15.5px] leading-relaxed text-slate-600">{item.description}</p>
+              <ul className="mt-1 flex flex-col gap-3 border-t border-slate-200/80 pt-5">
+                {item.stats.map((stat) => {
+                  const Icon = stat.icon;
+                  return (
+                    <li key={stat.text} className="flex gap-3 text-[15px] leading-snug text-slate-700">
+                      <Icon className="mt-0.5 h-4 w-4 shrink-0 text-sky-600" strokeWidth={1.9} aria-hidden="true" />
+                      {stat.text}
+                    </li>
+                  );
+                })}
+              </ul>
+              <div className="mt-auto pt-3">
+                <TextLink href={item.related.href}>{item.related.label}</TextLink>
+              </div>
+            </article>
+          ))}
         </div>
-      </main>
-      <BrandStamp />
-      <Footer />
-    </div>
+      </PageSection>
+
+      {/* ---------------- FORMATO DE CASO PUBLICADO ---------------- */}
+      {!FEATURED_CASE.placeholder && !published.length ? (
+        <PageSection id="caso-destacado" tone="light">
+          <SectionHeader eyebrow="Caso destacado" title="Resultados medidos antes y después de automatizar." />
+          <div className="mt-14"><CaseSpotlight /></div>
+        </PageSection>
+      ) : null}
+      <Testimonials />
+
+      {/* ---------------- CIERRE ---------------- */}
+      <CtaBand
+        eyebrow="Próximo paso"
+        title="Construyamos la línea base de tu proceso."
+        text="Revisamos el flujo actual y definimos qué medir antes de recomendar una implementación."
+      />
+    </PageShell>
   );
 }

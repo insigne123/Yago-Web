@@ -27,6 +27,27 @@ env:
     availability:
       - BUILD
       - RUNTIME
+  - variable: NEXT_PUBLIC_GA_MEASUREMENT_ID
+    value: "G-DSNXKXMCKX"
+    availability:
+      - BUILD
+      - RUNTIME
+  - variable: RESEND_FROM
+    value: "YAGO <no-reply@yago.cl>"
+    availability:
+      - RUNTIME
+  - variable: RESEND_API_KEY
+    secret: RESEND_API_KEY@1
+    availability:
+      - RUNTIME
+  - variable: RESEND_MAIL_NOTIFY_WEBHOOK_SECRET
+    secret: RESEND_MAIL_NOTIFY_WEBHOOK_SECRET@1
+    availability:
+      - RUNTIME
+  - variable: MAIL_NOTIFY_TO
+    value: "nicolas.yarur.g@yago.cl"
+    availability:
+      - RUNTIME
   - variable: CONTACT_TO
     value: "nicolas.yarur.g@yago.cl"
     availability:

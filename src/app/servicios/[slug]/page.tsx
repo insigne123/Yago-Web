@@ -1,19 +1,37 @@
 import { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, CheckCircle2, Clock } from "lucide-react";
-import { getServiceBySlug, SERVICES } from "@/config/services";
-import { Navbar } from "@/components/landing/Navbar";
-import { Footer } from "@/components/landing/Footer";
+import { Clock3, Info } from "lucide-react";
+import { getServiceBySlug, SERVICES, type Service } from "@/config/services";
+import { ChipList, ColumnHeader, ImageLinkCard, ListCard, stepGridClass } from "@/components/catalog/CatalogKit";
+import { DetailHeroAside, contactLinks, countWord } from "@/components/catalog/DetailKit";
+import { SpotlightGroup } from "@/components/home/SpotlightGroup";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { createPageMetadata } from "@/lib/seo";
-
-const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "contacto@yago.cl";
-const WHATSAPP_PHONE = process.env.NEXT_PUBLIC_WHATSAPP_PHONE || "";
+import { Testimonials } from "@/components/cases/Testimonials";
+import { RelatedCases } from "@/components/cases/RelatedCases";
+import { ServiceFlowExample } from "@/components/services/ServiceFlowExample";
+import {
+  ActionLink,
+  CtaBand,
+  FaqSection,
+  PageHero,
+  PageSection,
+  PageShell,
+  SectionHeader,
+  StepCard,
+  TextLink,
+  WhatsAppLink,
+} from "@/components/site/PageKit";
+import { ENTITY, formatUpdated } from "@/config/entity";
+import { PRIMARY_CTA, getDiagnosticHref } from "@/config/site";
+import { createPageMetadata, SITE_URL } from "@/lib/seo";
 
 type PageProps = { params: Promise<{ slug: string }> };
+
+/** "Capacitación de equipos en IA" -> "capacitación de equipos en IA" (conserva siglas). */
+function lowerFirst(text: string) {
+  return text.charAt(0).toLowerCase() + text.slice(1);
+}
 
 export function generateStaticParams() {
   return SERVICES.map((s) => ({ slug: s.slug }));
@@ -37,31 +55,46 @@ export default async function ServicePage({ params }: PageProps) {
   const svc = getServiceBySlug(slug);
   if (!svc) notFound();
 
-  const baseMsg = `Hola YAGO, me interesa el servicio: ${svc.title}. ¿Podemos agendar una conversación?`;
-  const waHref = WHATSAPP_PHONE
-    ? `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(baseMsg)}`
-    : undefined;
-  const mailHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
-    `Interés en ${svc.title}`
-  )}&body=${encodeURIComponent(baseMsg)}`;
+  const { waHref } = contactLinks({
+    subject: `Interés en ${svc.title}`,
+    message: `Hola YAGO, me interesa el servicio: ${svc.title}. ¿Podemos agendar una conversación?`,
+  });
 
   const heading = svc.pageTitle || svc.title;
   const subtitle = svc.pageSubtitle || svc.short;
-  const primaryLabel = svc.ctaPrimary || "Solicitar demo";
+  const primaryAction = {
+    label: svc.ctaPrimary || PRIMARY_CTA.label,
+    href: getDiagnosticHref(svc.slug),
+    event: `plausible-event-name=Service+CTA+Primary plausible-event-service=${svc.slug} plausible-event-location=service_page`,
+  };
+  const secondaryLabel = svc.ctaSecondary || "Ver etapas";
+  const faqs = svc.faq || [];
+  const stack = svc.stack ?? [];
+  const notes = svc.notes ?? [];
+  const relatedServices = svc.relatedServiceSlugs
+    ? svc.relatedServiceSlugs.map(getServiceBySlug).filter((service): service is Service => service !== undefined && service.slug !== svc.slug)
+    : SERVICES.filter((s) => s.slug !== svc.slug).slice(0, 3);
+  const reviewedDate = svc.modifiedDate || ENTITY.contentUpdated;
+
   const serviceJsonLd = {
     "@context": "https://schema.org",
     "@type": "Service",
-    "@id": `https://yago.cl/servicios/${svc.slug}#service`,
+    "@id": `${SITE_URL}/servicios/${svc.slug}#service`,
     name: svc.title,
-    description: svc.seoDescription || subtitle,
-    url: `https://yago.cl/servicios/${svc.slug}`,
-    areaServed: "Chile",
-    provider: { "@id": "https://yago.cl/#organization" },
+    serviceType: svc.title,
+    description: svc.definition || svc.seoDescription || subtitle,
+    url: `${SITE_URL}/servicios/${svc.slug}`,
+    image: `${SITE_URL}${svc.image}`,
+    areaServed: { "@type": "Country", name: "Chile" },
+    inLanguage: "es-CL",
+    dateModified: reviewedDate,
+    ...(svc.audience ? { audience: { "@type": "BusinessAudience", audienceType: svc.audience } } : {}),
+    provider: { "@id": `${SITE_URL}/#organization` },
   };
   const faqJsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: (svc.faq || []).map((item) => ({
+    mainEntity: faqs.map((item) => ({
       "@type": "Question",
       name: item.question,
       acceptedAnswer: { "@type": "Answer", text: item.answer },
@@ -69,216 +102,216 @@ export default async function ServicePage({ params }: PageProps) {
   };
 
   return (
-    <div className="relative min-h-screen overflow-x-clip text-white">
+    <PageShell>
       <JsonLd id={`jsonld-service-${svc.slug}`} data={serviceJsonLd} />
-      {svc.faq?.length ? <JsonLd id={`jsonld-service-faq-${svc.slug}`} data={faqJsonLd} /> : null}
-      <Navbar ctaHref="/#contacto" ctaLabel="Pedir analisis" />
-      <main id="main-content" className="main-premium pb-24 pt-28 md:pt-32">
-        <div className="mx-auto max-w-6xl space-y-14 px-4">
-          <Breadcrumbs items={[{ name: "Inicio", href: "/" }, { name: "Servicios", href: "/servicios" }, { name: svc.title, href: `/servicios/${svc.slug}` }]} />
-          {/* Hero */}
-          <section className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
-            <div>
-              <Link
-                href="/servicios"
-                className="inline-flex items-center gap-2 text-sm text-slate-300 transition hover:text-white"
-              >
-                <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-                Todos los servicios
-              </Link>
+      {faqs.length ? <JsonLd id={`jsonld-service-faq-${svc.slug}`} data={faqJsonLd} /> : null}
 
-              <h1 className="mt-5 text-balance font-headline text-4xl font-semibold text-white md:text-5xl">
-                {heading}
-              </h1>
-              <p className="mt-4 max-w-xl text-pretty text-lg leading-relaxed text-slate-300">
-                {subtitle}
-              </p>
-
-              <div className="mt-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-slate-200">
-                <Clock className="h-4 w-4 text-sky-300" aria-hidden="true" />
-                {svc.duration}
+      {/* ---------------- HERO ---------------- */}
+      <PageHero
+        top={
+          <Breadcrumbs
+            items={[
+              { name: "Inicio", href: "/" },
+              { name: "Servicios", href: "/servicios" },
+              { name: svc.title, href: `/servicios/${svc.slug}` },
+            ]}
+          />
+        }
+        eyebrow="Servicio a medida"
+        title={heading}
+        description={subtitle}
+        actions={
+          <>
+            <ActionLink action={primaryAction} arrow />
+            <a href="#como-funciona" className="y-btn y-btn-glass">
+              {secondaryLabel}
+            </a>
+          </>
+        }
+        aside={
+          <DetailHeroAside
+            src={svc.image}
+            alt={svc.imageAlt || `Ilustración del servicio ${svc.title}`}
+            card={
+              <div className="flex items-start gap-3.5 px-5 py-4 sm:px-6 sm:py-5">
+                <Clock3 className="mt-0.5 h-5 w-5 shrink-0 text-sky-300" strokeWidth={1.8} aria-hidden="true" />
+                <p className="flex min-w-0 flex-col gap-1">
+                  <span className="font-mono text-[11.5px] uppercase tracking-[0.12em] text-slate-400">Tiempo típico</span>
+                  <span className="text-[15px] leading-snug text-white">{svc.duration}</span>
+                </p>
               </div>
+            }
+          />
+        }
+      >
+        {svc.supportPoints?.length ? <ChipList items={svc.supportPoints} dark className="mt-2 max-w-xl" /> : null}
+      </PageHero>
 
-              {svc.stack && svc.stack.length > 0 && (
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {svc.stack.map((t) => (
-                    <span
-                      key={t}
-                      className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-xs text-slate-300"
-                    >
-                      {t}
-                    </span>
+      {svc.definition ? (
+        <PageSection id="resumen" tone="mist">
+          <SectionHeader eyebrow="En resumen" title={svc.title} description={svc.definition} />
+          <dl className="mt-10 grid gap-6 sm:grid-cols-3">
+            {[
+              { label: "Para quién", value: svc.audience || "Empresas en Chile" },
+              { label: "Implementación", value: svc.approach || "Diagnóstico, alcance, piloto y validación" },
+              { label: "Precio", value: svc.pricing || "Cotización según alcance, integraciones y operación" },
+              ...(svc.workflow ? [
+                { label: "Entrada", value: svc.workflow.input },
+                { label: "Salida", value: svc.workflow.output },
+                { label: "Conexiones", value: svc.workflow.connections },
+              ] : []),
+            ].map((fact) => (
+              <div key={fact.label} className="border-t border-slate-300 pt-4">
+                <dt className="font-mono text-xs uppercase tracking-wider text-slate-600">{fact.label}</dt>
+                <dd className="mt-2 text-[16px] leading-relaxed text-slate-900">{fact.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </PageSection>
+      ) : null}
+
+      {svc.useCases?.length ? (
+        <PageSection id="aplicaciones" tone="light">
+          <SectionHeader eyebrow="Ejemplos de aplicación" title="Qué podemos implementar en tu operación." description="El diagnóstico define qué ejemplo encaja con tus sistemas, datos y objetivos." />
+          <div className="mt-10 grid gap-5 md:grid-cols-3">
+            {svc.useCases.map((item) => (
+              <article key={item.title} className="y-card flex flex-col gap-3 p-7">
+                <h3 className="y-h3 text-[1.3rem] text-slate-950">{item.title}</h3>
+                <p className="text-[15.5px] leading-relaxed text-slate-600">{item.description}</p>
+              </article>
+            ))}
+          </div>
+        </PageSection>
+      ) : null}
+
+      {svc.workflow ? <ServiceFlowExample workflow={svc.workflow} /> : null}
+
+      {/* ---------------- ENTREGABLES ---------------- */}
+      <PageSection id="entregables" tone="light">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-10">
+          <div className="lg:col-span-5">
+            <ColumnHeader eyebrow="Entregables" title="Qué te llevas." description="Lo que queda en manos de tu equipo al cerrar el proyecto." />
+          </div>
+          <div className="flex flex-col gap-6 lg:col-span-7">
+            <ListCard items={svc.deliverables} />
+            {notes.length ? (
+              <div className="flex flex-col gap-3 rounded-2xl bg-mist p-6 sm:px-8">
+                <h3 className="font-mono text-[12px] uppercase tracking-[0.12em] text-slate-600">A considerar</h3>
+                <ul className="flex flex-col gap-2.5">
+                  {notes.map((note) => (
+                    <li key={note} className="flex gap-2.5 text-[15px] leading-relaxed text-slate-700">
+                      <Info className="mt-1 h-4 w-4 shrink-0 text-sky-700" strokeWidth={1.8} aria-hidden="true" />
+                      {note}
+                    </li>
                   ))}
-                </div>
-              )}
-
-              <div className="mt-8 flex flex-wrap gap-3">
-                <a
-                  href={mailHref}
-                  className={`btn-vibrant inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium plausible-event-name=Service+CTA+Primary plausible-event-service=${svc.slug} plausible-event-location=service_page`}
-                >
-                  {primaryLabel}
-                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                </a>
-                <a
-                  href="#como-funciona"
-                  className="inline-flex items-center rounded-full border border-white/10 bg-white/[0.03] px-6 py-3 text-sm text-white transition hover:bg-white/10"
-                >
-                  Ver etapas
-                </a>
+                </ul>
               </div>
-            </div>
-
-            <div className="card-glow-border relative overflow-hidden rounded-[2rem] border border-white/10 shadow-[0_30px_100px_rgba(0,0,0,0.14)]">
-              <Image
-                src={svc.image || "/placeholder.svg"}
-                alt={`Ilustración del servicio ${svc.title}`}
-                width={720}
-                height={540}
-                priority
-                className="h-auto w-full object-cover"
-              />
-            </div>
-          </section>
-
-          {/* Timeline de etapas */}
-          <section id="como-funciona">
-            <h2 className="text-balance text-3xl font-semibold text-white md:text-4xl">
-              Cómo funciona
-            </h2>
-            <div className="relative mt-10 space-y-8 border-l border-white/10 pl-8 md:pl-10">
-              {svc.stages.map((st, i) => (
-                <div key={st.name} className="relative">
-                  <span
-                    className="absolute -left-[2.55rem] flex size-9 items-center justify-center rounded-full border border-sky-300/30 bg-white/10 text-sm font-semibold text-sky-300 md:-left-[3.05rem]"
-                    aria-hidden="true"
-                  >
-                    {i + 1}
-                  </span>
-                  <div className="hover-lift rounded-[1.5rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-6">
-                    <h3 className="text-xl font-semibold text-white">{st.name}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-slate-300">{st.description}</p>
-                    {st.outputs && st.outputs.length > 0 && (
-                      <ul className="mt-4 flex flex-wrap gap-2">
-                        {st.outputs.map((o) => (
-                          <li
-                            key={o}
-                            className="rounded-full border border-sky-300/20 bg-sky-400/10 px-3 py-1 text-xs text-sky-300"
-                          >
-                            {o}
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* Entregables */}
-          <section id="entregables">
-            <h2 className="text-balance text-3xl font-semibold text-white md:text-4xl">
-              Qué te llevas
-            </h2>
-            <ul className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2">
-              {svc.deliverables.map((d) => (
-                <li
-                  key={d}
-                  className="flex items-start gap-3 rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-5"
-                >
-                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-sky-300" aria-hidden="true" />
-                  <span className="text-sm leading-relaxed text-slate-200">{d}</span>
-                </li>
-              ))}
-            </ul>
-            {svc.notes && svc.notes.length > 0 && (
-              <div className="mt-5 space-y-1 text-sm text-slate-300">
-                {svc.notes.map((n) => (
-                  <p key={n}>{n}</p>
-                ))}
-              </div>
-            )}
-          </section>
-
-          {/* FAQ opcional */}
-          {svc.faq && svc.faq.length > 0 && (
-            <section id="faq">
-              <h2 className="text-balance text-3xl font-semibold text-white md:text-4xl">
-                Preguntas frecuentes
-              </h2>
-              <p className="mt-2 text-xs text-slate-400">Contenido revisado en septiembre de 2026.</p>
-              <div className="mt-8 space-y-3">
-                {svc.faq.map((item) => (
-                  <article
-                    key={item.question}
-                    className="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-5"
-                  >
-                    <h3 className="text-sm font-medium text-white">{item.question}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-slate-300">{item.answer}</p>
-                  </article>
-                ))}
-              </div>
-            </section>
-          )}
-
-          {/* Otros servicios */}
-          <section aria-label="Otros servicios">
-            <h2 className="text-balance text-3xl font-semibold text-white md:text-4xl">
-              Otros servicios
-            </h2>
-            <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
-              {SERVICES.filter((s) => s.slug !== svc.slug)
-                .slice(0, 3)
-                .map((rel) => (
-                  <Link
-                    key={rel.slug}
-                    href={`/servicios/${rel.slug}`}
-                    className="group rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-5 transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-200/70"
-                    aria-label={`Ver servicio: ${rel.title}`}
-                  >
-                    <div className="text-base font-semibold text-white">{rel.title}</div>
-                    <p className="mt-2 text-sm leading-relaxed text-slate-300">{rel.short}</p>
-                    <span className="mt-3 inline-flex items-center gap-2 text-sm font-medium text-sky-300">
-                      Ver detalle
-                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
-                    </span>
-                  </Link>
-                ))}
-            </div>
-          </section>
-
-          {/* CTA final */}
-          <section className="card-glow-border flex flex-col items-center gap-4 rounded-[2rem] border border-white/10 bg-[linear-gradient(120deg,rgba(125,211,252,0.08),rgba(125,211,252,0.02))] p-8 text-center md:p-12">
-            <h2 className="text-balance text-2xl font-semibold text-white md:text-3xl">
-              {svc.closeCta?.title || `¿Listo para conversar sobre ${svc.title}?`}
-            </h2>
-            <p className="max-w-xl text-pretty text-sm leading-relaxed text-slate-300">
-              {svc.closeCta?.text || "Te ayudamos a evaluar el mejor plan para tu contexto."}
-            </p>
-            <div className="flex flex-wrap justify-center gap-3">
-              <a
-                href={mailHref}
-                className={`btn-vibrant inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium plausible-event-name=Service+Contact plausible-event-method=email plausible-event-service=${svc.slug} plausible-event-location=service_page`}
-              >
-                {svc.closeCta?.primary || "Contactar por Email"}
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </a>
-              {waHref && (
-                <a
-                  href={waHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`inline-flex items-center rounded-full border border-white/15 bg-white/10 px-6 py-3 text-sm text-white transition hover:bg-white/15 plausible-event-name=Service+Contact plausible-event-method=whatsapp plausible-event-service=${svc.slug} plausible-event-location=service_page`}
-                >
-                  {svc.closeCta?.secondary || "WhatsApp"}
-                </a>
-              )}
-            </div>
-          </section>
+            ) : null}
+          </div>
         </div>
-      </main>
-      <Footer />
-    </div>
+      </PageSection>
+
+      {/* ---------------- CÓMO FUNCIONA ---------------- */}
+      <PageSection id="como-funciona" tone="dark">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-end">
+          <div className="flex flex-col gap-5 lg:col-span-7">
+            <span className="y-eyebrow">Cómo funciona</span>
+            <h2 className="y-h2 text-white">Paso a paso, en {countWord(svc.stages.length)} etapas.</h2>
+          </div>
+          <p className="y-lead lg:col-span-4 lg:col-start-9">
+            Cada etapa cierra con entregables concretos antes de pasar a la siguiente.
+          </p>
+        </div>
+
+        <ol className={`mt-16 ${stepGridClass(svc.stages.length)}`}>
+          {svc.stages.map((stage, index) => (
+            <StepCard key={stage.name} index={index} title={stage.name} description={stage.description} chips={stage.outputs} />
+          ))}
+        </ol>
+
+        {stack.length ? (
+          <div className="mt-16 flex flex-col gap-5 border-t border-white/[0.08] pt-10 lg:flex-row lg:items-center">
+            <h3 className="shrink-0 text-[15px] font-medium leading-snug text-slate-300 lg:w-52">Tecnologías frecuentes</h3>
+            <ChipList items={stack} dark className="min-w-0 flex-1" />
+          </div>
+        ) : null}
+      </PageSection>
+
+      {svc.costFactors?.length ? (
+        <PageSection id="alcance-y-costo" tone="mist">
+          <div className="grid gap-10 lg:grid-cols-2">
+            <SectionHeader eyebrow="Alcance y costo" title="Qué define la propuesta." description="Revisamos estos factores para estimar el proyecto. La propuesta distingue implementación, operación y consumo de herramientas externas cuando corresponde." />
+            <ListCard items={svc.costFactors} />
+          </div>
+        </PageSection>
+      ) : null}
+
+      {/* ---------------- PREGUNTAS ---------------- */}
+      {faqs.length ? (
+        <FaqSection
+          title={`Dudas comunes sobre ${lowerFirst(svc.title)}.`}
+          items={faqs}
+          aside={
+            <div className="mt-2 flex flex-col items-start gap-3 rounded-2xl bg-mist p-5 text-[14.5px] leading-relaxed text-slate-600">
+              <p>Contenido revisado en <time dateTime={reviewedDate}>{formatUpdated(reviewedDate)}</time>.</p>
+              <WhatsAppLink label="Hacer otra pregunta" location="service_faq" />
+            </div>
+          }
+        />
+      ) : null}
+
+      {svc.relatedGuides?.length ? (
+        <PageSection id="guias" tone="light">
+          <SectionHeader eyebrow="Para decidir" title="Guías relacionadas con este servicio." />
+          <ul className="mt-8 flex flex-col gap-5">
+            {svc.relatedGuides.map((guide) => <li key={guide.href}><TextLink href={guide.href}>{guide.label}</TextLink></li>)}
+            {svc.relatedProducts?.map((product) => <li key={product.href}><TextLink href={product.href}>{product.label}</TextLink></li>)}
+            <li><TextLink href="/casos">Cómo medimos y documentamos los resultados</TextLink></li>
+          </ul>
+        </PageSection>
+      ) : null}
+
+      <RelatedCases service={svc.slug} />
+      <Testimonials service={svc.slug} />
+
+      {/* ---------------- OTROS SERVICIOS ---------------- */}
+      {relatedServices.length ? (
+        <PageSection id="otros-servicios" tone="mist">
+          <SectionHeader
+            eyebrow="Más servicios"
+            title="Otros servicios."
+            action={<TextLink href="/servicios">Ver todos los servicios</TextLink>}
+          />
+          <SpotlightGroup className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {relatedServices.map((related) => (
+              <ImageLinkCard
+                key={related.slug}
+                href={`/servicios/${related.slug}`}
+                image={related.image}
+                imageAlt={related.imageAlt}
+                title={related.title}
+                description={related.short}
+              />
+            ))}
+          </SpotlightGroup>
+        </PageSection>
+      ) : null}
+
+      {/* ---------------- CIERRE ---------------- */}
+      <CtaBand
+        title={svc.closeCta?.title || `¿Listo para conversar sobre ${lowerFirst(svc.title)}?`}
+        text={svc.closeCta?.text || "Te ayudamos a evaluar el mejor plan para tu contexto."}
+        primary={{
+          ...primaryAction,
+          label: svc.closeCta?.primary || PRIMARY_CTA.label,
+          event: `plausible-event-name=Service+CTA+Primary plausible-event-service=${svc.slug} plausible-event-location=service_close`,
+        }}
+        secondary={{
+          label: svc.closeCta?.secondary || "Escribir por WhatsApp",
+          href: waHref,
+          event: `plausible-event-name=Service+Contact plausible-event-method=whatsapp plausible-event-service=${svc.slug} plausible-event-location=service_page`,
+        }}
+      />
+    </PageShell>
   );
 }

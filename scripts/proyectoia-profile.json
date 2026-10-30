@@ -1,0 +1,32 @@
+{
+  "companyName": "YAGO",
+  "website": "https://yago.cl",
+  "companyType": "integrador",
+  "country": "CL",
+  "city": "La Reina, Región Metropolitana",
+  "linkedin": "https://www.linkedin.com/company/yago-spa",
+  "logo": "https://yago.cl/logo-yago.png",
+  "description": "YAGO (Yago SpA) implementa automatización, integración de IA, aplicaciones a medida, agentes y OCR para empresas en Chile. Conecta documentos, datos y sistemas con alcance y validación definidos.",
+  "categories": [
+    "automatizacion-de-procesos",
+    "desarrollo-a-medida",
+    "agentes-conversacionales",
+    "llm-y-rag",
+    "procesamiento-de-documentos"
+  ],
+  "services": [
+    "Automatización de procesos empresariales",
+    "Integración de IA con sistemas y procesos",
+    "Aplicaciones web y software a medida",
+    "Agentes y asistentes de IA",
+    "OCR y extracción de datos de documentos",
+    "OCR Master API",
+    "Capacitación de equipos en IA"
+  ],
+  "technologies": ["OpenAI", "Vertex AI", "n8n", "Make", "APIs REST", "Next.js", "TypeScript", "PostgreSQL"],
+  "contactPage": "https://yago.cl/#contacto",
+  "publicEmail": "",
+  "requesterName": "Nicolas Yarur",
+  "requesterEmail": "nicolas.yarur.g@yago.cl",
+  "message": "Solicitamos incorporar YAGO / Yago SpA, https://yago.cl, empresa chilena de automatización, integración de IA, aplicaciones, agentes y OCR. Atención exclusivamente remota; ciudad tomada del perfil público de YAGO en Clutch. Contacto oficial: nicolas.yarur.g@yago.cl, +56 9 6393 0231. No somos la ficha Asesorías e Inversiones Yago Ltda de Las Condes. Capacidades: https://yago.cl/nosotros y https://yago.cl/servicios. No adjuntamos casos de clientes pendientes de autorización. Productos propios: SADT, SOF.IA, ANTON.IA y OCR Master."
+}

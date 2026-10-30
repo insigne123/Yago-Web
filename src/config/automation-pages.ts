@@ -1,5 +1,12 @@
 export type AutomationPage = {
   slug: "sadt" | "axis";
+  modifiedDate?: string;
+  resultGuide?: {
+    title: string;
+    description: string;
+    states: { name: string; meaning: string; review: string }[];
+    scope: string;
+  };
   seoTitle: string;
   seoDescription: string;
   keywords: string[];
@@ -22,6 +29,8 @@ export type AutomationPage = {
     title: string;
     description: string;
   };
+  /** Hoy vs. con el producto: filas cortas para la comparación de la página. */
+  comparison: { today: string; withProduct: string }[];
   pains: { eyebrow: string; title: string; description: string }[];
   solution: {
     title: string;
@@ -86,9 +95,9 @@ export type AutomationPage = {
 export const AUTOMATION_PAGES: AutomationPage[] = [
   {
     slug: "sadt",
-    seoTitle: "SADT | Automatizacion del Portal Direccion del Trabajo | YAGO",
+    seoTitle: "SADT | Automatiza Mi DT: contratos, términos, F30 y F30-1 | YAGO",
     seoDescription:
-      "SADT automatiza el Portal Direccion del Trabajo para contratos, desvinculaciones y certificados F30/F30-1, con dashboard operativo, evidencia y reportería.",
+      "SADT automatiza el Portal Dirección del Trabajo para contratos, desvinculaciones y certificados F30/F30-1, con dashboard operativo, evidencia y reportería.",
     keywords: [
       "SADT",
       "automatizacion direccion del trabajo",
@@ -98,24 +107,15 @@ export const AUTOMATION_PAGES: AutomationPage[] = [
     ],
     nav: [
       { name: "Resumen", href: "#resumen" },
-      { name: "Como funciona", href: "#como-funciona" },
+      { name: "Cómo funciona", href: "#como-funciona" },
+      { name: "Qué incluye", href: "#modulos" },
       { name: "Planes", href: "#planes" },
-      { name: "FAQ", href: "#faq" },
-      {
-        name: "Apps",
-        href: "/#elige-ruta",
-        eyebrow: "Apps listas",
-        description: "OCR, SADT y AXIS para llegar rápido al servicio correcto.",
-        children: [
-          { name: "OCR", href: "/ocr", description: "Documentos y PDFs a datos útiles." },
-          { name: "SADT", href: "/sadt", description: "Portal DT con evidencia y reproceso." },
-          { name: "AXIS", href: "/axis", description: "Consulta PJUD a volumen con monitoreo." },
-        ],
-      },
+      { name: "Preguntas", href: "#faq" },
+      { name: "Demo", href: "#formulario" },
     ],
     hero: {
       badge: "SADT",
-      title: "Portal DT, automatizado",
+      title: "Automatiza el Portal Mi DT, sin carga manual",
       description:
         "SADT opera contratos, desvinculaciones y F30/F30-1 con dashboard, evidencia y reproceso.",
       proofSignals: ["App operativa activa", "Contratos, desvinculaciones y F30/F30-1", "Evidencia y reproceso"],
@@ -130,15 +130,33 @@ export const AUTOMATION_PAGES: AutomationPage[] = [
         { label: "Servicio", value: "Activo" },
         { label: "Procesos", value: "A1 + A2" },
         { label: "Evidencia", value: "PDFs" },
-        { label: "Modelo", value: "Creditos" },
+        { label: "Modelo", value: "Créditos" },
       ],
-      previewFlow: ["Carga Workges o archivo", "Validacion y transformacion", "Ejecucion en Portal DT", "Evidencia y reportería"],
+      previewFlow: ["Carga Workges o archivo", "Validación y transformación", "Ejecución en Portal DT", "Evidencia y reportería"],
     },
     problem: {
       title: "RRHH pierde demasiadas horas en tareas críticas pero repetitivas del Portal DT",
       description:
         "Registrar contratos, desvinculaciones y certificados manualmente no solo consume tiempo. También genera errores, retrabajo, falta de visibilidad y dependencia de personas clave para sostener la operación.",
     },
+    comparison: [
+      {
+        today: "Registros ingresados uno a uno en el portal, sobre todo en los peaks de inicio de mes.",
+        withProduct: "Carga por archivo o desde Workges, validada antes de ejecutar.",
+      },
+      {
+        today: "Errores de formato que obligan a corregir y volver a ingresar todo.",
+        withProduct: "Errores clasificados y reproceso individual o por lote.",
+      },
+      {
+        today: "Poca claridad sobre qué se ejecutó, qué falló y qué comprobante quedó.",
+        withProduct: "Estado, folio y PDF guardados para cada registro.",
+      },
+      {
+        today: "La operación depende de sesiones, credenciales y de quién sabe usar el portal.",
+        withProduct: "Gestión de sesión, reintentos y monitoreo desde un solo panel.",
+      },
+    ],
     pains: [
       {
         eyebrow: "01",
@@ -291,9 +309,9 @@ export const AUTOMATION_PAGES: AutomationPage[] = [
         "Cuéntanos tu volumen mensual, fuente de datos y procesos del Portal DT que quieres automatizar. Te responderemos con el siguiente paso recomendado.",
       submitLabel: "Solicitar demo SADT",
       processLabel: "Proceso principal",
-      processOptions: ["Contratos", "Desvinculaciones", "Certificados F30/F30-1", "A1 + A2 completo", "Aun no lo se"],
+      processOptions: ["Contratos", "Desvinculaciones", "Certificados F30/F30-1", "A1 + A2 completo", "Aún no lo sé"],
       volumeLabel: "Volumen mensual aproximado",
-      volumeOptions: ["Menos de 2.000 interacciones", "2.000 a 8.000 interacciones", "8.000 a 11.000 interacciones", "Mas de 11.000 interacciones", "Aun no lo se"],
+      volumeOptions: ["Menos de 2.000 interacciones", "2.000 a 8.000 interacciones", "8.000 a 11.000 interacciones", "Más de 11.000 interacciones", "Aún no lo sé"],
     },
     faqs: [
       { question: "¿Esto reemplaza al equipo de RRHH?", answer: "No. Automatiza tareas repetitivas y deja al equipo con más visibilidad, control y capacidad para gestionar excepciones." },
@@ -310,9 +328,20 @@ export const AUTOMATION_PAGES: AutomationPage[] = [
   },
   {
     slug: "axis",
-    seoTitle: "AXIS | Consulta de causas penales publicas | YAGO",
+    modifiedDate: "2026-10-26",
+    resultGuide: {
+      title: "Cómo interpretar el resultado de AXIS",
+      description: "El resultado organiza una consulta sobre fuentes públicas. Cada estado debe leerse junto con su alcance, fecha y evidencia.",
+      states: [
+        { name: "Con hallazgo", meaning: "La consulta informa una coincidencia dentro de las fuentes cubiertas.", review: "Revisar la identidad, la participación y la información de la causa antes de extraer una conclusión." },
+        { name: "Sin hallazgo", meaning: "La consulta no informa coincidencias dentro del alcance y la información disponibles en ese momento.", review: "Conservar la fecha y el alcance de la consulta. No equivale a un certificado oficial de antecedentes." },
+        { name: "Pendiente", meaning: "La consulta aún no entrega un resultado completo.", review: "Esperar o revisar el estado de ejecución. No interpretarlo como un resultado sin hallazgos." },
+      ],
+      scope: "AXIS se centra en causas penales públicas del PJUD de Chile. No emite certificados oficiales de antecedentes ni ofrece acceso a información reservada. Yago SpA es el proveedor del software y no representa al Poder Judicial.",
+    },
+    seoTitle: "AXIS | Consulta masiva de causas penales en PJUD | YAGO",
     seoDescription:
-      "AXIS consulta causas penales publicas en PJUD, con base histórica, búsqueda semántica, evidencia auditable, monitoreo diario y resultados en aproximadamente 1 minuto.",
+      "AXIS consulta causas penales públicas en PJUD, con base histórica, búsqueda semántica, evidencia auditable, monitoreo diario y resultados en aproximadamente 1 minuto.",
     keywords: [
       "AXIS",
       "consulta PJUD empresas",
@@ -322,24 +351,15 @@ export const AUTOMATION_PAGES: AutomationPage[] = [
     ],
     nav: [
       { name: "Resumen", href: "#resumen" },
-      { name: "Como funciona", href: "#como-funciona" },
+      { name: "Cómo funciona", href: "#como-funciona" },
+      { name: "Qué incluye", href: "#modulos" },
       { name: "Planes", href: "#planes" },
-      { name: "FAQ", href: "#faq" },
-      {
-        name: "Apps",
-        href: "/#elige-ruta",
-        eyebrow: "Apps listas",
-        description: "OCR, SADT y AXIS para llegar rápido al servicio correcto.",
-        children: [
-          { name: "OCR", href: "/ocr", description: "Documentos y PDFs a datos útiles." },
-          { name: "SADT", href: "/sadt", description: "Portal DT con evidencia y reproceso." },
-          { name: "AXIS", href: "/axis", description: "Consulta PJUD a volumen con monitoreo." },
-        ],
-      },
+      { name: "Preguntas", href: "#faq" },
+      { name: "Demo", href: "#formulario" },
     ],
     hero: {
       badge: "AXIS",
-      title: "AXIS consulta PJUD a volumen",
+      title: "Consulta causas penales en PJUD, a volumen",
       description:
         "Revisa personas con búsqueda semántica, evidencia auditable y monitoreo diario sobre causas penales públicas.",
       proofSignals: ["Servicio activo", "Resultados en ~1 minuto", "Monitoreo diario incluido"],
@@ -363,6 +383,24 @@ export const AUTOMATION_PAGES: AutomationPage[] = [
       description:
         "Cuando el volumen sube, revisar persona por persona consume horas, deja poca evidencia, expone a errores operativos y hace difícil demostrar qué se consultó, cuándo y con qué resultado.",
     },
+    comparison: [
+      {
+        today: "Revisar persona por persona en el portal consume horas del equipo.",
+        withProduct: "Carga unitaria o por lote, con resultado en ~1 minuto por persona.",
+      },
+      {
+        today: "Poca evidencia de criterios, fecha, resultado y alcance de cada consulta.",
+        withProduct: "Bitácora auditable y resultado estructurado por persona.",
+      },
+      {
+        today: "Consultas parciales o interrumpidas por fallas o cambios del portal.",
+        withProduct: "Reintentos automáticos y artefactos guardados para reprocesar.",
+      },
+      {
+        today: "Coincidencias superficiales que dejan espacio a omisiones.",
+        withProduct: "Búsqueda semántica en base histórica propia y verificación contra datos oficiales.",
+      },
+    ],
     pains: [
       { eyebrow: "01", title: "Alto consumo de tiempo", description: "Las consultas manuales repetitivas consumen horas que podrían dedicarse a tareas de mayor valor." },
       { eyebrow: "02", title: "Búsquedas poco auditables", description: "El proceso manual no siempre deja evidencia clara de criterios, fecha, resultado y alcance de la consulta." },
@@ -470,9 +508,9 @@ export const AUTOMATION_PAGES: AutomationPage[] = [
         "Cuéntanos cuántas personas revisan al mes, quién usa el resultado y si necesitas monitoreo diario o solo consultas por lote.",
       submitLabel: "Solicitar demo AXIS",
       processLabel: "Caso de uso principal",
-      processOptions: ["Revisión de postulantes", "Control interno", "Dotación masiva", "Monitoreo diario", "Aun no lo se"],
+      processOptions: ["Revisión de postulantes", "Control interno", "Dotación masiva", "Monitoreo diario", "Aún no lo sé"],
       volumeLabel: "Créditos estimados al mes",
-      volumeOptions: ["Menos de 2.000 créditos", "2.000 créditos", "4.000 créditos", "6.000 créditos", "Mas de 6.000 créditos", "Cotizacion 6 o 12 meses", "Aun no lo se"],
+      volumeOptions: ["Menos de 2.000 créditos", "2.000 créditos", "4.000 créditos", "6.000 créditos", "Más de 6.000 créditos", "Cotización 6 o 12 meses", "Aún no lo sé"],
     },
     faqs: [
       { question: "¿Qué fuentes cubre?", answer: "La salida inicial se enfoca en causas penales públicas disponibles en PJUD." },

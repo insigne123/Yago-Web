@@ -12,6 +12,7 @@ import {
   Lock,
   Users,
 } from "lucide-react";
+import { AUTOMATION_PAGES } from "./automation-pages";
 
 const bookingLink = process.env.NEXT_PUBLIC_BOOKING_URL?.trim() || "";
 
@@ -22,23 +23,40 @@ export const COMPANY = {
   whatsappLink: "https://wa.me/56963930231",
   bookingLink,
   location: "Chile · Remoto · LATAM",
-  // Logo principal en carpeta /public
-  logo: "/logo-yago.png",           // <-- tu archivo real en /public
-  logoMark: "/logo-yago-mark.svg",  // opcional si luego lo agregas
+  // Logo (isotipo + nombre, 600×600) e isotipo vectorial en /public/brand. Se regeneran con `npm run brand:assets`.
+  logo: "/brand/yago-logo.png",
+  logoMark: "/brand/yago-mark.svg",
 };
 
 export const PRIMARY_CTA = {
   href: bookingLink || "/#contacto",
-  label: "Solicitar diagnóstico",
+  label: "Agendar diagnóstico",
+};
+
+export function getDiagnosticHref(service: string) {
+  return bookingLink || `/?servicio=${encodeURIComponent(service)}#contacto`;
+}
+
+/** "31,80 UF" a partir del primer plan configurado de cada producto. */
+function startingPrice(slug: "sadt" | "axis") {
+  const plan = AUTOMATION_PAGES.find((page) => page.slug === slug)?.pricing.plans[0];
+  if (!plan) return undefined;
+  const value = new Intl.NumberFormat("es-CL", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(plan.priceUf);
+  return `Desde ${value} UF${plan.period.includes("IVA") ? " + IVA" : ""}/mes`;
+}
+
+export const PRODUCT_PRICES = {
+  sadt: startingPrice("sadt"),
+  axis: startingPrice("axis"),
 };
 
 export const about = {
   id: "nosotros",
   title: "Nosotros",
   description:
-    "En Yago automatizamos procesos empresariales con IA para equipos de operaciones, backoffice y finanzas que necesitan bajar carga manual sin perder control.",
+    "YAGO implementa automatización, integración de IA, aplicaciones a medida y procesamiento documental para empresas en Chile.",
   whatWeDo:
-    "Diseniamos, construimos y operamos automatizaciones y agentes de IA que eliminan tareas repetitivas, integran sistemas y entregan visibilidad real para seguir operando mejor.",
+    "Diseñamos y construimos flujos, integraciones, aplicaciones y agentes de IA conectados a los datos y sistemas de cada empresa, con alcance, validaciones y operación definidos.",
   principles: [
     "Automatización como mecanismo de colaboración humano-máquina.",
     "Ahorro de tiempo en procesos repetitivos y tediosos.",
@@ -165,72 +183,148 @@ export const technologies = [
 
 export const testimonials = [];
 
-export const navLinks = [
-    {
-      name: "Soluciones",
-      href: "/soluciones",
-      eyebrow: "Por problema",
-      description: "Rutas para backoffice, finanzas, reportes, aprobaciones, RRHH y procesos documentales.",
-      detail: "Parte por aquí si reconoces el problema, pero todavía no sabes qué tecnología necesitas.",
-    },
-    {
-      name: "Productos",
-      href: "/productos",
-      eyebrow: "Productos YAGO",
-      description: "Productos listos y configurables para procesos operativos frecuentes.",
-      detail: "Compara alternativas especializadas y solicita una demo según tu proceso.",
-      children: [
-        {
-          name: "OCR",
-          href: "/ocr",
-          eyebrow: "Documentos a datos",
-          description: "Convierte facturas, contratos, formularios y PDFs escaneados en datos útiles para operar.",
-        },
-        {
-          name: "SADT",
-          href: "/sadt",
-          eyebrow: "Portal DT",
-          description: "Automatiza contratos, desvinculaciones y certificados F30/F30-1.",
-        },
-        {
-          name: "AXIS",
-          href: "/axis",
-          eyebrow: "Consulta PJUD",
-          description: "Consulta causas penales públicas a volumen con evidencia y monitoreo diario.",
-        },
-      ],
-    },
-    {
-      name: "Servicios",
-      href: "/servicios",
-      eyebrow: "Implementación a medida",
-      description: "Automatización de procesos, aplicaciones internas, sitios y capacitación.",
-      detail: "Para procesos que requieren descubrimiento, integración y acompañamiento.",
-    },
-    {
-      name: "Casos",
-      href: "/casos",
-      eyebrow: "Evidencia operativa",
-      description: "Escenarios, metodología y resultados que YAGO documenta antes y después de automatizar.",
-    },
-    {
-      name: "Recursos",
-      href: "/blog",
-      eyebrow: "Guías prácticas",
-      description: "Automatización, IA, OCR y ROI explicados sin humo para equipos de operaciones.",
-      children: [
-        {
-          name: "Blog",
-          href: "/blog",
-          description: "Guías sobre automatización, IA, OCR y retorno operativo.",
-        },
-        {
-          name: "Proceso YAGO",
-          href: "/proceso",
-          description: "Cómo priorizamos, construimos, validamos y ponemos en marcha una automatización.",
-        },
-      ],
-    },
+export type NavIcon =
+  | "sadt"
+  | "axis"
+  | "ocr"
+  | "audit"
+  | "flow"
+  | "integration"
+  | "apps"
+  | "bot"
+  | "cap"
+  | "book"
+  | "route"
+  | "grid"
+  | "glossary";
+
+export type NavItem = {
+  name: string;
+  href: string;
+  eyebrow?: string;
+  description?: string;
+  detail?: string;
+  meta?: string;
+  icon?: NavIcon;
+  children?: NavItem[];
+};
+
+export const navLinks: NavItem[] = [
+  {
+    name: "Servicios",
+    href: "/servicios",
+    eyebrow: "Implementación a medida",
+    description: "Automatización, IA, apps y documentos.",
+    children: [
+      {
+        name: "Auditoría IA",
+        href: "/servicios/auditoria-ia",
+        description: "Investigamos tu empresa y te proponemos qué automatizar e integrar.",
+        meta: "No necesitas llegar con una idea",
+        icon: "audit",
+      },
+      {
+        name: "Automatización de procesos",
+        href: "/servicios/automatizacion-procesos",
+        description: "Tareas repetitivas orquestadas con IA y APIs.",
+        meta: "MVP en 1–2 semanas",
+        icon: "flow",
+      },
+      {
+        name: "Integración de IA",
+        href: "/servicios/integracion-ia",
+        description: "IA conectada a los datos y procesos de tu empresa.",
+        icon: "integration",
+      },
+      {
+        name: "Aplicaciones y software con IA",
+        href: "/servicios/apps-automatizacion",
+        description: "Apps a medida y desarrollo asistido por IA, con revisión y pruebas.",
+        icon: "apps",
+      },
+      {
+        name: "Agentes y asistentes de IA",
+        href: "/servicios/agentes-ia",
+        description: "Conocimiento interno y herramientas con un alcance definido.",
+        icon: "bot",
+      },
+      {
+        name: "OCR y documentos",
+        href: "/ocr",
+        description: "Lectura y extracción de datos desde PDFs e imágenes.",
+        icon: "ocr",
+      },
+      {
+        name: "Capacitación en IA",
+        href: "/servicios/capacitacion-ia",
+        description: "Workshops prácticos para que tu equipo adopte IA con seguridad.",
+        meta: "Bootcamp de 6–12 h",
+        icon: "cap",
+      },
+    ],
+  },
+  {
+    name: "Productos",
+    href: "/productos",
+    eyebrow: "Productos YAGO",
+    description: "Implementaciones para procesos específicos.",
+    children: [
+      { name: "SADT", href: "/sadt", eyebrow: "Portal Dirección del Trabajo", description: "Contratos, desvinculaciones y F30/F30-1 por lote.", meta: PRODUCT_PRICES.sadt, icon: "sadt" },
+      { name: "AXIS", href: "/axis", eyebrow: "Consultas PJUD", description: "Causas penales públicas, evidencia y monitoreo diario.", meta: PRODUCT_PRICES.axis, icon: "axis" },
+      { name: "OCR Master API", href: "/ocr-master", eyebrow: "Documentos a JSON", description: "Lectura de documentos para integrar en tus aplicaciones.", icon: "ocr" },
+    ],
+  },
+  { name: "Casos", href: "/casos" },
+  { name: "Precios", href: "/precios" },
+  {
+    name: "Recursos",
+    href: "/blog",
+    eyebrow: "Recursos",
+    description: "Guías prácticas y cómo trabajamos.",
+    children: [
+      { name: "Blog", href: "/blog", description: "Guías sobre automatización, IA, OCR y retorno operativo.", icon: "book" },
+      { name: "Cómo trabajamos", href: "/proceso", description: "Cómo priorizamos, construimos y ponemos en marcha.", icon: "route" },
+      { name: "Soluciones por problema", href: "/soluciones", description: "Backoffice, finanzas, aprobaciones, RRHH y más.", icon: "grid" },
+      { name: "Glosario", href: "/glosario", description: "IA, desarrollo, automatización y OCR, además de trámites laborales.", icon: "glossary" },
+      { name: "Nosotros", href: "/nosotros", description: "Qué hace YAGO y cómo implementamos IA y automatización en Chile.", icon: "grid" },
+    ],
+  },
+];
+
+export const footerGroups: { title: string; links: { name: string; href: string }[] }[] = [
+  {
+    title: "Productos",
+    links: [
+      { name: "SADT · Portal DT", href: "/sadt" },
+      { name: "AXIS · PJUD", href: "/axis" },
+      { name: "OCR · Documentos", href: "/ocr" },
+      { name: "OCR Master API", href: "/ocr-master" },
+      { name: "Precios", href: "/precios" },
+    ],
+  },
+  {
+    title: "Servicios",
+    links: [
+      { name: "Auditoría IA", href: "/servicios/auditoria-ia" },
+      { name: "Automatización", href: "/servicios/automatizacion-procesos" },
+      { name: "Integración de IA", href: "/servicios/integracion-ia" },
+      { name: "Apps y software con IA", href: "/servicios/apps-automatizacion" },
+      { name: "Agentes y asistentes", href: "/servicios/agentes-ia" },
+      { name: "OCR y documentos", href: "/ocr" },
+      { name: "Capacitación en IA", href: "/servicios/capacitacion-ia" },
+    ],
+  },
+  {
+    title: "Empresa",
+    links: [
+      { name: "Nosotros", href: "/nosotros" },
+      { name: "Casos", href: "/casos" },
+      { name: "Cómo trabajamos", href: "/proceso" },
+      { name: "Soluciones", href: "/soluciones" },
+      { name: "Blog", href: "/blog" },
+      { name: "Glosario", href: "/glosario" },
+    ],
+  },
 ];
 
 export const footerLinks = [

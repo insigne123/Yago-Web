@@ -12,6 +12,7 @@ export type SendEmailOptions = {
   html: string;
   text?: string;
   replyTo?: string;
+  idempotencyKey?: string;
 };
 
 export async function sendEmail(opts: SendEmailOptions) {
@@ -44,6 +45,15 @@ async function sendWithResend(opts: SendEmailOptions) {
     text: opts.text,
   };
   if (opts.replyTo) payload.reply_to = opts.replyTo;
+  if (opts.idempotencyKey) {
+    const response = await fetch("https://api.resend.com/emails", {
+      method: "POST", redirect: "error", signal: AbortSignal.timeout(15000),
+      headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY!}`, "Content-Type": "application/json", "Idempotency-Key": opts.idempotencyKey },
+      body: JSON.stringify(payload),
+    });
+    if (!response.ok) throw new Error("Resend no aceptó el envío.");
+    return { data: await response.json(), error: null };
+  }
   const res = await resend.emails.send(payload);
   if ((res as any).error) {
     throw new Error(

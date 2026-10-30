@@ -6,17 +6,7 @@ import { useToast } from "@/hooks/use-toast";
 import { track } from "@/lib/analytics";
 import { AttributionFields } from "@/components/forms/AttributionFields";
 import { LeadSuccess } from "@/components/forms/LeadSuccess";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
+import Link from "next/link";
 
 type AutomationLeadFormProps = {
   page: AutomationPage;
@@ -112,115 +102,109 @@ export function AutomationLeadForm({ page }: AutomationLeadFormProps) {
   }
 
   return (
-    <Card className="hover-lift rounded-[1.9rem] border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] shadow-[0_20px_60px_rgba(0,0,0,0.08)]">
-      <CardHeader>
-        <CardTitle>{page.form.title}</CardTitle>
-        <CardDescription>{page.form.description}</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <form onSubmit={onSubmit} onFocusCapture={markStart} className="grid gap-4">
-          <input type="text" name="hp" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden="true" />
-          <input type="hidden" name="topic" value={page.form.topic} />
-          <AttributionFields />
+    <div className="y-form-card rounded-[1.75rem] bg-white p-6 text-slate-950 shadow-[0_50px_100px_-40px_rgba(0,0,0,0.8),0_0_0_1px_rgba(255,255,255,0.1)] sm:p-9">
+      <div className="flex flex-col gap-1.5">
+        <h3 className="y-h3 text-2xl">{page.form.title}</h3>
+        <p className="text-[15px] leading-relaxed text-slate-500">{page.form.description}</p>
+      </div>
+      <form onSubmit={onSubmit} onFocusCapture={markStart} className="mt-6 grid gap-4">
+        <input type="text" name="hp" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden="true" />
+        <input type="hidden" name="topic" value={page.form.topic} />
+        <AttributionFields />
 
-          <div className="grid gap-4 md:grid-cols-2">
-            <div className="grid gap-2">
-              <Label htmlFor={`${id}-nombre`} className="text-slate-200">Nombre</Label>
-              <Input
-                id={`${id}-nombre`}
-                name="nombre"
-                autoComplete="name"
-                placeholder="Tu nombre"
-                required
-                className="rounded-2xl border-white/10 bg-white/[0.04] text-white placeholder:text-slate-400"
-              />
-            </div>
-
-            <div className="grid gap-2">
-              <Label htmlFor={`${id}-empresa`} className="text-slate-200">Empresa</Label>
-              <Input
-                id={`${id}-empresa`}
-                name="empresa"
-                autoComplete="organization"
-                placeholder="Nombre de la empresa"
-                required
-                className="rounded-2xl border-white/10 bg-white/[0.04] text-white placeholder:text-slate-400"
-              />
-            </div>
-          </div>
-
+        <div className="grid gap-4 sm:grid-cols-2">
           <div className="grid gap-2">
-            <Label htmlFor={`${id}-process`} className="text-slate-200">{page.form.processLabel}</Label>
-            <select
-              id={`${id}-process`}
-              name="proceso_principal"
+            <label htmlFor={`${id}-nombre`} className="y-label">Nombre</label>
+            <input id={`${id}-nombre`} name="nombre" autoComplete="name" placeholder="Tu nombre" required className="y-field" />
+          </div>
+          <div className="grid gap-2">
+            <label htmlFor={`${id}-empresa`} className="y-label">Empresa</label>
+            <input
+              id={`${id}-empresa`}
+              name="empresa"
+              autoComplete="organization"
+              placeholder="Nombre de la empresa"
               required
-              defaultValue=""
-              className="h-11 rounded-2xl border border-white/10 bg-white/[0.04] px-3 text-sm text-white outline-none transition-colors focus:border-sky-200/40 focus:ring-2 focus:ring-sky-200/30"
-            >
-              <option value="" disabled>Selecciona una opción</option>
-              {page.form.processOptions.map((option) => <option key={option} value={option}>{option}</option>)}
-            </select>
-          </div>
-
-          <div className="grid gap-4 md:grid-cols-2">
-            <div className="grid gap-2">
-              <Label htmlFor={`${id}-email`} className="text-slate-200">Correo</Label>
-              <Input
-                id={`${id}-email`}
-                name="email"
-                type="email"
-                autoComplete="email"
-                inputMode="email"
-                placeholder="tu@empresa.com"
-                required
-                className="rounded-2xl border-white/10 bg-white/[0.04] text-white placeholder:text-slate-400"
-              />
-            </div>
-
-            <div className="grid gap-2">
-              <Label htmlFor={`${id}-volume`} className="text-slate-200">{page.form.volumeLabel}</Label>
-              <select
-                id={`${id}-volume`}
-                name="volumen_mensual"
-                required
-                defaultValue=""
-                className="h-11 rounded-2xl border border-white/10 bg-white/[0.04] px-3 text-sm text-white outline-none transition-colors focus:border-sky-200/40 focus:ring-2 focus:ring-sky-200/30"
-              >
-                <option value="" disabled className="bg-[#0b1220] text-slate-300">
-                  Selecciona una opcion
-                </option>
-                {page.form.volumeOptions.map((option) => (
-                  <option key={option} value={option} className="bg-[#0b1220] text-white">
-                    {option}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-
-          <div className="grid gap-2">
-            <Label htmlFor={`${id}-message`} className="text-slate-200">Mensaje opcional</Label>
-            <Textarea
-              id={`${id}-message`}
-              name="mensaje"
-              autoComplete="off"
-              placeholder="Si quieres, cuentanos brevemente el proceso, volumen o urgencia..."
-              rows={4}
-              className="rounded-2xl border-white/10 bg-white/[0.04] text-white placeholder:text-slate-400"
+              className="y-field"
             />
           </div>
+        </div>
 
-          <Button
-            type="submit"
-            disabled={loading}
-            className="rounded-full border border-white/10 bg-white text-[#070b13] transition-[transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:shadow-[0_16px_38px_rgba(0,0,0,0.18)] active:scale-[0.98]"
-          >
-            {loading ? "Enviando..." : page.form.submitLabel}
-          </Button>
-        </form>
-        {leadId ? <LeadSuccess leadId={leadId} message="Te contactaremos para validar alcance, volumen y coordinar la demo." /> : null}
-      </CardContent>
-    </Card>
+        <div className="grid gap-2">
+          <label htmlFor={`${id}-email`} className="y-label">Email de trabajo</label>
+          <input
+            id={`${id}-email`}
+            name="email"
+            type="email"
+            autoComplete="email"
+            inputMode="email"
+            placeholder="nombre@empresa.cl"
+            required
+            className="y-field"
+          />
+        </div>
+
+        <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid gap-2">
+            <label htmlFor={`${id}-process`} className="y-label">{page.form.processLabel}</label>
+            <select id={`${id}-process`} name="proceso_principal" required defaultValue="" className="y-field pr-8">
+              <option value="" disabled>
+                Selecciona una opción
+              </option>
+              {page.form.processOptions.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="grid gap-2">
+            <label htmlFor={`${id}-volume`} className="y-label">{page.form.volumeLabel}</label>
+            <select id={`${id}-volume`} name="volumen_mensual" required defaultValue="" className="y-field pr-8">
+              <option value="" disabled>
+                Selecciona una opción
+              </option>
+              {page.form.volumeOptions.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        <div className="grid gap-2">
+          <label htmlFor={`${id}-message`} className="y-label">
+            Mensaje <span className="font-normal text-slate-500">(opcional)</span>
+          </label>
+          <textarea
+            id={`${id}-message`}
+            name="mensaje"
+            autoComplete="off"
+            placeholder="Si quieres, cuéntanos el proceso, volumen o urgencia."
+            rows={3}
+            className="y-field"
+          />
+        </div>
+
+        <button
+          type="submit"
+          disabled={loading}
+          className={`y-btn y-btn-primary mt-1 w-full disabled:cursor-wait disabled:opacity-70 plausible-event-name=CTA+Solicitar+Demo plausible-event-location=automation_form plausible-event-product=${page.slug}`}
+        >
+          {loading ? "Enviando…" : page.form.submitLabel}
+        </button>
+        <p className="text-[13px] text-slate-500">
+          Al enviar aceptas nuestra{" "}
+          <Link href="/privacidad" className="text-sky-700 underline underline-offset-2 hover:text-sky-800">
+            Política de Privacidad
+          </Link>
+          .
+        </p>
+      </form>
+      {leadId ? (
+        <LeadSuccess tone="light" leadId={leadId} message="Te contactaremos para validar alcance, volumen y coordinar la demo." />
+      ) : null}
+    </div>
   );
 }

@@ -1,0 +1,19 @@
+{
+  "submittedAt": "2026-10-08T15:58:00.254Z",
+  "form": "https://proyectoia.com/agregar?manual=1",
+  "httpStatus": 200,
+  "confirmation": "Recibimos tu empresa",
+  "company": "YAGO",
+  "website": "https://yago.cl",
+  "acceptedForReview": true,
+  "published": false,
+  "publicProfile": null,
+  "followUp": {
+    "sentAt": "2026-10-26T03:30:47.212Z",
+    "recipient": "hola@proyectoia.com",
+    "emailId": "01a17642-ba8c-7e9a-bd4f-fc8265a7ad49",
+    "deliveryStatus": "delivered",
+    "deliveryCheckedAt": "2026-10-26T03:59:23.927Z",
+    "replyPending": true
+  }
+}

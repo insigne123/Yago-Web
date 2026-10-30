@@ -1,0 +1,13 @@
+{
+  "address": "pgongora@yago.cl",
+  "fromName": "YAGO",
+  "receivingAddress": "pgongora@galook.resend.app",
+  "firebaseProject": "automata-ai",
+  "firebaseSecret": "RESEND_API_KEY",
+  "firebaseSecretVersion": "1",
+  "notification": {
+    "to": "nicolas.yarur.g@yago.cl",
+    "endpoint": "https://yago.cl/api/webhooks/resend",
+    "webhookSecret": "RESEND_MAIL_NOTIFY_WEBHOOK_SECRET"
+  }
+}

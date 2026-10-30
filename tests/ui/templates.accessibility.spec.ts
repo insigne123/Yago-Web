@@ -1,7 +1,7 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
-const templates = ["/productos", "/casos", "/blog/que-es-la-automatizacion-de-procesos-con-ia"];
+const templates = ["/productos", "/casos", "/blog/que-es-la-automatizacion-de-procesos-con-ia", "/servicios/integracion-ia", "/nosotros", "/blog/apps-ia-desarrollo-asistido-diferencias"];
 
 test.describe("key template accessibility", () => {
   for (const route of templates) {

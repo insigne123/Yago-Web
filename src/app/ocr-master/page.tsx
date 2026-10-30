@@ -1,55 +1,42 @@
-import Link from "next/link";
 import {
   ArrowRight,
   Braces,
-  CheckCircle2,
+  ClipboardCheck,
+  FileInput,
   FileJson2,
+  Gauge,
   Layers3,
   ShieldCheck,
+  Timer,
+  Workflow,
+  type LucideIcon,
 } from "lucide-react";
-import { BrandStamp } from "@/components/BrandStamp";
-import { Footer } from "@/components/landing/Footer";
-import { Navbar } from "@/components/landing/Navbar";
+import { stepGridClass } from "@/components/catalog/CatalogKit";
+import { SpotlightGroup } from "@/components/home/SpotlightGroup";
+import { CodeBlock, CodeWindow, SAMPLE_REQUEST, SAMPLE_RESPONSE, jsonTokens } from "@/components/ocr-master/CodeWindow";
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
+import { JsonLd } from "@/components/seo/JsonLd";
 import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
+  ActionLink,
+  CheckList,
+  CtaBand,
+  FaqSection,
+  IconTile,
+  PageHero,
+  PageSection,
+  PageShell,
+  SectionHeader,
+  StepCard,
+  TextLink,
+  WHATSAPP_ACTION,
+  faqJsonLd,
+} from "@/components/site/PageKit";
 import { COMPANY } from "@/config/site";
 import { OCR_MASTER } from "@/config/ocr-master";
+import { KeyFactsSection } from "@/components/site/KeyFacts";
+import { KEY_FACTS, mergeFaqs } from "@/config/key-facts";
+import { ENTITY } from "@/config/entity";
 import { createPageMetadata } from "@/lib/seo";
-
-const toneClasses = {
-  sky: {
-    accent: "bg-sky-300",
-    border: "border-sky-300/20",
-    panel: "bg-sky-400/10 text-sky-200",
-  },
-  amber: {
-    accent: "bg-sky-300",
-    border: "border-sky-300/20",
-    panel: "bg-sky-400/10 text-sky-200",
-  },
-  mint: {
-    accent: "bg-sky-300",
-    border: "border-sky-300/20",
-    panel: "bg-sky-400/10 text-sky-200",
-  },
-};
-
-const buyerIcons = [Braces, ShieldCheck, FileJson2, Layers3];
 
 export const metadata = createPageMetadata({
   title: OCR_MASTER.seoTitle,
@@ -57,436 +44,334 @@ export const metadata = createPageMetadata({
   path: "/ocr-master",
 });
 
+const RESULT_ICONS: LucideIcon[] = [Timer, Workflow, Layers3, ClipboardCheck];
+const BUYER_ICONS: LucideIcon[] = [Braces, ShieldCheck, FileJson2, Layers3];
+
+const DEMO_EVENT = "plausible-event-name=CTA+Solicitar+Demo plausible-event-product=ocr-master";
+
+function mailHref(plan?: string) {
+  const subject = plan ? `Interés en OCR Master · Plan ${plan}` : "Interés en OCR Master";
+  const body = plan
+    ? `Hola YAGO, me interesa el plan ${plan} de OCR Master. ¿Podemos revisar una demo o propuesta?`
+    : "Hola YAGO, me interesa OCR Master. ¿Podemos revisar una demo o propuesta?";
+  return `mailto:${COMPANY.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
+const RESPONSE_TOKENS = jsonTokens(SAMPLE_RESPONSE);
+
+function StatusOk() {
+  return <span className="y-status y-status-ok font-mono">200 OK</span>;
+}
+
+const FACTS = KEY_FACTS["ocr-master"];
+const FAQS = mergeFaqs(FACTS.faqs, OCR_MASTER.faqs);
+const usd = (label: string) => Number(label.replace(/[^\d,.]/g, "").replace(/\./g, "").replace(",", "."));
+
+const SOFTWARE_JSONLD = {
+  "@context": "https://schema.org",
+  "@type": "WebAPI",
+  "@id": "https://yago.cl/ocr-master#api",
+  name: "OCR Master",
+  alternateName: "OCR Master API by YAGO",
+  description: FACTS.definition,
+  url: "https://yago.cl/ocr-master",
+  inLanguage: "es-CL",
+  documentation: "https://yago.cl/ocr-master#api",
+  provider: { "@id": "https://yago.cl/#organization" },
+  dateModified: ENTITY.contentUpdated,
+  offers: OCR_MASTER.plans.map((plan) => ({
+    "@type": "Offer",
+    name: `OCR Master ${plan.name}`,
+    description: `${plan.documentsPerMonth} documentos al mes. ${plan.extraDocPrice}`,
+    price: usd(plan.annualPrice),
+    priceCurrency: "USD",
+    priceSpecification: { "@type": "UnitPriceSpecification", price: usd(plan.annualPrice), priceCurrency: "USD", unitText: "mes (pago anual)" },
+    url: "https://yago.cl/ocr-master#planes",
+    seller: { "@id": "https://yago.cl/#organization" },
+  })),
+};
+
 export default function OcrMasterPage() {
-  const mailHref = `mailto:${COMPANY.email}?subject=${encodeURIComponent("Interes en OCR Master")}&body=${encodeURIComponent(
-    "Hola YAGO, me interesa OCR Master. ¿Podemos revisar una demo o propuesta?"
-  )}`;
+  const inputFormats = OCR_MASTER.stages[0]?.outputs ?? [];
 
   return (
-    <div className="relative min-h-screen overflow-x-clip text-white">
-      <Navbar />
+    <PageShell>
+      <JsonLd id="jsonld-ocr-master-faq" data={faqJsonLd(FAQS)} />
+      <JsonLd id="jsonld-ocr-master-api" data={SOFTWARE_JSONLD} />
 
-      <main id="main-content" className="main-premium py-20 md:py-24">
-        <div className="mx-auto max-w-6xl space-y-8 px-4 md:space-y-10">
-          <section className="grid gap-6 xl:grid-cols-[1.05fr_0.95fr] xl:items-start">
-            <Card className="overflow-hidden rounded-[2rem] border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] shadow-[0_28px_100px_rgba(0,0,0,0.08)]">
-              <CardHeader className="pb-5 md:pb-6">
-                <div className="flex flex-wrap items-center justify-between gap-3">
-                  <Badge
-                    variant="outline"
-                    className="border-sky-300/20 bg-sky-400/[0.07] px-3 py-1 text-[11px] uppercase tracking-[0.16em] text-sky-300"
-                  >
-                    {OCR_MASTER.badge}
-                  </Badge>
-                  <Link
-                    href="/productos"
-                    className="text-sm text-slate-300 underline underline-offset-4 transition hover:text-white"
-                  >
-                    Volver a productos
-                  </Link>
-                </div>
-
-                <h1 className="mt-6 text-5xl font-semibold tracking-[-0.04em] text-white md:text-6xl">
-                  {OCR_MASTER.title}
-                </h1>
-                <CardDescription className="mt-3 text-2xl leading-tight text-white md:text-3xl">
-                  {OCR_MASTER.pageTitle}
-                </CardDescription>
-              </CardHeader>
-
-              <CardContent className="space-y-6">
-                <p className="max-w-3xl text-lg leading-relaxed text-slate-300">
-                  {OCR_MASTER.pageSubtitle}
-                </p>
-
-                <div className="flex flex-wrap gap-2">
-                  {OCR_MASTER.pageSupportPoints.map((item) => (
-                    <div
-                      key={item}
-                      className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-white"
-                    >
-                      {item}
-                    </div>
-                  ))}
-                </div>
-
-                <div className="flex flex-wrap gap-3 pt-2">
-                  <Button
-                    asChild
-                    className="rounded-full border border-white/10 bg-white px-5 text-[#070b13]"
-                  >
-                    <a href={mailHref}>{OCR_MASTER.closeCta.primary}</a>
-                  </Button>
-
-                  <Button
-                    asChild
-                    variant="ghost"
-                    className="rounded-full border border-white/10 bg-white/[0.04] text-white hover:bg-slate-50"
-                  >
-                    <a href={COMPANY.whatsappLink} target="_blank" rel="noreferrer">
-                      {OCR_MASTER.closeCta.secondary}
-                    </a>
-                  </Button>
-
-                  <Button
-                    asChild
-                    variant="ghost"
-                    className="rounded-full border border-white/10 bg-transparent text-slate-300 hover:bg-slate-50 hover:text-white"
-                  >
-                    <a href="#planes">Ver Planes</a>
-                  </Button>
-                </div>
-
-                <div className="flex flex-wrap gap-2 text-xs uppercase tracking-[0.16em] text-slate-300">
-                  {[
-                    OCR_MASTER.metaValue,
-                    "API lista para demo o piloto",
-                    "JSON estructurado para integracion",
-                  ].map((item) => (
-                    <span key={item} className="rounded-full border border-white/10 bg-white/5 px-3 py-2">
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-
-            <div className="grid gap-5">
-              <Card className="overflow-hidden rounded-[2rem] border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] shadow-[0_28px_100px_rgba(0,0,0,0.08)]">
-                <CardHeader className="pb-4">
-                  <Badge
-                    variant="outline"
-                    className="w-fit border-sky-200/20 bg-sky-200/[0.08] px-3 py-1 text-[11px] uppercase tracking-[0.16em] text-sky-300"
-                  >
-                    {OCR_MASTER.apiBadge}
-                  </Badge>
-                  <CardTitle as="h2" className="mt-4 text-3xl text-white">{OCR_MASTER.apiTitle}</CardTitle>
-                  <CardDescription className="max-w-lg text-base leading-relaxed text-slate-300">
-                    {OCR_MASTER.apiDescription}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-3">
-                  {OCR_MASTER.apiDetails.map((item) => (
-                    <div
-                      key={item.label}
-                      className="flex flex-col gap-2 rounded-[1.2rem] border border-white/10 bg-white/[0.05] px-4 py-4 md:flex-row md:items-center md:justify-between"
-                    >
-                      <div className="text-xs uppercase tracking-[0.16em] text-slate-300">{item.label}</div>
-                      <div className="text-base font-semibold text-white">{item.value}</div>
-                    </div>
-                  ))}
-                </CardContent>
-              </Card>
-
-              <Card className="overflow-hidden rounded-[2rem] border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))]">
-                <CardHeader className="pb-4">
-                  <CardTitle as="h2" className="text-2xl text-white">{OCR_MASTER.metaTitle}</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="rounded-[1.4rem] border border-sky-300/20 bg-sky-400/[0.07] px-4 py-5">
-                    <div className="text-3xl font-semibold text-white">{OCR_MASTER.metaValue}</div>
-                    <div className="mt-2 text-sm leading-relaxed text-slate-300">{OCR_MASTER.metaDescription}</div>
-                  </div>
-
-                  <div className="rounded-[1.4rem] border border-white/10 bg-white/5 px-4 py-4">
-                    <div className="text-sm font-medium text-sky-300">{OCR_MASTER.proposalTitle}</div>
-                    <p className="mt-2 text-sm leading-relaxed text-slate-300">
-                      {OCR_MASTER.proposalDescription}
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
+      {/* ---------------- HERO ---------------- */}
+      <PageHero
+        fx
+        top={
+          <Breadcrumbs
+            items={[
+              { name: "Inicio", href: "/" },
+              { name: "Productos", href: "/productos" },
+              { name: "OCR Master API", href: "/ocr-master" },
+            ]}
+          />
+        }
+        eyebrow={OCR_MASTER.badge}
+        title="OCR Master: de PDF o imagen a"
+        highlight="JSON estructurado."
+        description={OCR_MASTER.description}
+        actions={
+          <>
+            <a href={mailHref()} className={`y-btn y-btn-primary ${DEMO_EVENT} plausible-event-location=hero`}>
+              {OCR_MASTER.closeCta.primary}
+              <ArrowRight className="y-arrow h-4 w-4" aria-hidden="true" />
+            </a>
+            <ActionLink action={{ label: "Ver planes", href: "#planes" }} variant="glass" />
+          </>
+        }
+        aside={
+          <CodeWindow
+            beam
+            title="POST /v1/process"
+            meta={<StatusOk />}
+            footer="Respuesta de ejemplo · datos ficticios"
+          >
+            <CodeBlock tokens={RESPONSE_TOKENS} label="Ejemplo de respuesta JSON de OCR Master" />
+          </CodeWindow>
+        }
+      >
+        <dl className="mt-2 grid w-full grid-cols-1 gap-x-8 gap-y-4 border-t border-white/[0.08] pt-6 sm:grid-cols-2">
+          {OCR_MASTER.apiDetails.map((detail) => (
+            <div key={detail.label} className="flex min-w-0 flex-col gap-1">
+              <dt className="font-mono text-[11.5px] uppercase tracking-[0.12em] text-slate-400">{detail.label}</dt>
+              <dd className="font-mono text-[14.5px] text-white">{detail.value}</dd>
             </div>
-          </section>
+          ))}
+        </dl>
+      </PageHero>
 
-          <section className="rounded-[1.8rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-6">
-            <div className="flex flex-wrap gap-2">
-              {[
-                { id: "impacto", label: "Impacto" },
-                { id: "perfiles", label: "Compradores" },
-                { id: "como-funciona", label: "Como funciona" },
-                { id: "planes", label: "Planes" },
-                { id: "faq", label: "FAQ" },
-              ].map((item) => (
-                <a
-                  key={item.id}
-                  href={`#${item.id}`}
-                  className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-slate-200 transition hover:bg-slate-50 hover:text-white"
+      {/* ---------------- EN RESUMEN ---------------- */}
+      <KeyFactsSection data={FACTS} />
+
+      {/* ---------------- QUÉ ENTREGA ---------------- */}
+      <PageSection id="impacto" tone="mist">
+        <SectionHeader
+          eyebrow="Qué entrega"
+          title="Campos listos para tu sistema, no documentos por digitar."
+          description={OCR_MASTER.pageSubtitle}
+        />
+
+        <div className="y-card y-reveal mt-12 grid grid-cols-1 items-stretch gap-4 p-4 sm:p-5 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]">
+          <div className="flex flex-col gap-4 rounded-[1.1rem] bg-mist p-6">
+            <span className="flex items-center gap-2.5 font-mono text-[12px] uppercase tracking-[0.12em] text-slate-600">
+              <FileInput className="h-4 w-4" strokeWidth={1.8} aria-hidden="true" />
+              Entra
+            </span>
+            <ul className="flex flex-wrap gap-2">
+              {inputFormats.map((format) => (
+                <li
+                  key={format}
+                  className="rounded-lg bg-white px-3 py-1.5 font-mono text-[13.5px] font-medium text-slate-900 shadow-[inset_0_0_0_1px_#e2e8f0]"
                 >
-                  {item.label}
-                </a>
+                  {format}
+                </li>
               ))}
-            </div>
-          </section>
-
-          <section id="impacto" className="space-y-5">
-            <div className="max-w-3xl">
-              <p className="text-xs uppercase tracking-[0.2em] text-slate-300">Impacto</p>
-              <h2 className="mt-3 text-3xl font-semibold text-white md:text-4xl">
-                Por que OCR Master puede convertirse en una oferta comercial muy facil de entender.
-              </h2>
-            </div>
-
-            <div className="grid gap-4 md:grid-cols-2">
-              {OCR_MASTER.results.map((result) => (
-                <Card
-                  key={result.title}
-                  className="rounded-[1.7rem] border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))]"
+            </ul>
+            <p className="text-[14.5px] leading-relaxed text-slate-600">Desde portales, sistemas o flujos automatizados.</p>
+          </div>
+          <div className="flex items-center justify-center" aria-hidden="true">
+            <span className="grid h-11 w-11 rotate-90 place-items-center rounded-full bg-[#0b1220] text-sky-300 shadow-[0_0_20px_rgba(56,189,248,0.3)] lg:rotate-0">
+              <ArrowRight className="h-5 w-5" />
+            </span>
+          </div>
+          <div className="flex flex-col gap-4 rounded-[1.1rem] bg-sky-50 p-6 shadow-[inset_0_0_0_1px_rgba(14,165,233,0.2)]">
+            <span className="flex items-center gap-2.5 font-mono text-[12px] uppercase tracking-[0.12em] text-sky-800">
+              <Braces className="h-4 w-4" strokeWidth={1.8} aria-hidden="true" />
+              Sale
+            </span>
+            <ul className="flex flex-wrap gap-2">
+              {(OCR_MASTER.stages[2]?.outputs ?? []).map((output) => (
+                <li
+                  key={output}
+                  className="rounded-lg bg-white px-3 py-1.5 font-mono text-[13.5px] font-medium text-slate-900 shadow-[inset_0_0_0_1px_rgba(14,165,233,0.25)]"
                 >
-                  <CardHeader>
-                    <CardTitle className="text-2xl text-white">{result.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription className="text-base leading-relaxed text-slate-300">
-                      {result.description}
-                    </CardDescription>
-                  </CardContent>
-                </Card>
+                  {output}
+                </li>
               ))}
-            </div>
-          </section>
-
-          <section id="perfiles" className="space-y-5">
-            <div className="max-w-3xl">
-              <p className="text-xs uppercase tracking-[0.2em] text-slate-300">Perfiles Compradores</p>
-              <h2 className="mt-3 text-3xl font-semibold text-white md:text-4xl">
-                La propuesta se puede adaptar a operaciones, control y liderazgo sin cambiar el core del producto.
-              </h2>
-            </div>
-
-            <div className="grid gap-4 md:grid-cols-2">
-              {OCR_MASTER.buyerBlocks.map((block, index) => {
-                const Icon = buyerIcons[index % buyerIcons.length];
-                return (
-                  <Card
-                    key={block.buyer}
-                    className="rounded-[1.7rem] border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))]"
-                  >
-                    <CardHeader>
-                      <div className="flex size-12 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.05] text-sky-300">
-                        <Icon className="h-5 w-5" aria-hidden="true" />
-                      </div>
-                      <CardTitle className="pt-4 text-2xl text-white">{block.buyer}</CardTitle>
-                      <CardDescription className="text-base leading-relaxed text-slate-300">
-                        {block.summary}
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <ul className="space-y-3 text-sm text-slate-300">
-                        {block.items.map((item) => (
-                          <li key={item} className="flex items-start gap-3">
-                            <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-sky-200" aria-hidden="true" />
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </CardContent>
-                  </Card>
-                );
-              })}
-            </div>
-          </section>
-
-          <section id="como-funciona" className="space-y-5">
-            <div className="max-w-3xl">
-              <p className="text-xs uppercase tracking-[0.2em] text-slate-300">Como Funciona</p>
-              <h2 className="mt-3 text-3xl font-semibold text-white md:text-4xl">
-                De un archivo a un dato listo para integrarse, sin vender humo tecnico.
-              </h2>
-            </div>
-
-            <div className="grid gap-4 lg:grid-cols-5">
-              {OCR_MASTER.stages.map((stage, index) => (
-                <Card
-                  key={stage.name}
-                  className="rounded-[1.7rem] border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))]"
-                >
-                  <CardHeader>
-                    <div className="text-xs uppercase tracking-[0.16em] text-slate-300">Paso {index + 1}</div>
-                    <CardTitle className="pt-2 text-2xl text-white">{stage.name}</CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <CardDescription className="text-sm leading-relaxed text-slate-300">
-                      {stage.description}
-                    </CardDescription>
-                    {stage.outputs?.length ? (
-                      <div className="flex flex-wrap gap-2">
-                        {stage.outputs.map((output) => (
-                          <span
-                            key={output}
-                            className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-xs text-slate-200"
-                          >
-                            {output}
-                          </span>
-                        ))}
-                      </div>
-                    ) : null}
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </section>
-
-          <section id="planes" className="space-y-5">
-            <div className="max-w-3xl">
-              <p className="text-xs uppercase tracking-[0.2em] text-slate-300">Pricing</p>
-              <h2 className="mt-3 text-3xl font-semibold text-white md:text-4xl">
-                {OCR_MASTER.pricingTitle}
-              </h2>
-              <p className="mt-3 text-base leading-relaxed text-slate-300">
-                {OCR_MASTER.pricingDescription}
-              </p>
-            </div>
-
-            <div className="grid gap-4 xl:grid-cols-3">
-              {OCR_MASTER.plans.map((plan) => {
-                const tone = toneClasses[plan.tone];
-                return (
-                  <Card
-                    key={plan.name}
-                    className={`overflow-hidden rounded-[1.8rem] border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] ${tone.border}`}
-                  >
-                    <div className={`h-1.5 w-full ${tone.accent}`} />
-                    <CardHeader className="space-y-4">
-                      <Badge
-                        variant="outline"
-                        className="w-fit border-white/10 bg-white/[0.04] px-3 py-1 text-[11px] uppercase tracking-[0.16em] text-slate-300"
-                      >
-                        {plan.audience}
-                      </Badge>
-                      <div>
-                        <CardTitle className="text-4xl text-white">{plan.name}</CardTitle>
-                        <div className="mt-3 text-4xl font-semibold tracking-[-0.04em] text-white md:text-5xl">
-                          {plan.documentsPerMonth}
-                        </div>
-                        <CardDescription className="text-base text-slate-300">
-                          documentos / mes
-                        </CardDescription>
-                      </div>
-                      <p className="text-sm leading-relaxed text-slate-300">{plan.summary}</p>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-2">
-                        <div className="rounded-[1.35rem] border border-white/10 bg-white/[0.05] px-4 py-4">
-                          <div className="text-xs uppercase tracking-[0.16em] text-slate-300">Pago anual</div>
-                          <div className="mt-2 text-3xl font-semibold text-white">{plan.annualPrice}</div>
-                          <div className="mt-1 text-xs text-slate-300">por mes con pago anual</div>
-                        </div>
-                        <div className="rounded-[1.35rem] border border-white/10 bg-white/[0.05] px-4 py-4">
-                          <div className="text-xs uppercase tracking-[0.16em] text-slate-300">Pago mensual</div>
-                          <div className="mt-2 text-3xl font-semibold text-white">{plan.monthlyPrice}</div>
-                          <div className="mt-1 text-xs text-slate-300">por mes con pago mensual</div>
-                        </div>
-                      </div>
-
-                      <div className="rounded-[1.35rem] border border-white/10 bg-white/5 px-4 py-4 text-sm font-medium text-white">
-                        {plan.extraDocPrice}
-                      </div>
-
-                      <ul className="space-y-2 text-sm text-slate-300">
-                        {plan.includes.map((item) => (
-                          <li key={item} className="flex items-start gap-3">
-                            <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-sky-300" aria-hidden="true" />
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </CardContent>
-                    <CardFooter>
-                      <Button
-                        asChild
-                        className="w-full rounded-full border border-white/10 bg-white text-[#070b13]"
-                      >
-                        <a href={mailHref}>
-                          {plan.cta}
-                          <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                        </a>
-                      </Button>
-                    </CardFooter>
-                  </Card>
-                );
-              })}
-            </div>
-          </section>
-
-          <section id="faq" className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
-            <Card className="rounded-[1.8rem] border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-6">
-              <CardHeader className="px-0 pb-4 pt-0">
-                <CardTitle as="h2" className="text-3xl text-white">Preguntas frecuentes</CardTitle>
-                <CardDescription className="text-base leading-relaxed text-slate-300">
-                  Objeciones, conversaciones comerciales y dudas tecnicas frecuentes para presentar OCR Master con claridad.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="px-0 pb-0">
-                <div className="rounded-[1.4rem] border border-white/10 bg-white/5 p-5 text-sm leading-relaxed text-slate-300">
-                  El objetivo de esta pagina es que puedas explicar producto, API, confianza y pricing en minutos, sin depender de una narrativa tecnica compleja.
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="rounded-[1.8rem] border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-2 md:p-4">
-              <Accordion type="single" collapsible className="w-full">
-                {OCR_MASTER.faqs.map((item, idx) => (
-                  <AccordionItem key={item.question} value={`item-${idx}`} className="border-white/10 px-4">
-                    <AccordionTrigger className="text-left text-white hover:no-underline">
-                      {item.question}
-                    </AccordionTrigger>
-                    <AccordionContent className="text-slate-300">{item.answer}</AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
-            </Card>
-          </section>
-
-          <section className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] px-6 py-6 md:px-8">
-            <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-              <div className="max-w-3xl">
-                <div className="text-3xl font-semibold text-white">{OCR_MASTER.closeCta.title}</div>
-                <p className="mt-3 text-base leading-relaxed text-slate-300">{OCR_MASTER.closeCta.text}</p>
-              </div>
-
-              <div className="flex flex-col gap-3 lg:min-w-[22rem]">
-                {OCR_MASTER.footerHighlights.map((item) => (
-                  <div
-                    key={item}
-                    className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-3 text-center text-sm font-medium text-white"
-                  >
-                    {item}
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <Separator className="my-6 bg-border" />
-
-            <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-              <div className="text-sm text-slate-300">
-                Si quieres, armamos un demo o una propuesta comercial lista para presentar con tus propios casos de uso.
-              </div>
-              <div className="flex flex-wrap gap-3">
-                <Button
-                  asChild
-                  className="rounded-full border border-white/10 bg-white text-[#070b13]"
-                >
-                  <a href={mailHref}>{OCR_MASTER.closeCta.primary}</a>
-                </Button>
-                <Button
-                  asChild
-                  variant="ghost"
-                  className="rounded-full border border-white/10 bg-white/[0.04] text-white hover:bg-slate-50"
-                >
-                  <a href={COMPANY.whatsappLink} target="_blank" rel="noreferrer">
-                    {OCR_MASTER.closeCta.secondary}
-                  </a>
-                </Button>
-              </div>
-            </div>
-          </section>
+            </ul>
+            <p className="text-[14.5px] leading-relaxed text-slate-700">Para sistemas, workflows, onboarding o backoffice.</p>
+          </div>
         </div>
-      </main>
 
-      <BrandStamp />
-      <Footer />
-    </div>
+        <SpotlightGroup className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+          {OCR_MASTER.results.map((result, index) => (
+            <div key={result.title} className="y-spot y-card y-reveal flex flex-col gap-3 p-7">
+              <IconTile icon={RESULT_ICONS[index % RESULT_ICONS.length]} />
+              <h3 className="y-h3 mt-2 text-[1.15rem] text-slate-950">{result.title}</h3>
+              <p className="text-[15px] leading-relaxed text-slate-600">{result.description}</p>
+            </div>
+          ))}
+        </SpotlightGroup>
+      </PageSection>
+
+      {/* ---------------- CÓMO FUNCIONA ---------------- */}
+      <PageSection id="como-funciona" tone="dark">
+        <SectionHeader
+          dark
+          eyebrow="Cómo funciona"
+          title="Del archivo a la integración, en cinco pasos."
+          description={OCR_MASTER.apiDescription}
+        />
+        <ol className={`mt-16 ${stepGridClass(OCR_MASTER.stages.length)}`}>
+          {OCR_MASTER.stages.map((stage, index) => (
+            <StepCard key={stage.name} index={index} title={stage.name} description={stage.description} chips={stage.outputs} />
+          ))}
+        </ol>
+      </PageSection>
+
+      {/* ---------------- REQUEST / RESPONSE ---------------- */}
+      <PageSection id="api" tone="mist">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-10">
+          <div className="flex min-w-0 flex-col items-start gap-6 lg:col-span-5">
+            <span className="y-eyebrow">{OCR_MASTER.apiBadge}</span>
+            <h2 className="y-h2 text-slate-950">Un endpoint. Una respuesta en JSON.</h2>
+            <p className="y-lead">
+              Envías el archivo a <code className="rounded-md bg-white px-1.5 py-0.5 font-mono text-[0.9em] text-slate-900 shadow-[inset_0_0_0_1px_#e2e8f0]">POST /v1/process</code>{" "}
+              autenticado con <code className="rounded-md bg-white px-1.5 py-0.5 font-mono text-[0.9em] text-slate-900 shadow-[inset_0_0_0_1px_#e2e8f0]">x-api-key</code>{" "}
+              y recibes los datos listos para consumir.
+            </p>
+            <CheckList items={OCR_MASTER.pageSupportPoints} />
+
+            <div className="y-card mt-2 flex w-full flex-col gap-2 p-6">
+              <span className="flex items-center gap-2.5 font-mono text-[12px] uppercase tracking-[0.12em] text-sky-700">
+                <Gauge className="h-4 w-4" strokeWidth={1.8} aria-hidden="true" />
+                {OCR_MASTER.metaTitle}
+              </span>
+              <p className="y-h3 text-[1.35rem] text-slate-950">{OCR_MASTER.metaValue}</p>
+              <p className="text-[14.5px] leading-relaxed text-slate-600">{OCR_MASTER.metaDescription}</p>
+            </div>
+          </div>
+
+          <div className="flex min-w-0 flex-col gap-4 lg:col-span-7">
+            <CodeWindow title="Request · curl" meta={<span className="font-mono text-[12px] text-slate-400">multipart/form-data</span>}>
+              <CodeBlock tokens={SAMPLE_REQUEST} label="Ejemplo de solicitud con curl a OCR Master" />
+            </CodeWindow>
+            <CodeWindow title="Response · application/json" meta={<StatusOk />}>
+              <CodeBlock tokens={RESPONSE_TOKENS} label="Ejemplo de respuesta JSON de la solicitud" />
+            </CodeWindow>
+            <p className="text-[13.5px] leading-relaxed text-slate-600">
+              Ejemplo ilustrativo con datos ficticios. La estructura final depende del tipo documental y de la configuración del flujo.
+            </p>
+          </div>
+        </div>
+      </PageSection>
+
+      {/* ---------------- CASOS DE USO ---------------- */}
+      <PageSection id="perfiles" tone="light">
+        <SectionHeader
+          eyebrow="Casos de uso"
+          title="Para operaciones, control y liderazgo."
+          description="La misma API se adapta a cada área sin cambiar el core del producto."
+        />
+        <SpotlightGroup className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-2">
+          {OCR_MASTER.buyerBlocks.map((block, index) => (
+            <div key={block.buyer} className="y-spot y-card y-reveal flex flex-col gap-4 p-7 sm:p-8">
+              <div className="flex items-start gap-4">
+                <IconTile icon={BUYER_ICONS[index % BUYER_ICONS.length]} />
+                <div className="flex min-w-0 flex-col gap-1.5">
+                  <h3 className="y-h3 text-[1.3rem] text-slate-950">{block.buyer}</h3>
+                  <p className="text-[15px] leading-relaxed text-slate-600">{block.summary}</p>
+                </div>
+              </div>
+              <CheckList items={block.items} className="border-t border-slate-200 pt-5" />
+            </div>
+          ))}
+        </SpotlightGroup>
+      </PageSection>
+
+      {/* ---------------- PLANES ---------------- */}
+      <PageSection id="planes" tone="mist">
+        <SectionHeader eyebrow="Precios" title={`${OCR_MASTER.pricingTitle}.`} description={OCR_MASTER.pricingDescription} />
+
+        <div className="mt-12 grid grid-cols-1 items-stretch gap-5 lg:grid-cols-3">
+          {OCR_MASTER.plans.map((plan) => (
+            <div key={plan.name} className="y-card y-reveal flex flex-col gap-6 p-7 sm:p-8">
+              <div className="flex flex-col gap-3">
+                <span className="w-fit rounded-full bg-sky-50 px-3 py-1 font-mono text-[11px] uppercase tracking-[0.1em] text-sky-800">
+                  {plan.audience}
+                </span>
+                <h3 className="y-h3 text-[1.35rem] text-slate-950">{plan.name}</h3>
+                <p className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+                  <span className="font-headline text-[2.6rem] font-semibold leading-none tracking-[-0.035em] text-slate-950 tabular-nums">
+                    {plan.documentsPerMonth}
+                  </span>
+                  <span className="whitespace-nowrap text-base font-medium text-slate-600">documentos/mes</span>
+                </p>
+                <p className="text-[15px] leading-relaxed text-slate-600">{plan.summary}</p>
+              </div>
+
+              <dl className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+                <div className="flex flex-col gap-1 rounded-2xl bg-mist p-4">
+                  <dt className="text-[13px] text-slate-600">Pago anual</dt>
+                  <dd className="font-headline text-[1.5rem] font-semibold tracking-[-0.02em] text-slate-950 tabular-nums">{plan.annualPrice}</dd>
+                  <dd className="text-[12.5px] text-slate-600">por mes</dd>
+                </div>
+                <div className="flex flex-col gap-1 rounded-2xl bg-mist p-4">
+                  <dt className="text-[13px] text-slate-600">Pago mensual</dt>
+                  <dd className="font-headline text-[1.5rem] font-semibold tracking-[-0.02em] text-slate-950 tabular-nums">{plan.monthlyPrice}</dd>
+                  <dd className="text-[12.5px] text-slate-600">por mes</dd>
+                </div>
+              </dl>
+
+              <div className="flex flex-col gap-4 border-t border-slate-200 pt-5">
+                <p className="text-[14.5px] font-medium text-sky-800">{plan.extraDocPrice}</p>
+                <CheckList items={plan.includes} />
+              </div>
+
+              <a
+                href={mailHref(plan.name)}
+                className="y-btn y-btn-outline mt-auto w-full plausible-event-name=Plan+Click plausible-event-location=planes plausible-event-product=ocr-master"
+              >
+                {plan.cta}
+                <ArrowRight className="y-arrow h-4 w-4" aria-hidden="true" />
+              </a>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-6 flex flex-col gap-5 rounded-[1.75rem] border-[1.5px] border-dashed border-slate-300 p-7 sm:p-8 md:flex-row md:items-center md:justify-between">
+          <div className="flex max-w-2xl flex-col gap-2">
+            <h3 className="y-h3 text-[1.2rem] text-slate-950">¿No tienes equipo para integrar una API?</h3>
+            <p className="text-[15px] leading-relaxed text-slate-600">
+              OCR para empresas parte con una evaluación sobre una muestra real de tus documentos: qué campos se extraen, con qué calidad
+              y cómo se integran a tu flujo.
+            </p>
+          </div>
+          <div className="shrink-0">
+            <TextLink href="/ocr">Ver OCR para empresas</TextLink>
+          </div>
+        </div>
+      </PageSection>
+
+      {/* ---------------- PREGUNTAS ---------------- */}
+      <FaqSection
+        title="Dudas frecuentes sobre OCR Master."
+        items={FAQS}
+        aside={
+          <div className="mt-2 flex w-full flex-col gap-3 rounded-2xl bg-mist p-5 text-[14.5px] leading-relaxed text-slate-600">
+            <p className="font-semibold text-slate-900">¿Prefieres un servicio gestionado?</p>
+            <p>
+              OCR para empresas es la versión gestionada: partimos evaluando tus documentos y definimos contigo el siguiente paso, sea demo,
+              piloto o implementación.
+            </p>
+            <TextLink href="/ocr">Ver OCR para empresas</TextLink>
+          </div>
+        }
+      />
+
+      {/* ---------------- CIERRE ---------------- */}
+      <CtaBand
+        eyebrow="OCR Master API"
+        title={OCR_MASTER.closeCta.title}
+        text={OCR_MASTER.closeCta.text}
+        primary={{ label: OCR_MASTER.closeCta.primary, href: mailHref(), event: `${DEMO_EVENT} plausible-event-location=cta` }}
+        secondary={{ ...WHATSAPP_ACTION, label: OCR_MASTER.closeCta.secondary }}
+      />
+    </PageShell>
   );
 }
