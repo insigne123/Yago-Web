@@ -24,6 +24,11 @@ import { createPageMetadata } from "@/lib/seo";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
+/** "noviembre de 2026" a partir de la fecha de revisión de la página. */
+function reviewedLabel(modifiedDate = "2026-09-15") {
+  return new Intl.DateTimeFormat("es-CL", { month: "long", year: "numeric", timeZone: "America/Santiago" }).format(new Date(`${modifiedDate}T12:00:00.000Z`));
+}
+
 export function generateStaticParams() {
   return SEO_PAGES.map((page) => ({ slug: page.slug }));
 }
@@ -162,6 +167,28 @@ export default async function SeoSolutionPage({ params }: PageProps) {
         </div>
       </PageSection>
 
+      {/* ---------------- EJEMPLOS ---------------- */}
+      {page.scenarios?.length ? (
+        <PageSection id="ejemplos" tone="mist">
+          <SectionHeader eyebrow="Ejemplos" title="Cómo se ve antes y después." />
+          <ul className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-2">
+            {page.scenarios.map((item) => (
+              <li key={item.title} className="y-card y-reveal flex flex-col gap-4 p-7">
+                <h3 className="y-h3 text-[1.25rem] text-slate-950">{item.title}</h3>
+                <p className="text-[15px] leading-relaxed text-slate-600">
+                  <span className="mb-1 block font-mono text-[11.5px] uppercase tracking-[0.1em] text-slate-500">Hoy</span>
+                  {item.before}
+                </p>
+                <p className="text-[15px] leading-relaxed text-slate-700">
+                  <span className="mb-1 block font-mono text-[11.5px] uppercase tracking-[0.1em] text-sky-700">Con automatización</span>
+                  {item.after}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </PageSection>
+      ) : null}
+
       {/* ---------------- CÓMO TRABAJAMOS ---------------- */}
       <PageSection id="como-trabajamos" tone="dark">
         <SectionHeader
@@ -177,12 +204,39 @@ export default async function SeoSolutionPage({ params }: PageProps) {
         </ol>
       </PageSection>
 
+      {/* ---------------- GUÍA PRÁCTICA ---------------- */}
+      {page.guide?.length ? (
+        <PageSection id="guia" tone="mist">
+          <SectionHeader eyebrow="Guía práctica" title="Cómo aplicarlo en tu empresa." />
+          <div className="mt-14 grid grid-cols-1 gap-5 lg:grid-cols-2">
+            {page.guide.map((section) => (
+              <article key={section.heading} className="y-card y-reveal flex flex-col gap-4 p-7 sm:p-8">
+                <h3 className="y-h3 text-[1.25rem] text-slate-950">{section.heading}</h3>
+                {section.paragraphs.map((paragraph) => (
+                  <p key={paragraph} className="text-[15.5px] leading-relaxed text-slate-700">{paragraph}</p>
+                ))}
+                {section.bullets?.length ? (
+                  <ul className="flex flex-col gap-2.5">
+                    {section.bullets.map((bullet) => (
+                      <li key={bullet} className="flex gap-2.5 text-[15px] leading-snug text-slate-700">
+                        <Check className="mt-0.5 h-4 w-4 shrink-0 text-sky-600" strokeWidth={2.4} aria-hidden="true" />
+                        {bullet}
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
+              </article>
+            ))}
+          </div>
+        </PageSection>
+      ) : null}
+
       {/* ---------------- PREGUNTAS + RELACIONADOS ---------------- */}
       <FaqSection
         items={page.faq}
         aside={
           <div className="flex w-full flex-col gap-5">
-            <p className="text-[14px] text-slate-600">Contenido revisado en septiembre de 2026.</p>
+            <p className="text-[14px] text-slate-600">Contenido revisado en {reviewedLabel(page.modifiedDate)}.</p>
             <nav aria-label="Páginas relacionadas" className="w-full rounded-2xl bg-mist p-5 shadow-[inset_0_0_0_1px_rgba(15,23,42,0.06)]">
               <p className="font-mono text-[11.5px] font-medium uppercase tracking-[0.12em] text-slate-600">Relacionado</p>
               <ul className="mt-3 flex flex-col">

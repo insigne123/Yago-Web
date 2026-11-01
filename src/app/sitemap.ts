@@ -9,10 +9,13 @@ import { getPublishedCaseStudies } from "@/config/evidence";
 import { OCR_PAGE } from "@/config/ocr";
 import { DISCOVERY_UPDATED } from "@/config/discovery";
 import { CATALOG_UPDATED } from "@/config/catalog-guidance";
+import { GLOSSARY_UPDATED } from "@/config/glossary";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = process.env.NEXT_PUBLIC_SITE_URL || "https://yago.cl";
   const siteUpdated = new Date(`${ENTITY.contentUpdated}T12:00:00.000Z`);
+  // El índice del blog cambia cuando se publica o revisa un artículo.
+  const blogUpdated = new Date(`${BLOG_POSTS.map((post) => post.modifiedDate || post.date).sort().at(-1)}T12:00:00.000Z`);
 
   const entries: MetadataRoute.Sitemap = [
     { url: `${base}/`, lastModified: DISCOVERY_UPDATED, changeFrequency: "monthly", priority: 1 },
@@ -24,8 +27,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...getPublishedCaseStudies().map((item): MetadataRoute.Sitemap[number] => ({ url: `${base}/casos/${item.slug}`, lastModified: new Date(item.modifiedDate || item.publishedDate), changeFrequency: "monthly", priority: 0.7 })),
     { url: `${base}/precios`, lastModified: siteUpdated, changeFrequency: "monthly", priority: 0.85 },
     { url: `${base}/proceso`, lastModified: siteUpdated, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${base}/blog`, lastModified: CATALOG_UPDATED, changeFrequency: "weekly", priority: 0.8 },
-    { url: `${base}/glosario`, lastModified: siteUpdated, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${base}/blog`, lastModified: blogUpdated, changeFrequency: "weekly", priority: 0.8 },
+    { url: `${base}/glosario`, lastModified: new Date(`${GLOSSARY_UPDATED}T12:00:00.000Z`), changeFrequency: "monthly", priority: 0.7 },
     ...BLOG_POSTS.map(
       (post): MetadataRoute.Sitemap[number] => ({
         url: `${base}/blog/${post.slug}`,

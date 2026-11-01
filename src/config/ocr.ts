@@ -36,14 +36,15 @@ export type OcrFaq = {
 const EVALUATION_CTA = "Solicitar evaluación";
 
 export const OCR_PAGE = {
-  modifiedDate: "2026-10-25",
-  seoTitle: "OCR y digitalización de documentos en Chile | YAGO",
+  modifiedDate: "2026-11-01",
+  seoTitle: "Digitalización de documentos con OCR en Chile | YAGO",
   seoDescription:
-    "OCR y procesamiento inteligente de documentos para empresas en Chile. Extrae y valida datos de facturas, contratos y PDFs para planillas, ERP y aplicaciones.",
+    "Servicio de digitalización de documentos con OCR e IA para empresas en Chile: extrae y valida datos de facturas, contratos y PDFs para tu planilla o ERP.",
   nav: [
     { name: "Resumen", href: "#resumen" },
     { name: "El problema", href: "#problema" },
     { name: "Cómo funciona", href: "#como-funciona" },
+    { name: "Servicio", href: "#servicio-digitalizacion" },
     { name: "Casos de uso", href: "#casos-de-uso" },
     { name: "Más que OCR", href: "#mas-que-ocr" },
     { name: "Preguntas", href: "#faq" },
@@ -51,7 +52,7 @@ export const OCR_PAGE = {
   ],
   hero: {
     badge: "OCR para empresas",
-    title: "OCR y digitalización de documentos para empresas",
+    title: "Digitalización de documentos con OCR para empresas",
     description:
       "Convierte facturas, contratos y PDFs escaneados en datos estructurados para tu planilla, ERP o aplicación. Evaluamos tus archivos, definimos campos y validaciones, e integramos el resultado en tu proceso.",
     proofSignals: [
@@ -158,6 +159,28 @@ export const OCR_PAGE = {
       "OCR e IA al servicio del resultado operativo",
       "Salida útil para procesos reales, no solo lectura de texto",
       "Adaptable al flujo actual de tu empresa",
+    ],
+  },
+  digitization: {
+    eyebrow: "Digitalización de documentos",
+    title: "Servicio de digitalización de documentos para empresas",
+    paragraphs: [
+      "Nuestro servicio de digitalización de documentos convierte PDFs, imágenes y escaneos en datos que tu operación puede usar. Está pensado para empresas en Chile que reciben facturas, órdenes de compra, contratos, formularios, guías, certificados y otros documentos administrativos, incluidos archivos históricos escaneados: extraemos los campos que necesita cada proceso.",
+      "A diferencia de un software que tu equipo debe configurar por su cuenta, el servicio incluye la definición de campos, las reglas de validación y la integración. Los casos dudosos quedan marcados para que tu equipo los revise antes de la carga, y los datos aprobados llegan a tu planilla, ERP o sistema interno por la conexión que acordemos.",
+      "Partimos desde archivos digitales o ya escaneados: no hacemos escaneo físico ni custodia de archivos en papel. El servicio se cotiza según volumen, tipos de documento e integraciones, después de evaluar una muestra de tus documentos reales.",
+    ],
+    bullets: [
+      "Evaluación inicial con una muestra de tus documentos reales.",
+      "Campos y reglas de validación definidos para tu proceso.",
+      "Extracción desde PDFs, imágenes y escaneos, incluidos archivos históricos.",
+      "Casos dudosos marcados para revisión de tu equipo antes de la carga.",
+      "Integración con planillas, ERP o sistemas internos, y API con OCR Master.",
+      "Cotización según volumen, tipos de documento e integraciones.",
+    ],
+    guides: [
+      { label: "Digitalización de documentos: qué es y cómo se hace", href: "/blog/ocr-con-ia-digitalizar-documentos" },
+      { label: "Cuánto cuesta digitalizar documentos", href: "/blog/cuanto-cuesta-digitalizar-documentos" },
+      { label: "Validez legal de documentos digitalizados en Chile", href: "/blog/validez-legal-documentos-digitalizados-chile" },
     ],
   },
   steps: [
@@ -287,8 +310,12 @@ export const OCR_PAGE = {
       answer: "Sí. Además de extraer datos, YAGO implementa integraciones con sistemas, flujos de aprobación y avisos, aplicaciones a medida y asistentes que consultan documentos con referencias. La evaluación define las conexiones, los permisos y las revisiones que necesita tu proceso.",
     },
     {
-      question: "¿Qué tipo de documentos pueden procesar?",
-      answer: "Podemos evaluar facturas, contratos, formularios, órdenes de compra, guías y otros documentos administrativos o escaneados.",
+      question: "¿En qué se diferencia de un servicio de escaneo de documentos?",
+      answer: "Un servicio de escaneo convierte papel en imágenes o PDFs. Nuestro servicio parte de esos archivos y extrae, valida e integra los datos que contienen. Si tus documentos están en papel, el escaneo se hace antes, con tu equipo o con un proveedor de escaneo.",
+    },
+    {
+      question: "¿Qué documentos pueden digitalizar?",
+      answer: "Podemos evaluar facturas, órdenes de compra, contratos, formularios, guías, certificados y otros documentos administrativos, en PDF, imagen o escaneo, incluidos archivos históricos. Si recibes facturas electrónicas con su XML, revisamos si conviene usar esos datos directamente en lugar de leer el PDF.",
     },
     {
       question: "¿Funciona con PDFs escaneados e imágenes?",
@@ -299,12 +326,12 @@ export const OCR_PAGE = {
       answer: "Sí. La evaluación inicial nos permite revisar variaciones de formato y proponer el mejor enfoque para tu flujo documental.",
     },
     {
-      question: "¿La información se puede integrar a otros sistemas?",
-      answer: "Sí. Según el caso, los datos quedan listos para planillas, sistemas internos o flujos administrativos. También existe OCR Master API para integrarlo en tus aplicaciones.",
+      question: "¿Cómo llegan los datos a mi ERP o planilla?",
+      answer: "Una vez revisados y aprobados, los datos se envían a planillas, ERP o sistemas internos por la conexión que acordemos, según las interfaces y accesos disponibles. Si tu equipo técnico prefiere conectarse por API, OCR Master entrega JSON estructurado.",
     },
     {
-      question: "¿Cómo se realiza la evaluación inicial?",
-      answer: "Revisamos tu tipo de documento, volumen aproximado y objetivo operativo para proponerte un siguiente paso claro.",
+      question: "¿Qué necesito para empezar?",
+      answer: "Una muestra de documentos reales, el volumen mensual aproximado, los campos que necesitas y el sistema donde deben quedar los datos. Con eso revisamos formatos, campos, validaciones y conexiones, y te proponemos un siguiente paso: muestra, piloto o implementación.",
     },
     {
       question: "¿Necesito cambiar mis sistemas actuales?",

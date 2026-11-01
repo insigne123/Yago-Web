@@ -7,7 +7,7 @@ import { BLOG_AUTHOR, BLOG_POSTS, getBlogPostBySlug, type BlogSection } from "@/
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { PostCard, formatPostDate } from "@/components/blog/PostCard";
 import { ARTICLE_PROSE, headingId } from "@/components/blog/articleProse";
-import { ActionLink, BOOKING_ACTION, CtaBand, PageHero, PageSection, PageShell } from "@/components/site/PageKit";
+import { ActionLink, BOOKING_ACTION, CtaBand, PageHero, PageSection, PageShell, faqJsonLd } from "@/components/site/PageKit";
 import { createPageMetadata, SITE_URL } from "@/lib/seo";
 import { ReadingProgress } from "@/components/motion/ReadingProgress";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -40,6 +40,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const SUMMARY_ID = "en-resumen";
+const FAQ_ID = "preguntas-frecuentes";
 const SOURCES_ID = "fuentes-articulo";
 
 export default async function BlogPostPage({ params }: Props) {
@@ -56,6 +57,7 @@ export default async function BlogPostPage({ params }: Props) {
 
   const toc = [
     ...post.sections.map((section) => ({ id: headingId(section.heading), label: section.heading })),
+    ...(post.faq?.length ? [{ id: FAQ_ID, label: "Preguntas frecuentes" }] : []),
     { id: SUMMARY_ID, label: "En resumen" },
     ...(post.sources?.length ? [{ id: SOURCES_ID, label: "Fuentes y referencias" }] : []),
   ];
@@ -74,7 +76,7 @@ export default async function BlogPostPage({ params }: Props) {
     publisher: { "@id": `${base}/#organization` },
     mainEntityOfPage: { "@type": "WebPage", "@id": `${base}/blog/${post.slug}` },
     articleSection: post.category,
-    wordCount: [post.intro, ...post.sections.flatMap((section) => [section.heading, ...section.paragraphs, ...(section.bullets ?? []), ...(section.table?.columns ?? []), ...(section.table?.rows.flat() ?? []), ...(section.links?.map((link) => link.label) ?? [])]), post.conclusion]
+    wordCount: [post.intro, ...post.sections.flatMap((section) => [section.heading, ...section.paragraphs, ...(section.bullets ?? []), ...(section.table?.columns ?? []), ...(section.table?.rows.flat() ?? []), ...(section.links?.map((link) => link.label) ?? [])]), ...(post.faq?.flatMap((item) => [item.question, item.answer]) ?? []), post.conclusion]
       .join(" ")
       .split(/\s+/).length,
     abstract: post.conclusion,
@@ -89,6 +91,7 @@ export default async function BlogPostPage({ params }: Props) {
     <PageShell>
       <ReadingProgress targetId="articulo" />
       <JsonLd id={`jsonld-article-${post.slug}`} data={jsonLd} />
+      {post.faq?.length ? <JsonLd id={`jsonld-faq-${post.slug}`} data={faqJsonLd(post.faq)} /> : null}
 
       {/* ---------------- HERO ---------------- */}
       <PageHero
@@ -157,6 +160,18 @@ export default async function BlogPostPage({ params }: Props) {
               {post.sections.map((section) => (
                 <SectionBody key={section.heading} {...section} />
               ))}
+
+              {post.faq?.length ? (
+                <>
+                  <h2 id={FAQ_ID}>Preguntas frecuentes</h2>
+                  {post.faq.map((item) => (
+                    <div key={item.question}>
+                      <h3>{keepCodesTogether(item.question)}</h3>
+                      <p>{item.answer}</p>
+                    </div>
+                  ))}
+                </>
+              ) : null}
             </div>
 
             <section

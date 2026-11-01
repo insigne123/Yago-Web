@@ -80,7 +80,9 @@ export const KEY_FACTS: Record<ProductKeyFacts["slug"], ProductKeyFacts> = {
     ],
     guides: [
       { label: "Registro de contratos y términos en Mi DT: plazos y cómo hacerlo a volumen", href: "/blog/registro-contratos-terminos-mi-dt-plazos" },
-      { label: "Certificados F30 y F30-1: qué son y en qué se diferencian", href: "/blog/certificados-f30-y-f30-1-diferencias" },
+      { label: "Certificados F30 y F30-1: diferencias y cómo obtenerlos", href: "/blog/certificados-f30-y-f30-1-diferencias" },
+      { label: "Control de contratistas: Ley de Subcontratación y F30-1", href: "/blog/control-contratistas-subcontratacion-f30-1" },
+      { label: "Finiquito electrónico en Mi DT: plazos y pago", href: "/blog/finiquito-electronico-mi-dt-plazos" },
       { label: "Glosario: Mi DT, F30, F30-1 y registro electrónico laboral", href: "/glosario#tramites-laborales" },
     ],
     sources: DT_SOURCES,
@@ -118,7 +120,7 @@ export const KEY_FACTS: Record<ProductKeyFacts["slug"], ProductKeyFacts> = {
     ],
     guides: [
       { label: "Glosario: PJUD, Oficina Judicial Virtual y causas penales", href: "/glosario#poder-judicial" },
-      { label: "Qué es la automatización de procesos con IA (y qué no es)", href: "/blog/que-es-la-automatizacion-de-procesos-con-ia" },
+      { label: "Automatización de procesos: qué es, tipos y ejemplos", href: "/blog/que-es-la-automatizacion-de-procesos-con-ia" },
     ],
     sources: [
       { label: "Poder Judicial de Chile", href: "https://www.pjud.cl/" },
@@ -141,9 +143,9 @@ export const KEY_FACTS: Record<ProductKeyFacts["slug"], ProductKeyFacts> = {
     ],
     faqs: [
       {
-        question: "¿Cuánto cuesta el OCR para empresas?",
+        question: "¿Cuánto cuesta el servicio de digitalización de documentos con OCR?",
         answer:
-          "Se cotiza según el volumen mensual, los tipos de documento y los campos que necesitas extraer. El primer paso es una evaluación con una muestra de tus documentos reales para definir alcance y precio.",
+          "Se cotiza según el volumen, los tipos de documento y las integraciones, después de evaluar una muestra de tus documentos reales. No usamos un precio fijo por página, porque el trabajo cambia con los formatos, las validaciones y la revisión que necesita cada proceso. Si prefieres integrar la lectura por tu cuenta, OCR Master tiene planes mensuales publicados.",
       },
       {
         question: "¿Qué diferencia hay entre el OCR de YAGO y OCR Master?",
@@ -151,7 +153,9 @@ export const KEY_FACTS: Record<ProductKeyFacts["slug"], ProductKeyFacts> = {
       },
     ],
     guides: [
-      { label: "OCR con IA: cómo convertir documentos en datos útiles", href: "/blog/ocr-con-ia-digitalizar-documentos" },
+      { label: "Digitalización de documentos: qué es, cómo se hace y cuándo usar OCR", href: "/blog/ocr-con-ia-digitalizar-documentos" },
+      { label: "Cuánto cuesta digitalizar documentos: factores y cálculo", href: "/blog/cuanto-cuesta-digitalizar-documentos" },
+      { label: "Validez legal de documentos digitalizados en Chile", href: "/blog/validez-legal-documentos-digitalizados-chile" },
       { label: "Evaluar un proyecto OCR: precisión, validaciones y costo", href: "/blog/evaluar-piloto-ocr-precision-costos" },
       { label: "Glosario: OCR, IDP, API y JSON", href: "/glosario#documentos-e-ia" },
       { label: "Automatización del flujo documental completo", href: "/soluciones/automatizacion-documental" },

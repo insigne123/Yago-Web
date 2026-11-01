@@ -1,12 +1,29 @@
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import { join } from "node:path";
 
 const require = createRequire(import.meta.url);
 export const METRIC_SCOPES = ["https://www.googleapis.com/auth/webmasters.readonly", "https://www.googleapis.com/auth/analytics.readonly"];
 
+/** Ruta de firebase-tools: la variable de entorno o la versión más nueva que dejó `npx` en su caché. */
+export function firebaseToolsRoot() {
+  if (process.env.FIREBASE_TOOLS_MODULE_ROOT) return process.env.FIREBASE_TOOLS_MODULE_ROOT;
+  const caches = [process.env.LOCALAPPDATA && join(process.env.LOCALAPPDATA, "npm-cache", "_npx"), process.env.HOME && join(process.env.HOME, ".npm", "_npx")].filter(Boolean);
+  const found = [];
+  for (const cache of caches) {
+    if (!existsSync(cache)) continue;
+    for (const entry of readdirSync(cache)) {
+      const root = join(cache, entry, "node_modules", "firebase-tools");
+      try { found.push({ root, version: JSON.parse(readFileSync(join(root, "package.json"), "utf8")).version.split(".").map(Number) }); } catch { /* Sin firebase-tools en esta entrada. */ }
+    }
+  }
+  found.sort((a, b) => b.version[0] - a.version[0] || b.version[1] - a.version[1] || b.version[2] - a.version[2]);
+  return found[0]?.root;
+}
+
 export async function cloudSession() {
-  const root = process.env.FIREBASE_TOOLS_MODULE_ROOT;
-  if (!root) throw new Error("FIREBASE_TOOLS_MODULE_ROOT no configurado.");
+  const root = firebaseToolsRoot();
+  if (!root) throw new Error("No se encontró firebase-tools: ejecuta `npx --yes firebase-tools@15.32.1 --version` o define FIREBASE_TOOLS_MODULE_ROOT.");
   const { logger } = require(join(root, "lib/logger.js"));
   logger.silent = true;
   logger.clear();

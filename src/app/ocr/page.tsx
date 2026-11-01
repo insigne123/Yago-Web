@@ -25,6 +25,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { Testimonials } from "@/components/cases/Testimonials";
 import { RelatedCases } from "@/components/cases/RelatedCases";
 import {
+  CheckList,
   ComparisonCard,
   FaqSection,
   IconTile,
@@ -238,6 +239,30 @@ export default function OcrPage() {
       {/* ---------------- CASOS DE USO ---------------- */}
       <section id="casos-de-uso" className="y-light y-sheet">
         <div className="y-container">
+          {/* Servicio de digitalización: responde a las búsquedas de "digitalización de documentos". */}
+          <div id="servicio-digitalizacion" className="mb-20 grid scroll-mt-28 grid-cols-1 gap-10 border-b border-slate-200 pb-20 lg:grid-cols-12 lg:gap-10">
+            <div className="flex flex-col gap-5 lg:col-span-6">
+              <span className="y-eyebrow">{OCR_PAGE.digitization.eyebrow}</span>
+              <h2 className="y-h2 text-slate-950">{OCR_PAGE.digitization.title}.</h2>
+              {OCR_PAGE.digitization.paragraphs.map((paragraph) => (
+                <p key={paragraph} className="text-[16.5px] leading-relaxed text-slate-700">{paragraph}</p>
+              ))}
+            </div>
+            <div className="flex flex-col gap-6 lg:col-span-5 lg:col-start-8">
+              <div className="y-card p-7 sm:p-8">
+                <CheckList items={OCR_PAGE.digitization.bullets} />
+              </div>
+              <nav aria-label="Guías sobre digitalización de documentos" className="flex flex-col gap-3">
+                {OCR_PAGE.digitization.guides.map((guide) => (
+                  <Link key={guide.href} href={guide.href} className="y-link w-fit">
+                    {guide.label}
+                    <ArrowRight className="y-arrow h-4 w-4 shrink-0" aria-hidden="true" />
+                  </Link>
+                ))}
+              </nav>
+            </div>
+          </div>
+
           <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <div className="flex max-w-3xl flex-col gap-5">
               <span className="y-eyebrow">Casos de uso</span>

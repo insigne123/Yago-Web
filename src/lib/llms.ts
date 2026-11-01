@@ -194,6 +194,10 @@ export function buildLlmsFullTxt() {
       if (section.links?.length) out.push(...section.links.map((link) => `- [${link.label}](${url(link.href)})`), "");
     }
     if (post.resource) out.push(`[${post.resource.label}](${url(post.resource.href)}): ${post.resource.description}`, "");
+    if (post.faq?.length) {
+      out.push("#### Preguntas frecuentes", "");
+      for (const item of post.faq) out.push(`**${item.question}** ${item.answer}`, "");
+    }
     out.push(`**En resumen:** ${post.conclusion}`, "");
     if (post.sources?.length) out.push("Fuentes:", ...post.sources.map((s) => `- [${s.title}](${s.url})`), "");
     const offering = post.service || post.product;

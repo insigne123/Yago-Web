@@ -315,6 +315,18 @@ export const footerGroups: { title: string; links: { name: string; href: string 
     ],
   },
   {
+    title: "Soluciones",
+    links: [
+      { name: "Finanzas", href: "/soluciones/automatizacion-finanzas" },
+      { name: "Aprobaciones", href: "/soluciones/automatizacion-aprobaciones" },
+      { name: "Reportes", href: "/soluciones/automatizacion-reportes" },
+      { name: "Logística", href: "/soluciones/automatizacion-para-logistica" },
+      { name: "Backoffice", href: "/soluciones/automatizacion-backoffice" },
+      { name: "Carga de datos", href: "/soluciones/automatizacion-carga-de-datos" },
+      { name: "RRHH y dotación", href: "/soluciones/automatizacion-para-rrhh-y-dotacion" },
+    ],
+  },
+  {
     title: "Empresa",
     links: [
       { name: "Nosotros", href: "/nosotros" },

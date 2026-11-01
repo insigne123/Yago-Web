@@ -26,6 +26,8 @@
     "seo:access": "node scripts/setup-seo-access.mjs",
     "seo:report": "node scripts/seo-report.mjs",
     "seo:sitemap": "node scripts/seo/submit-sitemap.mjs",
+    "seo:daily": "node scripts/seo/daily-check.mjs",
+    "seo:bing": "node scripts/seo/bing-status.mjs",
     "seo:bing-key": "powershell -NoProfile -File scripts/seo/save-bing-key.ps1",
     "test:seo-report": "node --test tests/seo/report-utils.spec.mjs",
     "test:axis-feedback": "node --experimental-strip-types --test tests/feedback/axis-feedback.spec.mjs",

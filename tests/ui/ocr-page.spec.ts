@@ -16,8 +16,8 @@ test.describe("ocr landing", () => {
   test("renders core OCR conversion content", async ({ page }, testInfo) => {
     await page.goto("/ocr");
 
-    await expect(page).toHaveTitle(/OCR y digitalización de documentos/i);
-    await expect(page.getByRole("heading", { level: 1, name: /OCR y digitalización de documentos/i })).toBeVisible();
+    await expect(page).toHaveTitle(/^Digitalización de documentos con OCR/i);
+    await expect(page.getByRole("heading", { level: 1, name: /Digitalización de documentos con OCR/i })).toBeVisible();
     await expect(page.getByRole("link", { name: /^Solicitar evaluación$/i }).first()).toBeVisible();
     await expect(page.getByRole("link", { name: /Hablar por WhatsApp/i }).first()).toBeVisible();
     await expect(page.locator("#problema")).toBeAttached();
@@ -58,8 +58,8 @@ test.describe("ocr landing", () => {
     expect(html).toContain("Ejemplo ilustrativo · datos ficticios");
     expect(html).toContain("Podemos conectar lo que sigue");
     const schema = await page.locator("#jsonld-ocr-service").textContent();
-    expect(JSON.parse(schema!).dateModified).toBe("2026-10-25");
-    await expect(page.locator("#resumen time")).toHaveAttribute("datetime", "2026-10-25");
+    expect(JSON.parse(schema!).dateModified).toBe("2026-11-01");
+    await expect(page.locator("#resumen time")).toHaveAttribute("datetime", "2026-11-01");
     const full = await (await request.get("/llms-full.txt")).text();
     expect(full).toContain("### Una factura, de entrada a salida.");
     expect(full).toContain("Excepción: Orden de compra no identificada");

@@ -4,6 +4,9 @@
  * Revisar las definiciones laborales si cambia la normativa (fecha de revisión en ENTITY.contentUpdated).
  */
 
+/** Fecha de la última revisión del glosario (lastmod del sitemap). */
+export const GLOSSARY_UPDATED = "2026-11-01";
+
 export type GlossaryTerm = {
   id: string;
   term: string;
@@ -52,7 +55,20 @@ export const GLOSSARY: GlossaryGroup[] = [
         term: "Digitalización de documentos",
         definition: "Conversión de información documental a una forma digital utilizable. El escaneo genera un archivo; el OCR y la extracción de campos permiten buscar o procesar su contenido.",
         detail: "El servicio OCR de YAGO trabaja sobre PDFs e imágenes disponibles y prepara los datos para validación e integración.",
-        related: [{ label: "OCR y procesamiento documental", href: "/ocr" }],
+        related: [
+          { label: "Servicio de digitalización de documentos", href: "/ocr" },
+          { label: "Guía: digitalización de documentos", href: "/blog/ocr-con-ia-digitalizar-documentos" },
+          { label: "Cuánto cuesta digitalizar documentos", href: "/blog/cuanto-cuesta-digitalizar-documentos" },
+        ],
+      },
+      {
+        id: "microforma",
+        term: "Microforma",
+        aka: ["Ley 18.845", "copia digitalizada con valor legal"],
+        definition:
+          "Reproducción de documentos en un soporte que permite obtener copias fieles, como imágenes digitales. Según la Ley 18.845, en archivos privados tiene el mismo mérito que el original solo si la hace una entidad inscrita en el registro respectivo e incluye actas de apertura y cierre con intervención de un ministro de fe.",
+        detail: "Un escaneo común no cumple por sí solo esos requisitos.",
+        related: [{ label: "Validez legal de documentos digitalizados en Chile", href: "/blog/validez-legal-documentos-digitalizados-chile" }],
       },
       {
         id: "evaluacion-ia",
@@ -141,6 +157,30 @@ export const GLOSSARY: GlossaryGroup[] = [
           "Normas del Código del Trabajo (artículos 183-A y siguientes) que regulan el trabajo en régimen de subcontratación y los servicios transitorios, incluida la responsabilidad de la empresa principal sobre las obligaciones laborales y previsionales de sus contratistas.",
         source: { label: "DT · Subcontratación", href: "https://www.dt.gob.cl/portal/1626/w3-article-93827.html" },
       },
+      {
+        id: "responsabilidad-solidaria-subsidiaria",
+        term: "Responsabilidad solidaria y subsidiaria",
+        definition:
+          "Grado en que la empresa principal responde por las obligaciones laborales y previsionales que un contratista tiene con sus trabajadores. Por regla general es solidaria; pasa a ser subsidiaria si la empresa principal ejerce sus derechos de información y de retención.",
+        related: [{ label: "Control de contratistas y Ley de Subcontratación", href: "/blog/control-contratistas-subcontratacion-f30-1" }],
+        source: { label: "Código del Trabajo, artículos 183-B a 183-D", href: "https://www.bcn.cl/leychile/navegar?idNorma=207436" },
+      },
+      {
+        id: "derecho-de-retencion",
+        term: "Derecho de retención",
+        definition:
+          "Facultad de la empresa principal de retener, de lo que debe pagar al contratista, el monto de las obligaciones laborales y previsionales que este no acredite haber cumplido, para pagar con ese monto al trabajador o a la institución previsional que corresponda.",
+        related: [{ label: "Qué revisar antes de pagar un estado de pago", href: "/blog/control-contratistas-subcontratacion-f30-1" }],
+        source: { label: "Código del Trabajo, artículo 183-C", href: "https://www.bcn.cl/leychile/navegar?idNorma=207436" },
+      },
+      {
+        id: "finiquito-electronico",
+        term: "Finiquito electrónico",
+        definition:
+          "Finiquito que el empleador otorga y el trabajador firma en el Portal Mi DT. Desde la Ley 21.361, de 2021, el Código del Trabajo lo considera ratificado ante el inspector del trabajo.",
+        related: [{ label: "Finiquito electrónico en Mi DT: plazos y pago", href: "/blog/finiquito-electronico-mi-dt-plazos" }],
+        source: { label: "DT · Finiquito electrónico", href: "https://www.dt.gob.cl/portal/1626/w3-article-117245.html" },
+      },
     ],
   },
   {
@@ -201,7 +241,7 @@ export const GLOSSARY: GlossaryGroup[] = [
         term: "Agente de IA",
         definition:
           "Sistema que usa un modelo de lenguaje para decidir pasos y usar herramientas (buscar, consultar una base de datos, llenar un formulario) hasta completar una tarea, con reglas y límites definidos por la empresa.",
-        related: [{ label: "Agentes y asistentes empresariales", href: "/servicios/agentes-ia" }, { label: "Guía: agentes de IA para empresas", href: "/blog/agentes-de-ia-para-empresas" }],
+        related: [{ label: "Agentes y asistentes empresariales", href: "/servicios/agentes-ia" }, { label: "Guía: qué es un agente de IA", href: "/blog/agentes-de-ia-para-empresas" }],
       },
       {
         id: "rag",
@@ -244,7 +284,7 @@ export const GLOSSARY: GlossaryGroup[] = [
         definition:
           "Uso de software para ejecutar tareas repetitivas de un proceso (copiar datos, validar, registrar, avisar) con reglas claras, dejando a las personas las excepciones y decisiones.",
         related: [
-          { label: "Guía: qué es la automatización con IA", href: "/blog/que-es-la-automatizacion-de-procesos-con-ia" },
+          { label: "Guía: qué es la automatización de procesos", href: "/blog/que-es-la-automatizacion-de-procesos-con-ia" },
           { label: "Servicio de automatización", href: "/servicios/automatizacion-procesos" },
         ],
       },

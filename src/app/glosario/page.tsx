@@ -3,8 +3,8 @@ import { ArrowRight, ExternalLink } from "lucide-react";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { CtaBand, PageHero, PageSection, PageShell } from "@/components/site/PageKit";
-import { ENTITY, formatUpdated } from "@/config/entity";
-import { GLOSSARY, GLOSSARY_TERMS } from "@/config/glossary";
+import { formatUpdated } from "@/config/entity";
+import { GLOSSARY, GLOSSARY_TERMS, GLOSSARY_UPDATED } from "@/config/glossary";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata = createPageMetadata({
@@ -26,7 +26,7 @@ export default function GlossaryPage() {
     description: "Términos de integración de IA, desarrollo de aplicaciones, automatización y documentos, además de trámites laborales en Chile.",
     url: `${BASE}/glosario`,
     inLanguage: "es-CL",
-    dateModified: ENTITY.contentUpdated,
+    dateModified: GLOSSARY_UPDATED,
     publisher: { "@id": `${BASE}/#organization` },
     hasDefinedTerm: GLOSSARY_TERMS.map((term) => ({
       "@type": "DefinedTerm",
@@ -58,7 +58,7 @@ export default function GlossaryPage() {
       >
         <p className="font-mono text-[12.5px] uppercase tracking-[0.1em] text-slate-400">
           {GLOSSARY_TERMS.length} términos <span aria-hidden="true">·</span> actualizado en{" "}
-          <time dateTime={ENTITY.contentUpdated}>{formatUpdated()}</time>
+          <time dateTime={GLOSSARY_UPDATED}>{formatUpdated(GLOSSARY_UPDATED)}</time>
         </p>
       </PageHero>
 

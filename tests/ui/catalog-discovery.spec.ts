@@ -5,11 +5,11 @@ test.beforeEach(async ({ page }) => {
   await page.route("**/www.googletagmanager.com/gtag/js?*", (route) => route.fulfill({ status: 200, contentType: "application/javascript", body: "/* no analytics requests in UI checks */" }));
 });
 
-test("blog keeps all twelve guides reachable once and offers four working topic anchors", async ({ page }) => {
+test("blog keeps all sixteen guides reachable once and offers four working topic anchors", async ({ page }) => {
   await page.goto("/blog");
   const articleLinks = await page.locator("#articulos article a").evaluateAll((links) => links.map((link) => link.getAttribute("href")));
-  expect(articleLinks).toHaveLength(12);
-  expect(new Set(articleLinks).size).toBe(12);
+  expect(articleLinks).toHaveLength(16);
+  expect(new Set(articleLinks).size).toBe(16);
   const navigation = page.getByRole("navigation", { name: "Guías por necesidad" });
   const anchors = await navigation.locator("a").evaluateAll((links) => links.map((link) => link.getAttribute("href")!));
   expect(anchors).toHaveLength(4);
@@ -18,7 +18,7 @@ test("blog keeps all twelve guides reachable once and offers four working topic 
   await expect(page.locator("#guias-documentos h2")).toBeInViewport();
   const schema = JSON.parse((await page.locator("#jsonld-blog-collection").textContent())!);
   expect(schema["@type"]).toBe("CollectionPage");
-  expect(schema.mainEntity.numberOfItems).toBe(12);
+  expect(schema.mainEntity.numberOfItems).toBe(16);
 });
 
 test("service comparison exposes the six needs and all eight catalog routes", async ({ page }) => {
@@ -53,15 +53,15 @@ test("product catalog shows two defined products and distinguishes OCR API from 
 test("agent guide explains design choices with sources and connects to the service", async ({ page, request }) => {
   await page.goto("/blog/agentes-de-ia-para-empresas");
   const article = page.locator("article").first();
-  await expect(article.getByRole("heading", { name: "Cómo evaluar el resultado antes de ampliar el alcance" })).toBeAttached();
-  await expect(article).toContainText("Es un ejemplo de diseño, no un caso de cliente");
-  await expect(article.locator("a[href='https://www.anthropic.com/engineering/building-effective-agents']")).toBeAttached();
+  await expect(article.getByRole("heading", { name: "Cómo empezar con un piloto acotado" })).toBeAttached();
+  await expect(article).toContainText("Son ejemplos de diseño, no casos de clientes");
+  await expect(page.locator("a[href='https://www.anthropic.com/research/building-effective-agents']")).toBeAttached();
   await expect(article.locator("a[href='/servicios/agentes-ia']").first()).toBeAttached();
   const schema = JSON.parse((await page.locator("script[id^='jsonld-article-']").textContent())!);
-  expect(schema.dateModified).toBe("2026-10-26");
+  expect(schema.dateModified).toBe("2026-11-01");
   expect(schema.mentions[0].url).toBe("https://yago.cl/servicios/agentes-ia");
   const full = await (await request.get("/llms-full.txt")).text();
-  expect(full).toContain("Cómo evaluar el resultado antes de ampliar el alcance");
+  expect(full).toContain("Cómo empezar con un piloto acotado");
   expect(full).toContain("Servicio cotizado según documentos y alcance");
   const short = await (await request.get("/llms.txt")).text();
   for (const group of ["Automatización y retorno", "Integración, aplicaciones y agentes", "OCR y documentos", "RRHH y Portal Mi DT"]) expect(short).toContain(`### ${group}`);
