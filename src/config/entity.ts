@@ -16,7 +16,7 @@ export const ENTITY = {
    * Perfiles oficiales (LinkedIn, YouTube, Instagram, Google Business Profile, directorios de software…).
    * Agregar las URL reales: ayudan a que buscadores e IA reconozcan a YAGO como una misma entidad.
    */
-  sameAs: ["https://www.linkedin.com/company/yago-spa", "https://clutch.co/profile/yago"] as string[],
+  sameAs: ["https://www.linkedin.com/company/yago-spa", "https://www.youtube.com/@yago-cl", "https://clutch.co/profile/yago"] as string[],
   /** Temas en los que YAGO es especialista (schema.org knowsAbout). */
   knowsAbout: [
     "Auditoría de procesos para automatización e inteligencia artificial",

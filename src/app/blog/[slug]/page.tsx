@@ -14,6 +14,8 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { getPersonJsonLd } from "@/config/team";
 import { YagoMark } from "@/components/brand/YagoLogo";
 import { keepCodesTogether } from "@/lib/typography";
+import { VideoEmbed } from "@/components/content/VideoEmbed";
+import { videoJsonLd } from "@/lib/video";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -132,6 +134,7 @@ export default async function BlogPostPage({ params }: Props) {
       <ReadingProgress targetId="articulo" />
       <JsonLd id={`jsonld-article-${post.slug}`} data={jsonLd} />
       {post.faq?.length ? <JsonLd id={`jsonld-faq-${post.slug}`} data={faqJsonLd(post.faq)} /> : null}
+      {post.video ? <JsonLd id={`jsonld-video-${post.slug}`} data={videoJsonLd(post.video, base, `${base}/#organization`)} /> : null}
 
       {/* ---------------- HERO ---------------- */}
       <PageHero
@@ -207,6 +210,7 @@ export default async function BlogPostPage({ params }: Props) {
             <div className={`mt-12 max-w-[68ch] ${ARTICLE_PROSE}`}>
               <p className="font-headline text-[1.2rem] leading-[1.6] tracking-[-0.01em] text-slate-900 sm:text-[1.3rem]">{post.intro}</p>
               {post.resource ? <aside aria-label="Recurso para la evaluación" className="not-prose my-8 rounded-2xl bg-mist p-6"><p className="font-semibold text-slate-950">Plantilla editable</p><p className="mt-2 text-[15px] leading-relaxed text-slate-600">{post.resource.description}</p><a href={post.resource.href} download className={`y-link mt-4 min-h-11 plausible-event-name=Resource+Download plausible-event-service=${post.resource.service} plausible-event-location=article`}>{post.resource.label}<ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" /></a></aside> : null}
+              {post.video ? <VideoEmbed video={post.video} /> : null}
 
               {post.sections.slice(0, INLINE_CTA_AFTER).map((section) => (
                 <SectionBody key={section.heading} {...section} />

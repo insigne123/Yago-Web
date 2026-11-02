@@ -7,6 +7,8 @@ import { DetailHeroAside, contactLinks, countWord } from "@/components/catalog/D
 import { SpotlightGroup } from "@/components/home/SpotlightGroup";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { VideoEmbed } from "@/components/content/VideoEmbed";
+import { videoJsonLd } from "@/lib/video";
 import { Testimonials } from "@/components/cases/Testimonials";
 import { RelatedCases } from "@/components/cases/RelatedCases";
 import { ServiceFlowExample } from "@/components/services/ServiceFlowExample";
@@ -105,6 +107,7 @@ export default async function ServicePage({ params }: PageProps) {
     <PageShell>
       <JsonLd id={`jsonld-service-${svc.slug}`} data={serviceJsonLd} />
       {faqs.length ? <JsonLd id={`jsonld-service-faq-${svc.slug}`} data={faqJsonLd} /> : null}
+      {svc.video ? <JsonLd id={`jsonld-service-video-${svc.slug}`} data={videoJsonLd(svc.video, SITE_URL, `${SITE_URL}/#organization`)} /> : null}
 
       {/* ---------------- HERO ---------------- */}
       <PageHero
@@ -167,6 +170,7 @@ export default async function ServicePage({ params }: PageProps) {
               </div>
             ))}
           </dl>
+          {svc.video ? <div className="mt-12 max-w-3xl"><VideoEmbed video={svc.video} /></div> : null}
         </PageSection>
       ) : null}
 

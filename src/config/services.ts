@@ -1,6 +1,8 @@
 // src/config/services.ts
 // Definición centralizada de los servicios y su contenido para mini-páginas.
 
+import type { VideoInfo } from "@/lib/video";
+
 export type ServiceStage = {
   name: string;
   description: string;
@@ -83,6 +85,7 @@ export type Service = {
   audience?: string;
   approach?: string; // "Implementación" en la ficha En resumen
   pricing?: string; // "Precio" en la ficha En resumen
+  video?: VideoInfo; // video de YouTube bajo "En resumen", también como VideoObject
   useCases?: ServiceResult[];
   costFactors?: string[];
   relatedGuides?: { label: string; href: string }[];
@@ -95,7 +98,15 @@ export type Service = {
 export const SERVICES: Service[] = [
   {
     slug: "auditoria-ia",
-    modifiedDate: "2026-10-29",
+    modifiedDate: "2026-11-02",
+    video: {
+      youtubeId: "_kGFzz-NcWc",
+      title: "Auditoría IA: no necesitas llegar con una idea | SOF.IA, de YAGO",
+      description: "SOF.IA, la asistente de IA de YAGO, recorre las cuatro etapas de la auditoría IA: levantamiento, análisis, propuesta y hoja de ruta con el primer piloto definido.",
+      uploadDate: "2026-11-02T15:06:25-03:00",
+      duration: "PT1M20S",
+      poster: "/videos/auditoria-ia-sofia.webp",
+    },
     seoTitle: "Auditoría IA de procesos para empresas en Chile | YAGO",
     seoDescription: "Auditamos los procesos de tu empresa para descubrir qué automatizar, qué apps unir en un solo sistema y dónde aplicar IA, con una hoja de ruta priorizada.",
     title: "Auditoría IA de procesos",

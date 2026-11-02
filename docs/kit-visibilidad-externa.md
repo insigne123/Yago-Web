@@ -35,6 +35,7 @@ Usa exactamente estos datos en todos los directorios: la coincidencia de nombre,
 - Tamaño del equipo: 2 a 10 personas (el mismo rango que LinkedIn, en todos los perfiles)
 - Fundador: Nicolás Yarur · https://www.linkedin.com/in/nicolas-yarur/
 - LinkedIn de la empresa: https://www.linkedin.com/company/yago-spa
+- YouTube: https://www.youtube.com/@yago-cl
 - Logo cuadrado 600×600: https://yago.cl/brand/yago-logo.png
 - Isotipo SVG: https://yago.cl/brand/yago-mark.svg
 

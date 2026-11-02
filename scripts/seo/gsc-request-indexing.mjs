@@ -5,7 +5,7 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
-import { chromium } from "@playwright/test";
+import { connectChrome } from "./cdp-connect.mjs";
 
 const LOG = fileURLToPath(new URL("../../.local/seo/daily/solicitudes-indexacion.json", import.meta.url));
 const MAX_PER_RUN = 10;
@@ -14,11 +14,11 @@ if (!urls.length) throw new Error("Uso: node scripts/seo/gsc-request-indexing.mj
 
 async function connect() {
   try {
-    return await chromium.connectOverCDP("http://127.0.0.1:9335");
+    return await connectChrome(9335);
   } catch {
     spawnSync(process.execPath, [fileURLToPath(new URL("../search-console-session.mjs", import.meta.url))], { stdio: "ignore" });
     await new Promise((resolve) => setTimeout(resolve, 7000));
-    return chromium.connectOverCDP("http://127.0.0.1:9335");
+    return connectChrome(9335);
   }
 }
 
@@ -34,9 +34,14 @@ try {
   for (const url of urls) {
     if (results.filter((r) => r.resultado === "solicitada").length >= MAX_PER_RUN) break;
     if (recent.has(url)) { results.push({ url, resultado: "omitida: solicitada hace menos de 7 días" }); continue; }
-    await page.goto(`https://search.google.com/search-console/inspect?resource_id=sc-domain%3Ayago.cl&id=${encodeURIComponent(url)}`, { waitUntil: "domcontentloaded", timeout: 60000 });
+    // La inspección usa un id interno en la URL, así que se entra por la barra "Inspeccionar cualquier URL".
+    await page.goto("https://search.google.com/search-console?resource_id=sc-domain%3Ayago.cl", { waitUntil: "domcontentloaded", timeout: 60000 });
     await page.waitForTimeout(4000);
     if (/accounts\.google\.com|search-console\/about/.test(page.url())) { results.push({ url, resultado: "sin sesión" }); break; }
+    const search = page.locator("input[aria-label*='nspeccionar'], input[aria-label*='nspect']").first();
+    await search.click();
+    await search.fill(url);
+    await page.keyboard.press("Enter");
     // Veredicto de la inspección: "La URL no está en Google" o "La URL está en Google".
     const verdict = page.getByText(/La URL (no )?está en Google|URL is (not )?on Google/i).first();
     await verdict.waitFor({ timeout: 90000 }).catch(() => {});

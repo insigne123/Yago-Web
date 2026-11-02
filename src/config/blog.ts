@@ -2,6 +2,7 @@
 // Artículos del blog de YAGO orientados a SEO sobre automatización con IA.
 
 import { EDITORIAL_AUTHOR } from "@/config/team";
+import type { VideoInfo } from "@/lib/video";
 
 export type BlogSection = {
   heading: string;
@@ -30,6 +31,8 @@ export type BlogPost = {
   /** Preguntas frecuentes visibles al final del artículo (también como FAQPage). */
   faq?: { question: string; answer: string }[];
   sources?: { title: string; url: string }[];
+  /** Video de YouTube que resume la guía; se muestra después de la introducción y como VideoObject. */
+  video?: VideoInfo;
   /** Producto relacionado que se muestra al final del artículo. */
   product?: { name: string; href: string; text: string };
   service?: { name: string; href: string; text: string };
@@ -1395,7 +1398,15 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: "certificados-f30-y-f30-1-diferencias",
-    modifiedDate: "2026-11-01",
+    modifiedDate: "2026-11-02",
+    video: {
+      youtubeId: "_TSViR4tj5Q",
+      title: "F30 y F30-1: la diferencia en 60 segundos | Lunes en la oficina, Ep. 1",
+      description: "Lunes en la mañana. A Carola, jefa de RRHH, le llega un correo: \"F30-1 para el estado de pago\". El video explica en 60 segundos qué muestra el F30, qué certifica el F30-1, quién los pide y dónde se obtienen.",
+      uploadDate: "2026-11-02T15:04:01-03:00",
+      duration: "PT59S",
+      poster: "/videos/f30-y-f30-1-lunes-en-la-oficina.webp",
+    },
     title: "Certificados F30 y F30-1: qué son, en qué se diferencian y cómo obtenerlos",
     seoTitle: "F30 y F30-1: qué son, diferencias y cómo obtenerlos | YAGO",
     description: "Qué acredita el F30 y el F30-1, quién puede pedirlos, paso a paso en Mi DT, vigencia, cómo se verifican y qué hacer si el F30-1 no se puede emitir.",
@@ -2243,7 +2254,15 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: "ocr-con-ia-digitalizar-documentos",
-    modifiedDate: "2026-11-01",
+    modifiedDate: "2026-11-02",
+    video: {
+      youtubeId: "7i2mmmVsXfA",
+      title: "Digitalizar no es escanear | Los documentos hablan",
+      description: "Escanear, reconocer texto con OCR y extraer datos son tres trabajos distintos con un mismo nombre. El video muestra qué entrega cada uno y cuándo conviene usar el XML de la factura electrónica en vez de leer el PDF.",
+      uploadDate: "2026-11-02T15:05:19-03:00",
+      duration: "PT59S",
+      poster: "/videos/digitalizar-no-es-escanear.webp",
+    },
     title: "Digitalización de documentos: qué es, cómo se hace y cuándo usar OCR con IA",
     seoTitle: "Digitalización de documentos en empresas: guía | YAGO",
     description: "Qué es la digitalización de documentos, cómo se diferencia de escanear o de la gestión documental, cómo se hace paso a paso y cuándo usar OCR con IA.",

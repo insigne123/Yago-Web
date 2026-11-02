@@ -93,7 +93,7 @@ Corren mientras la app de Claude está abierta en este computador. Si está cerr
 
 | Tarea | Cuándo | Qué hace | Necesita al dueño |
 | --- | --- | --- | --- |
-| YAGO · SEO diario | Todos los días, 08:30 | Reporte de Google, GA4 y Bing; resumen diario; IndexNow de lo que cambió; envío a Bing de URL sin rastrear; solicitudes de indexación en Search Console si hay sesión abierta | Iniciar sesión cuando vence Firebase o Google |
+| YAGO · SEO diario | Todos los días, 08:30 | Reporte de Google, GA4 y Bing; resumen diario; IndexNow de lo que cambió; envío a Bing de URL sin rastrear; hasta 4 solicitudes de indexación por día en Search Console desde el Chrome separado | Iniciar sesión cuando vence Firebase o Google |
 | YAGO · Mejora de contenido diaria | Todos los días, 10:30 | Elige la oportunidad con más impacto del resumen y prepara una mejora concreta con fuentes. Publica solo si la publicación automática está activada | Activar o no la publicación automática |
 | YAGO · Revisión semanal GEO | Lunes, 11:30 | Hace 5 preguntas rotativas en Perplexity y Copilot y registra si citan a YAGO. Prepara además un borrador de post de LinkedIn | Publicar el post |
 | YAGO - Seguimiento SEO (Windows) | Lunes, 09:00 | Reporte semanal ya existente | Nada |
@@ -118,17 +118,21 @@ Tareas puntuales programadas:
 Ordenado por impacto:
 
 1. **Sesiones de Google.**
-   - Firebase y la sesión web de Google vencen cada pocos días, y eso detuvo varios reportes en octubre.
-   - Es probable que se deba al control de sesión de Google Workspace. Se revisa en Admin › Seguridad › Control de acceso y datos › Control de sesión de Google Cloud y Control de sesión de Google.
+   - Firebase vence cada pocos días (volvió a pasar el 2 de noviembre) y detiene reportes, envíos a Bing y despliegues.
+   - Es una política de Google Workspace que solo puede cambiar el administrador: Admin › Seguridad › Control de acceso y de datos › Control de sesión de Google Cloud. Hay que elegir no requerir reautenticación, o eximir las apps de confianza y marcar "Firebase CLI" como de confianza en Controles de API. En la misma sección, Control de sesión de Google define cuánto dura la sesión web.
    - Mientras no se ajuste, cuando una tarea lo pida hay que iniciar sesión con `npx --yes firebase-tools@15.32.1 login --reauth`.
-2. **Search Console en el navegador integrado.** Iniciar sesión en Google una vez permite que la tarea diaria solicite la indexación de las URL pendientes (unas 10 por día).
-3. **Reseñas de clientes.** Clutch (https://review.clutch.co/review?provider_id=2738610) y, si se crea, el perfil de Google. Las reseñas son lo que más cita la IA cuando recomienda proveedores. Los mensajes están en `docs/kit-clientes-resenas.md`.
-4. **Perfil de Empresa de Google** como empresa de área de servicio, sin mostrar dirección. Ayuda a que Google y Gemini no confundan a YAGO con "Asesorías e Inversiones Yago Ltda".
-5. **Directorios, medios y partners.** Ver la sección 6.
-6. **LinkedIn.** Publicar los borradores semanales desde la página de empresa.
-7. **Datos pendientes**:
-   - el RUT de Yago SpA, para declararlo en los datos estructurados;
-   - plazo, precio, NDA y obligación de la Auditoría IA.
+2. **Permiso del despliegue diario.** El modo automático bloqueó el despliegue de la tarea de contenido el 2 de noviembre. Se habilita abriendo la tarea en la app, pulsando "Run now" y aprobando el despliegue (la aprobación queda guardada), o agregando la regla de permiso en `.claude/settings.local.json`.
+3. **Reseñas de clientes.** Clutch (https://review.clutch.co/review?provider_id=2738610). Las reseñas son lo que más cita la IA cuando recomienda proveedores. Los mensajes están en `docs/kit-clientes-resenas.md`.
+4. **Directorios, medios y partners.** Ver la sección 6 y `docs/kit-visibilidad-externa.md` (ProyectoIA, TechBehemoths, Capterra/G2, ComparaSoftware, agentes.ai y RankMyAI).
+5. **LinkedIn.** Publicar los borradores semanales desde la página de empresa.
+
+Resuelto el 2 de noviembre:
+
+- **Search Console:** la sesión de Google quedó iniciada en el Chrome separado (`scripts/search-console-session.mjs`). La tarea diaria pide hasta 4 indexaciones por día con `scripts/seo/gsc-request-indexing.mjs`; ese día se pidieron las 10 URL pendientes.
+- **Perfil de Empresa de Google:** no corresponde. YAGO atiende 100 % remoto y Google exige atención presencial; un perfil así puede ser suspendido.
+- **RUT y razón social:** Sociedad de Inversiones Yago SpA, RUT 77.711.804-8, ya están en los datos estructurados, en /nosotros y en llms.txt.
+- **Auditoría IA:** el sitio ya dice cómo se acuerdan plazo y precio, la confidencialidad y que no obliga a implementar con YAGO.
+- **YouTube:** canal https://www.youtube.com/@yago-cl con los 3 videos animados, insertados en la guía de F30, la de digitalización y la Auditoría IA, con datos estructurados de video.
 
 ## 6. Presencia externa
 
