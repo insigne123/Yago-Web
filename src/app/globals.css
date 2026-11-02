@@ -882,6 +882,8 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .y-beam::before, .y-marquee__track { animation: none !important; }
 }
+/* El botón de pausa de la consola también detiene el haz del borde */
+.y-beam[data-paused]::before { animation-play-state: paused; }
 
 /* ===========================================================================
    YAGO 2026 · movimiento (Motion, Lenis, WebGL y haces de luz)

@@ -2,14 +2,17 @@
 
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
+import { onFirstInteraction } from "@/components/motion/firstInteraction";
 
 /**
  * Entradas escalonadas con Motion para todo el sitio, sin tocar cada página:
  * anima las tarjetas `.y-reveal` y los encabezados de cada sección (eyebrow, título, bajada)
  * cuando entran en pantalla. Los que ya se ven al cargar quedan quietos.
  *
- * Mejora progresiva: el HTML del servidor muestra todo; solo después de hidratar se
- * esconden los elementos que aún están fuera de pantalla (clase `y-motion` en <html>).
+ * Mejora progresiva: el HTML del servidor muestra todo; recién con la primera interacción
+ * (cursor, toque, rueda o teclado) se carga Motion y se esconden los elementos que aún están
+ * fuera de pantalla (clase `y-motion` en <html>). Mientras tanto, los navegadores con
+ * `animation-timeline` usan la entrada en CSS de `.y-reveal`.
  */
 const SELECTOR = [
   ".y-reveal",
@@ -30,7 +33,7 @@ export function RevealObserver() {
 
     let disposed = false;
     let cleanup = () => {};
-    void import("motion").then(({ animate, inView, stagger }) => {
+    const cancelWait = onFirstInteraction(() => void import("motion").then(({ animate, inView, stagger }) => {
       if (disposed) return;
 
       const root = document.documentElement;
@@ -84,8 +87,8 @@ export function RevealObserver() {
         stop();
         if (frame) cancelAnimationFrame(frame);
       };
-    }).catch(() => { document.documentElement.classList.remove("y-motion"); });
-    return () => { disposed = true; cleanup(); };
+    }).catch(() => { document.documentElement.classList.remove("y-motion"); }));
+    return () => { disposed = true; cancelWait(); cleanup(); };
   }, [pathname]);
 
   return null;

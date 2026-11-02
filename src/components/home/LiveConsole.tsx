@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { ArrowRight, Check, FileCheck2, TriangleAlert } from "lucide-react";
+import { ArrowRight, Check, FileCheck2, Pause, Play, TriangleAlert } from "lucide-react";
 
 type Product = "SADT" | "AXIS" | "OCR";
 type Filter = "Todo" | Product;
@@ -71,7 +71,12 @@ export function LiveConsole() {
   const [feed, setFeed] = useState<FeedRow[]>(INITIAL);
   const [done, setDone] = useState(252);
   const [total, setTotal] = useState(1284);
-  const [paused, setPaused] = useState(false);
+  // Se detiene con el cursor encima, con el foco del teclado dentro o con el botón de pausa
+  // (contenido que se actualiza solo: WCAG 2.2.2 pide una forma de pausarlo).
+  const [hovering, setHovering] = useState(false);
+  const [focused, setFocused] = useState(false);
+  const [stopped, setStopped] = useState(false);
+  const paused = hovering || focused || stopped;
   const clock = useRef(10 * 60 + 14);
   const cursor = useRef(0);
   const nextId = useRef(100);
@@ -119,14 +124,21 @@ export function LiveConsole() {
   return (
     <div
       className="relative pb-14"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
+      onMouseEnter={() => setHovering(true)}
+      onMouseLeave={() => setHovering(false)}
+      onFocus={() => setFocused(true)}
+      onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setFocused(false);
+      }}
     >
-      <div className="y-beam shadow-[0_50px_100px_-30px_rgba(0,0,0,0.9),0_0_80px_-20px_rgba(56,189,248,0.25)]">
+      <div
+        data-paused={stopped ? "" : undefined}
+        className="y-beam shadow-[0_50px_100px_-30px_rgba(0,0,0,0.9),0_0_80px_-20px_rgba(56,189,248,0.25)]"
+      >
         <div className="y-beam__inner overflow-hidden bg-[#0b1220]">
           <div className="flex items-center justify-between gap-3 border-b border-white/[0.07] px-5 py-4">
             <div className="flex items-center gap-3">
-              <span className="flex gap-1.5" aria-hidden="true">
+              <span className="hidden gap-1.5 sm:flex" aria-hidden="true">
                 <span className="h-2.5 w-2.5 rounded-full bg-white/10" />
                 <span className="h-2.5 w-2.5 rounded-full bg-white/10" />
                 <span className="h-2.5 w-2.5 rounded-full bg-white/10" />
@@ -136,10 +148,33 @@ export function LiveConsole() {
                 <span className="font-mono text-[11.5px] text-slate-400">consola YAGO · ejemplo</span>
               </div>
             </div>
-            <span className="inline-flex items-center gap-2 rounded-full bg-emerald-400/10 px-2.5 py-1 text-xs font-medium text-emerald-300">
-              <span className="h-1.5 w-1.5 animate-y-pulse rounded-full bg-emerald-300" aria-hidden="true" />
-              En línea
-            </span>
+            <div className="flex items-center gap-2">
+              <span
+                className={`inline-flex items-center gap-2 whitespace-nowrap rounded-full px-2.5 py-1 text-xs font-medium ${
+                  stopped ? "bg-white/[0.06] text-slate-300" : "bg-emerald-400/10 text-emerald-300"
+                }`}
+              >
+                <span
+                  className={`h-1.5 w-1.5 rounded-full ${stopped ? "bg-slate-400" : "animate-y-pulse bg-emerald-300"}`}
+                  aria-hidden="true"
+                />
+                {stopped ? "En pausa" : "En línea"}
+              </span>
+              <button
+                type="button"
+                aria-pressed={stopped}
+                aria-label="Pausar la consola"
+                title={stopped ? "Reanudar" : "Pausar"}
+                onClick={() => setStopped((value) => !value)}
+                className="grid h-8 w-8 place-items-center rounded-full text-slate-300 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.14)] transition-colors hover:bg-white/10 hover:text-white"
+              >
+                {stopped ? (
+                  <Play className="h-3.5 w-3.5" strokeWidth={2.2} aria-hidden="true" />
+                ) : (
+                  <Pause className="h-3.5 w-3.5" strokeWidth={2.2} aria-hidden="true" />
+                )}
+              </button>
+            </div>
           </div>
 
           <div className="flex gap-1 px-5 pt-3" role="group" aria-label="Filtrar por producto">

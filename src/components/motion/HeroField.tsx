@@ -1,13 +1,15 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { onFirstInteraction } from "@/components/motion/firstInteraction";
 
 /**
  * Fondo 3D para los heros oscuros: un campo de puntos de luz que ondula como un flujo de datos
  * y reacciona suave al cursor. WebGL directo con un shader propio (~3 KB, sin librerías pesadas).
  *
  * Rendimiento y accesibilidad:
- * - Se inicia cuando el navegador está libre (no bloquea la carga ni el LCP).
+ * - Se inicia con la primera interacción (cursor, toque, rueda o teclado) y cuando el navegador está libre:
+ *   crear el contexto WebGL y compilar los shaders no compite con la carga ni con el LCP.
  * - Solo dibuja mientras el hero está en pantalla y la pestaña visible.
  * - Menos puntos en pantallas chicas; resolución máxima 1,5x.
  * - Con "reducir movimiento" o si el equipo no alcanza ~30 cuadros por segundo, queda un cuadro quieto.
@@ -280,14 +282,18 @@ export function HeroField({ className = "", intensity = 1 }: { className?: strin
     const host = hostRef.current;
     if (!host) return;
     let cleanup: () => void = () => {};
+    let handle = 0;
     const run = () => {
       cleanup = startField(host, intensity);
     };
 
     const hasIdle = typeof window.requestIdleCallback === "function";
-    const handle = hasIdle ? window.requestIdleCallback(run, { timeout: 1200 }) : window.setTimeout(run, 200);
+    const cancelWait = onFirstInteraction(() => {
+      handle = hasIdle ? window.requestIdleCallback(run, { timeout: 1200 }) : window.setTimeout(run, 200);
+    });
 
     return () => {
+      cancelWait();
       if (hasIdle) window.cancelIdleCallback(handle);
       else window.clearTimeout(handle);
       cleanup();

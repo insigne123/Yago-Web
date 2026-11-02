@@ -13,10 +13,10 @@ export const HOME_HERO = {
 };
 
 export const HOME_FACTS = [
-  { value: "Flujos", label: "automatización de tareas y procesos empresariales" },
-  { value: "IA", label: "integración con tus datos, documentos y sistemas" },
-  { value: "Apps", label: "software a medida y desarrollo asistido por IA" },
-  { value: "OCR", label: "documentos convertidos en datos para tu operación" },
+  { value: "Flujos", label: "automatización de tareas y procesos empresariales", href: "/servicios/automatizacion-procesos" },
+  { value: "IA", label: "integración con tus datos, documentos y sistemas", href: "/servicios/integracion-ia" },
+  { value: "Apps", label: "software a medida y desarrollo asistido por IA", href: "/servicios/apps-automatizacion" },
+  { value: "OCR", label: "documentos convertidos en datos para tu operación", href: "/ocr" },
 ];
 
 export const CLIENT_LOGOS = [

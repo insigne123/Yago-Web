@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { onFirstInteraction } from "@/components/motion/firstInteraction";
 
 type MotionModule = typeof import("motion");
 
@@ -70,7 +71,7 @@ export function CountUp({ value, className }: { value: string; className?: strin
 /**
  * Contador "en vivo" para las maquetas de producto: parte en el valor dado y
  * suma de a poco mientras está en pantalla, con un pequeño destello al cambiar.
- * Es ilustrativo (los paneles son datos de ejemplo).
+ * Es ilustrativo (los paneles son datos de ejemplo) y arranca con la primera interacción.
  */
 export function LiveNumber({
   value,
@@ -90,7 +91,7 @@ export function LiveNumber({
     if (!element || reducedMotion()) return;
     let disposed = false;
     let cleanup = () => {};
-    void import("motion").then(({ animate, inView }) => {
+    const cancelWait = onFirstInteraction(() => void import("motion").then(({ animate, inView }) => {
       if (disposed) return;
       let current = parseChilean(value).value;
       let timer = 0;
@@ -129,8 +130,8 @@ export function LiveNumber({
         window.clearTimeout(timer);
         element.textContent = value;
       };
-    }).catch(() => { element.textContent = value; });
-    return () => { disposed = true; cleanup(); };
+    }).catch(() => { element.textContent = value; }));
+    return () => { disposed = true; cancelWait(); cleanup(); };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
 

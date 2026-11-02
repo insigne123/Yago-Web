@@ -47,6 +47,8 @@ type NavbarProps = {
   subnavLabel?: string;
   ctaHref?: string;
   ctaLabel?: string;
+  /** Texto corto del CTA en teléfonos, donde el botón comparte la barra con el logo y el menú. */
+  ctaShortLabel?: string;
   mobileDescription?: string;
   homeHref?: string;
 };
@@ -172,6 +174,7 @@ export function Navbar({
   subnavLabel,
   ctaHref = PRIMARY_CTA.href,
   ctaLabel = PRIMARY_CTA.label,
+  ctaShortLabel = ctaLabel === PRIMARY_CTA.label ? "Agendar" : ctaLabel,
   mobileDescription = "Productos, servicios a medida, casos, precios y recursos de YAGO.",
   homeHref = "/",
 }: NavbarProps = {}) {
@@ -250,11 +253,14 @@ export function Navbar({
               <MessageCircle className="h-[18px] w-[18px]" strokeWidth={1.8} aria-hidden="true" />
               WhatsApp
             </a>
+            {/* Visible también en teléfonos: el CTA principal queda a un toque en cualquier punto de la página. */}
             <SmartLink
               href={ctaHref}
-              className={`y-btn y-btn-primary y-btn-sm hidden sm:inline-flex plausible-event-name=${ctaIsPrimary ? "CTA+Agendar+Sesion" : "CTA+Solicitar+Demo"} plausible-event-location=navbar`}
+              ariaLabel={ctaShortLabel !== ctaLabel ? ctaLabel : undefined}
+              className={`y-btn y-btn-primary y-btn-sm max-sm:px-4 plausible-event-name=${ctaIsPrimary ? "CTA+Agendar+Sesion" : "CTA+Solicitar+Demo"} plausible-event-location=navbar`}
             >
-              {ctaLabel}
+              <span className="sm:hidden">{ctaShortLabel}</span>
+              <span className="hidden sm:inline">{ctaLabel}</span>
             </SmartLink>
 
             <Sheet>

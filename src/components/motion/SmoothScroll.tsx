@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import type Lenis from "lenis";
+import { onFirstInteraction } from "@/components/motion/firstInteraction";
 
 declare global {
   interface Window {
@@ -15,6 +16,7 @@ declare global {
  * - En pantallas táctiles se mantiene el scroll nativo (comportamiento por defecto de Lenis).
  * - Se detiene mientras un modal bloquea el scroll (menú móvil, diálogos de Radix).
  * - Los enlaces a anclas (#formulario, #planes…) se desplazan con el mismo suavizado.
+ * - Se carga con la primera interacción, no durante la carga de la página.
  */
 export function SmoothScroll() {
   useEffect(() => {
@@ -23,7 +25,7 @@ export function SmoothScroll() {
 
     let disposed = false;
     let cleanup = () => {};
-    void import("lenis").then(({ default: LenisConstructor }) => {
+    const cancelWait = onFirstInteraction(() => void import("lenis").then(({ default: LenisConstructor }) => {
       if (disposed) return;
       const headerOffset = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 104;
 
@@ -52,9 +54,9 @@ export function SmoothScroll() {
         lenis.destroy();
         if (window.__lenis === lenis) delete window.__lenis;
       };
-    }).catch(() => { /* El scroll nativo sigue disponible si falla la mejora opcional. */ });
+    }).catch(() => { /* El scroll nativo sigue disponible si falla la mejora opcional. */ }));
 
-    return () => { disposed = true; cleanup(); };
+    return () => { disposed = true; cancelWait(); cleanup(); };
   }, []);
 
   return null;

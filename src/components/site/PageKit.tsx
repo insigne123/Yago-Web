@@ -117,8 +117,8 @@ export function PageHero({
   return (
     <section id="inicio" className="y-dark y-grain relative overflow-hidden pb-24 pt-14 md:pb-28 md:pt-20">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        <div className="absolute right-[-12%] top-[-25%] h-[40rem] w-[40rem] rounded-full bg-sky-400/[0.12] blur-[120px]" />
-        <div className="absolute left-[-15%] top-[-30%] h-[28rem] w-[28rem] rounded-full bg-sky-300/[0.05] blur-[110px]" />
+        <div className="absolute right-[-12%] top-[-10.5rem] h-[40rem] w-[40rem] rounded-full bg-sky-400/[0.12] blur-[120px]" />
+        <div className="absolute left-[-15%] top-[-12.5rem] h-[28rem] w-[28rem] rounded-full bg-sky-300/[0.05] blur-[110px]" />
         {fx ? null : <div className="y-grid-bg" />}
       </div>
       {fx ? <HeroField /> : null}
@@ -346,7 +346,7 @@ export function CtaBand({
   return (
     <section id={id} className="y-dark y-sheet y-grain overflow-hidden">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        <div className="absolute left-1/2 top-[-20%] h-[30rem] w-[50rem] -translate-x-1/2 rounded-full bg-sky-400/[0.12] blur-[120px]" />
+        <div className="absolute left-1/2 top-[-8rem] h-[30rem] w-[50rem] -translate-x-1/2 rounded-full bg-sky-400/[0.12] blur-[120px]" />
         <div className="y-grid-bg" />
       </div>
       <div className="y-container relative mx-auto flex max-w-3xl flex-col items-center gap-6 text-center">
@@ -399,9 +399,9 @@ export function ProductHero({
   aside: ReactNode;
 }) {
   return (
-    <section id="inicio" className="y-mist relative overflow-hidden pb-24 pt-12 md:pb-28 md:pt-16">
+    <section id="inicio" className="y-mist relative overflow-hidden pb-24 pt-12 md:pb-28">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        <div className="absolute right-[-12%] top-[-20%] h-[40rem] w-[40rem] rounded-full bg-sky-300/25 blur-[120px]" />
+        <div className="absolute right-[-12%] top-[-11rem] h-[40rem] w-[40rem] rounded-full bg-sky-300/25 blur-[120px]" />
         <div className="y-grid-bg y-grid-bg-light" />
       </div>
       <div className="y-container relative grid grid-cols-1 items-center gap-14 lg:grid-cols-2 lg:gap-16">
@@ -413,7 +413,8 @@ export function ProductHero({
               {pill}
             </span>
           ) : null}
-          <h1 className="y-display text-[clamp(2.6rem,5.4vw,4.6rem)] text-slate-950">{title}</h1>
+          {/* Escala contenida: con títulos largos (OCR) el CTA sigue sobre el pliegue en laptops de 1280×720 y 1366×768. */}
+          <h1 className="y-display text-[clamp(2.4rem,4.4vw,3.9rem)] text-slate-950">{title}</h1>
           <div className="y-lead max-w-xl">{description}</div>
           <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">{actions}</div>
           {facts?.length ? (

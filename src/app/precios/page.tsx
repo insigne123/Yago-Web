@@ -35,7 +35,7 @@ export default async function PreciosPage() {
       <main id="main-content">
         <section className="y-dark y-grain relative overflow-hidden pb-24 pt-16 md:pb-28 md:pt-24">
           <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-            <div className="absolute left-1/2 top-[-30%] h-[36rem] w-[56rem] -translate-x-1/2 rounded-full bg-sky-400/[0.12] blur-[120px]" />
+            <div className="absolute left-1/2 top-[-10rem] h-[36rem] w-[56rem] -translate-x-1/2 rounded-full bg-sky-400/[0.12] blur-[120px]" />
             <div className="y-grid-bg" />
           </div>
           <div className="y-container relative flex max-w-4xl flex-col items-center gap-6 text-center">

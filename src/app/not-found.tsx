@@ -15,7 +15,7 @@ export default function NotFound() {
     <PageShell>
       <section id="inicio" className="y-dark y-grain relative flex min-h-[72vh] items-center overflow-hidden py-24 md:py-28">
         <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-          <div className="absolute left-1/2 top-[-25%] h-[36rem] w-[56rem] -translate-x-1/2 rounded-full bg-sky-400/[0.12] blur-[120px]" />
+          <div className="absolute left-1/2 top-[-10.5rem] h-[36rem] w-[56rem] -translate-x-1/2 rounded-full bg-sky-400/[0.12] blur-[120px]" />
           <div className="y-grid-bg" />
         </div>
 

@@ -224,7 +224,7 @@ export default function ProductsIndexPage() {
           {/* OCR Master API: ocupa dos columnas para cerrar la grilla */}
           <article className="y-dark y-reveal relative flex flex-col overflow-hidden rounded-[1.5rem] bg-[#0b1220] shadow-[0_40px_80px_-40px_rgba(11,18,32,0.7)] sm:col-span-2">
             <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-              <div className="absolute right-[-20%] top-[-40%] h-[26rem] w-[26rem] rounded-full bg-sky-400/[0.14] blur-[100px]" />
+              <div className="absolute right-[-20%] top-[-13rem] h-[26rem] w-[26rem] rounded-full bg-sky-400/[0.14] blur-[100px]" />
               <div className="y-grid-bg" />
             </div>
             <div className="relative grid flex-1 grid-cols-1 gap-8 p-7 sm:p-9 md:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)] md:items-center">

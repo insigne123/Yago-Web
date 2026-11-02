@@ -85,7 +85,7 @@ export function ContactSection() {
   return (
     <section id="contacto" className="y-dark y-sheet y-grain overflow-hidden">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        <div className="absolute right-[-8%] top-[-10%] h-[36rem] w-[36rem] rounded-full bg-sky-400/[0.12] blur-[120px]" />
+        <div className="absolute right-[-8%] top-[-7rem] h-[36rem] w-[36rem] rounded-full bg-sky-400/[0.12] blur-[120px]" />
       </div>
       <div className="y-container relative grid grid-cols-1 items-center gap-14 lg:grid-cols-12">
         <div className="flex flex-col gap-6 lg:col-span-5">

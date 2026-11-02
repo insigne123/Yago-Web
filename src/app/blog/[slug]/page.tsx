@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, CalendarDays, Clock, ExternalLink, RefreshCw } from "lucide-react";
+import { ArrowLeft, ArrowRight, CalendarDays, ChevronDown, Clock, ExternalLink, RefreshCw } from "lucide-react";
 import { BLOG_AUTHOR, BLOG_POSTS, getBlogPostBySlug, type BlogSection } from "@/config/blog";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { PostCard, formatPostDate } from "@/components/blog/PostCard";
@@ -42,6 +42,46 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 const SUMMARY_ID = "en-resumen";
 const FAQ_ID = "preguntas-frecuentes";
 const SOURCES_ID = "fuentes-articulo";
+/** En móvil y tablet (sin columna lateral), el CTA de diagnóstico aparece después de esta sección. */
+const INLINE_CTA_AFTER = 2;
+
+type TocItem = { id: string; label: string };
+
+function TocList({ items }: { items: TocItem[] }) {
+  return (
+    <ol className="flex flex-col border-l border-slate-200">
+      {items.map((item) => (
+        <li key={item.id}>
+          <a
+            href={`#${item.id}`}
+            className="-ml-px block border-l-2 border-transparent py-1.5 pl-4 text-[14.5px] leading-snug text-slate-700 transition-colors hover:border-sky-500 hover:text-slate-950"
+          >
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ol>
+  );
+}
+
+/** Tarjeta oscura de diagnóstico: columna lateral en escritorio y dentro del artículo en móvil. */
+function DiagnosisCard() {
+  return (
+    <div className="y-dark relative overflow-hidden rounded-[1.5rem] bg-[#0b1220] p-6 shadow-[0_30px_60px_-30px_rgba(11,18,32,0.7)]">
+      <div aria-hidden="true" className="pointer-events-none absolute -right-16 -top-16 h-44 w-44 rounded-full bg-sky-400/[0.16] blur-[60px]" />
+      <div className="relative flex flex-col items-start gap-4">
+        <span className="y-eyebrow">Diagnóstico</span>
+        <p className="font-headline text-[1.2rem] font-semibold leading-snug tracking-[-0.015em] text-white">
+          ¿Quieres aplicar esto en tu operación?
+        </p>
+        <p className="text-[14.5px] leading-relaxed text-slate-300">
+          Revisamos tu necesidad, datos y sistemas para proponer un primer alcance.
+        </p>
+        <ActionLink action={BOOKING_ACTION} size="sm" arrow className="w-full" />
+      </div>
+    </div>
+  );
+}
 
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
@@ -55,7 +95,7 @@ export default async function BlogPostPage({ params }: Props) {
   const offering = post.service || post.product;
   const revised = post.modifiedDate && post.modifiedDate !== post.date ? post.modifiedDate : null;
 
-  const toc = [
+  const toc: TocItem[] = [
     ...post.sections.map((section) => ({ id: headingId(section.heading), label: section.heading })),
     ...(post.faq?.length ? [{ id: FAQ_ID, label: "Preguntas frecuentes" }] : []),
     { id: SUMMARY_ID, label: "En resumen" },
@@ -153,11 +193,34 @@ export default async function BlogPostPage({ params }: Props) {
               />
             </div>
 
+            {/* Índice plegable para móvil y tablet: en escritorio está en la columna lateral. */}
+            <details className="group mt-8 max-w-[68ch] rounded-[1.25rem] bg-mist shadow-[inset_0_0_0_1px_rgba(15,23,42,0.06)] lg:hidden">
+              <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 rounded-[1.25rem] px-5 py-3 font-mono text-[11.5px] font-medium uppercase tracking-[0.12em] text-slate-600 [&::-webkit-details-marker]:hidden">
+                En este artículo
+                <ChevronDown className="h-4 w-4 shrink-0 text-sky-700 transition-transform duration-200 group-open:rotate-180" aria-hidden="true" />
+              </summary>
+              <nav aria-label="Índice del artículo" className="px-5 pb-5">
+                <TocList items={toc} />
+              </nav>
+            </details>
+
             <div className={`mt-12 max-w-[68ch] ${ARTICLE_PROSE}`}>
               <p className="font-headline text-[1.2rem] leading-[1.6] tracking-[-0.01em] text-slate-900 sm:text-[1.3rem]">{post.intro}</p>
               {post.resource ? <aside aria-label="Recurso para la evaluación" className="not-prose my-8 rounded-2xl bg-mist p-6"><p className="font-semibold text-slate-950">Plantilla editable</p><p className="mt-2 text-[15px] leading-relaxed text-slate-600">{post.resource.description}</p><a href={post.resource.href} download className={`y-link mt-4 min-h-11 plausible-event-name=Resource+Download plausible-event-service=${post.resource.service} plausible-event-location=article`}>{post.resource.label}<ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" /></a></aside> : null}
 
-              {post.sections.map((section) => (
+              {post.sections.slice(0, INLINE_CTA_AFTER).map((section) => (
+                <SectionBody key={section.heading} {...section} />
+              ))}
+            </div>
+
+            {post.sections.length > INLINE_CTA_AFTER ? (
+              <aside aria-label="Diagnóstico con YAGO" className="mt-10 max-w-[68ch] lg:hidden">
+                <DiagnosisCard />
+              </aside>
+            ) : null}
+
+            <div className={`mt-14 max-w-[68ch] ${ARTICLE_PROSE}`}>
+              {post.sections.slice(INLINE_CTA_AFTER).map((section) => (
                 <SectionBody key={section.heading} {...section} />
               ))}
 
@@ -253,34 +316,11 @@ export default async function BlogPostPage({ params }: Props) {
           <aside className="hidden lg:col-span-4 lg:col-start-9 lg:block xl:col-span-3 xl:col-start-10" aria-label="Índice y contacto">
             <div className="sticky top-28 flex flex-col gap-6">
               <nav aria-label="Contenido del artículo" className="rounded-[1.5rem] bg-mist p-6 shadow-[inset_0_0_0_1px_rgba(15,23,42,0.06)]">
-                <p className="font-mono text-[11.5px] font-medium uppercase tracking-[0.12em] text-slate-600">En este artículo</p>
-                <ol className="mt-4 flex flex-col border-l border-slate-200">
-                  {toc.map((item) => (
-                    <li key={item.id}>
-                      <a
-                        href={`#${item.id}`}
-                        className="-ml-px block border-l-2 border-transparent py-1.5 pl-4 text-[14.5px] leading-snug text-slate-700 transition-colors hover:border-sky-500 hover:text-slate-950"
-                      >
-                        {item.label}
-                      </a>
-                    </li>
-                  ))}
-                </ol>
+                <p className="mb-4 font-mono text-[11.5px] font-medium uppercase tracking-[0.12em] text-slate-600">En este artículo</p>
+                <TocList items={toc} />
               </nav>
 
-              <div className="y-dark relative overflow-hidden rounded-[1.5rem] bg-[#0b1220] p-6 shadow-[0_30px_60px_-30px_rgba(11,18,32,0.7)]">
-                <div aria-hidden="true" className="pointer-events-none absolute -right-16 -top-16 h-44 w-44 rounded-full bg-sky-400/[0.16] blur-[60px]" />
-                <div className="relative flex flex-col items-start gap-4">
-                  <span className="y-eyebrow">Diagnóstico</span>
-                  <p className="font-headline text-[1.2rem] font-semibold leading-snug tracking-[-0.015em] text-white">
-                    ¿Quieres aplicar esto en tu operación?
-                  </p>
-                  <p className="text-[14.5px] leading-relaxed text-slate-300">
-                    Revisamos tu necesidad, datos y sistemas para proponer un primer alcance.
-                  </p>
-                  <ActionLink action={BOOKING_ACTION} size="sm" arrow className="w-full" />
-                </div>
-              </div>
+              <DiagnosisCard />
             </div>
           </aside>
         </div>

@@ -99,7 +99,7 @@ export function ProductsShowcase() {
           {/* Mosaico: integraciones con haces de luz */}
           <article className="y-dark y-reveal relative overflow-hidden rounded-[1.5rem] bg-[#0b1220] p-7 shadow-[0_40px_80px_-40px_rgba(11,18,32,0.75)] sm:p-9 md:col-span-2 lg:col-span-4">
             <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-              <div className="absolute left-1/2 top-[-30%] h-[22rem] w-[40rem] -translate-x-1/2 rounded-full bg-sky-400/[0.12] blur-[100px]" />
+              <div className="absolute left-1/2 top-[-12rem] h-[22rem] w-[40rem] -translate-x-1/2 rounded-full bg-sky-400/[0.12] blur-[100px]" />
               <div className="y-grid-bg" />
             </div>
             <div className="relative flex h-full flex-col gap-8">
