@@ -6,8 +6,9 @@
  * Mantener consistente con Google Business Profile, LinkedIn y cualquier directorio donde aparezca YAGO.
  */
 export const ENTITY = {
-  /** Razón social. Confirmar que coincide con el SII. */
-  legalName: "Yago SpA",
+  /** Razón social y RUT, como figuran en las licitaciones públicas de la empresa (revisado en noviembre de 2026). */
+  legalName: "Sociedad de Inversiones Yago SpA",
+  taxID: "77.711.804-8",
   /** Fecha de la última revisión general del contenido (se muestra como "Actualizado"). */
   contentUpdated: "2026-10-03",
   country: "CL",

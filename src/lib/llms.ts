@@ -38,7 +38,7 @@ function header() {
     `> ${ENTITY.description}`,
     "",
     `- Sitio: ${url("/")}`,
-    `- Razón social: ${ENTITY.legalName}`,
+    `- Razón social: ${ENTITY.legalName} (RUT ${ENTITY.taxID})`,
     `- País: Chile (atiende también a Latinoamérica de forma remota)`,
     `- Contacto: ${COMPANY.email} · WhatsApp ${COMPANY.whatsapp}`,
     `- Agendar diagnóstico: ${PRIMARY_CTA.href.startsWith("http") ? PRIMARY_CTA.href : url(PRIMARY_CTA.href)}`,

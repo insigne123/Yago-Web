@@ -95,6 +95,7 @@ export type AutomationPage = {
 export const AUTOMATION_PAGES: AutomationPage[] = [
   {
     slug: "sadt",
+    modifiedDate: "2026-11-02",
     seoTitle: "SADT | Automatiza Mi DT: contratos, términos, F30 y F30-1 | YAGO",
     seoDescription:
       "SADT automatiza el Portal Dirección del Trabajo para contratos, desvinculaciones y certificados F30/F30-1, con dashboard operativo, evidencia y reportería.",
@@ -316,6 +317,11 @@ export const AUTOMATION_PAGES: AutomationPage[] = [
     faqs: [
       { question: "¿Esto reemplaza al equipo de RRHH?", answer: "No. Automatiza tareas repetitivas y deja al equipo con más visibilidad, control y capacidad para gestionar excepciones." },
       { question: "¿Se puede integrar con Workges?", answer: "Sí. El flujo considera carga manual o integración con API/fuente definida por Workges, según disponibilidad y alcance." },
+      {
+        question: "¿Qué es el portal Workges y cómo se usa con SADT?",
+        answer:
+          "Workges es un ERP para empresas de selección, BPO y servicios transitorios, desarrollado por Grupo Expro Technology, que lo usa en sus propias operaciones. YAGO no administra el acceso a Workges: para entrar al portal usa el enlace y las credenciales que te entregó tu empresa o el proveedor. Si tu equipo ya registra contratos y desvinculaciones en Workges, SADT puede tomar esos registros, validarlos y ejecutarlos en el Portal Mi DT sin volver a digitarlos, según la integración que se acuerde.",
+      },
       { question: "¿Qué pasa si falla el Portal DT?", answer: "La solución contempla manejo de errores, reintentos, alertas y reproceso controlado para mitigar fallas transitorias." },
       { question: "¿SADT ya está disponible?", answer: "Sí. SADT se presenta como una app operativa disponible para automatizar procesos recurrentes del Portal DT con dashboard, evidencia y reproceso." },
     ],

@@ -45,7 +45,7 @@ export default function AboutPage() {
       <PageSection id="empresa" tone="light">
         <SectionHeader eyebrow="Qué hace YAGO" title="Tecnología conectada a un problema concreto." description={COMPANY_PROFILE.definition} />
         <dl className="mt-10 grid gap-6 sm:grid-cols-3">
-          <div><dt className="y-eyebrow">Empresa</dt><dd className="mt-3 text-lg text-slate-950">{ENTITY.legalName}</dd></div>
+          <div><dt className="y-eyebrow">Empresa</dt><dd className="mt-3 text-lg text-slate-950">{ENTITY.legalName}<span className="mt-1 block text-sm text-slate-600">RUT {ENTITY.taxID}</span></dd></div>
           <div><dt className="y-eyebrow">Mercado principal</dt><dd className="mt-3 text-lg text-slate-950">Empresas en Chile</dd></div>
           <div><dt className="y-eyebrow">Modalidad</dt><dd className="mt-3 text-lg text-slate-950">Atención remota · Chile y Latinoamérica</dd></div>
           <div><dt className="y-eyebrow">Contacto</dt><dd className="mt-3 break-all text-lg text-slate-950"><a href={`mailto:${COMPANY.email}`} className="underline underline-offset-4">{COMPANY.email}</a></dd></div>
