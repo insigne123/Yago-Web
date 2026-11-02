@@ -26,13 +26,13 @@ Los campos entre corchetes, como [completar], son datos que solo tú conoces. No
 Usa exactamente estos datos en todos los directorios: la coincidencia de nombre, sitio y descripción ayuda a que Google y la IA reconozcan una sola entidad.
 
 - Nombre comercial: YAGO
-- Razón social: Yago SpA
-- RUT: [completar]
+- Razón social: Sociedad de Inversiones Yago SpA
+- RUT: 77.711.804-8
 - Sitio: https://yago.cl
 - Correo: nicolas.yarur.g@yago.cl
 - País y modalidad: Chile, trabajo remoto con empresas de Chile y Latinoamérica
 - Año de fundación: [completar]
-- Tamaño del equipo: [completar, el mismo número en todos los perfiles]
+- Tamaño del equipo: 2 a 10 personas (el mismo rango que LinkedIn, en todos los perfiles)
 - Fundador: Nicolás Yarur · https://www.linkedin.com/in/nicolas-yarur/
 - LinkedIn de la empresa: https://www.linkedin.com/company/yago-spa
 - Logo cuadrado 600×600: https://yago.cl/brand/yago-logo.png
@@ -124,13 +124,15 @@ Dónde publicar cada ficha:
 
 | Directorio | Fichas | Enlace |
 | --- | --- | --- |
-| ComparaSoftware | SADT (RRHH y cumplimiento), OCR (gestión documental), AXIS (abogados) | https://www.comparasoftware.com/registro |
-| Capterra (Gartner Digital Markets) | SADT y OCR | https://digital-markets.gartner.com/capterra-vendor-signup |
-| RankMyAI | OCR con IA y OCR Master API | https://www.rankmyai.com/tool-addition |
+| ComparaSoftware | SADT (RRHH y cumplimiento), OCR (gestión documental), AXIS (abogados) | https://www.comparasoftware.cl/registro |
+| Capterra (desde 2026 lo administra G2) | SADT y AXIS como productos; OCR solo si se vende como producto con prueba o demo | https://www.g2.com/products/new |
+| RankMyAI | OCR con IA y OCR Master API (sin cuenta; pide razón social, RUT, dirección y precios; revisión de hasta 21 días) | https://www.rankmyai.com/tool-addition |
 | GoodFirms | YAGO (ficha maestra) | https://www.goodfirms.co/get-listed |
 | TechBehemoths | YAGO (ficha maestra) | https://techbehemoths.com/companies/get-listed |
 | Crunchbase | YAGO (ficha maestra) | https://support.crunchbase.com/hc/en-us/articles/115011823988 |
 | Product Hunt, AlternativeTo, Postman | OCR Master API (requiere landing y documentación en inglés) | https://www.producthunt.com/launch/guide |
+| ProyectoIA | YAGO (ficha maestra). Perplexity lo cita en preguntas de "quién implementa IA en Chile" | El formulario https://proyectoia.com/agregar está fuera de línea desde el 2 de noviembre; hay un borrador en Gmail para hola@proyectoia.com. Al reabrir, registrar con un correo @yago.cl |
+| agentes.ai | YAGO como agencia en Santiago (la página de Santiago no tiene agencias) | Botón "Publica tu agencia gratis" en https://agentes.ai (gratis 3 meses, luego pago) |
 
 ## 5. Columnas de opinión y 6. Nota de prensa
 
