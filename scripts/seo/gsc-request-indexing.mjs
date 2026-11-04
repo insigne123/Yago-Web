@@ -1,7 +1,7 @@
 // Solicita indexación en Search Console para URL de yago.cl usando el Chrome separado de
 // scripts/search-console-session.mjs (perfil .local/seo/search-console-browser, puerto 9335).
 // Uso: node scripts/seo/gsc-request-indexing.mjs [--refrescar] https://yago.cl/ruta [...]
-// --refrescar también pide rastrear URL ya indexadas, para cuando cambió su título o contenido.
+// --refrescar también pide rastrear URL ya indexadas o solicitadas hace poco, para cuando cambió su título o contenido.
 // Google permite unas 10 solicitudes por día. Si la ventana no tiene sesión, se detiene: nunca escribe credenciales.
 import { readFile, writeFile } from "node:fs/promises";
 import { spawnSync } from "node:child_process";
@@ -35,7 +35,7 @@ const results = [];
 try {
   for (const url of urls) {
     if (results.filter((r) => r.resultado === "solicitada").length >= MAX_PER_RUN) break;
-    if (recent.has(url)) { results.push({ url, resultado: "omitida: solicitada hace menos de 7 días" }); continue; }
+    if (!refresh && recent.has(url)) { results.push({ url, resultado: "omitida: solicitada hace menos de 7 días" }); continue; }
     // La inspección usa un id interno en la URL, así que se entra por la barra "Inspeccionar cualquier URL".
     await page.goto("https://search.google.com/search-console?resource_id=sc-domain%3Ayago.cl", { waitUntil: "domcontentloaded", timeout: 60000 });
     await page.waitForTimeout(4000);

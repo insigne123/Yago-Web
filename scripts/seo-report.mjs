@@ -97,17 +97,17 @@ async function consoleReport(session, window, paths = config.routes) {
       performance[name] = { available: true, rows: data.rows || [], rowLimit: 1000, atLimit: (data.rows || []).length === 1000 };
     } catch (error) { performance[name] = { available: false, ...safeFailure(error) }; }
   }
-  // Sin filtro de consulta: incluye la marca y las consultas que Google oculta por privacidad, que quedan fuera de las filas anteriores.
+  // Solo por país: incluye la marca y las consultas que Google oculta por privacidad. Combinar país con página
+  // también las deja fuera (8 clics contra 40 el 4 de noviembre de 2026). Cubre todo el dominio, con subdominios.
   try {
     const data = await googleJson(session, endpoint, { method: "POST", body: {
       ...window, type: "web", dataState: "final", dimensions: ["date"], rowLimit: 1000,
       dimensionFilterGroups: [{ filters: [
         { dimension: "country", operator: "equals", expression: "chl" },
-        { dimension: "page", operator: "includingRegex", expression: `^${config.site.replaceAll(".", "[.]")}/` },
       ] }],
     } });
-    performance.allQueries = { available: true, rows: data.rows || [] };
-  } catch (error) { performance.allQueries = { available: false, ...safeFailure(error) }; }
+    performance.domainTotals = { available: true, rows: data.rows || [] };
+  } catch (error) { performance.domainTotals = { available: false, ...safeFailure(error) }; }
   return { connected: true, property: config.searchConsoleProperty, inspectionScope: options["inspect-all"] ? "sitemap" : "priorities", inspections, filters: { country: "Chile", type: "web", dataState: "final", mainSitePrefix: `${config.site}/`, excludedBrandRegex: BRAND_PATTERN }, performance };
 }
 
