@@ -53,7 +53,10 @@ for (const route of ["/", "/ocr", "/sadt", "/servicios/agentes-ia", "/productos/
 test("the F30 guide leads with the current rule and answers the questions people ask", async ({ page }) => {
   await page.goto("/blog/certificados-f30-y-f30-1-diferencias");
   await expect(page).toHaveTitle("F30 y F30-1: diferencia y cómo sacarlos en Mi DT (2026)");
-  await expect(page.locator("meta[name='description']")).toHaveAttribute("content", /^Desde junio de 2026 el F30 se pide solo en Mi DT/);
+  await expect(page.locator("meta[name='description']")).toHaveAttribute("content", /^Desde junio de 2026 el F30 en línea se pide solo en Mi DT/);
+  await expect(page.getByRole("heading", { level: 2, name: "Qué es el certificado F30-1 y qué acredita" })).toBeAttached();
+  await expect(page.getByText("¿Qué es el F30-1?", { exact: true })).toBeAttached();
+  await expect(page.getByText(/también se puede pedir en una oficina de la Inspección del Trabajo/)).toBeAttached();
   await expect(page.getByRole("heading", { level: 2, name: "¿Qué diferencia hay entre el F30 y el F30-1?" })).toBeAttached();
   await expect(page.getByRole("heading", { level: 2, name: "Cómo sacar el F30 por internet en Mi DT, paso a paso" })).toBeAttached();
 });

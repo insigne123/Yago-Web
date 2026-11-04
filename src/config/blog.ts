@@ -1409,7 +1409,7 @@ export const BLOG_POSTS: BlogPost[] = [
     },
     title: "Certificados F30 y F30-1: qué son, en qué se diferencian y cómo obtenerlos",
     seoTitle: "F30 y F30-1: diferencia y cómo sacarlos en Mi DT (2026)",
-    description: "Desde junio de 2026 el F30 se pide solo en Mi DT. Qué muestra cada certificado, cómo sacarlos paso a paso, su vigencia y qué hacer si el F30-1 no sale.",
+    description: "Desde junio de 2026 el F30 en línea se pide solo en Mi DT. Qué muestra cada certificado, cómo sacarlos paso a paso, su vigencia y qué hacer si el F30-1 no sale.",
     excerpt: "El F30 muestra multas y deuda previsional publicada; el F30-1 certifica pagos a tus trabajadores por obra y mes. Cómo pedirlos en Mi DT, verificarlos y destrabarlos.",
     image: "/images/blog-f30-f30-1.png",
     category: "RRHH y cumplimiento",
@@ -1446,9 +1446,17 @@ export const BLOG_POSTS: BlogPost[] = [
         ]
       },
       {
+        heading: "Qué es el certificado F30-1 y qué acredita",
+        paragraphs: [
+          "El F30-1 es el Certificado de cumplimiento de obligaciones laborales y previsionales de la DT. Permite a un empleador, persona natural o jurídica, acreditar el cumplimiento de sus obligaciones con los trabajadores de una obra, faena o servicio, en un período determinado. Incluye las eventuales indemnizaciones legales asociadas al término de la relación laboral.",
+          "Cada solicitud cubre de 1 a 3 meses consecutivos. La DT menciona como usos principales cursar estados de pago, pedir la devolución de garantías y cobrar subvenciones. Su marco legal es el artículo 183-C del Código del Trabajo y el Decreto N° 319 de 2007, que lo reglamenta."
+        ]
+      },
+      {
         heading: "Quién puede pedir cada certificado",
         paragraphs: [
-          "El F30 lo pide el propio empleador. Desde el 30 de junio de 2026, la DT lo entrega solo en el portal Mi DT, donde pueden pedirlo el empleador persona natural, el empresario individual y el empleador persona jurídica, este último a través de sus representantes laborales electrónicos.",
+          "El F30 lo pide el propio empleador. En línea se pide en el portal Mi DT: la DT avisó que, desde el 30 de junio de 2026, solo está disponible allí, para el empleador persona natural, el empresario individual y el empleador persona jurídica, este último a través de sus representantes laborales electrónicos.",
+          "Ese aviso no menciona las oficinas. La página del trámite de la DT y ChileAtiende todavía indican que también se puede pedir en una oficina de la Inspección del Trabajo, con un costo de $2.500. Si necesitas hacerlo en forma presencial, confirma antes con la Inspección.",
           "El F30-1 también lo pide el empleador: el contratista o subcontratista cuyos trabajadores prestan servicios en la obra. La DT indica que tiene que ser el empleador quien haga la solicitud. La empresa principal no lo tramita; lo exige a sus contratistas y lo verifica.",
           "En ambos casos, la DT no puede otorgar el certificado a una persona jurídica con menos de 30 días de antigüedad, porque su información puede tardar hasta 45 días en actualizarse.",
           "El representante laboral electrónico es una persona natural que la empresa autoriza para operar en Mi DT a su nombre, con su propia ClaveÚnica. La empresa lo crea en Mi DT con su clave tributaria del SII."
@@ -1597,7 +1605,7 @@ export const BLOG_POSTS: BlogPost[] = [
       {
         heading: "Cada cuánto necesitan los contratistas estos certificados",
         paragraphs: [
-          "La ley no fija una frecuencia. El artículo 183-C da a la empresa principal el derecho a ser informada por sus contratistas cuando lo solicite. La DT menciona como usos principales del F30-1 cursar estados de pago, pedir la devolución de garantías y cobrar subsidios.",
+          "La ley no fija una frecuencia. El artículo 183-C da a la empresa principal el derecho a ser informada por sus contratistas cuando lo solicite. La DT menciona como usos principales del F30-1 cursar estados de pago, pedir la devolución de garantías y cobrar subvenciones.",
           "En la práctica, la frecuencia la define el contrato con cada empresa principal, por ejemplo si exige el certificado con cada estado de pago. Como cada F30-1 cubre una empresa principal, una obra y hasta tres meses, un contratista con varias obras necesita un certificado por cada combinación. El F30, en cambio, se pide cuando una institución lo exige como antecedente del empleador."
         ]
       },
@@ -1619,6 +1627,14 @@ export const BLOG_POSTS: BlogPost[] = [
       }
     ],
     faq: [
+      {
+        question: "¿Qué es el F30?",
+        answer: "Es el Certificado de antecedentes laborales y previsionales de la Dirección del Trabajo. Muestra las multas ejecutoriadas cursadas por la DT y la deuda previsional publicada del empleador. Se presenta como antecedente ante instituciones públicas o privadas."
+      },
+      {
+        question: "¿Qué es el F30-1?",
+        answer: "Es el Certificado de cumplimiento de obligaciones laborales y previsionales de la Dirección del Trabajo. Permite a un empleador acreditar el cumplimiento de sus obligaciones con los trabajadores de una obra, faena o servicio, por 1 a 3 meses consecutivos. Se usa, por ejemplo, para cursar estados de pago."
+      },
       {
         question: "¿Cuál es la diferencia entre el F30 y el F30-1?",
         answer: "El F30 muestra multas ejecutoriadas y deuda previsional publicada del empleador. El F30-1 certifica si pagó a los trabajadores de una obra en uno a tres meses, y es el que pide la empresa principal en subcontratación."
@@ -1665,6 +1681,10 @@ export const BLOG_POSTS: BlogPost[] = [
       {
         title: "Dirección del Trabajo: ¿Quiénes pueden solicitar un Certificado de Antecedentes Laborales y Previsionales?",
         url: "https://www.dt.gob.cl/portal/1628/w3-article-118009.html"
+      },
+      {
+        title: "ChileAtiende: Certificado de antecedentes laborales y previsionales",
+        url: "https://www.chileatiende.gob.cl/fichas/1396"
       },
       {
         title: "Dirección del Trabajo: aviso sobre el F30 en el portal Mi DT desde el 30 de junio de 2026",
