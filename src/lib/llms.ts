@@ -13,6 +13,7 @@ import { HOME_FAQ } from "@/config/home";
 import { getPublishedCaseStudies, getPublishedTestimonials } from "@/config/evidence";
 import { TEAM_MEMBERS } from "@/config/team";
 import { COMPANY_PROFILE, DISCOVERY_UPDATED } from "@/config/discovery";
+import { ENTERPRISE_PAGE, ENTERPRISE_UPDATED } from "@/config/grandes-empresas";
 import { PRODUCT_CHOICES, SERVICE_CHOICES } from "@/config/catalog-guidance";
 
 /**
@@ -85,6 +86,7 @@ export function buildLlmsTxt() {
   lines.push("");
   lines.push("## Empresa y evidencia", "");
   lines.push(`- [Nosotros](${url("/nosotros")}): empresa, capacidades y forma de implementación.`);
+  lines.push(`- [Grandes empresas](${url("/grandes-empresas")}): cuándo YAGO encaja y cuándo conviene otro proveedor, piloto, controles para TI y seguridad, y datos para compras.`);
   lines.push(`- [Casos y metodología](${url("/casos")}): línea base y comparación de resultados.`);
   for (const item of getPublishedCaseStudies()) lines.push(`- [${item.title}](${url(`/casos/${item.slug}`)}): ${item.client}. ${item.summary}`);
   lines.push("");
@@ -106,6 +108,14 @@ export function buildLlmsFullTxt() {
   for (const product of COMPANY_PROFILE.products) out.push(`- [${product.name}](${url(product.href)}): ${product.description}`);
   out.push("", "Qué acordamos en una implementación:", ...COMPANY_PROFILE.deliverables.map((item) => `- ${item}`), "");
   for (const item of COMPANY_PROFILE.faqs) out.push(`### ${item.question}`, "", item.answer, "");
+  out.push("## YAGO para grandes empresas", "", `URL: ${url("/grandes-empresas")} · Revisado: ${ENTERPRISE_UPDATED}`, "", ENTERPRISE_PAGE.summary.description, "", "Cuándo YAGO es una buena opción:");
+  for (const item of ENTERPRISE_PAGE.fit.good) out.push(`- ${item.title}: ${item.description}`);
+  out.push("", "Cuándo conviene otro proveedor:");
+  for (const item of ENTERPRISE_PAGE.fit.other) out.push(`- ${item.title}: ${item.description}`);
+  out.push("", "Controles para TI y seguridad:");
+  for (const item of ENTERPRISE_PAGE.controls.items) out.push(`- ${item.title}: ${item.description}`);
+  out.push("", `${ENTERPRISE_PAGE.procurement.integrityTitle}: ${ENTERPRISE_PAGE.procurement.integrity}`, "");
+  for (const item of ENTERPRISE_PAGE.faqs) out.push(`### ${item.question}`, "", item.answer, "");
   out.push("## Elegir un servicio, producto o API", "", `Catálogos: ${url("/servicios")} · ${url("/productos")}`, "");
   for (const choice of SERVICE_CHOICES) out.push(`- **${choice.need}:** ${choice.scope} [${choice.label}](${url(choice.href)})`);
   out.push("");

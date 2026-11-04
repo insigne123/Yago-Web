@@ -10,6 +10,7 @@ import { OCR_PAGE } from "@/config/ocr";
 import { DISCOVERY_UPDATED } from "@/config/discovery";
 import { CATALOG_UPDATED } from "@/config/catalog-guidance";
 import { GLOSSARY_UPDATED } from "@/config/glossary";
+import { ENTERPRISE_UPDATED } from "@/config/grandes-empresas";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = process.env.NEXT_PUBLIC_SITE_URL || "https://yago.cl";
@@ -24,6 +25,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/servicios`, lastModified: CATALOG_UPDATED, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/casos`, lastModified: siteUpdated, changeFrequency: "monthly", priority: 0.8 },
     { url: `${base}/nosotros`, lastModified: DISCOVERY_UPDATED, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${base}/grandes-empresas`, lastModified: ENTERPRISE_UPDATED, changeFrequency: "monthly", priority: 0.85 },
     ...getPublishedCaseStudies().map((item): MetadataRoute.Sitemap[number] => ({ url: `${base}/casos/${item.slug}`, lastModified: new Date(item.modifiedDate || item.publishedDate), changeFrequency: "monthly", priority: 0.7 })),
     { url: `${base}/precios`, lastModified: siteUpdated, changeFrequency: "monthly", priority: 0.85 },
     { url: `${base}/proceso`, lastModified: siteUpdated, changeFrequency: "monthly", priority: 0.7 },

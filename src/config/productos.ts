@@ -127,7 +127,7 @@ export const PRODUCTS: Product[] = [
     },
     seoTitle: "SOF.IA | Asistente corporativo con IA para conocimiento interno",
     seoDescription:
-      "Asistente con IA para responder consultas internas con RAG, control de acceso por roles y trazabilidad de fuentes.",
+      "SOF.IA responde las consultas de tu equipo con tus documentos internos, muestra la fuente de cada respuesta y respeta los permisos de cada persona.",
     details: {
       description:
         "SOF.IA ayuda a tu equipo a encontrar procedimientos, políticas y respuestas en segundos, integrándose con tus repositorios de documentos y respetando permisos.",

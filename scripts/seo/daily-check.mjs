@@ -36,6 +36,10 @@ async function completeReports() {
 const path = (url) => url.replace(config.site, "") || "/";
 const indexedSet = (report) => new Set((report?.searchConsole?.inspections || []).filter((item) => item.verdict === "PASS").map((item) => item.path));
 const totals = (report) => (report?.searchConsole?.performance?.pages?.rows || []).reduce((sum, row) => ({ impressions: sum.impressions + row.impressions, clicks: sum.clicks + row.clicks }), { impressions: 0, clicks: 0 });
+const allQueryTotals = (report) => {
+  const rows = report?.searchConsole?.performance?.allQueries?.rows;
+  return rows ? rows.reduce((sum, row) => ({ impressions: sum.impressions + row.impressions, clicks: sum.clicks + row.clicks }), { impressions: 0, clicks: 0 }) : null;
+};
 const sessions = (rows = []) => rows.reduce((sum, row) => sum + (row.sessions || row.eventCount || 0), 0);
 const delta = (now, before) => (before === undefined ? "" : ` (${now - before >= 0 ? "+" : ""}${now - before})`);
 
@@ -53,11 +57,14 @@ if (!latest) {
   const indexed = indexedSet(latest);
   const indexedBefore = previous ? indexedSet(previous) : new Set();
   const inspections = latest.searchConsole.inspections || [];
+  const allNow = allQueryTotals(latest);
+  const allBefore = previous ? allQueryTotals(previous) : null;
   lines.push(
     `Reporte: ${latest.generatedAt} · ventana ${latest.window.startDate} a ${latest.window.endDate}${previous ? ` · comparado con ${previous.generatedAt.slice(0, 10)}` : " · sin reporte anterior para comparar"}`,
     "",
-    "## Google (Chile, sin marca, 28 días)",
-    `- Impresiones: ${now.impressions}${delta(now.impressions, before?.impressions)} · clics: ${now.clicks}${delta(now.clicks, before?.clicks)}`,
+    "## Google (Chile, 28 días)",
+    ...(allNow ? [`- Total, con marca y consultas que Google oculta: ${allNow.clicks} clics${delta(allNow.clicks, allBefore?.clicks)} · ${allNow.impressions} impresiones${delta(allNow.impressions, allBefore?.impressions)}`] : []),
+    `- Consultas visibles sin marca: ${now.clicks} clics${delta(now.clicks, before?.clicks)} · ${now.impressions} impresiones${delta(now.impressions, before?.impressions)}`,
     `- Indexadas: ${indexed.size} de ${inspections.length}${previous ? delta(indexed.size, indexedBefore.size) : ""}`,
   );
   const gained = [...indexed].filter((item) => previous && !indexedBefore.has(item));

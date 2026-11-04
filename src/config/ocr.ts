@@ -39,7 +39,7 @@ export const OCR_PAGE = {
   modifiedDate: "2026-11-01",
   seoTitle: "Digitalización de documentos con OCR en Chile | YAGO",
   seoDescription:
-    "Servicio de digitalización de documentos con OCR e IA para empresas en Chile: extrae y valida datos de facturas, contratos y PDFs para tu planilla o ERP.",
+    "Digitalización de documentos en Chile: de facturas, contratos y escaneos a datos validados en tu planilla o ERP. Evaluamos una muestra antes de cotizar.",
   nav: [
     { name: "Resumen", href: "#resumen" },
     { name: "El problema", href: "#problema" },

@@ -14,7 +14,7 @@ import { createPageMetadata } from "@/lib/seo";
 export const metadata = createPageMetadata({
   title: "YAGO | Automatización e integración de IA en Chile",
   description:
-    "Automatización de procesos, integración de IA, desarrollo de aplicaciones y software a medida, agentes y OCR para empresas en Chile. Agenda un diagnóstico con YAGO.",
+    "Automatización de procesos, integración de IA, software a medida, agentes y OCR para empresas en Chile. Agenda un diagnóstico con YAGO.",
   path: "/",
 });
 

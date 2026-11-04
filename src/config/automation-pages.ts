@@ -98,7 +98,7 @@ export const AUTOMATION_PAGES: AutomationPage[] = [
     modifiedDate: "2026-11-02",
     seoTitle: "SADT | Automatiza Mi DT: contratos, términos, F30 y F30-1 | YAGO",
     seoDescription:
-      "SADT automatiza el Portal Dirección del Trabajo para contratos, desvinculaciones y certificados F30/F30-1, con dashboard operativo, evidencia y reportería.",
+      "SADT registra contratos y términos en Mi DT por lote y descarga F30 y F30-1, desde un archivo o Workges, con comprobante de cada registro.",
     keywords: [
       "SADT",
       "automatizacion direccion del trabajo",

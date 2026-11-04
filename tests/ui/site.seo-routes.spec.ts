@@ -11,6 +11,7 @@ const routes = [
   "/servicios/apps-automatizacion",
   "/servicios/agentes-ia",
   "/nosotros",
+  "/grandes-empresas",
   "/glosario",
   "/casos",
   "/precios",
@@ -139,7 +140,7 @@ test.describe("public routes and SEO", () => {
       await expect(flow.getByRole("heading", { name: "Cómo comprobamos que funciona" })).toBeAttached();
       await expect(page.locator("#resumen")).toContainText("Entrada");
       await expect(page.locator("#resumen")).toContainText("Salida");
-      expect(service.dateModified).toBe(slug === "agentes-ia" ? "2026-11-01" : slug === "automatizacion-procesos" ? "2026-11-04" : slug === "integracion-ia" ? "2026-10-27" : "2026-10-08");
+      expect(service.dateModified).toBe(["agentes-ia", "automatizacion-procesos"].includes(slug) ? "2026-11-04" : slug === "integracion-ia" ? "2026-10-27" : "2026-10-08");
       const addedGuide = slug === "automatizacion-procesos" ? "/blog/automatizacion-para-pymes-por-donde-partir" : slug === "integracion-ia" ? "/blog/herramientas-automatizacion-n8n-make-ia" : null;
       if (addedGuide) {
         await expect(page.locator(`#guias a[href='${addedGuide}']`)).toHaveCount(1);

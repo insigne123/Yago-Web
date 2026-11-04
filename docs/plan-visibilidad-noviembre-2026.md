@@ -186,3 +186,30 @@ Ambas quedaron programadas en la app de Claude (ver sección 4). Detalle:
 - Diario: `.local/seo/daily/AAAA-MM-DD.md`, generado por la tarea diaria.
 - Semanal: `.local/seo/geo/seguimiento-geo.csv` (respuestas de Perplexity y Copilot, generado por la tarea semanal) y el reporte de Windows de los lunes.
 - Cierre (1 de diciembre): comparar con la tabla de la sección 1 y decidir el plan de diciembre.
+
+## 10. Clics: línea base del 4 de noviembre
+
+Datos de Google del 4 de octubre al 1 de noviembre. La foto completa queda en `.local/seo/ctr/2026-11-04.json`.
+
+- **Total:** Chile, 44 clics y 1.361 impresiones (CTR 3,2 %, posición media 13,8). Todos los países: 55 clics y 1.759 impresiones. Bing, del 9 de octubre al 1 de noviembre: 7 clics y 503 impresiones.
+- **Clics semanales en Chile:** 11, 4, 11 y 18 desde la semana del 5 de octubre.
+- **La cifra "sin marca" no es el total.** Cuenta 2 clics porque las consultas que Google oculta por privacidad quedan fuera. Desde ahora el reporte diario muestra ambas.
+
+| Posición (consultas visibles en Chile) | Impresiones | Clics |
+|---|---:|---:|
+| 1 a 3 | 123 | 8 |
+| 4 a 7 | 71 | 2 |
+| 8 a 10 | 156 | 0 |
+| 11 a 20 | 125 | 1 |
+| 21 o más | 353 | 0 |
+
+**Lectura.** El problema principal es la posición, no el texto del resultado: el 43 % de esas impresiones está de la página 3 hacia abajo. Además, `/ocr` concentra 500 impresiones por búsquedas donde compiten empresas de escaneo físico, un servicio que YAGO no ofrece. En la búsqueda "agentes de ia para empresas", los avisos pagados ocupan la parte alta de la página, y en "f30" los tres primeros resultados son de la Dirección del Trabajo.
+
+**Cambios preparados el 4 de noviembre:**
+
+- Título, descripción y encabezados de la guía de F30, según lo que Google muestra en "Más preguntas".
+- Descripciones de `/ocr`, `/sadt`, `/servicios/agentes-ia`, `/productos/sofia` y la portada.
+- Columna "Guías" en el pie de página, para enlazar desde todo el sitio a las cinco guías con más demanda (la de F30 tenía enlaces desde solo 6 páginas).
+- Menú: "OCR y documentos" pasa a "Digitalización de documentos".
+
+**Cómo medirlo.** Comparar el 1 de diciembre con `node .local/seo/ctr-analisis.mjs`. Google tarda días o semanas en recoger los títulos, así que antes de esa fecha cualquier cambio es ruido. Meta de referencia, no pronóstico: 30 clics semanales en Chile y los primeros clics de la guía de F30.

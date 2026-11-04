@@ -68,6 +68,7 @@ export default function AboutPage() {
         <SectionHeader eyebrow="Cómo trabajamos" title="Alcance, prueba y operación definidos." description="Revisamos el proceso y sus datos, acordamos entregables, construimos un primer alcance y lo validamos junto al equipo que lo utilizará. Documentamos integraciones, excepciones y mantenimiento según el proyecto." />
         <ul className="mt-8 flex flex-col gap-5">
           <li><TextLink href="/proceso">Conocer las etapas de implementación</TextLink></li>
+          <li><TextLink href="/grandes-empresas">Cómo trabajamos con grandes empresas</TextLink></li>
           <li><TextLink href="/casos">Cómo medimos los resultados</TextLink></li>
           <li><TextLink href="/blog/elegir-proveedor-automatizacion-ia-chile">Criterios para elegir un proveedor</TextLink></li>
         </ul>

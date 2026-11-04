@@ -1398,7 +1398,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: "certificados-f30-y-f30-1-diferencias",
-    modifiedDate: "2026-11-02",
+    modifiedDate: "2026-11-04",
     video: {
       youtubeId: "_TSViR4tj5Q",
       title: "F30 y F30-1: la diferencia en 60 segundos | Lunes en la oficina, Ep. 1",
@@ -1408,8 +1408,8 @@ export const BLOG_POSTS: BlogPost[] = [
       poster: "/videos/f30-y-f30-1-lunes-en-la-oficina.webp",
     },
     title: "Certificados F30 y F30-1: qué son, en qué se diferencian y cómo obtenerlos",
-    seoTitle: "F30 y F30-1: qué son, diferencias y cómo obtenerlos | YAGO",
-    description: "Qué acredita el F30 y el F30-1, quién puede pedirlos, paso a paso en Mi DT, vigencia, cómo se verifican y qué hacer si el F30-1 no se puede emitir.",
+    seoTitle: "F30 y F30-1: diferencia y cómo sacarlos en Mi DT (2026)",
+    description: "Desde junio de 2026 el F30 se pide solo en Mi DT. Qué muestra cada certificado, cómo sacarlos paso a paso, su vigencia y qué hacer si el F30-1 no sale.",
     excerpt: "El F30 muestra multas y deuda previsional publicada; el F30-1 certifica pagos a tus trabajadores por obra y mes. Cómo pedirlos en Mi DT, verificarlos y destrabarlos.",
     image: "/images/blog-f30-f30-1.png",
     category: "RRHH y cumplimiento",
@@ -1427,14 +1427,14 @@ export const BLOG_POSTS: BlogPost[] = [
     intro: "El F30 y el F30-1 son dos certificados de la Dirección del Trabajo (DT) que las empresas usan para acreditar su situación laboral y previsional, sobre todo en subcontratación. Tienen nombres parecidos, pero muestran cosas distintas y se piden de forma diferente en el Portal Mi DT. Esta guía explica qué es cada uno, quién puede pedirlo, el paso a paso, cuánto tiempo sirve, cómo se verifica y qué hacer cuando el F30-1 no sale.",
     sections: [
       {
-        heading: "F30 y F30-1 en una frase",
+        heading: "¿Qué diferencia hay entre el F30 y el F30-1?",
         paragraphs: [
           "El F30 es el Certificado de antecedentes laborales y previsionales. Muestra las multas ejecutoriadas que la DT ha cursado al empleador y la deuda previsional publicada en el Boletín Laboral y Previsional. Sirve como antecedente general ante instituciones públicas o privadas, pero no certifica que pagaste las remuneraciones o cotizaciones de un mes.",
           "El F30-1 es el Certificado de cumplimiento de obligaciones laborales y previsionales. Acredita si el empleador pagó las remuneraciones, cotizaciones e indemnizaciones de sus trabajadores en una obra, faena o servicio, para uno a tres meses. Es el que la empresa principal pide a sus contratistas, con base en el artículo 183-C del Código del Trabajo."
         ]
       },
       {
-        heading: "Qué muestra el certificado F30",
+        heading: "Qué es el certificado F30 y qué muestra",
         paragraphs: [
           "Según la guía del trámite que la DT publicó en 2026, el F30 emitido en Mi DT contiene:"
         ],
@@ -1461,7 +1461,7 @@ export const BLOG_POSTS: BlogPost[] = [
         ]
       },
       {
-        heading: "Cómo obtener el F30 en Mi DT, paso a paso",
+        heading: "Cómo sacar el F30 por internet en Mi DT, paso a paso",
         paragraphs: [
           "El trámite en línea no tiene costo. Según la guía de la DT, el flujo es:"
         ],
@@ -1476,7 +1476,7 @@ export const BLOG_POSTS: BlogPost[] = [
         ]
       },
       {
-        heading: "Cómo obtener el F30-1 en Mi DT, paso a paso",
+        heading: "Cómo sacar el F30-1 en Mi DT, paso a paso",
         paragraphs: [
           "Desde 2023 el F30-1 se pide en el Portal Mi DT, sin costo, y la DT informó que mantendría el historial de certificados anteriores en su antiguo portal web. Antes de empezar, revisa dos requisitos: cotizaciones de todos tus trabajadores pagadas en forma electrónica, por Previred, Caja Los Andes o Caja La Araucana, y, si eres persona jurídica, al menos un representante laboral electrónico habilitado.",
           "La DT responde en un plazo máximo de 48 horas hábiles. El flujo que describe su guía del trámite es:"

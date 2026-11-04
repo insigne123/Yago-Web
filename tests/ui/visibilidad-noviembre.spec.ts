@@ -32,6 +32,32 @@ for (const slug of GUIDES) {
   });
 }
 
+test("footer links the most searched guides from the whole site", async ({ page }) => {
+  await page.goto("/precios");
+  const guides = page.locator("footer").getByRole("navigation", { name: "Guías" });
+  for (const slug of ["certificados-f30-y-f30-1-diferencias", "registro-contratos-terminos-mi-dt-plazos", "ocr-con-ia-digitalizar-documentos", "agentes-de-ia-para-empresas", "que-es-la-automatizacion-de-procesos-con-ia"]) {
+    await expect(guides.locator(`a[href="/blog/${slug}"]`)).toHaveCount(1);
+  }
+});
+
+for (const route of ["/", "/ocr", "/sadt", "/servicios/agentes-ia", "/productos/sofia", "/grandes-empresas", "/blog/certificados-f30-y-f30-1-diferencias"]) {
+  test(`${route} has a title and description that fit in a search result`, async ({ page }) => {
+    await page.goto(route);
+    expect((await page.title()).length).toBeLessThanOrEqual(65);
+    const description = await page.locator("meta[name='description']").getAttribute("content");
+    expect(description!.length).toBeGreaterThanOrEqual(110);
+    expect(description!.length).toBeLessThanOrEqual(160);
+  });
+}
+
+test("the F30 guide leads with the current rule and answers the questions people ask", async ({ page }) => {
+  await page.goto("/blog/certificados-f30-y-f30-1-diferencias");
+  await expect(page).toHaveTitle("F30 y F30-1: diferencia y cómo sacarlos en Mi DT (2026)");
+  await expect(page.locator("meta[name='description']")).toHaveAttribute("content", /^Desde junio de 2026 el F30 se pide solo en Mi DT/);
+  await expect(page.getByRole("heading", { level: 2, name: "¿Qué diferencia hay entre el F30 y el F30-1?" })).toBeAttached();
+  await expect(page.getByRole("heading", { level: 2, name: "Cómo sacar el F30 por internet en Mi DT, paso a paso" })).toBeAttached();
+});
+
 test("/ocr leads with document digitization and links its guides", async ({ page }) => {
   await page.goto("/ocr");
   await expect(page).toHaveTitle(/^Digitalización de documentos/);
@@ -70,4 +96,23 @@ test("glossary defines the new labor and document terms with sources", async ({ 
     await expect(page.locator(`[id="${id}"]`)).toBeAttached();
   }
   await expect(page.locator("time").first()).toHaveAttribute("datetime", "2026-11-01");
+});
+
+test("/grandes-empresas states the fit, the controls and the procurement data", async ({ page }) => {
+  await page.goto("/grandes-empresas");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("grandes empresas");
+  const fit = page.locator("#donde-encajamos");
+  for (const href of ["/servicios/agentes-ia", "/sadt", "/axis", "/ocr", "/servicios/auditoria-ia"]) await expect(fit.locator(`a[href='${href}']`)).toBeAttached();
+  await expect(fit.getByRole("heading", { name: "Cuándo conviene otro proveedor." })).toBeAttached();
+  await expect(page.locator("#como-parte ol > li")).toHaveCount(5);
+  await expect(page.locator("#ti-y-seguridad dt")).toHaveCount(6);
+  const legal = page.locator("#compras-y-legal");
+  await expect(legal).toContainText("Sociedad de Inversiones Yago SpA");
+  await expect(legal).toContainText("77.711.804-8");
+  await expect(legal).toContainText("Programa de Integridad");
+  const schemas = await page.locator("script[type='application/ld+json']").evaluateAll((items) => items.map((item) => JSON.parse(item.textContent || "{}")));
+  const faq = schemas.find((schema) => schema["@type"] === "FAQPage");
+  expect(faq.mainEntity.map((item: { name: string }) => item.name)).toContain("¿YAGO trabaja con grandes empresas?");
+  const webPage = schemas.find((schema) => schema["@id"]?.endsWith("/grandes-empresas#page"));
+  expect(webPage.audience.name).toBe("Grandes empresas en Chile");
 });

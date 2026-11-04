@@ -249,9 +249,9 @@ export const navLinks: NavItem[] = [
         icon: "bot",
       },
       {
-        name: "OCR y documentos",
+        name: "Digitalización de documentos",
         href: "/ocr",
-        description: "Lectura y extracción de datos desde PDFs e imágenes.",
+        description: "OCR y extracción de datos desde PDFs e imágenes.",
         icon: "ocr",
       },
       {
@@ -286,6 +286,7 @@ export const navLinks: NavItem[] = [
       { name: "Cómo trabajamos", href: "/proceso", description: "Cómo priorizamos, construimos y ponemos en marcha.", icon: "route" },
       { name: "Soluciones por problema", href: "/soluciones", description: "Backoffice, finanzas, aprobaciones, RRHH y más.", icon: "grid" },
       { name: "Glosario", href: "/glosario", description: "IA, desarrollo, automatización y OCR, además de trámites laborales.", icon: "glossary" },
+      { name: "Grandes empresas", href: "/grandes-empresas", description: "Un proceso, un piloto medible y lo que piden TI, seguridad y compras.", icon: "route" },
       { name: "Nosotros", href: "/nosotros", description: "Qué hace YAGO y cómo implementamos IA y automatización en Chile.", icon: "grid" },
     ],
   },
@@ -297,7 +298,7 @@ export const footerGroups: { title: string; links: { name: string; href: string 
     links: [
       { name: "SADT · Portal DT", href: "/sadt" },
       { name: "AXIS · PJUD", href: "/axis" },
-      { name: "OCR · Documentos", href: "/ocr" },
+      { name: "OCR · Digitalización", href: "/ocr" },
       { name: "OCR Master API", href: "/ocr-master" },
       { name: "Precios", href: "/precios" },
     ],
@@ -309,8 +310,8 @@ export const footerGroups: { title: string; links: { name: string; href: string 
       { name: "Automatización", href: "/servicios/automatizacion-procesos" },
       { name: "Integración de IA", href: "/servicios/integracion-ia" },
       { name: "Apps y software con IA", href: "/servicios/apps-automatizacion" },
-      { name: "Agentes y asistentes", href: "/servicios/agentes-ia" },
-      { name: "OCR y documentos", href: "/ocr" },
+      { name: "Agentes de IA", href: "/servicios/agentes-ia" },
+      { name: "Digitalización de documentos", href: "/ocr" },
       { name: "Capacitación en IA", href: "/servicios/capacitacion-ia" },
     ],
   },
@@ -330,11 +331,22 @@ export const footerGroups: { title: string; links: { name: string; href: string 
     title: "Empresa",
     links: [
       { name: "Nosotros", href: "/nosotros" },
+      { name: "Grandes empresas", href: "/grandes-empresas" },
       { name: "Casos", href: "/casos" },
       { name: "Cómo trabajamos", href: "/proceso" },
       { name: "Soluciones", href: "/soluciones" },
       { name: "Blog", href: "/blog" },
       { name: "Glosario", href: "/glosario" },
+    ],
+  },
+  {
+    title: "Guías",
+    links: [
+      { name: "Certificados F30 y F30-1", href: "/blog/certificados-f30-y-f30-1-diferencias" },
+      { name: "Registro de contratos en Mi DT", href: "/blog/registro-contratos-terminos-mi-dt-plazos" },
+      { name: "Cómo digitalizar documentos", href: "/blog/ocr-con-ia-digitalizar-documentos" },
+      { name: "Qué es un agente de IA", href: "/blog/agentes-de-ia-para-empresas" },
+      { name: "Qué es la automatización de procesos", href: "/blog/que-es-la-automatizacion-de-procesos-con-ia" },
     ],
   },
 ];

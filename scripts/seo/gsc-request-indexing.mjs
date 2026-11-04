@@ -1,6 +1,7 @@
 // Solicita indexación en Search Console para URL de yago.cl usando el Chrome separado de
 // scripts/search-console-session.mjs (perfil .local/seo/search-console-browser, puerto 9335).
-// Uso: node scripts/seo/gsc-request-indexing.mjs https://yago.cl/ruta [...]
+// Uso: node scripts/seo/gsc-request-indexing.mjs [--refrescar] https://yago.cl/ruta [...]
+// --refrescar también pide rastrear URL ya indexadas, para cuando cambió su título o contenido.
 // Google permite unas 10 solicitudes por día. Si la ventana no tiene sesión, se detiene: nunca escribe credenciales.
 import { readFile, writeFile } from "node:fs/promises";
 import { spawnSync } from "node:child_process";
@@ -9,8 +10,9 @@ import { connectChrome } from "./cdp-connect.mjs";
 
 const LOG = fileURLToPath(new URL("../../.local/seo/daily/solicitudes-indexacion.json", import.meta.url));
 const MAX_PER_RUN = 10;
+const refresh = process.argv.includes("--refrescar");
 const urls = process.argv.slice(2).filter((u) => u.startsWith("https://yago.cl"));
-if (!urls.length) throw new Error("Uso: node scripts/seo/gsc-request-indexing.mjs https://yago.cl/ruta [...]");
+if (!urls.length) throw new Error("Uso: node scripts/seo/gsc-request-indexing.mjs [--refrescar] https://yago.cl/ruta [...]");
 
 async function connect() {
   try {
@@ -47,7 +49,7 @@ try {
     await verdict.waitFor({ timeout: 90000 }).catch(() => {});
     const text = (await verdict.textContent().catch(() => "")) || "";
     if (!text) { results.push({ url, resultado: "error: sin veredicto" }); continue; }
-    if (!/no está|not on/i.test(text)) { results.push({ url, resultado: "ya indexada" }); continue; }
+    if (!refresh && !/no está|not on/i.test(text)) { results.push({ url, resultado: "ya indexada" }); continue; }
     await page.getByText(/^\s*(Solicitar indexación|Request indexing)\s*$/i).first().click();
     // Google prueba la URL publicada (hasta 2 minutos) y confirma o avisa de la cuota.
     const done = page.getByText(/Se ha solicitado la indexación|Indexación solicitada|Indexing requested|cuota|quota/i).first();

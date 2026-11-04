@@ -33,6 +33,7 @@ export const ENTITY = {
     "OCR y procesamiento inteligente de documentos",
     "Agentes de inteligencia artificial para empresas",
     "Integración de sistemas mediante API",
+    "Pilotos de agentes de IA y automatización en grandes empresas",
   ],
   slogan: "Automatización e inteligencia artificial para empresas en Chile.",
   description:
