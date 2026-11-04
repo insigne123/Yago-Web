@@ -211,7 +211,7 @@ export const SERVICES: Service[] = [
   },
   {
     slug: "automatizacion-procesos",
-    modifiedDate: "2026-10-27",
+    modifiedDate: "2026-11-04",
     seoTitle: "Automatización de procesos con IA para empresas en Chile | YAGO",
     seoDescription: "Automatizamos tareas repetitivas de backoffice, RRHH y finanzas con IA e integraciones por API. Primer MVP en 1–2 semanas, con control de errores y trazabilidad.",
     title: "Automatización de procesos con IA",
@@ -289,6 +289,7 @@ export const SERVICES: Service[] = [
     faq: [
       { question: "¿Qué procesos se pueden automatizar con IA?", answer: "Procesos con tareas repetitivas y entradas identificables, como clasificación de solicitudes, lectura de documentos, carga de datos, aprobaciones y reportes. Primero revisamos si basta con reglas y APIs o si hay un paso que realmente requiere IA." },
       { question: "¿La automatización exige cambiar el ERP o CRM?", answer: "No necesariamente. Evaluamos APIs, archivos, webhooks y otras interfaces disponibles para conectar los sistemas actuales. El método y los accesos se definen en el diagnóstico." },
+      { question: "¿Qué alternativas tengo en Chile para modernizar el ERP, adoptar IA y cuidar la seguridad?", answer: "Depende de qué necesitas cambiar. Si el ERP funciona pero el trabajo alrededor es manual, puedes automatizar sobre él: conectamos el ERP con correo, planillas, documentos e IA por sus APIs u otras interfaces, sin reemplazarlo. Si aún no sabes por dónde partir, una auditoría IA revisa tus procesos, herramientas y datos, y entrega una hoja de ruta priorizada. Si necesitas cambiar de ERP o reforzar la infraestructura y la ciberseguridad, eso se define con el proveedor del ERP y con tu área de TI o un especialista en seguridad. En cada automatización trabajamos con los accesos y las políticas de seguridad que define tu empresa." },
       { question: "¿Cuánto cuesta automatizar un proceso empresarial?", answer: "Se cotiza según los pasos, sistemas, volumen, excepciones y soporte requerido. Separaremos implementación, operación y consumo de herramientas externas para que puedas evaluar el costo completo." },
       { question: "¿Cuánto demora una automatización?", answer: "Un MVP acotado puede tomar 1–2 semanas y una implementación productiva 3–6 semanas, según integraciones y disponibilidad de accesos. El plazo se confirma después de revisar el proceso y sus criterios de aceptación." },
       { question: "¿Cómo se mide el resultado?", answer: "Definimos una línea base de tiempo de intervención humana, volumen, errores y esperas. Comparamos períodos equivalentes y documentamos el método; el tiempo de ejecución de una máquina no se presenta como horas de trabajo humano ahorradas." },
