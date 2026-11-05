@@ -22,7 +22,7 @@ test("homepage exposes the priority guides and company directly in its main cont
 
 test("company identity connects remote service, products, deliverables and visible FAQ", async ({ page }) => {
   await page.goto("/nosotros");
-  await expect(page.locator("#empresa")).toContainText("Yago SpA es una empresa chilena");
+  await expect(page.locator("#empresa")).toContainText("YAGO es una empresa chilena");
   await expect(page.locator("#empresa")).toContainText("Atención remota");
   await expect(page.locator("#productos-y-entregables a[href='/axis']")).toHaveCount(1);
   await expect(page.locator("#productos-y-entregables")).toContainText("criterios de aceptación");
@@ -78,7 +78,7 @@ test("sitemap dates and assistant text match the changed public content", async 
     expect(entry).toContain(`<lastmod>${date}`);
   }
   const full = await (await request.get("/llms-full.txt")).text();
-  for (const text of ["Yago SpA: modalidad, productos y entregables", "Cómo interpretar el resultado de AXIS", "una factura conectada al ERP", "/recursos/plantilla-evaluacion-ocr.csv"]) expect(full).toContain(text);
+  for (const text of ["YAGO: modalidad, productos y entregables", "Cómo interpretar el resultado de AXIS", "una factura conectada al ERP", "/recursos/plantilla-evaluacion-ocr.csv"]) expect(full).toContain(text);
 });
 
 test("existing SADT and the application guide retain their distinct scope", async ({ page }) => {

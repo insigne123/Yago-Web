@@ -3,11 +3,11 @@ export const DISCOVERY_UPDATED = "2026-11-05";
 export const DECISION_RESOURCES = [
   { title: "Evaluar un proyecto OCR", description: "Define muestra, campos, excepciones y costo. Incluye una plantilla editable para registrar la evaluación.", label: "Preparar la evaluación OCR", href: "/blog/evaluar-piloto-ocr-precision-costos" },
   { title: "Integrar IA con tus sistemas", description: "Revisa entradas, interfaces y criterios de aceptación con un ejemplo de factura conectada al ERP.", label: "Definir una integración de IA", href: "/blog/integrar-ia-procesos-empresa" },
-  { title: "Conocer a tu implementador", description: "Qué hace Yago SpA, cómo trabajamos de forma remota y qué productos y entregables puedes revisar.", label: "Conocer YAGO y su forma de trabajo", href: "/nosotros" },
+  { title: "Conocer a tu implementador", description: "Qué hace YAGO, cómo trabajamos de forma remota y qué productos y entregables puedes revisar.", label: "Conocer YAGO y su forma de trabajo", href: "/nosotros" },
 ];
 
 export const COMPANY_PROFILE = {
-  definition: "Yago SpA es una empresa chilena que implementa automatización de procesos, integración de inteligencia artificial, aplicaciones a medida, agentes y procesamiento documental con OCR. Trabaja de forma remota con equipos de negocio y tecnología en Chile y Latinoamérica.",
+  definition: "YAGO es una empresa chilena que implementa automatización de procesos, integración de inteligencia artificial, aplicaciones a medida, agentes y procesamiento documental con OCR. Trabaja de forma remota con equipos de negocio y tecnología en Chile y Latinoamérica.",
   products: [
     { name: "SADT", href: "/sadt", description: "Software para operar por lote el registro de contratos, términos y descarga de certificados F30 y F30-1 del Portal Mi DT, con validación y evidencia." },
     { name: "AXIS", href: "/axis", description: "Software para consultar causas penales públicas del PJUD de Chile, con consultas individuales o por lote, evidencia y monitoreo diario de personas seleccionadas." },

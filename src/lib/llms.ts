@@ -109,7 +109,7 @@ export function buildLlmsTxt() {
 
 export function buildLlmsFullTxt() {
   const out: string[] = [header(), ""];
-  out.push("## Yago SpA: modalidad, productos y entregables", "", `URL: ${url("/nosotros")} · Revisado: ${DISCOVERY_UPDATED}`, "", COMPANY_PROFILE.definition, "");
+  out.push("## YAGO: modalidad, productos y entregables", "", `URL: ${url("/nosotros")} · Revisado: ${DISCOVERY_UPDATED}`, "", COMPANY_PROFILE.definition, "");
   for (const product of COMPANY_PROFILE.products) out.push(`- [${product.name}](${url(product.href)}): ${product.description}`);
   out.push("", "Qué acordamos en una implementación:", ...COMPANY_PROFILE.deliverables.map((item) => `- ${item}`), "");
   for (const item of COMPANY_PROFILE.faqs) out.push(`### ${item.question}`, "", item.answer, "");

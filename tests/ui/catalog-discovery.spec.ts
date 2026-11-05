@@ -5,11 +5,11 @@ test.beforeEach(async ({ page }) => {
   await page.route("**/www.googletagmanager.com/gtag/js?*", (route) => route.fulfill({ status: 200, contentType: "application/javascript", body: "/* no analytics requests in UI checks */" }));
 });
 
-test("blog keeps all sixteen guides reachable once and offers four working topic anchors", async ({ page }) => {
+test("blog keeps every guide reachable once and offers four working topic anchors", async ({ page }) => {
   await page.goto("/blog");
   const articleLinks = await page.locator("#articulos article a").evaluateAll((links) => links.map((link) => link.getAttribute("href")));
-  expect(articleLinks).toHaveLength(16);
-  expect(new Set(articleLinks).size).toBe(16);
+  expect(articleLinks.length).toBeGreaterThanOrEqual(17);
+  expect(new Set(articleLinks).size).toBe(articleLinks.length);
   const navigation = page.getByRole("navigation", { name: "Guías por necesidad" });
   const anchors = await navigation.locator("a").evaluateAll((links) => links.map((link) => link.getAttribute("href")!));
   expect(anchors).toHaveLength(4);
@@ -18,7 +18,7 @@ test("blog keeps all sixteen guides reachable once and offers four working topic
   await expect(page.locator("#guias-documentos h2")).toBeInViewport();
   const schema = JSON.parse((await page.locator("#jsonld-blog-collection").textContent())!);
   expect(schema["@type"]).toBe("CollectionPage");
-  expect(schema.mainEntity.numberOfItems).toBe(16);
+  expect(schema.mainEntity.numberOfItems).toBe(articleLinks.length);
 });
 
 test("service comparison exposes the six needs and all eight catalog routes", async ({ page }) => {

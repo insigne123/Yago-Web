@@ -343,7 +343,7 @@ export const AUTOMATION_PAGES: AutomationPage[] = [
         { name: "Sin hallazgo", meaning: "La consulta no informa coincidencias dentro del alcance y la información disponibles en ese momento.", review: "Conservar la fecha y el alcance de la consulta. No equivale a un certificado oficial de antecedentes." },
         { name: "Pendiente", meaning: "La consulta aún no entrega un resultado completo.", review: "Esperar o revisar el estado de ejecución. No interpretarlo como un resultado sin hallazgos." },
       ],
-      scope: "AXIS se centra en causas penales públicas del PJUD de Chile. No emite certificados oficiales de antecedentes ni ofrece acceso a información reservada. Yago SpA es el proveedor del software y no representa al Poder Judicial.",
+      scope: "AXIS se centra en causas penales públicas del PJUD de Chile. No emite certificados oficiales de antecedentes ni ofrece acceso a información reservada. YAGO es el proveedor del software y no representa al Poder Judicial.",
     },
     seoTitle: "AXIS | Consulta masiva de causas penales en PJUD | YAGO",
     seoDescription:

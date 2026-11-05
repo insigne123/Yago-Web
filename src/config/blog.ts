@@ -1156,7 +1156,7 @@ export const BLOG_POSTS: BlogPost[] = [
         heading: "Ejemplo de alcance: una factura conectada al ERP",
         paragraphs: ["Imagina una factura que llega en PDF. La extracción identifica proveedor, folio y monto; una validación comprueba campos obligatorios y duplicados. Si falta la orden de compra, el registro queda pendiente para que una persona complete y apruebe el dato antes de continuar. Este es un ejemplo de diseño, no un caso de cliente ni un resultado medido.", "El criterio de aceptación debe incluir lo que sucede cuando la conexión al ERP falla: conservar el estado y la evidencia, evitar crear dos registros al reintentar y mostrar qué necesita revisión. La interfaz y el comportamiento concreto se acuerdan con el responsable del sistema."],
         table: { columns: ["Situación de prueba", "Resultado que se debería comprobar"], rows: [["Falta un dato obligatorio", "El registro queda pendiente y se identifica el dato que falta"], ["La factura ya fue registrada", "La validación evita una carga duplicada"], ["El destino no responde", "La tarea conserva su estado y permite un reintento controlado"], ["Una persona corrige el dato", "La revisión queda registrada antes de continuar"]] },
-        links: [{ label: "Cómo evaluar extracción, excepciones y costo de OCR", href: "/blog/evaluar-piloto-ocr-precision-costos" }, { label: "Qué implementa Yago SpA y cómo se acuerdan los entregables", href: "/nosotros" }],
+        links: [{ label: "Cómo evaluar extracción, excepciones y costo de OCR", href: "/blog/evaluar-piloto-ocr-precision-costos" }, { label: "Qué implementa YAGO y cómo se acuerdan los entregables", href: "/nosotros" }],
       },
       {
         heading: "Evaluar el costo completo de implementar IA",
