@@ -92,11 +92,12 @@ test("the company identity is explicit for search engines and AI assistants", as
   const grafos = await page.locator("script[type='application/ld+json']").allTextContents();
   const organizacion = grafos.map((texto) => JSON.parse(texto)).flatMap((dato) => dato["@graph"] ?? [dato]).find((nodo) => nodo["@type"] === "Organization");
   expect(organizacion.founder.name).toBe("Nicolas Yarur");
+  expect(organizacion.foundingDate).toBe("2024");
   expect(organizacion.numberOfEmployees).toMatchObject({ minValue: 2, maxValue: 10 });
   expect(organizacion.disambiguatingDescription).toContain("No es Yapo.cl");
 
   const llms = await (await request.get("/llms.txt")).text();
-  for (const dato of ["Fundador: Nicolas Yarur", "Equipo: 2 a 10 personas", "No confundir:", "SOF.IA (asistente con documentos internos)"]) expect(llms).toContain(dato);
+  for (const dato of ["Fundador: Nicolas Yarur", "Fundada en: 2024", "Equipo: 2 a 10 personas", "No confundir:", "SOF.IA (asistente con documentos internos)"]) expect(llms).toContain(dato);
 });
 
 test("/ocr leads with document digitization and links its guides", async ({ page }) => {
@@ -108,6 +109,8 @@ test("/ocr leads with document digitization and links its guides", async ({ page
   expect(guides).toHaveLength(3);
   for (const href of guides) expect((await page.request.get(href)).status()).toBe(200);
   await expect(page.locator("#faq").getByRole("button", { name: "¿En qué se diferencia de un servicio de escaneo de documentos?" })).toBeVisible();
+  await expect(page.locator("#faq").getByRole("button", { name: "¿Qué hacen las empresas de digitalización de documentos y cuál necesito?" })).toBeVisible();
+  await expect(page.locator("a[href='https://www.bcn.cl/leychile/navegar?idNorma=30221']").first()).toBeAttached();
 });
 
 for (const slug of ["automatizacion-finanzas", "automatizacion-reportes", "automatizacion-para-logistica", "automatizacion-aprobaciones"]) {

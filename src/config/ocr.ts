@@ -36,7 +36,7 @@ export type OcrFaq = {
 const EVALUATION_CTA = "Solicitar evaluación";
 
 export const OCR_PAGE = {
-  modifiedDate: "2026-11-01",
+  modifiedDate: "2026-11-05",
   seoTitle: "Digitalización de documentos con OCR en Chile | YAGO",
   seoDescription:
     "Digitalización de documentos en Chile: de facturas, contratos y escaneos a datos validados en tu planilla o ERP. Evaluamos una muestra antes de cotizar.",
@@ -308,6 +308,10 @@ export const OCR_PAGE = {
     {
       question: "¿YAGO puede implementar lo que viene después del OCR?",
       answer: "Sí. Además de extraer datos, YAGO implementa integraciones con sistemas, flujos de aprobación y avisos, aplicaciones a medida y asistentes que consultan documentos con referencias. La evaluación define las conexiones, los permisos y las revisiones que necesita tu proceso.",
+    },
+    {
+      question: "¿Qué hacen las empresas de digitalización de documentos y cuál necesito?",
+      answer: "Puedes ordenar lo que ofrecen en tres servicios, y una misma empresa puede dar más de uno. El escaneo convierte papel en imágenes o PDFs. La digitalización con valor legal busca que la imagen tenga el mismo mérito que el original: según la Ley 18.845, en archivos privados debe hacerla una persona o entidad inscrita en el registro que depende del Conservador del Archivo Nacional, con actas de apertura y cierre. La extracción de datos toma PDFs e imágenes y deja los campos validados en tu planilla o ERP. YAGO hace solo esta última. Para elegir, parte por lo que necesitas al final: archivos para consultar, una copia con el mérito del original o datos para operar.",
     },
     {
       question: "¿En qué se diferencia de un servicio de escaneo de documentos?",

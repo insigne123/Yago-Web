@@ -167,6 +167,10 @@ export const KEY_FACTS: Record<ProductKeyFacts["slug"], ProductKeyFacts> = {
       { label: "Automatización del flujo documental completo", href: "/soluciones/automatizacion-documental" },
       { label: "OCR Master API", href: "/ocr-master" },
     ],
+    sources: [
+      { label: "BCN Ley Chile: Ley 18.845, sistemas de microcopia o micrograbación de documentos", href: "https://www.bcn.cl/leychile/navegar?idNorma=30221" },
+      { label: "BCN Ley Chile: DFL 4 de 1991, registro y requisitos de la microcopia y micrograbado", href: "https://www.bcn.cl/leychile/navegar?idNorma=3647" },
+    ],
   },
   "ocr-master": {
     slug: "ocr-master",

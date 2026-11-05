@@ -58,8 +58,8 @@ test.describe("ocr landing", () => {
     expect(html).toContain("Ejemplo ilustrativo · datos ficticios");
     expect(html).toContain("Podemos conectar lo que sigue");
     const schema = await page.locator("#jsonld-ocr-service").textContent();
-    expect(JSON.parse(schema!).dateModified).toBe("2026-11-01");
-    await expect(page.locator("#resumen time")).toHaveAttribute("datetime", "2026-11-01");
+    expect(JSON.parse(schema!).dateModified).toBe("2026-11-05");
+    await expect(page.locator("#resumen time")).toHaveAttribute("datetime", "2026-11-05");
     const full = await (await request.get("/llms-full.txt")).text();
     expect(full).toContain("### Una factura, de entrada a salida.");
     expect(full).toContain("Excepción: Orden de compra no identificada");

@@ -11,8 +11,8 @@ export const ENTITY = {
   taxID: "77.711.804-8",
   /** Rango de personas del equipo, el mismo que publican /grandes-empresas y los perfiles externos. */
   employees: { min: 2, max: 10, label: "2 a 10 personas" },
-  /** Año de fundación en formato AAAA. Vacío hasta que el dueño lo confirme: LinkedIn dice 2025 y Clutch 2024. */
-  foundingYear: "",
+  /** Año de fundación en formato AAAA, confirmado por el dueño el 5 de noviembre de 2026. */
+  foundingYear: "2024",
   /** Evita que buscadores e IA mezclen a YAGO con empresas de nombre parecido (la IA de Bing la confundió con Yapo.cl). */
   disambiguation: "YAGO es la marca de Sociedad de Inversiones Yago SpA (RUT 77.711.804-8), con sitio en yago.cl. No es Yapo.cl, el portal de avisos clasificados, ni otras empresas o sociedades con nombres parecidos.",
   /** Fecha de la última revisión general del contenido (se muestra como "Actualizado"). */
