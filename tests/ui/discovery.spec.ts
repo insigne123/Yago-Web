@@ -27,7 +27,7 @@ test("company identity connects remote service, products, deliverables and visib
   await expect(page.locator("#productos-y-entregables a[href='/axis']")).toHaveCount(1);
   await expect(page.locator("#productos-y-entregables")).toContainText("criterios de aceptación");
   const json = JSON.parse((await page.locator("#jsonld-about").textContent())!);
-  expect(json["@graph"][0].dateModified).toBe("2026-10-26");
+  expect(json["@graph"][0].dateModified).toBe("2026-11-05");
   const faq = JSON.parse((await page.locator("#jsonld-about-faq").textContent())!);
   for (const question of faq.mainEntity) await expect(page.locator("#faq").getByText(question.acceptedAnswer.text, { exact: true })).toBeAttached();
 });
@@ -72,9 +72,10 @@ test("integration guide adds a concrete acceptance example and contextual routes
 
 test("sitemap dates and assistant text match the changed public content", async ({ request }) => {
   const sitemap = await (await request.get("/sitemap.xml")).text();
-  for (const path of ["/", "/nosotros", "/axis", guide, integration]) {
+  const lastmod: [string, string][] = [["/", "2026-11-05"], ["/nosotros", "2026-11-05"], ["/axis", "2026-10-26"], [guide, "2026-10-26"], [integration, "2026-10-26"]];
+  for (const [path, date] of lastmod) {
     const entry = sitemap.split("<url>").find((item) => item.includes(`<loc>https://yago.cl${path}</loc>`));
-    expect(entry).toContain("<lastmod>2026-10-26");
+    expect(entry).toContain(`<lastmod>${date}`);
   }
   const full = await (await request.get("/llms-full.txt")).text();
   for (const text of ["Yago SpA: modalidad, productos y entregables", "Cómo interpretar el resultado de AXIS", "una factura conectada al ERP", "/recursos/plantilla-evaluacion-ocr.csv"]) expect(full).toContain(text);

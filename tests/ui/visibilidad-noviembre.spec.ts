@@ -57,8 +57,46 @@ test("the F30 guide leads with the current rule and answers the questions people
   await expect(page.getByRole("heading", { level: 2, name: "Qué es el certificado F30-1 y qué acredita" })).toBeAttached();
   await expect(page.getByText("¿Qué es el F30-1?", { exact: true })).toBeAttached();
   await expect(page.getByText(/también se puede pedir en una oficina de la Inspección del Trabajo/)).toBeAttached();
+  const planilla = page.getByRole("link", { name: "Descargar planilla de control de F30 y F30-1", exact: true });
+  await expect(planilla).toHaveAttribute("download", "");
+  const respuesta = await page.request.get((await planilla.getAttribute("href"))!);
+  expect(respuesta.status()).toBe(200);
+  expect((await respuesta.body()).subarray(0, 2).toString()).toBe("PK");
   await expect(page.getByRole("heading", { level: 2, name: "¿Qué diferencia hay entre el F30 y el F30-1?" })).toBeAttached();
   await expect(page.getByRole("heading", { level: 2, name: "Cómo sacar el F30 por internet en Mi DT, paso a paso" })).toBeAttached();
+});
+
+test("the Mi DT comparison discloses its author and lists its sources", async ({ page, request }) => {
+  await page.goto("/blog/automatizar-mi-dt-opciones-chile");
+  await expect(page).toHaveTitle("Automatizar Mi DT: opciones en Chile y cómo elegir (2026)");
+  await expect(page.getByText(/esta guía la escribe YAGO, que vende SADT/)).toBeVisible();
+  await expect(page.getByRole("heading", { level: 2, name: "Comparación de proveedores para automatizar Mi DT" })).toBeAttached();
+  const filas = page.locator("table tbody tr");
+  expect(await filas.count()).toBe(12);
+  await expect(page.locator("table")).toContainText("SADT (YAGO)");
+  await expect(page.locator("a[href='https://www.tecnozero.cl/portal-dt']")).toBeAttached();
+  expect(await (await request.get("/sitemap.xml")).text()).toContain("/blog/automatizar-mi-dt-opciones-chile");
+  await page.goto("/sadt");
+  await expect(page.locator("a[href='/blog/automatizar-mi-dt-opciones-chile']").first()).toBeAttached();
+});
+
+test("the company identity is explicit for search engines and AI assistants", async ({ page, request }) => {
+  await page.goto("/nosotros");
+  const empresa = page.locator("#empresa");
+  await expect(empresa).toContainText("Sociedad de Inversiones Yago SpA");
+  await expect(empresa).toContainText("Nicolas Yarur");
+  await expect(empresa).toContainText("2 a 10 personas");
+  await expect(empresa).toContainText("No es Yapo.cl");
+  await expect(page.locator("#faq").getByRole("button", { name: "¿YAGO es lo mismo que Yapo.cl?" })).toBeVisible();
+
+  const grafos = await page.locator("script[type='application/ld+json']").allTextContents();
+  const organizacion = grafos.map((texto) => JSON.parse(texto)).flatMap((dato) => dato["@graph"] ?? [dato]).find((nodo) => nodo["@type"] === "Organization");
+  expect(organizacion.founder.name).toBe("Nicolas Yarur");
+  expect(organizacion.numberOfEmployees).toMatchObject({ minValue: 2, maxValue: 10 });
+  expect(organizacion.disambiguatingDescription).toContain("No es Yapo.cl");
+
+  const llms = await (await request.get("/llms.txt")).text();
+  for (const dato of ["Fundador: Nicolas Yarur", "Equipo: 2 a 10 personas", "No confundir:", "SOF.IA (asistente con documentos internos)"]) expect(llms).toContain(dato);
 });
 
 test("/ocr leads with document digitization and links its guides", async ({ page }) => {

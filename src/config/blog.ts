@@ -50,7 +50,7 @@ export const BLOG_COLLECTIONS = [
   { id: "automatizacion", title: "Automatización y retorno", description: "Priorizar un proceso, comparar proveedores y evaluar herramientas y costo.", slugs: ["elegir-proveedor-automatizacion-ia-chile", "que-es-la-automatizacion-de-procesos-con-ia", "como-calcular-el-roi-de-automatizar-procesos", "automatizacion-para-pymes-por-donde-partir", "herramientas-automatizacion-n8n-make-ia"] },
   { id: "integracion", title: "Integración, aplicaciones y agentes", description: "Distinguir qué construir, cómo conectarlo y qué resultado comprobar.", slugs: ["integrar-ia-procesos-empresa", "apps-ia-desarrollo-asistido-diferencias", "agentes-de-ia-para-empresas"] },
   { id: "documentos", title: "OCR y documentos", description: "Digitalizar documentos, estimar su costo, medir la calidad y conocer el marco legal.", slugs: ["ocr-con-ia-digitalizar-documentos", "cuanto-cuesta-digitalizar-documentos", "evaluar-piloto-ocr-precision-costos", "validez-legal-documentos-digitalizados-chile"] },
-  { id: "laboral", title: "RRHH y Portal Mi DT", description: "Entender registros, plazos y certificados laborales de Chile.", slugs: ["certificados-f30-y-f30-1-diferencias", "control-contratistas-subcontratacion-f30-1", "finiquito-electronico-mi-dt-plazos", "registro-contratos-terminos-mi-dt-plazos"] },
+  { id: "laboral", title: "RRHH y Portal Mi DT", description: "Entender registros, plazos y certificados laborales de Chile.", slugs: ["certificados-f30-y-f30-1-diferencias", "automatizar-mi-dt-opciones-chile", "control-contratistas-subcontratacion-f30-1", "finiquito-electronico-mi-dt-plazos", "registro-contratos-terminos-mi-dt-plazos"] },
 ];
 
 export const BLOG_POSTS: BlogPost[] = [
@@ -1380,6 +1380,12 @@ export const BLOG_POSTS: BlogPost[] = [
           "Automatizar este trámite no significa soltar el control. Un buen flujo valida los datos antes de ir al portal, ejecuta en una cola ordenada, guarda el comprobante o folio de cada registro y deja los errores a la vista para corregirlos y reprocesarlos por lote.",
           "Así el equipo de RRHH deja de copiar datos pantalla por pantalla y pasa a revisar solo las excepciones, con evidencia de cada registro para auditorías o fiscalizaciones.",
         ],
+        links: [
+          {
+            label: "Opciones para automatizar Mi DT en Chile y cómo elegir",
+            href: "/blog/automatizar-mi-dt-opciones-chile",
+          },
+        ],
       },
     ],
     conclusion:
@@ -1397,8 +1403,179 @@ export const BLOG_POSTS: BlogPost[] = [
     },
   },
   {
+    slug: "automatizar-mi-dt-opciones-chile",
+    modifiedDate: "2026-11-05",
+    title: "Cómo automatizar los trámites de Mi DT: opciones en Chile y cómo elegir",
+    seoTitle: "Automatizar Mi DT: opciones en Chile y cómo elegir (2026)",
+    description: "Comparación de opciones para automatizar contratos, términos y finiquitos en Mi DT: qué cubre cada una, cómo funciona, precios publicados y qué preguntar.",
+    excerpt: "De la carga masiva gratuita de la DT a robots, módulos de RRHH y servicios externos: qué declara cada proveedor en Chile, cuánto publica que cuesta y cómo elegir.",
+    image: "/images/blog-f30-f30-1.png",
+    category: "RRHH y cumplimiento",
+    date: "2026-11-05",
+    readingTime: "8 min",
+    keywords: [
+      "automatizar Mi DT",
+      "proveedor automatización Portal Mi DT",
+      "registro masivo de contratos Mi DT",
+      "carga masiva de contratos DT",
+      "robot Dirección del Trabajo",
+      "automatizar finiquitos Mi DT",
+      "software alta rotación Chile"
+    ],
+    intro: "Para automatizar los trámites de Mi DT hay cuatro caminos: la carga masiva de la propia Dirección del Trabajo (DT), un módulo de tu software de RRHH, un robot o software especializado, y un servicio externo que hace la carga por ti. Cuál conviene depende de qué trámites necesitas, de dónde vienen tus datos y de tu volumen. Una aclaración antes de seguir: esta guía la escribe YAGO, que vende SADT, una de las opciones comparadas. Por eso los datos de cada proveedor salen de sus propias páginas públicas, revisadas el 5 de noviembre de 2026, y enlazamos cada una para que las compruebes.",
+    sections: [
+      {
+        heading: "Qué opciones hay para automatizar Mi DT",
+        paragraphs: [
+          "Las opciones se diferencian más por cómo funcionan que por el trámite que prometen. Conviene partir por identificar a cuál de estos grupos pertenece cada proveedor:"
+        ],
+        bullets: [
+          "Carga masiva de la DT: archivos CSV dentro de Mi DT, sin costo, con los límites que fija el trámite.",
+          "Módulo de tu software de RRHH: envía a la DT los datos que ya tienes cargados. Ejemplos: la extensión de Talana y Conexión DT de Rex+. RH Connect de Pro-City trabaja sobre Talana o Buk.",
+          "Robot o software especializado: toma una planilla o un sistema y opera sobre el portal. Ejemplos: Tecnozero, Abitech, Auto DT de Plutonia, BotSolutions, el robot de Firme y SADT de YAGO.",
+          "Servicio externo o agente conectado a tu ERP: otro equipo o un agente de IA hace la carga. Ejemplos: Krew y HR Automation."
+        ]
+      },
+      {
+        heading: "Comparación de proveedores para automatizar Mi DT",
+        paragraphs: [
+          "La tabla resume lo que cada página pública declara al 5 de noviembre de 2026. Que un trámite no aparezca significa que no lo vimos en esa página, no que el proveedor no lo ofrezca. Si representas a uno de estos proveedores y un dato cambió, escríbenos a nicolas.yarur.g@yago.cl y lo corregimos."
+        ],
+        table: {
+          columns: [
+            "Opción",
+            "Trámites que declara",
+            "Cómo funciona",
+            "Precio publicado"
+          ],
+          rows: [
+            ["Carga masiva de la DT", "Contratos en CSV, según un instructivo de 2022; finiquitos y Libro de Remuneraciones por sus propios trámites", "Archivos dentro de Mi DT", "Sin costo"],
+            ["SADT (YAGO)", "Contratos, términos, F30 y F30-1", "Software que toma datos de un archivo o de Workges, valida y ejecuta por lote", "Desde 31,80 UF al mes por 8.000 créditos"],
+            ["Tecnozero", "Contratos, anexos, bajas y finiquitos", "Robots que cargan una planilla Excel, con mandato firmado", "De $640 a $290 por registro con IVA, según volumen; mínimo 50 por carga"],
+            ["Talana", "Contratos y anexos", "Extensión del módulo Gestión de Personas", "Cotización"],
+            ["Rex+ (Conexión DT)", "Libro de Remuneraciones, contratos y términos; finiquitos anunciados como próximamente", "Complemento usado desde la plataforma Rex+", "Cotización"],
+            ["Pro-City (RH Connect)", "Contratos, anexos y finiquitos", "Compara datos de Talana o Buk con el registro de la DT y sube en lote lo que eliges", "No publica"],
+            ["Abitech", "Contratos; un diagrama de la página muestra también modificaciones y finiquitos", "Robots RPA que completan los formularios de la DT", "6 UF al mes; no aclara IVA ni volumen"],
+            ["Plutonia (Auto DT)", "Contratos y términos", "App de escritorio que lee un Excel y opera en Chrome con tu ClaveÚnica", "$149.990"],
+            ["BotSolutions", "Finiquito electrónico, con seguimiento y alertas de plazos", "Bot de envío al portal, integrado con Excel, RRHH o ERP", "De $4.600 a $350 + IVA según tramo mensual"],
+            ["Firme", "Cartas de aviso de término", "Robot RPA conectado al software de remuneraciones", "Sin precio propio para este trámite"],
+            ["HR Automation", "Contratos, anexos, modificaciones y avisos de término", "Agente de IA conectado al ERP", "No publica"],
+            ["Krew", "Contratos, anexos, amonestaciones, modificaciones y finiquitos", "Servicio externalizado: Krew maneja accesos y cargas", "No publica para Mi DT"]
+          ]
+        }
+      },
+      {
+        heading: "Qué puedes hacer gratis con la Dirección del Trabajo",
+        paragraphs: [
+          "Antes de pagar, revisa si te alcanza con lo que ofrece la DT. El registro de contratos y de términos no tiene costo, y su instructivo de registro masivo de contratos (versión del 21 de abril de 2022) describe archivos CSV con estas condiciones:"
+        ],
+        bullets: [
+          "Hasta 5 MB y 1.000 filas por archivo.",
+          "Un solo cargo por archivo, por lo que varios cargos significan varios archivos.",
+          "Los contratos con más de cinco tipos de remuneración o más de cinco comunas de desempeño se registran por separado.",
+          "El procesamiento puede tardar hasta 7 días, un dato que importa frente al plazo de 15 días hábiles para registrar un contrato."
+        ],
+        links: [
+          {
+            label: "Plazos para registrar contratos y términos en Mi DT",
+            href: "/blog/registro-contratos-terminos-mi-dt-plazos"
+          }
+        ]
+      },
+      {
+        heading: "Límites de la opción gratuita que conviene confirmar",
+        paragraphs: [
+          "El instructivo es de 2022 y la página actual del trámite no lo enlaza, así que confirma en Mi DT, con tu ClaveÚnica, que la opción sigue disponible como la describe. Tampoco encontramos una carga masiva oficial para anexos y términos: eso no prueba que no exista, pero conviene revisarlo.",
+          "No encontramos una API pública de la DT para registrar contratos. La referencia más cercana es una respuesta de la DT de 2023, que anunciaba servicios web para una evolución futura del Libro de Remuneraciones Electrónico. Si un proveedor habla de integración directa con la DT, pregunta cómo funciona exactamente."
+        ]
+      },
+      {
+        heading: "Cómo elegir según tu caso",
+        paragraphs: [
+          "Parte por tus datos y tu volumen, no por el proveedor. Estas son orientaciones, no una recomendación única:"
+        ],
+        bullets: [
+          "Volumen bajo y un solo cargo: prueba primero la carga masiva de la DT.",
+          "Ya usas Talana, Buk o Rex+: revisa primero la extensión o el complemento de tu sistema, porque evita mantener otra base de datos.",
+          "Trabajas con planillas y un volumen moderado: compara Auto DT de Plutonia, Abitech y el pago por registro de Tecnozero.",
+          "Solo necesitas finiquitos o cartas de aviso: BotSolutions y Firme se concentran en esos trámites.",
+          "Prefieres no operar el trámite: Krew lo ofrece como servicio externalizado.",
+          "Quieres conectar un ERP como SAP o SuccessFactors: HR Automation declara esa integración.",
+          "Tienes alta rotación, usas Workges o archivos y además necesitas F30 y F30-1 por lote: esa es la situación para la que construimos SADT. SADT no incluye anexos en su alcance publicado; si los necesitas, considéralo al comparar."
+        ]
+      },
+      {
+        heading: "Qué preguntar antes de contratar",
+        paragraphs: [
+          "Las páginas comerciales no siempre responden lo que más importa en la operación. Pregúntalo por escrito:"
+        ],
+        bullets: [
+          "Accesos: con qué identidad opera en Mi DT, quién queda como representante laboral electrónico, qué credenciales pide y cómo se revocan al terminar.",
+          "Evidencia: si guarda el comprobante o folio de cada registro y por cuánto tiempo.",
+          "Errores: cómo avisa qué falló y si permite reprocesar solo esos casos.",
+          "Cambios en el portal: qué pasa cuando Mi DT cambia o se cae, y en qué plazo se ajusta la solución.",
+          "Datos personales: dónde quedan los datos de tus trabajadores, quién accede y qué ocurre con ellos al terminar el contrato.",
+          "Certificados: si necesitas F30 y F30-1, pregunta por ellos expresamente. Varias páginas hablan de certificados o comprobantes sin decir cuáles.",
+          "Costo real: cuánto pagarías con tu volumen en el mes más alto, con IVA, y si hay mínimos o costos de implementación."
+        ]
+      },
+      {
+        heading: "Cómo comparar precios",
+        paragraphs: [
+          "Los precios no se pueden comparar directamente, porque unos cobran por registro, otros por plan mensual y otros por licencia. Para compararlos, calcula el costo mensual con tu volumen real, incluyendo el mes de mayor rotación, y agrega el IVA cuando no esté incluido.",
+          "El pago por registro suele acomodar mejor un volumen variable. Un plan mensual se aprovecha mejor con un volumen estable y alto. Una licencia o un software local pueden salir más baratos, pero considera quién los mantiene si el portal cambia."
+        ]
+      }
+    ],
+    faq: [
+      {
+        question: "¿Qué proveedor automatiza Mi DT para empresas con alta rotación?",
+        answer: "Depende de los trámites y de tus datos. Tecnozero, Abitech y SADT de YAGO son software o robots especializados; Talana, Rex+ y RH Connect de Pro-City trabajan sobre tu sistema de RRHH; Krew lo ofrece como servicio. SADT cubre contratos, términos, F30 y F30-1. YAGO escribe esta guía y desarrolla SADT."
+      },
+      {
+        question: "¿Se pueden cargar contratos en forma masiva en Mi DT sin un proveedor?",
+        answer: "Según un instructivo de la DT de 2022, sí: con archivos CSV de hasta 5 MB y 1.000 filas, un solo cargo por archivo y un procesamiento que puede tardar hasta 7 días. Confirma en Mi DT que sigue disponible, porque la página actual del trámite no lo enlaza."
+      },
+      {
+        question: "¿La Dirección del Trabajo tiene una API para registrar contratos?",
+        answer: "No encontramos una API pública para registrar contratos. La referencia más cercana es una respuesta de la DT de 2023, que anunciaba servicios web para una evolución futura del Libro de Remuneraciones Electrónico. Si un proveedor habla de integración directa, pregunta cómo funciona."
+      },
+      {
+        question: "¿Cuánto cuesta automatizar los trámites de Mi DT?",
+        answer: "Los precios públicos revisados en noviembre de 2026 van desde $290 a $640 por registro en Tecnozero, 6 UF al mes en Abitech, $149.990 en Auto DT de Plutonia y desde 31,80 UF al mes en SADT de YAGO. Talana, Rex+, Pro-City, HR Automation y Krew no publican precio para este servicio."
+      },
+      {
+        question: "¿Automatizar el trámite traspasa la responsabilidad al proveedor?",
+        answer: "No traspasa la obligación del empleador de registrar a tiempo y con datos correctos. Por eso conviene validar los datos antes de enviarlos, guardar la evidencia de cada registro y revisar qué dice el contrato con el proveedor."
+      }
+    ],
+    conclusion: "Para automatizar Mi DT, parte por lo que ya tienes: la carga masiva de la DT si tu caso es simple, tu software de RRHH si ya tiene la función, y un robot, un software especializado o un servicio externo si el volumen o los trámites lo justifican. Compara con tu volumen real y pregunta por accesos, evidencia y cambios en el portal. Esta comparación la escribe YAGO, que desarrolla SADT, y resume páginas públicas revisadas el 5 de noviembre de 2026: confirma los datos con cada proveedor antes de decidir.",
+    sources: [
+      { title: "Dirección del Trabajo: instructivo de registro masivo de contratos (versión 21.04.22)", url: "https://www.dt.gob.cl/portal/1626/articles-121013_recurso_2" },
+      { title: "Dirección del Trabajo: registro de contrato de trabajo", url: "https://www.dt.gob.cl/portal/1626/w3-article-121013.html" },
+      { title: "Dirección del Trabajo: ¿el registro de contrato tiene costo?", url: "https://www.dt.gob.cl/portal/1628/w3-article-121034.html" },
+      { title: "Dirección del Trabajo: consulta sobre servicios web en el Libro de Remuneraciones Electrónico", url: "https://www.dt.gob.cl/portal/1628/w3-article-120083.html" },
+      { title: "Tecnozero: Portal DT", url: "https://www.tecnozero.cl/portal-dt" },
+      { title: "Talana: Mi DT", url: "https://web.talana.com/mi-dt" },
+      { title: "Rex+: Conexión DT", url: "https://rexmas.com/conexion-dt/" },
+      { title: "Pro-City: RH Connect", url: "https://pro-city.cl/rh-connect.html" },
+      { title: "Abitech: carga de trámites laborales en Mi DT", url: "https://abitech.cl/carga-midt-tramites-laborales/" },
+      { title: "Plutonia: Auto DT", url: "https://plutonia.cl/autodt" },
+      { title: "BotSolutions: precios", url: "https://botsolutions.cl/precios.html" },
+      { title: "Firme: empresas de servicios transitorios", url: "https://firme.cl/industrias/empresas-servicios-transitorios" },
+      { title: "HR Automation: soluciones para la Dirección del Trabajo", url: "https://hrautomation.cl/soluciones-direccion-del-trabajo" },
+      { title: "Krew: Mi DT + IA", url: "https://krew.cl/mi-dt-ia/" }
+    ],
+    product: {
+      name: "SADT",
+      href: "/sadt",
+      text: "SADT, de YAGO, registra contratos y términos en Mi DT por lote y descarga F30 y F30-1, desde un archivo o Workges, con comprobante de cada registro."
+    },
+    relatedSlugs: ["registro-contratos-terminos-mi-dt-plazos", "certificados-f30-y-f30-1-diferencias", "finiquito-electronico-mi-dt-plazos"],
+  },
+  {
     slug: "certificados-f30-y-f30-1-diferencias",
-    modifiedDate: "2026-11-04",
+    modifiedDate: "2026-11-05",
     video: {
       youtubeId: "_TSViR4tj5Q",
       title: "F30 y F30-1: la diferencia en 60 segundos | Lunes en la oficina, Ep. 1",
@@ -1409,7 +1586,8 @@ export const BLOG_POSTS: BlogPost[] = [
     },
     title: "Certificados F30 y F30-1: qué son, en qué se diferencian y cómo obtenerlos",
     seoTitle: "F30 y F30-1: diferencia y cómo sacarlos en Mi DT (2026)",
-    description: "Desde junio de 2026 el F30 en línea se pide solo en Mi DT. Qué muestra cada certificado, cómo sacarlos paso a paso, su vigencia y qué hacer si el F30-1 no sale.",
+    description: "Desde junio de 2026 el F30 en línea se pide solo en Mi DT. Diferencia con el F30-1, paso a paso, qué hacer si no sale y planilla gratis para controlarlos.",
+    resource: { label: "Descargar planilla de control de F30 y F30-1", description: "Excel gratuito y sin registro para llevar, por empresa principal, obra y período, el estado de cada certificado, su número y dónde está el PDF. Avisa qué falta entregar y qué hay que volver a ingresar.", href: "/recursos/planilla-control-f30-f30-1.xlsx", service: "sadt" },
     excerpt: "El F30 muestra multas y deuda previsional publicada; el F30-1 certifica pagos a tus trabajadores por obra y mes. Cómo pedirlos en Mi DT, verificarlos y destrabarlos.",
     image: "/images/blog-f30-f30-1.png",
     category: "RRHH y cumplimiento",
@@ -1616,6 +1794,10 @@ export const BLOG_POSTS: BlogPost[] = [
         ],
         links: [
           {
+            label: "Descargar planilla gratuita de control de F30 y F30-1",
+            href: "/recursos/planilla-control-f30-f30-1.xlsx"
+          },
+          {
             label: "SADT: solicitud y descarga de F30 y F30-1 por lote",
             href: "/sadt"
           },
@@ -1638,6 +1820,10 @@ export const BLOG_POSTS: BlogPost[] = [
       {
         question: "¿Cuál es la diferencia entre el F30 y el F30-1?",
         answer: "El F30 muestra multas ejecutoriadas y deuda previsional publicada del empleador. El F30-1 certifica si pagó a los trabajadores de una obra en uno a tres meses, y es el que pide la empresa principal en subcontratación."
+      },
+      {
+        question: "¿Hay una planilla para controlar los F30 y F30-1 de varias obras?",
+        answer: "Sí. En esta guía puedes descargar gratis y sin registro una planilla Excel para llevar cada certificado por empresa principal, obra y período, con su estado, número y PDF. Es una ayuda de orden: los certificados se piden en Mi DT."
       },
       {
         question: "¿Cuánto cuesta sacar el F30 y el F30-1?",

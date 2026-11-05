@@ -12,9 +12,10 @@ export type TeamMember = {
 export const EDITORIAL_AUTHOR: TeamMember = {
   slug: "nicolas-yarur",
   name: "Nicolas Yarur",
-  role: "Desarrollo de soluciones, automatización e integración de IA",
-  bio: "Nicolas Yarur cuenta con experiencia en el desarrollo de soluciones y automatizaciones empresariales con inteligencia artificial, y en la integración de IA en ambientes empresariales.",
+  role: "Fundador de YAGO. Desarrollo de soluciones, automatización e integración de IA",
+  bio: "Nicolas Yarur es fundador de YAGO. Cuenta con experiencia en el desarrollo de soluciones y automatizaciones empresariales con inteligencia artificial, y en la integración de IA en ambientes empresariales.",
   profileUrl: "https://www.linkedin.com/in/nicolas-yarur/",
+  jobTitle: "Fundador",
   specialties: [
     "Desarrollo de soluciones empresariales con inteligencia artificial",
     "Automatización de procesos empresariales con IA",

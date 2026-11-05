@@ -6,19 +6,20 @@ import { ActionLink, BOOKING_ACTION, CtaBand, FaqSection, PageHero, PageSection,
 import { ENTITY } from "@/config/entity";
 import { HOME_SERVICES } from "@/config/home";
 import { COMPANY } from "@/config/site";
-import { TEAM_MEMBERS, getPersonJsonLd } from "@/config/team";
+import { EDITORIAL_AUTHOR, TEAM_MEMBERS, getPersonJsonLd } from "@/config/team";
 import { createPageMetadata, SITE_URL } from "@/lib/seo";
 import { COMPANY_PROFILE, DISCOVERY_UPDATED } from "@/config/discovery";
 
 export const metadata = createPageMetadata({
   title: "YAGO: automatización e inteligencia artificial en Chile",
-  description: "Conoce YAGO: implementación de automatización, integración de IA, aplicaciones y procesamiento documental para empresas en Chile, con alcance y validación definidos.",
+  description: "Quién es YAGO: razón social, fundador, tamaño del equipo y qué implementa en automatización, IA, aplicaciones y documentos para empresas en Chile.",
   path: "/nosotros",
 });
 
 const PROFILE_LABELS: Record<string, string> = {
   "www.linkedin.com": "LinkedIn de YAGO",
-  "clutch.co": "Perfil de YAGO en Clutch",
+  "clutch.co": "Perfil y reseña verificada de YAGO en Clutch",
+  "www.youtube.com": "Canal de YAGO en YouTube",
 };
 
 export default function AboutPage() {
@@ -46,11 +47,14 @@ export default function AboutPage() {
         <SectionHeader eyebrow="Qué hace YAGO" title="Tecnología conectada a un problema concreto." description={COMPANY_PROFILE.definition} />
         <dl className="mt-10 grid gap-6 sm:grid-cols-3">
           <div><dt className="y-eyebrow">Empresa</dt><dd className="mt-3 text-lg text-slate-950">{ENTITY.legalName}<span className="mt-1 block text-sm text-slate-600">RUT {ENTITY.taxID}</span></dd></div>
+          <div><dt className="y-eyebrow">Fundador</dt><dd className="mt-3 text-lg text-slate-950"><a href={`#${EDITORIAL_AUTHOR.slug}`} className="underline underline-offset-4">{EDITORIAL_AUTHOR.name}</a></dd></div>
+          <div><dt className="y-eyebrow">Equipo</dt><dd className="mt-3 text-lg text-slate-950">{ENTITY.employees.label}</dd></div>
+          {ENTITY.foundingYear ? <div><dt className="y-eyebrow">Fundada en</dt><dd className="mt-3 text-lg text-slate-950">{ENTITY.foundingYear}</dd></div> : null}
           <div><dt className="y-eyebrow">Mercado principal</dt><dd className="mt-3 text-lg text-slate-950">Empresas en Chile</dd></div>
           <div><dt className="y-eyebrow">Modalidad</dt><dd className="mt-3 text-lg text-slate-950">Atención remota · Chile y Latinoamérica</dd></div>
           <div><dt className="y-eyebrow">Contacto</dt><dd className="mt-3 break-all text-lg text-slate-950"><a href={`mailto:${COMPANY.email}`} className="underline underline-offset-4">{COMPANY.email}</a></dd></div>
         </dl>
-        <p className="mt-6 text-sm text-slate-600">Información revisada: <time dateTime={DISCOVERY_UPDATED}>26 de octubre de 2026</time>.</p>
+        <p className="mt-6 max-w-3xl text-sm text-slate-600">{ENTITY.disambiguation} Información revisada: <time dateTime={DISCOVERY_UPDATED}>5 de noviembre de 2026</time>.</p>
       </PageSection>
       <PageSection id="capacidades" tone="mist">
         <SectionHeader eyebrow="Especialidades" title="Automatización, IA, aplicaciones y documentos." />

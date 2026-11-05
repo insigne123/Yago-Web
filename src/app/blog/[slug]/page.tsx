@@ -122,7 +122,7 @@ export default async function BlogPostPage({ params }: Props) {
       .join(" ")
       .split(/\s+/).length,
     abstract: post.conclusion,
-    ...(post.resource ? { associatedMedia: { "@type": "DigitalDocument", name: post.resource.label, description: post.resource.description, url: `${base}${post.resource.href}`, encodingFormat: "text/csv" } } : {}),
+    ...(post.resource ? { associatedMedia: { "@type": "DigitalDocument", name: post.resource.label, description: post.resource.description, url: `${base}${post.resource.href}`, encodingFormat: post.resource.href.endsWith(".xlsx") ? "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" : "text/csv" } } : {}),
     ...(post.sources?.length
       ? { citation: post.sources.map((source) => ({ "@type": "CreativeWork", name: source.title, url: source.url })) }
       : {}),
@@ -209,7 +209,7 @@ export default async function BlogPostPage({ params }: Props) {
 
             <div className={`mt-12 max-w-[68ch] ${ARTICLE_PROSE}`}>
               <p className="font-headline text-[1.2rem] leading-[1.6] tracking-[-0.01em] text-slate-900 sm:text-[1.3rem]">{post.intro}</p>
-              {post.resource ? <aside aria-label="Recurso para la evaluación" className="not-prose my-8 rounded-2xl bg-mist p-6"><p className="font-semibold text-slate-950">Plantilla editable</p><p className="mt-2 text-[15px] leading-relaxed text-slate-600">{post.resource.description}</p><a href={post.resource.href} download className={`y-link mt-4 min-h-11 plausible-event-name=Resource+Download plausible-event-service=${post.resource.service} plausible-event-location=article`}>{post.resource.label}<ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" /></a></aside> : null}
+              {post.resource ? <aside aria-label="Recurso descargable" className="not-prose my-8 rounded-2xl bg-mist p-6"><p className="font-semibold text-slate-950">{post.resource.href.endsWith(".xlsx") ? "Planilla gratuita" : "Plantilla editable"}</p><p className="mt-2 text-[15px] leading-relaxed text-slate-600">{post.resource.description}</p><a href={post.resource.href} download className={`y-link mt-4 min-h-11 plausible-event-name=Resource+Download plausible-event-service=${post.resource.service} plausible-event-location=article`}>{post.resource.label}<ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" /></a></aside> : null}
               {post.video ? <VideoEmbed video={post.video} /> : null}
 
               {post.sections.slice(0, INLINE_CTA_AFTER).map((section) => (

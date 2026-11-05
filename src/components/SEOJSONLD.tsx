@@ -1,6 +1,7 @@
 import { COMPANY } from "@/config/site";
 import { ENTITY } from "@/config/entity";
 import { SERVICES } from "@/config/services";
+import { EDITORIAL_AUTHOR } from "@/config/team";
 import { JsonLd } from "@/components/seo/JsonLd";
 
 /**
@@ -39,6 +40,10 @@ export function SEOJSONLD() {
     logo: { "@type": "ImageObject", "@id": `${SITE_URL}/#logo`, url: logoUrl, contentUrl: logoUrl, width: 600, height: 600, caption: COMPANY.name },
     image: ogImage,
     description: ENTITY.description,
+    disambiguatingDescription: ENTITY.disambiguation,
+    founder: { "@type": "Person", "@id": `${SITE_URL}/nosotros#${EDITORIAL_AUTHOR.slug}`, name: EDITORIAL_AUTHOR.name },
+    ...(ENTITY.foundingYear ? { foundingDate: ENTITY.foundingYear } : {}),
+    numberOfEmployees: { "@type": "QuantitativeValue", minValue: ENTITY.employees.min, maxValue: ENTITY.employees.max },
     slogan: ENTITY.slogan,
     email: COMPANY.email,
     telephone: COMPANY.whatsapp,

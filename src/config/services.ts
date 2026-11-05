@@ -101,8 +101,8 @@ export const SERVICES: Service[] = [
     modifiedDate: "2026-11-02",
     video: {
       youtubeId: "_kGFzz-NcWc",
-      title: "Auditoría IA: no necesitas llegar con una idea | SOF.IA, de YAGO",
-      description: "SOF.IA, la asistente de IA de YAGO, recorre las cuatro etapas de la auditoría IA: levantamiento, análisis, propuesta y hoja de ruta con el primer piloto definido.",
+      title: "Auditoría IA de YAGO: no necesitas llegar con una idea",
+      description: "El video recorre las cuatro etapas de la auditoría IA de YAGO: levantamiento, análisis, propuesta y hoja de ruta con el primer piloto definido. Lo presenta SOF.IA, la asistente de YAGO; la auditoría es un servicio aparte.",
       uploadDate: "2026-11-02T15:06:25-03:00",
       duration: "PT1M20S",
       poster: "/videos/auditoria-ia-sofia.webp",

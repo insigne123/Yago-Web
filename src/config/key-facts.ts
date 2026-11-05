@@ -51,9 +51,9 @@ export const KEY_FACTS: Record<ProductKeyFacts["slug"], ProductKeyFacts> = {
     name: "SADT",
     question: "¿Qué es SADT?",
     definition:
-      "SADT es un software de YAGO que automatiza los trámites del Portal Mi DT de la Dirección del Trabajo de Chile: registro de contratos, registro de términos de contrato (desvinculaciones) y descarga de certificados F30 y F30-1. Toma los datos desde un archivo o desde Workges, los valida antes de ejecutar y guarda comprobante, folio o PDF de cada registro, con los errores a la vista para reprocesarlos.",
+      "SADT es un software de YAGO para empresas con alta rotación de personal o alto volumen de contratos, que automatiza los trámites del Portal Mi DT de la Dirección del Trabajo de Chile: registro de contratos, registro de términos de contrato (desvinculaciones) y descarga de certificados F30 y F30-1. Toma los datos desde un archivo o desde Workges, los valida antes de ejecutar y guarda comprobante, folio o PDF de cada registro, con los errores a la vista para reprocesarlos.",
     facts: [
-      { label: "Para quién", value: "RRHH, remuneraciones y operaciones con alto volumen de contratos" },
+      { label: "Para quién", value: "RRHH, remuneraciones y operaciones con alta rotación o alto volumen de contratos: servicios transitorios, outsourcing, seguridad, construcción o retail" },
       { label: "Qué automatiza", value: "Registro de contratos y de términos de contrato, certificados F30 y F30-1" },
       { label: "Carga de datos", value: "Desde archivo o integración con Workges" },
       { label: "Evidencia", value: "Comprobante, folio o PDF por cada registro" },
@@ -65,6 +65,11 @@ export const KEY_FACTS: Record<ProductKeyFacts["slug"], ProductKeyFacts> = {
         question: "¿Qué es SADT?",
         answer:
           "Es un software de YAGO que automatiza los trámites del Portal Mi DT: registro de contratos y de términos de contrato y descarga de certificados F30 y F30-1, con validación previa, evidencia de cada registro y reproceso de errores.",
+      },
+      {
+        question: "¿SADT de YAGO es la metodología SADT?",
+        answer:
+          "No. SADT de YAGO es un software para operar trámites del Portal Mi DT. No tiene relación con la técnica de análisis y diseño estructurado que lleva la misma sigla.",
       },
       {
         question: "¿Cuánto cuesta SADT?",
@@ -79,6 +84,7 @@ export const KEY_FACTS: Record<ProductKeyFacts["slug"], ProductKeyFacts> = {
       },
     ],
     guides: [
+      { label: "Opciones para automatizar Mi DT en Chile y cómo elegir", href: "/blog/automatizar-mi-dt-opciones-chile" },
       { label: "Registro de contratos y términos en Mi DT: plazos y cómo hacerlo a volumen", href: "/blog/registro-contratos-terminos-mi-dt-plazos" },
       { label: "Certificados F30 y F30-1: diferencias y cómo obtenerlos", href: "/blog/certificados-f30-y-f30-1-diferencias" },
       { label: "Control de contratistas: Ley de Subcontratación y F30-1", href: "/blog/control-contratistas-subcontratacion-f30-1" },
