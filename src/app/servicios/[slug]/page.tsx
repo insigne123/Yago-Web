@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Clock3, Info } from "lucide-react";
+import { CircleCheck, Clock3, Info, MessageCircle } from "lucide-react";
 import { getServiceBySlug, SERVICES, type Service } from "@/config/services";
 import { ChipList, ColumnHeader, ImageLinkCard, ListCard, stepGridClass } from "@/components/catalog/CatalogKit";
 import { DetailHeroAside, contactLinks, countWord } from "@/components/catalog/DetailKit";
@@ -12,6 +12,7 @@ import { videoJsonLd } from "@/lib/video";
 import { Testimonials } from "@/components/cases/Testimonials";
 import { RelatedCases } from "@/components/cases/RelatedCases";
 import { ServiceFlowExample } from "@/components/services/ServiceFlowExample";
+import { ServiceLeadForm } from "@/components/services/ServiceLeadForm";
 import {
   ActionLink,
   CtaBand,
@@ -64,9 +65,10 @@ export default async function ServicePage({ params }: PageProps) {
 
   const heading = svc.pageTitle || svc.title;
   const subtitle = svc.pageSubtitle || svc.short;
+  const bookingHref = getDiagnosticHref(svc.slug);
   const primaryAction = {
-    label: svc.ctaPrimary || PRIMARY_CTA.label,
-    href: getDiagnosticHref(svc.slug),
+    label: svc.leadForm?.heroLabel || svc.ctaPrimary || PRIMARY_CTA.label,
+    href: svc.leadForm ? "#contacto" : bookingHref,
     event: `plausible-event-name=Service+CTA+Primary plausible-event-service=${svc.slug} plausible-event-location=service_page`,
   };
   const secondaryLabel = svc.ctaSecondary || "Ver etapas";
@@ -302,20 +304,62 @@ export default async function ServicePage({ params }: PageProps) {
       ) : null}
 
       {/* ---------------- CIERRE ---------------- */}
-      <CtaBand
-        title={svc.closeCta?.title || `¿Listo para conversar sobre ${lowerFirst(svc.title)}?`}
-        text={svc.closeCta?.text || "Te ayudamos a evaluar el mejor plan para tu contexto."}
-        primary={{
-          ...primaryAction,
-          label: svc.closeCta?.primary || PRIMARY_CTA.label,
-          event: `plausible-event-name=Service+CTA+Primary plausible-event-service=${svc.slug} plausible-event-location=service_close`,
-        }}
-        secondary={{
-          label: svc.closeCta?.secondary || "Escribir por WhatsApp",
-          href: waHref,
-          event: `plausible-event-name=Service+Contact plausible-event-method=whatsapp plausible-event-service=${svc.slug} plausible-event-location=service_page`,
-        }}
-      />
+      {svc.leadForm ? (
+        <PageSection id="contacto" tone="dark">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-10">
+            <div className="flex flex-col gap-6 lg:col-span-5">
+              <span className="y-eyebrow">{svc.leadForm.eyebrow}</span>
+              <h2 className="y-h2 text-white">{svc.leadForm.title}</h2>
+              <p className="y-lead">{svc.leadForm.description}</p>
+              <ul className="flex flex-col gap-3">
+                {svc.leadForm.points.map((point) => (
+                  <li key={point} className="flex gap-3 text-base text-white">
+                    <CircleCheck className="mt-0.5 h-5 w-5 shrink-0 text-sky-300" strokeWidth={1.8} aria-hidden="true" />
+                    {point}
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-2 flex flex-col items-start gap-4">
+                <a
+                  href={bookingHref}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={`y-link plausible-event-name=CTA+Agendar+Sesion plausible-event-service=${svc.slug} plausible-event-location=service_form`}
+                >
+                  Prefiero agendar una reunión
+                </a>
+                <a
+                  href={waHref}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={`y-link plausible-event-name=Service+Contact plausible-event-method=whatsapp plausible-event-service=${svc.slug} plausible-event-location=service_form`}
+                >
+                  <MessageCircle className="h-[18px] w-[18px]" aria-hidden="true" />
+                  Escribir por WhatsApp
+                </a>
+              </div>
+            </div>
+            <div className="lg:col-span-6 lg:col-start-7">
+              <ServiceLeadForm service={svc.slug} serviceTitle={svc.title} config={svc.leadForm} />
+            </div>
+          </div>
+        </PageSection>
+      ) : (
+        <CtaBand
+          title={svc.closeCta?.title || `¿Listo para conversar sobre ${lowerFirst(svc.title)}?`}
+          text={svc.closeCta?.text || "Te ayudamos a evaluar el mejor plan para tu contexto."}
+          primary={{
+            ...primaryAction,
+            label: svc.closeCta?.primary || PRIMARY_CTA.label,
+            event: `plausible-event-name=Service+CTA+Primary plausible-event-service=${svc.slug} plausible-event-location=service_close`,
+          }}
+          secondary={{
+            label: svc.closeCta?.secondary || "Escribir por WhatsApp",
+            href: waHref,
+            event: `plausible-event-name=Service+Contact plausible-event-method=whatsapp plausible-event-service=${svc.slug} plausible-event-location=service_page`,
+          }}
+        />
+      )}
     </PageShell>
   );
 }

@@ -40,6 +40,19 @@ export type ServiceCloseCta = {
   secondary: string;
 };
 
+/** Formulario propio del servicio: reemplaza el cierre y lleva el botón principal a #contacto para medir cada contacto. */
+export type ServiceLeadForm = {
+  heroLabel: string;
+  eyebrow: string;
+  title: string;
+  description: string;
+  points: string[];
+  processLabel: string;
+  processPlaceholder: string;
+  submitLabel: string;
+  successMessage: string;
+};
+
 export type ServiceWorkflow = {
   title: string;
   description: string;
@@ -78,6 +91,7 @@ export type Service = {
   buyerBlocks?: ServiceBuyerBlock[];
   pricingPlans?: ServicePlan[];
   closeCta?: ServiceCloseCta;
+  leadForm?: ServiceLeadForm;
   faq?: ServiceFaq[];
   seoTitle?: string;
   seoDescription?: string;
@@ -215,6 +229,21 @@ export const SERVICES: Service[] = [
     seoTitle: "Automatización de procesos con IA para empresas en Chile | YAGO",
     seoDescription: "Automatizamos tareas repetitivas de backoffice, RRHH y finanzas con IA e integraciones por API. Primer MVP en 1–2 semanas, con control de errores y trazabilidad.",
     title: "Automatización de procesos con IA",
+    leadForm: {
+      heroLabel: "Cuéntanos tu proceso",
+      eyebrow: "Cuéntanos tu proceso",
+      title: "¿Qué proceso te gustaría automatizar?",
+      description: "No necesitas tener la solución definida. Cuéntanos qué tarea le quita tiempo a tu equipo y te respondemos con el siguiente paso recomendado.",
+      points: [
+        "No necesitas saber qué herramienta usar.",
+        "Partimos por revisar el proceso, tus sistemas y tus datos.",
+        "Trabajamos sobre lo que tu empresa ya usa.",
+      ],
+      processLabel: "¿Qué proceso quieres automatizar?",
+      processPlaceholder: "Por ejemplo: cargamos facturas a mano en el ERP y nos toma varios días al mes.",
+      submitLabel: "Enviar y coordinar diagnóstico",
+      successMessage: "Revisaremos el proceso y te responderemos con el siguiente paso recomendado.",
+    },
     short: "Conectamos tareas, datos y sistemas para reducir trabajo manual y dejar cada paso trazable.",
     pageTitle: "Automatización de procesos con IA para empresas en Chile",
     pageSubtitle: "Automatizamos carga de datos, aprobaciones, documentos y reportes sobre los sistemas que ya usa tu empresa. Combinamos reglas, APIs e IA según lo que necesita cada paso.",

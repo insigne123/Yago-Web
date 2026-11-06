@@ -15,6 +15,7 @@ const LEAD_FORMS: Record<string, string> = {
   "OCR Lead Form Success": "ocr",
   "Automation Lead Form Success": "automation",
   "Audit Form Success": "audit",
+  "Service Lead Form Success": "service",
 };
 
 const GOOGLE_PROPS = new Set(["position", "service", "slug", "location", "section", "method", "kind", "status", "topic"]);
