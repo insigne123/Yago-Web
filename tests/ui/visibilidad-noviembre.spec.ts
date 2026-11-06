@@ -113,6 +113,33 @@ test("/ocr leads with document digitization and links its guides", async ({ page
   await expect(page.locator("a[href='https://www.bcn.cl/leychile/navegar?idNorma=30221']").first()).toBeAttached();
 });
 
+test("/servicios/automatizacion-procesos answers what a company asks before automating", async ({ page }) => {
+  await page.goto("/servicios/automatizacion-procesos");
+  const preguntas = [
+    "¿Qué accesos necesitan para automatizar un proceso?",
+    "¿Cómo se controla quién ve la información si un portal no separa perfiles?",
+    "¿Qué pasa si un portal o sistema externo se cae?",
+    "¿Tengo que comprar licencias adicionales?",
+    "¿Una persona puede revisar antes de que se cierre un trámite?",
+    "¿Dónde quedan los certificados y comprobantes?",
+    "¿Se puede avisar automáticamente a una persona cuando su trámite está listo?",
+  ];
+  for (const pregunta of preguntas) await expect(page.locator("#faq").getByRole("button", { name: pregunta })).toBeAttached();
+  const faq = (await page.locator("script[type='application/ld+json']").allTextContents()).map((value) => JSON.parse(value)).find((value) => value["@type"] === "FAQPage");
+  const nombres = faq.mainEntity.map((entrada: { name: string }) => entrada.name);
+  for (const pregunta of preguntas) expect(nombres).toContain(pregunta);
+  await expect(page.locator("#inicio")).toContainText("1–2 semanas");
+});
+
+test("the n8n guide answers how to start in Chile and leads to the service", async ({ page }) => {
+  await page.goto("/blog/herramientas-automatizacion-n8n-make-ia");
+  await expect(page).toHaveTitle(/^Automatización con n8n y Make en Chile/);
+  await expect(page.getByRole("heading", { name: "Automatización con n8n en Chile: qué hace falta" })).toBeVisible();
+  await expect(page.getByText("¿Quién implementa automatizaciones con n8n en Chile?").first()).toBeAttached();
+  await expect(page.locator("article a[href='/servicios/automatizacion-procesos']").first()).toBeAttached();
+  await expect(page.locator("a[href='https://docs.n8n.io/choose-n8n/']").first()).toBeAttached();
+});
+
 for (const slug of ["automatizacion-finanzas", "automatizacion-reportes", "automatizacion-para-logistica", "automatizacion-aprobaciones"]) {
   test(`/soluciones/${slug} shows scenarios, a practical guide and extended FAQ`, async ({ page }) => {
     await page.goto(`/soluciones/${slug}`);

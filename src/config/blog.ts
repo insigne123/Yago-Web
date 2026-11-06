@@ -3245,25 +3245,50 @@ export const BLOG_POSTS: BlogPost[] = [
   {
     slug: "herramientas-automatizacion-n8n-make-ia",
     title: "n8n, Make y IA: las herramientas detrás de la automatización moderna",
-    seoTitle: "n8n, Make e IA: herramientas de automatización | YAGO",
+    seoTitle: "Automatización con n8n y Make en Chile: cómo partir | YAGO",
     description:
-      "Comparativa práctica de herramientas de automatización: n8n, Make, APIs e IA. Cuándo usar cada una y cómo se combinan en flujos empresariales reales.",
+      "Cómo automatizar con n8n o Make en Chile: alojamiento, datos, errores y qué definir antes del primer flujo. Cuándo usar cada herramienta y dónde entra la IA.",
     excerpt:
       "El stack real detrás de las automatizaciones: qué hace n8n, qué hace Make, dónde entra la IA y cómo se combinan sin fragilidad.",
     image: "/images/blog-herramientas.png",
     category: "Tecnología",
     date: "2026-05-20",
-    modifiedDate: "2026-09-01",
+    modifiedDate: "2026-11-06",
     readingTime: "8 min",
-    keywords: ["n8n", "Make", "herramientas automatización", "integración de sistemas", "workflows"],
+    keywords: ["n8n", "automatización n8n Chile", "Make", "herramientas automatización", "integración de sistemas", "workflows"],
     intro:
-      "Detrás de cada automatización robusta hay un stack de herramientas que orquesta datos entre sistemas. Entender qué hace cada pieza te ayuda a evaluar propuestas, evitar dependencias innecesarias y exigir soluciones mantenibles.",
+      "Detrás de cada automatización robusta hay un stack de herramientas que orquesta datos entre sistemas. Entender qué hace cada pieza te ayuda a evaluar propuestas, evitar dependencias innecesarias y exigir soluciones mantenibles. Si estás evaluando n8n en Chile, también verás qué hace falta para partir.",
     sections: [
       {
         heading: "Orquestadores: n8n y Make",
         paragraphs: [
           "n8n y Make son plataformas de orquestación: conectan aplicaciones (correo, ERP, CRM, planillas, WhatsApp) y ejecutan flujos con lógica condicional, reintentos y manejo de errores.",
-          "Make brilla en flujos simples y rápidos de montar. n8n destaca cuando necesitas control: se puede alojar en tu propia infraestructura, maneja lógica compleja y escala mejor en volumen. Para procesos con datos sensibles, n8n self-hosted suele ser la elección correcta.",
+          "Make brilla en flujos simples y rápidos de montar. n8n destaca cuando necesitas control: se puede alojar en tu propia infraestructura y maneja lógica compleja. Para procesos con datos sensibles, alojarlo tú te da más control, pero exige que alguien lo mantenga.",
+        ],
+      },
+      {
+        heading: "Automatización con n8n en Chile: qué hace falta",
+        paragraphs: [
+          "La herramienta es la misma en cualquier país. Lo que debes decidir es dónde corre y quién la mantiene. Tienes dos caminos: n8n Cloud, administrado por n8n, o alojamiento propio, en tu infraestructura o en una nube privada. La documentación de n8n recomienda Cloud a quien no tiene conocimientos técnicos. Con alojamiento propio, la infraestructura y su mantenimiento quedan a tu cargo.",
+          "Antes de construir el primer flujo, define estos puntos:",
+        ],
+        bullets: [
+          "Un proceso acotado: qué lo inicia, qué pasos sigue y qué resultado entrega. Como ejemplo ficticio, una factura que llega por correo y debe quedar registrada en el ERP.",
+          "Accesos: con qué sistemas se conecta, si tienen API y quién autoriza las credenciales. n8n recomienda usar OAuth cuando sea posible.",
+          "Alojamiento: con instalación propia, tu equipo se encarga de cifrar los datos en tránsito y en reposo, y de actualizar la instancia. Con Cloud, confirma con n8n en qué región quedarán tus datos.",
+          "Datos personales: si el flujo los trata y salen de Chile, revisa con tu equipo legal las reglas de transferencia internacional de la Ley 19.628, modificada por la Ley 21.719. Esos cambios entran en vigencia el 1 de diciembre de 2026.",
+          "Errores: n8n permite crear un flujo de errores que avisa cuando una ejecución falla. Define quién recibe ese aviso y quién revisa las ejecuciones fallidas.",
+          "Mantenimiento: quién ajusta el flujo cuando cambia un sistema, un formato o una regla.",
+        ],
+        links: [
+          {
+            label: "Automatización de procesos con YAGO: cómo se trabaja y qué incluye",
+            href: "/servicios/automatizacion-procesos",
+          },
+          {
+            label: "Cómo elegir un proveedor de automatización e IA en Chile",
+            href: "/blog/elegir-proveedor-automatizacion-ia-chile",
+          },
         ],
       },
       {
@@ -3282,15 +3307,44 @@ export const BLOG_POSTS: BlogPost[] = [
         heading: "Señales de una buena arquitectura",
         paragraphs: [
           "Independiente de las herramientas, una automatización mantenible tiene: manejo de errores explícito (qué pasa cuando algo falla), logs consultables, alertas cuando un flujo se detiene, y documentación del flujo que cualquier técnico pueda leer.",
-          "Desconfía de automatizaciones 'mágicas' sin trazabilidad: cuando fallan —y todas fallan alguna vez— el costo de no saber por qué es altísimo.",
+          "Desconfía de automatizaciones 'mágicas' sin trazabilidad. Todas fallan alguna vez, y no saber por qué sale caro.",
         ],
       },
     ],
+    faq: [
+      {
+        question: "¿Quién implementa automatizaciones con n8n en Chile?",
+        answer: "Puedes hacerlo con tu equipo, si alguien tiene el tiempo y los conocimientos para mantenerlo, o con un proveedor. YAGO diseña e implementa automatizaciones en Chile con n8n o Make, APIs e IA, y parte por revisar el proceso, tus sistemas y tus datos. Si comparas proveedores, pregunta cómo manejan los errores, quién mantiene el flujo y a nombre de quién quedan la cuenta y las credenciales.",
+      },
+      {
+        question: "¿Conviene n8n Cloud o alojarlo en mi propia infraestructura?",
+        answer: "Depende de quién lo va a mantener y de cuánto control necesitas. Según la documentación de n8n, ambas opciones sirven para producción. Cloud está administrado por n8n y no requiere instalación. El alojamiento propio da control total, pero requiere conocimientos técnicos y deja la infraestructura y el mantenimiento a tu cargo.",
+      },
+      {
+        question: "¿Necesito n8n para automatizar un proceso?",
+        answer: "No. También puedes usar Make u otra plataforma, integraciones por API o desarrollo a medida. Conviene elegir después de revisar el proceso, los sistemas que debe conectar y quién lo mantendrá. No necesitas tener definida la herramienta para empezar.",
+      },
+    ],
     conclusion:
-      "Las herramientas importan menos que el diseño: un flujo con IA en los puntos correctos, manejo de errores explícito y documentación clara es más fácil de operar, auditar y mantener.",
+      "Las herramientas importan menos que el diseño: un flujo con IA en los puntos correctos, manejo de errores explícito y documentación clara es más fácil de operar, auditar y mantener. Si vas a partir con n8n en Chile, define el proceso, los accesos, el alojamiento y quién lo mantendrá antes del primer flujo.",
     sources: [
-      { title: "n8n documentation", url: "https://docs.n8n.io/" },
+      { title: "n8n Docs: qué es n8n", url: "https://docs.n8n.io/" },
+      { title: "n8n Docs: elegir entre n8n Cloud y alojamiento propio", url: "https://docs.n8n.io/choose-n8n/" },
+      { title: "n8n Docs: alojamiento propio de n8n", url: "https://docs.n8n.io/deploy/host-n8n" },
+      { title: "n8n Docs: medidas de privacidad y seguridad", url: "https://docs.n8n.io/privacy-security/what-you-can-do/" },
+      { title: "n8n Docs: manejo de errores", url: "https://docs.n8n.io/flow-logic/error-handling/" },
       { title: "Make Help Center", url: "https://help.make.com/" },
+      { title: "Biblioteca del Congreso Nacional: Ley 21.719 sobre protección de datos personales", url: "https://www.bcn.cl/leychile/navegar?idNorma=1209272" },
+    ],
+    service: {
+      name: "Automatización de procesos",
+      href: "/servicios/automatizacion-procesos",
+      text: "YAGO diseña e implementa automatizaciones en Chile sobre los sistemas que ya usa tu empresa, con n8n o Make cuando calzan con el proceso. Cuéntanos qué tarea quieres automatizar y te respondemos con el siguiente paso recomendado.",
+    },
+    relatedSlugs: [
+      "elegir-proveedor-automatizacion-ia-chile",
+      "que-es-la-automatizacion-de-procesos-con-ia",
+      "integrar-ia-procesos-empresa",
     ],
   },
 ];

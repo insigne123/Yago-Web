@@ -225,7 +225,7 @@ export const SERVICES: Service[] = [
   },
   {
     slug: "automatizacion-procesos",
-    modifiedDate: "2026-11-04",
+    modifiedDate: "2026-11-06",
     seoTitle: "Automatización de procesos con IA para empresas en Chile | YAGO",
     seoDescription: "Automatizamos tareas repetitivas de backoffice, RRHH y finanzas con IA e integraciones por API. Primer MVP en 1–2 semanas, con control de errores y trazabilidad.",
     title: "Automatización de procesos con IA",
@@ -322,6 +322,13 @@ export const SERVICES: Service[] = [
       { question: "¿Cuánto cuesta automatizar un proceso empresarial?", answer: "Se cotiza según los pasos, sistemas, volumen, excepciones y soporte requerido. Separaremos implementación, operación y consumo de herramientas externas para que puedas evaluar el costo completo." },
       { question: "¿Cuánto demora una automatización?", answer: "Un MVP acotado puede tomar 1–2 semanas y una implementación productiva 3–6 semanas, según integraciones y disponibilidad de accesos. El plazo se confirma después de revisar el proceso y sus criterios de aceptación." },
       { question: "¿Cómo se mide el resultado?", answer: "Definimos una línea base de tiempo de intervención humana, volumen, errores y esperas. Comparamos períodos equivalentes y documentamos el método; el tiempo de ejecución de una máquina no se presenta como horas de trabajo humano ahorradas." },
+      { question: "¿Qué accesos necesitan para automatizar un proceso?", answer: "Solo los que el proceso necesita. Si lo requieres, firmamos primero un acuerdo de confidencialidad. Después definimos contigo un usuario o rol para cada sistema, según lo que permita cada plataforma. Si un portal solo funciona con una credencial personal, como ClaveÚnica, acordamos con tu empresa quién queda autorizado y cómo se revoca ese acceso al terminar." },
+      { question: "¿Cómo se controla quién ve la información si un portal no separa perfiles?", answer: "Si un portal le muestra toda la información a quien entra, conviene reducir cuántas personas lo usan directamente. La automatización opera en el portal y tu equipo trabaja desde un panel, con permisos según el rol de cada persona. Qué ve cada rol se define contigo antes de partir." },
+      { question: "¿Qué pasa si un portal o sistema externo se cae?", answer: "La automatización vuelve a intentar sin que alguien tenga que lanzarla de nuevo. Lo que no se pudo completar queda registrado para revisarlo o reprocesarlo. Además, distribuimos las consultas en los horarios que definas, para no saturar el portal." },
+      { question: "¿Tengo que comprar licencias adicionales?", answer: "Por lo general, no. Cuando YAGO opera la solución, pagas una suscripción mensual que incluye las herramientas que usa. Puede ser una bolsa de créditos, con una tarifa menor y vencimiento, o un cobro por uso, con una tarifa mayor. Las licencias de los sistemas que ya tienes, como tu ERP, siguen siendo tuyas. Si tu proyecto necesita otra herramienta, la verás por separado en la propuesta." },
+      { question: "¿Una persona puede revisar antes de que se cierre un trámite?", answer: "Sí. Puedes definir qué pasos requieren la aprobación de una persona, como una desvinculación, un monto alto o un caso dudoso. El resto sigue de forma automática y cada decisión queda registrada." },
+      { question: "¿Dónde quedan los certificados y comprobantes?", answer: "Los documentos que genera el proceso se guardan y quedan disponibles en un panel web. También pueden enviarse por correo a quien definas." },
+      { question: "¿Se puede avisar automáticamente a una persona cuando su trámite está listo?", answer: "Sí. El flujo puede enviar avisos personalizados por correo o WhatsApp, con el tono y la imagen de tu empresa. Por ejemplo, a un extrabajador cuando su finiquito queda listo." },
     ],
     relatedGuides: [
       { label: "Cómo elegir un proveedor de automatización e IA en Chile", href: "/blog/elegir-proveedor-automatizacion-ia-chile" },
