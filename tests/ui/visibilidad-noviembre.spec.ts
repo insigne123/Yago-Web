@@ -131,6 +131,16 @@ test("/servicios/automatizacion-procesos answers what a company asks before auto
   await expect(page.locator("#inicio")).toContainText("1–2 semanas");
 });
 
+test("the process automation guide sends readers to the service early", async ({ page }) => {
+  await page.goto("/blog/que-es-la-automatizacion-de-procesos-con-ia");
+  const headings = await page.locator("article h2").allInnerTexts();
+  const nueva = headings.indexOf("Qué necesitas para automatizar un proceso en tu empresa");
+  expect(nueva).toBeGreaterThanOrEqual(0);
+  expect(nueva).toBe(headings.indexOf("Qué es la automatización de procesos") + 1);
+  await expect(page.locator("article a[href='/servicios/automatizacion-procesos']").first()).toBeAttached();
+  await expect(page.getByText("¿Quién puede automatizar los procesos de mi empresa?").first()).toBeAttached();
+});
+
 test("the n8n guide answers how to start in Chile and leads to the service", async ({ page }) => {
   await page.goto("/blog/herramientas-automatizacion-n8n-make-ia");
   await expect(page).toHaveTitle(/^Automatización con n8n y Make en Chile/);

@@ -1925,7 +1925,7 @@ export const BLOG_POSTS: BlogPost[] = [
     image: "/images/blog-automatizacion-ia.png",
     category: "Fundamentos",
     date: "2026-06-24",
-    modifiedDate: "2026-11-01",
+    modifiedDate: "2026-11-09",
     readingTime: "13 min",
     keywords: [
       "automatización de procesos",
@@ -1935,7 +1935,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "ejemplos de automatización de procesos",
       "cómo automatizar procesos en una empresa"
     ],
-    intro: "La automatización de procesos es el uso de software para ejecutar las tareas repetitivas de un proceso de negocio, mover datos entre sistemas y coordinar sus etapas con reglas definidas, dejando a las personas las excepciones y decisiones. Con inteligencia artificial, el flujo también puede leer documentos, clasificar mensajes o proponer una respuesta en pasos que antes requerían interpretación humana. Esta guía explica tipos, ejemplos por área, cómo elegir el primer proceso y cómo implementarlo con medición.",
+    intro: "La automatización de procesos es el uso de software para ejecutar las tareas repetitivas de un proceso de negocio, mover datos entre sistemas y coordinar sus etapas con reglas definidas, dejando a las personas las excepciones y decisiones. Con inteligencia artificial, el flujo también puede leer documentos, clasificar mensajes o proponer una respuesta en pasos que antes requerían interpretación humana. Esta guía explica qué necesitas para partir, tipos, ejemplos por área, cómo elegir el primer proceso y cómo implementarlo con medición.",
     sections: [
       {
         heading: "Qué es la automatización de procesos",
@@ -1949,6 +1949,25 @@ export const BLOG_POSTS: BlogPost[] = [
           "Conexiones: interfaces con los sistemas donde se leen o registran datos.",
           "Excepciones: casos que pasan a una persona, con el motivo visible.",
           "Registro: historial de lo ejecutado, para revisar fallos y medir."
+        ]
+      },
+      {
+        heading: "Qué necesitas para automatizar un proceso en tu empresa",
+        paragraphs: [
+          "Si ya tienes una tarea que le quita tiempo a tu equipo, no necesitas saber qué herramienta usar. Puedes hacerlo con tu equipo, si alguien tiene el tiempo y los conocimientos para mantenerlo, o con un proveedor. En ambos casos, conviene partir con estas respuestas:"
+        ],
+        bullets: [
+          "Qué tarea es: qué la inicia, qué pasos sigue y qué resultado entrega. Como ejemplo ficticio, facturas que llegan por correo y se cargan a mano en el ERP.",
+          "Qué sistemas toca: correo, planillas, ERP, CRM o portales, y si tienen API u otra forma de conectarse.",
+          "Cuánto volumen tiene: cuántos casos llegan al mes y cuánto trabajo manual toman hoy.",
+          "Qué casos debe revisar una persona: datos que faltan, montos que no cuadran o aprobaciones.",
+          "Quién entrega los accesos y quién ajusta el flujo cuando cambia un sistema o una regla."
+        ],
+        links: [
+          {
+            label: "Automatización de procesos para empresas en Chile: cómo trabaja YAGO y qué incluye",
+            href: "/servicios/automatizacion-procesos"
+          }
         ]
       },
       {
@@ -2336,6 +2355,10 @@ export const BLOG_POSTS: BlogPost[] = [
       {
         question: "¿Qué procesos se pueden automatizar en una empresa?",
         answer: "Los que tienen volumen, pasos repetibles y datos accesibles: registro de facturas, conciliaciones, aprobaciones, ingreso de personal, reportes, clasificación de solicitudes y extracción de datos de documentos. Los procesos con reglas que cambian a menudo o con poco volumen suelen convenir menos."
+      },
+      {
+        question: "¿Quién puede automatizar los procesos de mi empresa?",
+        answer: "Tu propio equipo, si alguien tiene el tiempo y los conocimientos para construir y mantener los flujos, o un proveedor. YAGO diseña e implementa automatización de procesos para empresas en Chile, sobre los sistemas que ya usan, y parte por revisar el proceso, los sistemas y los datos. Si comparas proveedores, pregunta quién mantiene el flujo y cómo se manejan los errores."
       },
       {
         question: "¿Se necesita inteligencia artificial para automatizar un proceso?",
