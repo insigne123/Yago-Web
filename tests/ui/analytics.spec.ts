@@ -96,7 +96,7 @@ test("configured GA4 initializes once with advertising signals disabled", async 
   await page.locator("#servicios").getByRole("link", { name: "Comparar servicios", exact: true }).click();
   await expect(page).toHaveURL(/\/servicios$/);
   const configs = await page.evaluate(() => (window as unknown as AnalyticsTestWindow).googleCalls.filter((call) => call[0] === "config"));
-  expect(configs).toEqual([["config", process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID, { send_page_view: true, allow_google_signals: false, allow_ad_personalization_signals: false }]]);
+  expect(configs).toEqual([["config", process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID, { send_page_view: true, allow_google_signals: false, allow_ad_personalization_signals: false, linker: { domains: ["yago.cl", "axis-legal.cl"] } }]]);
 });
 
 test("analytics preference persists and stops commercial events until reactivated", async ({ page }) => {

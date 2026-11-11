@@ -145,11 +145,15 @@ async function ga4Report(session, window) {
       fieldName: "sessionSource", inListFilter: { values: ["chatgpt.com", "chat.openai.com", "perplexity.ai", "copilot.microsoft.com", "claude.ai", "gemini.google.com"] },
     } } },
   };
+  // axis-legal.cl comparte la propiedad de GA4 desde noviembre de 2026: cada informe se separa por dominio.
+  const host = (value) => ({ filter: { fieldName: "hostName", stringFilter: { matchType: "EXACT", value } } });
+  definitions.axisOrganic = { ...definitions.organic, site: "axis-legal.cl" };
+  definitions.axisLeads = { ...definitions.leads, site: "axis-legal.cl" };
   const reports = {};
-  for (const [name, definition] of Object.entries(definitions)) {
+  for (const [name, { site = "yago.cl", ...definition }] of Object.entries(definitions)) {
     try {
       const response = await googleJson(session, `https://analyticsdata.googleapis.com/v1beta/${property}:runReport`, { method: "POST", body: {
-        dateRanges: [window], ...definition, limit: "1000",
+        dateRanges: [window], ...definition, dimensionFilter: { andGroup: { expressions: [definition.dimensionFilter, host(site)] } }, limit: "1000",
       } });
       reports[name] = { available: true, rows: analyticsRows(response), rowCount: response.rowCount || 0, metadata: response.metadata || null };
     } catch (error) { reports[name] = { available: false, ...safeFailure(error) }; }

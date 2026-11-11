@@ -7,6 +7,8 @@ export type AutomationPage = {
     states: { name: string; meaning: string; review: string }[];
     scope: string;
   };
+  /** Sitio propio del producto, cuando existe (por ejemplo, https://axis-legal.cl para AXIS). */
+  officialSite?: { href: string; label: string };
   seoTitle: string;
   seoDescription: string;
   keywords: string[];
@@ -334,7 +336,8 @@ export const AUTOMATION_PAGES: AutomationPage[] = [
   },
   {
     slug: "axis",
-    modifiedDate: "2026-10-26",
+    modifiedDate: "2026-11-11",
+    officialSite: { href: "https://axis-legal.cl/", label: "Sitio de AXIS: soluciones por sector, API y guías" },
     resultGuide: {
       title: "Cómo interpretar el resultado de AXIS",
       description: "El resultado organiza una consulta sobre fuentes públicas. Cada estado debe leerse junto con su alcance, fecha y evidencia.",

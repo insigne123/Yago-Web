@@ -185,7 +185,32 @@ async function readBody(req: Request): Promise<EmailFormPayload> {
   }
 }
 
+// El formulario de https://axis-legal.cl (sitio estático de AXIS) usa esta misma API. Solo ese origen puede leer la respuesta.
+const CORS_ORIGINS = new Set(["https://axis-legal.cl", "https://www.axis-legal.cl"]);
+
+function corsHeaders(req: Request): Record<string, string> {
+  const origin = req.headers.get("origin") || "";
+  if (!CORS_ORIGINS.has(origin)) return {};
+  return {
+    "Access-Control-Allow-Origin": origin,
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+    "Access-Control-Allow-Headers": "content-type",
+    "Access-Control-Max-Age": "86400",
+    Vary: "Origin",
+  };
+}
+
+export function OPTIONS(req: Request) {
+  return new NextResponse(null, { status: 204, headers: corsHeaders(req) });
+}
+
 export async function POST(req: Request) {
+  const response = await handleContact(req);
+  for (const [key, value] of Object.entries(corsHeaders(req))) response.headers.set(key, value);
+  return response;
+}
+
+async function handleContact(req: Request) {
   try {
     const rateLimit = checkRateLimit(req, { namespace: "contact", limit: 6, windowMs: 10 * 60 * 1000 });
     if (!rateLimit.allowed) {

@@ -10,7 +10,7 @@ export const COMPANY_PROFILE = {
   definition: "YAGO es una empresa chilena que implementa automatización de procesos, integración de inteligencia artificial, aplicaciones a medida, agentes y procesamiento documental con OCR. Trabaja de forma remota con equipos de negocio y tecnología en Chile y Latinoamérica.",
   products: [
     { name: "SADT", href: "/sadt", description: "Software para operar por lote el registro de contratos, términos y descarga de certificados F30 y F30-1 del Portal Mi DT, con validación y evidencia." },
-    { name: "AXIS", href: "/axis", description: "Software para consultar causas penales públicas del PJUD de Chile, con consultas individuales o por lote, evidencia y monitoreo diario de personas seleccionadas." },
+    { name: "AXIS", href: "/axis", description: "Software para consultar causas penales públicas del PJUD de Chile, con consultas individuales o por lote, evidencia y monitoreo diario de personas seleccionadas. Su sitio es axis-legal.cl." },
   ],
   deliverables: [
     "Alcance con entradas, salidas, responsables y dependencias de los sistemas.",

@@ -68,6 +68,7 @@ export function AutomationLandingPage({ page, ufRate }: AutomationLandingPagePro
     operatingSystem: "Web",
     inLanguage: "es-CL",
     url: `https://yago.cl/${page.slug}`,
+    ...(page.officialSite ? { sameAs: [page.officialSite.href] } : {}),
     image: `https://yago.cl/${page.slug}/opengraph-image`,
     dateModified: page.modifiedDate || ENTITY.contentUpdated,
     featureList: page.modules.map((module) => module.title),
@@ -174,7 +175,10 @@ export function AutomationLandingPage({ page, ufRate }: AutomationLandingPagePro
                 <table className="w-full min-w-[36rem] text-left text-[15px] leading-relaxed text-slate-700"><caption className="sr-only">Estados de consulta y revisión del resultado</caption><thead className="bg-mist text-slate-950"><tr><th scope="col" className="px-5 py-4">Estado</th><th scope="col" className="px-5 py-4">Qué indica</th><th scope="col" className="px-5 py-4">Qué revisar</th></tr></thead><tbody>{page.resultGuide.states.map((state) => <tr key={state.name} className="border-t border-slate-200"><th scope="row" className="px-5 py-4 font-semibold text-slate-950">{state.name}</th><td className="px-5 py-4">{state.meaning}</td><td className="px-5 py-4">{state.review}</td></tr>)}</tbody></table>
               </div>
               <p className="mt-6 max-w-4xl text-[15px] leading-relaxed text-slate-600">{page.resultGuide.scope}</p>
-              <Link href="/nosotros" className="y-link mt-5">Conocer a YAGO, proveedor de AXIS<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
+              <div className="mt-5 flex flex-wrap gap-x-8 gap-y-3">
+                <Link href="/nosotros" className="y-link">Conocer a YAGO, proveedor de AXIS<ArrowRight className="h-4 w-4" aria-hidden="true" /></Link>
+                {page.officialSite ? <a href={page.officialSite.href} className="y-link plausible-event-name=AXIS+Sitio+Oficial">{page.officialSite.label}<ArrowRight className="h-4 w-4" aria-hidden="true" /></a> : null}
+              </div>
             </div>
           </section>
         ) : null}

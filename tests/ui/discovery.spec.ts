@@ -40,8 +40,8 @@ test("AXIS explains each result state without presenting an official certificate
   await expect(scope.locator("a[href='/nosotros']")).toHaveCount(1);
   const json = JSON.parse((await page.locator("#jsonld-automation-axis").textContent())!);
   expect(json.applicationSubCategory).toBe("Consulta de causas penales públicas");
-  expect(json.dateModified).toBe("2026-10-26");
-  await expect(page.locator("#resumen time")).toHaveAttribute("datetime", "2026-10-26");
+  expect(json.dateModified).toBe("2026-11-11");
+  await expect(page.locator("#resumen time")).toHaveAttribute("datetime", "2026-11-11");
 });
 
 test("OCR evaluation offers a working empty template and identifies its downloadable resource", async ({ page, request }) => {
@@ -72,7 +72,7 @@ test("integration guide adds a concrete acceptance example and contextual routes
 
 test("sitemap dates and assistant text match the changed public content", async ({ request }) => {
   const sitemap = await (await request.get("/sitemap.xml")).text();
-  const lastmod: [string, string][] = [["/", "2026-11-05"], ["/nosotros", "2026-11-05"], ["/axis", "2026-10-26"], [guide, "2026-10-26"], [integration, "2026-10-26"]];
+  const lastmod: [string, string][] = [["/", "2026-11-05"], ["/nosotros", "2026-11-05"], ["/axis", "2026-11-11"], [guide, "2026-10-26"], [integration, "2026-10-26"]];
   for (const [path, date] of lastmod) {
     const entry = sitemap.split("<url>").find((item) => item.includes(`<loc>https://yago.cl${path}</loc>`));
     expect(entry).toContain(`<lastmod>${date}`);
