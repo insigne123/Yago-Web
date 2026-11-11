@@ -11,7 +11,9 @@ import { connectChrome } from "./cdp-connect.mjs";
 const LOG = fileURLToPath(new URL("../../.local/seo/daily/solicitudes-indexacion.json", import.meta.url));
 const MAX_PER_RUN = 10;
 const refresh = process.argv.includes("--refrescar");
-const urls = process.argv.slice(2).filter((u) => u.startsWith("https://yago.cl"));
+// También acepta axis-legal.cl, que es una propiedad de prefijo de URL en la misma cuenta.
+const urls = process.argv.slice(2).filter((u) => /^https:\/\/(yago\.cl|axis-legal\.cl)/.test(u));
+const resourceFor = (url) => (url.startsWith("https://axis-legal.cl") ? "https%3A%2F%2Faxis-legal.cl%2F" : "sc-domain%3Ayago.cl");
 if (!urls.length) throw new Error("Uso: node scripts/seo/gsc-request-indexing.mjs [--refrescar] https://yago.cl/ruta [...]");
 
 async function connect() {
@@ -37,7 +39,7 @@ try {
     if (results.filter((r) => r.resultado === "solicitada").length >= MAX_PER_RUN) break;
     if (!refresh && recent.has(url)) { results.push({ url, resultado: "omitida: solicitada hace menos de 7 días" }); continue; }
     // La inspección usa un id interno en la URL, así que se entra por la barra "Inspeccionar cualquier URL".
-    await page.goto("https://search.google.com/search-console?resource_id=sc-domain%3Ayago.cl", { waitUntil: "domcontentloaded", timeout: 60000 });
+    await page.goto(`https://search.google.com/search-console?resource_id=${resourceFor(url)}`, { waitUntil: "domcontentloaded", timeout: 60000 });
     await page.waitForTimeout(4000);
     if (/accounts\.google\.com|search-console\/about/.test(page.url())) { results.push({ url, resultado: "sin sesión" }); break; }
     const search = page.locator("input[aria-label*='nspeccionar'], input[aria-label*='nspect']").first();
