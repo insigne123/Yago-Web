@@ -140,7 +140,7 @@ test.describe("public routes and SEO", () => {
       await expect(flow.getByRole("heading", { name: "Cómo comprobamos que funciona" })).toBeAttached();
       await expect(page.locator("#resumen")).toContainText("Entrada");
       await expect(page.locator("#resumen")).toContainText("Salida");
-      expect(service.dateModified).toBe(slug === "automatizacion-procesos" ? "2026-11-06" : slug === "agentes-ia" ? "2026-11-04" : slug === "integracion-ia" ? "2026-10-27" : "2026-10-08");
+      expect(service.dateModified).toBe(slug === "automatizacion-procesos" ? "2026-11-06" : slug === "agentes-ia" ? "2026-11-11" : slug === "integracion-ia" ? "2026-10-27" : "2026-10-08");
       const addedGuide = slug === "automatizacion-procesos" ? "/blog/automatizacion-para-pymes-por-donde-partir" : slug === "integracion-ia" ? "/blog/herramientas-automatizacion-n8n-make-ia" : null;
       if (addedGuide) {
         await expect(page.locator(`#guias a[href='${addedGuide}']`)).toHaveCount(1);

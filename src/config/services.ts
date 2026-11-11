@@ -489,7 +489,7 @@ export const SERVICES: Service[] = [
   },
   {
     slug: "agentes-ia",
-    modifiedDate: "2026-11-04",
+    modifiedDate: "2026-11-11",
     title: "Agentes y asistentes de IA",
     seoTitle: "Agentes y asistentes de IA para empresas en Chile | YAGO",
     seoDescription: "Agentes de IA para empresas en Chile: responden con tus documentos y preparan acciones en tus sistemas. Piloto con tus casos, permisos y aprobación humana.",
@@ -545,6 +545,7 @@ export const SERVICES: Service[] = [
       { question: "¿Puede responder usando los documentos de mi empresa?", answer: "Sí. Podemos implementar recuperación de información, conocida como RAG, sobre fuentes autorizadas. Evaluamos la pertinencia de las respuestas, las referencias y el acceso a la información." },
       { question: "¿En qué se diferencia de un chatbot?", answer: "Un chatbot es una interfaz de conversación. Puede contener un asistente que responde o un agente que también usa herramientas. La diferencia importante es la tarea y las acciones que realmente puede ejecutar." },
       { question: "¿Puede usar WhatsApp o una aplicación web?", answer: "Podemos evaluar esos canales según accesos, requisitos y alcance. La conexión con sistemas y las acciones disponibles se definen por separado del canal de conversación." },
+      { question: "¿Pueden poner un asistente de IA en el sitio web de mi empresa de servicios en Chile?", answer: "Sí, cuando la tarea está acotada. El asistente puede responder preguntas sobre tus servicios con las fuentes que autorices, como fichas de servicio, condiciones y preguntas frecuentes, y mostrar de dónde sale cada respuesta. También puede recoger los datos de una consulta, clasificarla y preparar un registro para que tu equipo lo revise. Antes de partir definimos qué preguntas responde, qué fuentes usa, cuándo deriva a una persona y a qué sistema llegan las solicitudes. Si además necesitas rehacer el sitio, eso lo vemos en el servicio de páginas web." },
       { question: "¿Cómo se actualiza y supervisa?", answer: "Acordamos cómo actualizar fuentes, revisar consultas y registrar resultados. El soporte y mantenimiento se definen según el uso y las herramientas de la solución." },
       { question: "¿Implementan agentes de IA en grandes empresas?", answer: "Sí, cuando el alcance es acotado: una tarea, sus fuentes autorizadas y criterios de éxito definidos antes de partir. Se parte con un piloto, con permisos por usuario, registro de actividad y aprobación humana en lo sensible. Si necesitas un programa en muchas áreas a la vez, conviene un integrador de mayor tamaño y podemos hacernos cargo de una parte concreta. El detalle para TI, seguridad y compras está en yago.cl/grandes-empresas." },
       { question: "¿Cuánto cuesta implementar un agente de IA en una empresa en Chile?", answer: "Se cotiza según la tarea, las fuentes que hay que preparar, las integraciones, los canales y el volumen de consultas. Separamos la implementación de los costos de operación, como el consumo de modelos, la infraestructura y el soporte, para que puedas comparar el costo completo. El monto se confirma después de revisar el alcance del piloto." },
