@@ -197,3 +197,20 @@ test("/grandes-empresas states the fit, the controls and the procurement data", 
   const webPage = schemas.find((schema) => schema["@id"]?.endsWith("/grandes-empresas#page"));
   expect(webPage.audience.name).toBe("Grandes empresas en Chile");
 });
+
+test("/soluciones/automatizacion-latinoamerica serves Peru, Colombia, Mexico and Ecuador with official sources", async ({ page }) => {
+  await page.goto("/soluciones/automatizacion-latinoamerica");
+  await expect(page.locator("h1")).toContainText("Perú, Colombia, México y Ecuador");
+  for (const pais of ["Perú:", "Colombia:", "México:", "Ecuador:"]) await expect(page.getByRole("heading", { name: new RegExp(`^${pais}`) })).toBeAttached();
+  const fuentes = page.getByRole("navigation", { name: "Fuentes oficiales" }).locator("a");
+  await expect(fuentes).toHaveCount(4);
+  for (const dominio of ["sunat.gob.pe", "dian.gov.co", "sat.gob.mx", "sri.gob.ec"]) await expect(page.locator(`nav[aria-label='Fuentes oficiales'] a[href*='${dominio}']`)).toHaveCount(1);
+  const schemas = (await page.locator("script[type='application/ld+json']").allTextContents()).map((value) => JSON.parse(value));
+  const servicio = schemas.find((value) => value["@type"] === "Service");
+  expect(servicio.areaServed.map((pais: { name: string }) => pais.name)).toEqual(["Perú", "Colombia", "México", "Ecuador", "Chile"]);
+  await expect(page.getByText("¿SADT y AXIS sirven fuera de Chile?").first()).toBeAttached();
+  for (const servicioUrl of ["/servicios/automatizacion-procesos", "/servicios/apps-automatizacion"]) {
+    await page.goto(servicioUrl);
+    await expect(page.locator("#guias a[href='/soluciones/automatizacion-latinoamerica']")).toHaveCount(1);
+  }
+});

@@ -27,6 +27,10 @@ export type SeoPage = {
   faq: { question: string; answer: string }[];
   relatedLinks: { href: string; label: string }[];
   modifiedDate?: string;
+  /** Países que atiende la página (Service.areaServed). Si no se indica, Chile. */
+  areaServed?: string[];
+  /** Fuentes oficiales citadas en la guía, enlazadas al final de la guía práctica. */
+  sources?: { label: string; href: string }[];
 };
 
 export const SEO_PAGES: SeoPage[] = [
@@ -1213,6 +1217,178 @@ export const SEO_PAGES: SeoPage[] = [
       { href: "/soluciones/automatizacion-documental", label: "Automatización documental" },
       { href: "/soluciones/automatizacion-carga-de-datos", label: "Automatización de carga de datos" },
       { href: "/soluciones/automatizacion-aprobaciones", label: "Automatización de aprobaciones" },
+    ],
+  },
+  {
+    slug: "automatizacion-latinoamerica",
+    name: "Latinoamérica",
+    modifiedDate: "2026-11-11",
+    seoTitle: "Automatización de procesos y apps para Latinoamérica | YAGO",
+    seoDescription:
+      "Automatizamos procesos y desarrollamos apps a medida para empresas de Perú, Colombia, México y Ecuador, de forma remota y sobre los sistemas que ya usan.",
+    keywords: [
+      "automatización de procesos Perú",
+      "automatización de procesos Colombia",
+      "automatización de procesos México",
+      "automatización de procesos Ecuador",
+      "desarrollo de apps a medida Latinoamérica",
+      "software a medida para empresas",
+      "empresa de automatización Latinoamérica",
+    ],
+    eyebrow: "Región",
+    title: "Automatización de procesos y apps a medida para empresas de Perú, Colombia, México y Ecuador.",
+    description:
+      "YAGO trabaja de forma remota con empresas de Latinoamérica. Automatizamos las tareas repetitivas entre tus sistemas y desarrollamos aplicaciones internas cuando una hoja de cálculo o el ERP ya no alcanzan.",
+    proof: [
+      "Trabajo remoto con tu equipo de negocio y tecnología",
+      "Sobre los sistemas que ya usa tu empresa",
+      "Primero un proceso acotado, después escalar",
+    ],
+    problemTitle: "Dónde se pierde tiempo cuando la operación crece",
+    problemDescription:
+      "En empresas de cualquier país, el trabajo manual se concentra en los traspasos: datos que se copian de un sistema a otro, aprobaciones que avanzan por correo y hojas de cálculo que se volvieron la herramienta principal de un área.",
+    painPoints: [
+      "Facturas que llegan como XML y alguien igual digita en el ERP",
+      "Aprobaciones y seguimiento por correo o WhatsApp, sin registro",
+      "Reportes que se arman a mano cada semana",
+      "Hojas de cálculo compartidas que hacen el trabajo de una aplicación",
+    ],
+    fitTitle: "Cuándo encaja",
+    fitItems: [
+      "Empresas de Perú, Colombia, México o Ecuador con procesos repetitivos y volumen",
+      "Equipos que ya usan un ERP, un CRM u hojas de cálculo y no quieren cambiarlos",
+      "Áreas que necesitan una herramienta interna propia, con permisos y registro",
+      "Empresas que prefieren un piloto acotado antes de un proyecto grande",
+    ],
+    startingTitle: "Por dónde suele convenir partir",
+    startingItems: [
+      "Lectura de facturas electrónicas en XML y carga validada al ERP",
+      "Aprobaciones con responsables, plazos y registro de cada decisión",
+      "Una aplicación interna que reemplace una hoja de cálculo crítica",
+      "Reportes que se arman solos con los datos de tus sistemas",
+    ],
+    outcomesTitle: "Qué cambia",
+    outcomes: [
+      {
+        title: "Menos digitación",
+        description: "Los datos pasan entre sistemas validados, y el equipo revisa solo las excepciones.",
+      },
+      {
+        title: "Procesos con registro",
+        description: "Cada paso queda con responsable, fecha y resultado, para revisar qué pasó con cada caso.",
+      },
+      {
+        title: "Herramientas a la medida",
+        description: "La aplicación sigue tu proceso, con los permisos y las reglas de tu empresa.",
+      },
+    ],
+    processTitle: "Cómo trabajamos a distancia",
+    processSteps: [
+      {
+        title: "Revisamos el proceso",
+        description: "En videollamadas con tu equipo revisamos el proceso, tus sistemas y tus datos, y elegimos el tramo con más trabajo manual.",
+      },
+      {
+        title: "Construimos un primer alcance",
+        description: "Implementamos una automatización o el primer módulo de la aplicación con datos reales, accesos definidos y control de errores.",
+      },
+      {
+        title: "Operamos y ampliamos",
+        description: "Medimos contra la línea base, documentamos la solución y sumamos procesos o módulos si el resultado lo justifica.",
+      },
+    ],
+    scenarios: [
+      {
+        title: "Perú: facturas de proveedores al ERP",
+        before: "Las facturas llegan por correo con el XML y el PDF. Alguien abre el PDF y copia RUC, montos e IGV al ERP, y los errores aparecen al cerrar el mes.",
+        after: "El flujo lee el XML, lo cruza con la orden de compra y lo deja cargado en el ERP. Las diferencias de montos o de proveedor quedan en una bandeja para revisión.",
+      },
+      {
+        title: "Colombia: guías de transporte de varias transportadoras",
+        before: "Cada transportadora entrega sus guías y estados en un formato distinto, y el equipo arma una hoja de cálculo para saber qué envío salió, cuál se entregó y cuál tiene problemas.",
+        after: "Los datos de todas las transportadoras se consolidan en una sola vista con estados comunes. El equipo atiende solo los envíos con novedades y el cliente recibe avisos en hitos acordados.",
+      },
+      {
+        title: "México: CFDI recibidos y conciliación",
+        before: "El equipo descarga los CFDI de proveedores y los cuadra a mano con órdenes de compra y pagos, en hojas de cálculo que cambian cada mes.",
+        after: "El flujo lee el XML de cada CFDI, lo cruza con la orden y con el pago, y deja las diferencias listas para que contabilidad las revise.",
+      },
+      {
+        title: "Ecuador: una aplicación para despachos y guías de remisión",
+        before: "Los datos del despacho viven en una hoja de cálculo compartida y se copian al sistema de facturación cuando hay que emitir la guía de remisión.",
+        after: "Una aplicación interna reúne los datos del despacho, el destinatario y el transporte, los valida y los envía al sistema de facturación electrónica que ya usa la empresa.",
+      },
+    ],
+    guide: [
+      {
+        heading: "Cómo trabajamos con empresas fuera de Chile",
+        paragraphs: [
+          "La atención y la implementación se coordinan de forma remota, igual que con empresas de Chile. Las reuniones son por videollamada y los accesos se definen con tu equipo de tecnología, con las políticas de seguridad que fija tu empresa.",
+          "Entre Chile y Perú, Colombia, Ecuador o México hay entre una y tres horas de diferencia, según la época del año, así que las reuniones coinciden con el horario laboral de ambos países. La propuesta indica alcance, plazos, entregables, moneda y forma de pago.",
+        ],
+      },
+      {
+        heading: "Automatización de procesos: qué conviene automatizar primero",
+        paragraphs: [
+          "Busca procesos con volumen, pasos que se repiten y datos que ya existen en algún sistema. Antes de elegir herramienta, conviene medir cuánto tiempo toma hoy el proceso, cuántos errores tiene y quién interviene en cada paso.",
+        ],
+        bullets: [
+          "Carga de facturas, órdenes o pedidos desde correo y archivos al ERP.",
+          "Aprobaciones de compras, gastos o descuentos con responsables y plazos.",
+          "Conciliaciones entre el ERP, el banco y las hojas de cálculo de apoyo.",
+          "Reportes semanales o mensuales que hoy se arman a mano.",
+        ],
+      },
+      {
+        heading: "Apps a medida: cuándo una hoja de cálculo ya no alcanza",
+        paragraphs: [
+          "Una aplicación interna conviene cuando varias personas trabajan sobre la misma hoja de cálculo, cuando necesitas permisos distintos por rol o cuando quieres que cada cambio quede registrado. También cuando un proceso necesita un formulario en terreno, un portal para clientes o proveedores, o un panel con los datos de varios sistemas.",
+          "La aplicación se conecta con lo que ya usa tu empresa, como el ERP, el CRM o el correo, y puede incluir funciones de IA cuando aportan, por ejemplo leer un documento o clasificar una solicitud. Se parte por un primer módulo y se amplía por etapas.",
+        ],
+      },
+      {
+        heading: "Facturas electrónicas: el dato ya viene estructurado",
+        paragraphs: [
+          "En los cuatro países la factura electrónica es un archivo XML. En Perú, la Resolución de Superintendencia N.° 117-2017/SUNAT establece que la factura, la boleta, las notas y la guía de remisión electrónicas usan XML con el estándar UBL, y que un Operador de Servicios Electrónicos (OSE) comprueba lo emitido. En Colombia, la DIAN indica que la factura electrónica es el XML firmado y validado por ella, y que debe estar validada antes de entregarse al comprador.",
+          "En México, el SAT indica que desde el 1 de abril de 2023 la versión 4.0 del CFDI es la única válida. En Ecuador, el SRI publica los esquemas XML de la factura, las notas de crédito y débito, la guía de remisión y el comprobante de retención, y exige firma electrónica para que el comprobante tenga validez.",
+          "Por eso, para cargar facturas al ERP conviene leer el XML en vez de digitarlo o aplicar OCR al PDF, y dejar el OCR para lo que llega en papel o imagen. La emisión la sigue haciendo el sistema autorizado que ya usa tu empresa. Revisa con tu contador o asesor tributario cómo aplica cada norma a tu caso.",
+        ],
+      },
+    ],
+    faq: [
+      {
+        question: "¿YAGO trabaja con empresas de Perú, Colombia, México y Ecuador?",
+        answer: "Sí. La atención y la implementación se coordinan de forma remota, igual que con empresas de Chile. Partimos por revisar el proceso, tus sistemas y tus datos, y te proponemos un primer alcance acotado.",
+      },
+      {
+        question: "¿Desarrollan aplicaciones a medida para empresas fuera de Chile?",
+        answer: "Sí. Desarrollamos aplicaciones internas, portales y paneles conectados a tus procesos, con permisos, pruebas y documentación. Se parte por un primer módulo y se amplía por etapas.",
+      },
+      {
+        question: "¿Pueden conectarse con el ERP y la facturación electrónica de mi país?",
+        answer: "Evaluamos las API, archivos y otras interfaces que ofrecen tu ERP y tu proveedor de facturación electrónica. La emisión ante SUNAT, DIAN, SAT o SRI la sigue haciendo el sistema autorizado que ya usas; la automatización prepara, valida y mueve los datos.",
+      },
+      {
+        question: "¿Cómo son las reuniones si estamos en otro país?",
+        answer: "Por videollamada. Entre Chile y Perú, Colombia, Ecuador o México hay entre una y tres horas de diferencia según la época del año, así que las reuniones coinciden con el horario laboral de ambos países.",
+      },
+      {
+        question: "¿SADT y AXIS sirven fuera de Chile?",
+        answer: "No. SADT trabaja con el Portal Mi DT de la Dirección del Trabajo y AXIS con el Poder Judicial de Chile, así que solo aplican a empresas que operan en Chile. La automatización de procesos y las aplicaciones a medida sí se ofrecen en Latinoamérica.",
+      },
+    ],
+    relatedLinks: [
+      { href: "/servicios/automatizacion-procesos", label: "Automatización de procesos" },
+      { href: "/servicios/apps-automatizacion", label: "Aplicaciones y software a medida" },
+      { href: "/ocr", label: "Digitalización de documentos con OCR" },
+      { href: "/soluciones/automatizacion-para-logistica", label: "Automatización para logística" },
+    ],
+    areaServed: ["Perú", "Colombia", "México", "Ecuador", "Chile"],
+    sources: [
+      { label: "SUNAT: Resolución de Superintendencia N.° 117-2017/SUNAT", href: "https://www.sunat.gob.pe/legislacion/superin/2017/117-2017.pdf" },
+      { label: "DIAN: preguntas frecuentes de facturación electrónica", href: "https://micrositios.dian.gov.co/sistema-de-facturacion-electronica/facturacion-preguntas-frecuentes/" },
+      { label: "SAT: formato de factura electrónica (Anexo 20)", href: "https://wwwmatnp.sat.gob.mx/consultas/35025/formato-de-factura-electronica-(anexo-20)" },
+      { label: "SRI: facturación electrónica", href: "https://www.sri.gob.ec/facturacion-electronica" },
     ],
   },
 ];

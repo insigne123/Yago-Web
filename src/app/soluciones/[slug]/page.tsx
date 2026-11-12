@@ -60,7 +60,7 @@ export default async function SeoSolutionPage({ params }: PageProps) {
     name: page.title,
     description: page.seoDescription,
     url: `https://yago.cl/soluciones/${page.slug}`,
-    areaServed: "Chile",
+    areaServed: page.areaServed?.length ? page.areaServed.map((name) => ({ "@type": "Country", name })) : "Chile",
     provider: { "@id": "https://yago.cl/#organization" },
   };
   const faqJsonLd = {
@@ -228,6 +228,20 @@ export default async function SeoSolutionPage({ params }: PageProps) {
               </article>
             ))}
           </div>
+          {page.sources?.length ? (
+            <nav aria-label="Fuentes oficiales" className="mt-8 rounded-2xl bg-white p-6 shadow-[inset_0_0_0_1px_rgba(15,23,42,0.08)]">
+              <p className="font-mono text-[11.5px] font-medium uppercase tracking-[0.12em] text-slate-600">Fuentes oficiales</p>
+              <ul className="mt-3 flex flex-col gap-2">
+                {page.sources.map((source) => (
+                  <li key={source.href}>
+                    <a href={source.href} target="_blank" rel="noopener noreferrer" className="text-[15px] font-medium text-sky-800 underline underline-offset-4 hover:text-sky-600">
+                      {source.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          ) : null}
         </PageSection>
       ) : null}
 

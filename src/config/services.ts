@@ -225,7 +225,7 @@ export const SERVICES: Service[] = [
   },
   {
     slug: "automatizacion-procesos",
-    modifiedDate: "2026-11-06",
+    modifiedDate: "2026-11-11",
     seoTitle: "Automatización de procesos con IA para empresas en Chile | YAGO",
     seoDescription: "Automatizamos tareas repetitivas de backoffice, RRHH y finanzas con IA e integraciones por API. Primer MVP en 1–2 semanas, con control de errores y trazabilidad.",
     title: "Automatización de procesos con IA",
@@ -329,11 +329,13 @@ export const SERVICES: Service[] = [
       { question: "¿Una persona puede revisar antes de que se cierre un trámite?", answer: "Sí. Puedes definir qué pasos requieren la aprobación de una persona, como una desvinculación, un monto alto o un caso dudoso. El resto sigue de forma automática y cada decisión queda registrada." },
       { question: "¿Dónde quedan los certificados y comprobantes?", answer: "Los documentos que genera el proceso se guardan y quedan disponibles en un panel web. También pueden enviarse por correo a quien definas." },
       { question: "¿Se puede avisar automáticamente a una persona cuando su trámite está listo?", answer: "Sí. El flujo puede enviar avisos personalizados por correo o WhatsApp, con el tono y la imagen de tu empresa. Por ejemplo, a un extrabajador cuando su finiquito queda listo." },
+      { question: "¿Trabajan con empresas fuera de Chile?", answer: "Sí. Automatizamos procesos de forma remota para empresas de Perú, Colombia, México y Ecuador, además de Chile. Las reuniones son por videollamada y trabajamos sobre los sistemas que ya usa tu empresa." },
     ],
     relatedGuides: [
       { label: "Cómo elegir un proveedor de automatización e IA en Chile", href: "/blog/elegir-proveedor-automatizacion-ia-chile" },
       { label: "Cómo calcular el ROI de una automatización", href: "/blog/como-calcular-el-roi-de-automatizar-procesos" },
       { label: "Automatización para pymes: elegir el primer proceso y evaluar el piloto", href: "/blog/automatizacion-para-pymes-por-donde-partir" },
+      { label: "Automatización y apps a medida para empresas de Latinoamérica", href: "/soluciones/automatizacion-latinoamerica" },
     ],
   },
   {
@@ -404,7 +406,7 @@ export const SERVICES: Service[] = [
   },
   {
     slug: "apps-automatizacion",
-    modifiedDate: "2026-10-08",
+    modifiedDate: "2026-11-11",
     seoTitle: "Desarrollo de aplicaciones y software con IA en Chile | YAGO",
     seoDescription: "Desarrollamos aplicaciones empresariales a medida, funciones de IA y software con desarrollo asistido por IA. Integraciones, permisos, pruebas y documentación.",
     title: "Aplicaciones y software con IA",
@@ -481,10 +483,14 @@ export const SERVICES: Service[] = [
       { question: "¿Usar IA para desarrollar garantiza un proyecto más rápido o barato?", answer: "El efecto depende del alcance, las integraciones y la revisión necesaria. Definimos entregables y estimamos el proyecto; la calidad se comprueba con revisión del código, pruebas y criterios de aceptación." },
       { question: "¿Qué recibe mi empresa al terminar?", answer: "Los entregables y condiciones de acceso al repositorio, despliegue, documentación y soporte se acuerdan en la propuesta. La aplicación incluye los módulos, roles e integraciones del alcance aprobado." },
       { question: "¿Cuánto demora desarrollar una app interna?", answer: "Un primer módulo acotado puede tomar 2–4 semanas; el plazo completo depende de módulos, integraciones y disponibilidad de datos. Confirmamos el calendario después de definir el alcance." },
+      { question: "¿Conviene una app a medida o un software que ya existe?", answer: "Si un software estándar resuelve el proceso con ajustes menores, suele convenir más. Una app a medida conviene cuando el proceso es propio de tu empresa, cuando hay que conectar varios sistemas o cuando pagas por muchas funciones que no usas y te faltan las que necesitas. En el diagnóstico revisamos ambas opciones." },
+      { question: "¿Cuánto cuesta desarrollar una app a medida?", answer: "Se cotiza según los módulos, usuarios y permisos, las integraciones y la migración de datos, las funciones de IA, y la infraestructura y el soporte. La propuesta separa el desarrollo de la operación mensual para que veas el costo completo." },
+      { question: "¿Desarrollan apps para empresas fuera de Chile?", answer: "Sí. Desarrollamos aplicaciones a medida de forma remota para empresas de Perú, Colombia, México y Ecuador, además de Chile. Las reuniones son por videollamada y la aplicación se conecta con los sistemas que ya usa tu empresa." },
     ],
     relatedGuides: [
       { label: "Apps con IA y desarrollo asistido: diferencias", href: "/blog/apps-ia-desarrollo-asistido-diferencias" },
       { label: "Integrar IA en procesos empresariales", href: "/blog/integrar-ia-procesos-empresa" },
+      { label: "Automatización y apps a medida para empresas de Latinoamérica", href: "/soluciones/automatizacion-latinoamerica" },
     ],
   },
   {

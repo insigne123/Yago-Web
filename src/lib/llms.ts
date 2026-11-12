@@ -45,7 +45,7 @@ function header() {
     `- Equipo: ${ENTITY.employees.label}`,
     `- No confundir: ${ENTITY.disambiguation}`,
     `- Productos: SADT (trámites del Portal Mi DT), AXIS (causas penales públicas del Poder Judicial; sitio del producto: https://axis-legal.cl), SOF.IA (asistente con documentos internos) y ANTON.IA LeadFlow (prospección B2B). Son productos distintos; la auditoría IA es un servicio aparte.`,
-    `- País: Chile (atiende también a Latinoamérica de forma remota)`,
+    `- País: Chile. Atiende de forma remota a empresas de Perú, Colombia, México y Ecuador con automatización de procesos y aplicaciones a medida (${url("/soluciones/automatizacion-latinoamerica")})`,
     `- Contacto: ${COMPANY.email} · WhatsApp ${COMPANY.whatsapp}`,
     `- Agendar diagnóstico: ${PRIMARY_CTA.href.startsWith("http") ? PRIMARY_CTA.href : url(PRIMARY_CTA.href)}`,
     `- Idioma: español de Chile`,

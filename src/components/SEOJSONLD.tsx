@@ -48,7 +48,7 @@ export function SEOJSONLD() {
     email: COMPANY.email,
     telephone: COMPANY.whatsapp,
     address: { "@type": "PostalAddress", addressCountry: ENTITY.country },
-    areaServed: [{ "@type": "Country", name: "Chile" }, "Latinoamérica"],
+    areaServed: ["Chile", "Perú", "Colombia", "México", "Ecuador"].map((name) => ({ "@type": "Country", name })),
     knowsAbout: ENTITY.knowsAbout,
     ...(ENTITY.sameAs.length ? { sameAs: ENTITY.sameAs } : {}),
     contactPoint: [
@@ -57,7 +57,7 @@ export function SEOJSONLD() {
         contactType: "sales",
         email: COMPANY.email,
         telephone: COMPANY.whatsapp,
-        areaServed: "CL",
+        areaServed: ["CL", "PE", "CO", "MX", "EC"],
         availableLanguage: ["es-CL", "es"],
       },
     ],
