@@ -47,13 +47,173 @@ export const BLOG_AUTHOR = {
 };
 
 export const BLOG_COLLECTIONS = [
-  { id: "automatizacion", title: "Automatización y retorno", description: "Priorizar un proceso, comparar proveedores y evaluar herramientas y costo.", slugs: ["elegir-proveedor-automatizacion-ia-chile", "que-es-la-automatizacion-de-procesos-con-ia", "como-calcular-el-roi-de-automatizar-procesos", "automatizacion-para-pymes-por-donde-partir", "herramientas-automatizacion-n8n-make-ia"] },
+  { id: "automatizacion", title: "Automatización y retorno", description: "Priorizar un proceso, comparar proveedores y evaluar herramientas y costo.", slugs: ["elegir-proveedor-automatizacion-ia-chile", "que-es-la-automatizacion-de-procesos-con-ia", "como-calcular-el-roi-de-automatizar-procesos", "automatizacion-para-pymes-por-donde-partir", "herramientas-automatizacion-n8n-make-ia", "automatizar-rendicion-de-gastos"] },
   { id: "integracion", title: "Integración, aplicaciones y agentes", description: "Distinguir qué construir, cómo conectarlo y qué resultado comprobar.", slugs: ["integrar-ia-procesos-empresa", "apps-ia-desarrollo-asistido-diferencias", "agentes-de-ia-para-empresas"] },
   { id: "documentos", title: "OCR y documentos", description: "Digitalizar documentos, estimar su costo, medir la calidad y conocer el marco legal.", slugs: ["ocr-con-ia-digitalizar-documentos", "cuanto-cuesta-digitalizar-documentos", "evaluar-piloto-ocr-precision-costos", "validez-legal-documentos-digitalizados-chile"] },
   { id: "laboral", title: "RRHH y Portal Mi DT", description: "Entender registros, plazos y certificados laborales de Chile.", slugs: ["certificados-f30-y-f30-1-diferencias", "automatizar-mi-dt-opciones-chile", "control-contratistas-subcontratacion-f30-1", "finiquito-electronico-mi-dt-plazos", "registro-contratos-terminos-mi-dt-plazos"] },
 ];
 
 export const BLOG_POSTS: BlogPost[] = [
+  {
+    slug: "automatizar-rendicion-de-gastos",
+    title: "Cómo automatizar la rendición de gastos: flujo, validaciones y respaldo",
+    seoTitle: "Automatizar la rendición de gastos paso a paso | YAGO",
+    description:
+      "Cómo automatizar la rendición de gastos y fondos por rendir: registro con foto, extracción de datos, validación contra la política, aprobación y respaldo para contabilidad.",
+    excerpt:
+      "El flujo completo para dejar de digitar boletas: qué se automatiza, qué revisa una persona y qué necesitas para empezar.",
+    image: "/images/optimized/service-automatizacion-procesos.webp",
+    category: "Automatización empresarial",
+    date: "2026-11-16",
+    modifiedDate: "2026-11-16",
+    readingTime: "8 min",
+    keywords: [
+      "automatizar rendiciones",
+      "automatizar rendición de gastos",
+      "rendición de gastos",
+      "fondos por rendir",
+      "software rendición de gastos",
+      "aplicación rendición de gastos",
+    ],
+    intro:
+      "La rendición de gastos parece un trámite menor hasta que se mira el mes completo. Cada persona junta boletas, las fotografía o las guarda en un sobre, y alguien en finanzas digita cada gasto, revisa si cumple la política y persigue los respaldos que faltan. Esta guía explica cómo automatizar ese proceso, qué controles conviene mantener en manos de personas y qué hace falta para empezar.",
+    sections: [
+      {
+        heading: "Dónde se traba una rendición de gastos",
+        paragraphs: [
+          "Una rendición tiene pocos pasos: alguien gasta, registra el gasto con su respaldo, una jefatura lo aprueba, finanzas lo revisa y contabilidad lo registra. El problema no está en la cantidad de pasos. Está en que cada uno pasa por un canal distinto y casi todo se copia a mano.",
+          "Estos son los puntos donde más tiempo se pierde:",
+        ],
+        bullets: [
+          "Las boletas llegan como fotos por WhatsApp, por correo o en papel a fin de mes, y no siempre se leen bien.",
+          "Finanzas digita fecha, monto, emisor y concepto de cada documento en una planilla.",
+          "La política de gastos existe en un documento, pero se revisa caso a caso y de memoria.",
+          "La aprobación de la jefatura queda en un correo o en un mensaje, separada del gasto.",
+          "Los respaldos que faltan se detectan tarde, cuando ya hay que cerrar el mes.",
+          "Los fondos por rendir quedan abiertos porque nadie sabe con certeza qué se rindió y qué no.",
+        ],
+      },
+      {
+        heading: "Qué debe tener el respaldo de un gasto",
+        paragraphs: [
+          "Antes de automatizar conviene tener claro qué se está protegiendo. En Chile, el inciso primero del artículo 31 de la Ley sobre Impuesto a la Renta exige que los gastos necesarios para producir la renta se acrediten o justifiquen en forma fehaciente. El SII lo recuerda, por ejemplo, en su Oficio N° 2488 de 2016. En la práctica, eso significa que el respaldo del gasto debe poder mostrarse cuando se pida, junto con la razón del gasto.",
+          "Por eso una automatización de rendiciones no debe limitarse a leer montos. También debe conservar el documento original, vincularlo con el registro y dejar visible quién aprobó y por qué. Qué gastos se aceptan, con qué documento y con qué tratamiento tributario lo define tu empresa con su contador. La automatización aplica esas reglas, no las reemplaza.",
+          "Hay dos verificaciones que el SII pone a disposición y que el flujo puede facilitar. Para las facturas y otros documentos tributarios electrónicos, el sitio de factura electrónica del SII tiene la opción \"Consultar validez de un documento\", que indica si el SII recibió el documento emitido. Para las boletas electrónicas, el SII indica que se puede leer el timbre electrónico y compararlo con el documento impreso, y que la validez se consulta en el sitio web que el emisor debe informar bajo el timbre.",
+        ],
+      },
+      {
+        heading: "El flujo automatizado, paso a paso",
+        paragraphs: [
+          "Un flujo de rendición automatizado suele seguir este orden. Cada paso se puede ajustar a tu política y a tus sistemas.",
+        ],
+        bullets: [
+          "Registro: la persona sube la foto o el PDF del documento desde el celular o el computador, e indica el motivo del gasto y, si aplica, el centro de costo o el proyecto.",
+          "Extracción: un OCR con IA lee el documento y propone fecha, monto, RUT del emisor, tipo y número de documento. La persona confirma o corrige antes de enviar.",
+          "Validación: las reglas revisan que no falten datos, que el gasto no esté duplicado, que el monto esté dentro del límite de su categoría y que la fecha corresponda al período.",
+          "Aprobación: el gasto llega a la jefatura que corresponde según el área o el monto, con el documento a la vista. La decisión queda registrada con usuario y fecha.",
+          "Revisión de finanzas: finanzas ve primero los gastos marcados fuera de regla y los que la extracción no pudo leer con claridad.",
+          "Registro contable: los gastos aprobados se preparan para carga al ERP o se entregan en el formato que usa tu contador, cada uno con su respaldo.",
+          "Cierre del fondo: si el gasto venía de un fondo por rendir, el saldo se actualiza y se ve qué queda pendiente de rendir o devolver.",
+        ],
+        links: [
+          { label: "OCR para empresas: cómo se evalúa con tus documentos", href: "/ocr" },
+          { label: "Automatización de aprobaciones por monto y rol", href: "/soluciones/automatizacion-aprobaciones" },
+        ],
+      },
+      {
+        heading: "Qué revisa el sistema y qué decide una persona",
+        paragraphs: [
+          "Automatizar la rendición no saca a finanzas del proceso. Le cambia el foco: en lugar de revisar cada boleta, revisa las diferencias. Conviene dejar escrito desde el inicio qué hace cada parte.",
+        ],
+        table: {
+          columns: ["Tarea", "Quién la hace", "Por qué"],
+          rows: [
+            ["Leer los datos del documento", "El sistema propone y la persona confirma", "Una foto borrosa o un documento poco común puede leerse mal."],
+            ["Detectar duplicados", "El sistema", "Comparar RUT del emisor, número de documento y monto es una regla clara."],
+            ["Revisar límites por categoría", "El sistema marca y finanzas decide", "Un gasto fuera de límite puede tener una razón válida."],
+            ["Aprobar el gasto", "La jefatura", "La aprobación es una decisión de negocio."],
+            ["Definir el tratamiento contable y tributario", "Finanzas y el contador", "Depende de la política de la empresa y de la normativa."],
+            ["Corregir un dato ya aprobado", "Una persona autorizada, con registro", "Toda corrección debe quedar trazada."],
+          ],
+        },
+      },
+      {
+        heading: "Planilla compartida o aplicación: qué conviene",
+        paragraphs: [
+          "Muchas empresas parten con un formulario que alimenta una planilla compartida. Funciona mientras el volumen es bajo y una sola persona revisa todo. Cuando hay varias áreas, fondos por rendir y aprobaciones por monto, la planilla empieza a fallar: cualquiera puede editar una fila, los respaldos quedan en carpetas separadas y no hay un estado claro de cada gasto.",
+          "Hay dos caminos. El primero es automatizar sobre las herramientas que ya usas, por ejemplo conectar un formulario, el correo y la planilla con un flujo que extraiga datos y envíe las aprobaciones. El segundo es una aplicación interna de rendiciones, con usuarios, roles, estados y respaldos en un solo lugar. La decisión depende del volumen, de cuántas personas participan y de qué tan estricto es el control que necesitas.",
+          "Un ejemplo ficticio para ilustrarlo: una empresa con equipos en terreno entrega fondos por rendir a sus supervisores. Hoy cada supervisor envía fotos por WhatsApp y finanzas arma la rendición en Excel. Si los supervisores son pocos, un flujo que reciba las fotos, extraiga los datos y los ordene en la planilla puede bastar. Si son muchos y cada uno maneja varios fondos, una aplicación con el saldo de cada fondo a la vista evita perseguir rendiciones a fin de mes.",
+        ],
+        links: [
+          { label: "Automatización de procesos a medida", href: "/servicios/automatizacion-procesos" },
+          { label: "Aplicaciones y software a medida", href: "/servicios/apps-automatizacion" },
+        ],
+      },
+      {
+        heading: "Qué necesitas para empezar",
+        paragraphs: [
+          "No necesitas tener todo definido. Para evaluar si la rendición de gastos se puede automatizar y cómo, sirve reunir esto:",
+        ],
+        bullets: [
+          "La política de gastos vigente, aunque esté incompleta: categorías, límites y quién aprueba qué.",
+          "Una muestra de documentos reales, incluidas fotos de mala calidad y documentos poco comunes.",
+          "Cómo se registra hoy: planilla, formulario, ERP o software de contabilidad.",
+          "Cuántas rendiciones y cuántos documentos se procesan al mes, aunque sea una estimación.",
+          "Cómo recibe la información tu contador o tu área de contabilidad.",
+          "Qué sistemas tienen API o permiten importar archivos, para saber cómo llegan los datos al registro contable.",
+        ],
+      },
+      {
+        heading: "Cómo medir si funcionó",
+        paragraphs: [
+          "Toma una línea base antes de cambiar el proceso y compárala con un período equivalente después. No asumas ahorros: mídelos. Estas métricas suelen servir para la rendición de gastos:",
+        ],
+        bullets: [
+          "Días entre el gasto y su registro contable.",
+          "Gastos que pasan sin intervención y gastos que requieren revisión.",
+          "Campos que la persona tuvo que corregir después de la extracción.",
+          "Respaldos faltantes detectados al cierre de mes.",
+          "Fondos por rendir abiertos y su antigüedad.",
+          "Horas de finanzas dedicadas a digitar y revisar, medidas igual antes y después.",
+        ],
+      },
+    ],
+    conclusion:
+      "La rendición de gastos es un buen candidato para automatizar porque se repite todos los meses, tiene reglas que finanzas sabe explicar y hoy obliga a copiar datos desde fotos y correos. El punto de partida no es la herramienta, sino la política y una muestra de documentos reales. Con eso se puede decidir si basta con automatizar sobre la planilla actual o si conviene una aplicación interna, y qué revisiones deben quedar siempre en manos de personas.",
+    faq: [
+      {
+        question: "¿Se puede automatizar la rendición de gastos sin cambiar el ERP?",
+        answer: "Sí, en muchos casos. El flujo puede preparar los gastos aprobados en un archivo de carga o registrarlos por API si el ERP lo permite. Si no hay conexión directa, se entregan en el formato que usa tu contabilidad. Las interfaces disponibles se revisan al inicio.",
+      },
+      {
+        question: "¿La IA puede leer fotos de boletas en mal estado?",
+        answer: "Depende de la calidad de la foto y del tipo de documento. Por eso conviene probar con una muestra real que incluya fotos borrosas, arrugadas o con poca luz. Cuando la lectura no es clara, el gasto pasa a revisión y la persona confirma los datos antes de enviarlo.",
+      },
+      {
+        question: "¿Quién aprueba los gastos en un flujo automatizado?",
+        answer: "Las mismas personas que hoy, según las reglas de tu empresa. El flujo envía cada gasto a la jefatura que corresponde por área o monto y registra la decisión. Lo que cambia es que la aprobación queda junto al gasto y su respaldo, no en un correo aparte.",
+      },
+      {
+        question: "¿Qué pasa con el documento original?",
+        answer: "El flujo guarda el archivo original vinculado al registro del gasto, para que el respaldo pueda mostrarse cuando se pida. Si tu empresa también exige el documento en papel, eso se define en la política y el flujo puede marcar qué papeles faltan por entregar.",
+      },
+      {
+        question: "¿Conviene una aplicación de rendiciones o automatizar la planilla actual?",
+        answer: "Depende del volumen y del control que necesitas. Con pocas personas y pocas reglas, automatizar sobre la planilla puede bastar. Con varias áreas, fondos por rendir y aprobaciones por monto, una aplicación interna con usuarios, roles y estados suele ordenar mejor el proceso. Se decide después de revisar el proceso actual.",
+      },
+    ],
+    sources: [
+      { title: "SII: Oficio N° 2488 de 2016, artículo 31 de la Ley sobre Impuesto a la Renta", url: "https://www.sii.cl/normativa_legislacion/jurisprudencia_administrativa/ley_impuesto_renta/2016/ja2488.htm" },
+      { title: "SII: ¿Por qué no puedo consultar la validez de una boleta electrónica con e-Factura?", url: "https://www.sii.cl/preguntas_frecuentes/factura_electronica/001_003_7185.htm" },
+      { title: "SII: Verificación de documentos tributarios electrónicos", url: "https://palena.sii.cl/dte/mn_verif_doc.html" },
+    ],
+    service: {
+      name: "Automatización de procesos",
+      href: "/servicios/automatizacion-procesos",
+      text: "En el diagnóstico de YAGO revisamos tu política de gastos, una muestra de documentos y tus sistemas para definir si conviene automatizar sobre lo que ya usas o construir una aplicación interna de rendiciones.",
+    },
+    relatedSlugs: ["como-calcular-el-roi-de-automatizar-procesos", "ocr-con-ia-digitalizar-documentos", "que-es-la-automatizacion-de-procesos-con-ia"],
+  },
   {
     slug: "cuanto-cuesta-digitalizar-documentos",
     title: "Cuánto cuesta digitalizar documentos: factores, cálculo y cotización",
