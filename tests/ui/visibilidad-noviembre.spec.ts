@@ -214,3 +214,20 @@ test("/soluciones/automatizacion-latinoamerica serves Peru, Colombia, Mexico and
     await expect(page.locator("#guias a[href='/soluciones/automatizacion-latinoamerica']")).toHaveCount(1);
   }
 });
+
+for (const [slug, heading, servicio] of [
+  ["automatizar-carga-de-facturas-al-erp", "El plazo de 8 días que conviene vigilar", "/servicios/automatizacion-procesos"],
+  ["automatizar-excel-o-pasar-a-una-aplicacion", "Señales de que la planilla ya necesita una aplicación", "/servicios/apps-automatizacion"],
+  ["software-a-medida-para-empresas", "Cuándo conviene a medida y cuándo un software estándar", "/servicios/apps-automatizacion"],
+] as const) {
+  test(`/blog/${slug} answers a buyer problem and leads to the service`, async ({ page }) => {
+    await page.goto(`/blog/${slug}`);
+    await expect(page.getByRole("heading", { name: heading })).toBeVisible();
+    await expect(page.locator(`article a[href='${servicio}']`).first()).toBeAttached();
+    const schemas = (await page.locator("script[type='application/ld+json']").allTextContents()).map((value) => JSON.parse(value));
+    expect(schemas.some((value) => value["@type"] === "FAQPage" || value["@graph"]?.some((node: { "@type": string }) => node["@type"] === "FAQPage"))).toBeTruthy();
+    for (const href of await page.locator("article a[href^='/']").evaluateAll((links) => [...new Set(links.map((link) => link.getAttribute("href")!.split("#")[0]))])) {
+      expect((await page.request.get(href)).status(), href).toBe(200);
+    }
+  });
+}

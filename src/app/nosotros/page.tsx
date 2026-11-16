@@ -20,6 +20,7 @@ const PROFILE_LABELS: Record<string, string> = {
   "www.linkedin.com": "LinkedIn de YAGO",
   "clutch.co": "Perfil y reseña verificada de YAGO en Clutch",
   "www.youtube.com": "Canal de YAGO en YouTube",
+  "www.sortlist.com": "Perfil de YAGO en Sortlist",
 };
 
 export default function AboutPage() {

@@ -140,7 +140,7 @@ test.describe("public routes and SEO", () => {
       await expect(flow.getByRole("heading", { name: "Cómo comprobamos que funciona" })).toBeAttached();
       await expect(page.locator("#resumen")).toContainText("Entrada");
       await expect(page.locator("#resumen")).toContainText("Salida");
-      expect(service.dateModified).toBe(["automatizacion-procesos", "agentes-ia", "apps-automatizacion"].includes(slug) ? "2026-11-11" : slug === "integracion-ia" ? "2026-10-27" : "2026-10-08");
+      expect(service.dateModified).toBe(["automatizacion-procesos", "apps-automatizacion"].includes(slug) ? "2026-11-16" : slug === "agentes-ia" ? "2026-11-11" : slug === "integracion-ia" ? "2026-10-27" : "2026-10-08");
       const addedGuide = slug === "automatizacion-procesos" ? "/blog/automatizacion-para-pymes-por-donde-partir" : slug === "integracion-ia" ? "/blog/herramientas-automatizacion-n8n-make-ia" : null;
       if (addedGuide) {
         await expect(page.locator(`#guias a[href='${addedGuide}']`)).toHaveCount(1);
@@ -195,10 +195,12 @@ test.describe("public routes and SEO", () => {
     const organization = documents.flatMap((value) => value["@graph"] || []).find((value) => value["@type"] === "Organization");
     expect(organization.description).toContain("integración de inteligencia artificial");
     expect(organization.sameAs).toContain("https://clutch.co/profile/yago");
+    expect(organization.sameAs).toContain("https://www.sortlist.com/agency/yago");
     expect(organization.hasOfferCatalog.itemListElement.some((offer: any) => offer.itemOffered.url === "https://yago.cl/servicios/integracion-ia")).toBeTruthy();
     expect(organization.aggregateRating).toBeUndefined();
     await page.goto("/nosotros");
     await expect(page.locator("#perfiles a[href='https://clutch.co/profile/yago']")).toBeVisible();
+    await expect(page.locator("#perfiles a[href='https://www.sortlist.com/agency/yago']")).toHaveText(/Perfil de YAGO en Sortlist/);
     await page.goto("/blog/apps-ia-desarrollo-asistido-diferencias");
     await expect(page.getByRole("table")).toHaveCount(1);
     await expect(page.getByRole("columnheader", { name: "Desarrollo asistido por IA", exact: true })).toBeAttached();

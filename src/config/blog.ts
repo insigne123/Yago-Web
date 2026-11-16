@@ -47,13 +47,469 @@ export const BLOG_AUTHOR = {
 };
 
 export const BLOG_COLLECTIONS = [
-  { id: "automatizacion", title: "Automatización y retorno", description: "Priorizar un proceso, comparar proveedores y evaluar herramientas y costo.", slugs: ["elegir-proveedor-automatizacion-ia-chile", "que-es-la-automatizacion-de-procesos-con-ia", "como-calcular-el-roi-de-automatizar-procesos", "automatizacion-para-pymes-por-donde-partir", "herramientas-automatizacion-n8n-make-ia", "automatizar-rendicion-de-gastos"] },
-  { id: "integracion", title: "Integración, aplicaciones y agentes", description: "Distinguir qué construir, cómo conectarlo y qué resultado comprobar.", slugs: ["integrar-ia-procesos-empresa", "apps-ia-desarrollo-asistido-diferencias", "agentes-de-ia-para-empresas"] },
+  { id: "automatizacion", title: "Automatización y retorno", description: "Priorizar un proceso, comparar proveedores y evaluar herramientas y costo.", slugs: ["elegir-proveedor-automatizacion-ia-chile", "que-es-la-automatizacion-de-procesos-con-ia", "como-calcular-el-roi-de-automatizar-procesos", "automatizacion-para-pymes-por-donde-partir", "herramientas-automatizacion-n8n-make-ia", "automatizar-rendicion-de-gastos", "automatizar-carga-de-facturas-al-erp", "automatizar-excel-o-pasar-a-una-aplicacion"] },
+  { id: "integracion", title: "Integración, aplicaciones y agentes", description: "Distinguir qué construir, cómo conectarlo y qué resultado comprobar.", slugs: ["integrar-ia-procesos-empresa", "apps-ia-desarrollo-asistido-diferencias", "agentes-de-ia-para-empresas", "software-a-medida-para-empresas"] },
   { id: "documentos", title: "OCR y documentos", description: "Digitalizar documentos, estimar su costo, medir la calidad y conocer el marco legal.", slugs: ["ocr-con-ia-digitalizar-documentos", "cuanto-cuesta-digitalizar-documentos", "evaluar-piloto-ocr-precision-costos", "validez-legal-documentos-digitalizados-chile"] },
   { id: "laboral", title: "RRHH y Portal Mi DT", description: "Entender registros, plazos y certificados laborales de Chile.", slugs: ["certificados-f30-y-f30-1-diferencias", "automatizar-mi-dt-opciones-chile", "control-contratistas-subcontratacion-f30-1", "finiquito-electronico-mi-dt-plazos", "registro-contratos-terminos-mi-dt-plazos"] },
 ];
 
 export const BLOG_POSTS: BlogPost[] = [
+  {
+    slug: "software-a-medida-para-empresas",
+    title: "Software a medida para empresas: ejemplos, costos y cuándo conviene",
+    seoTitle: "Software a medida para empresas: ejemplos y costos | YAGO",
+    description:
+      "Qué es el software a medida, ejemplos de aplicaciones para empresas, de qué depende el costo, cuándo conviene frente a un software estándar y cómo partir con un módulo.",
+    excerpt:
+      "Cuándo conviene construir una aplicación propia y cuándo basta con un software que ya existe, con ejemplos y los factores que mueven el costo.",
+    image: "/images/optimized/service-apps-automatizacion.webp",
+    category: "Aplicaciones y desarrollo",
+    date: "2026-11-16",
+    modifiedDate: "2026-11-16",
+    readingTime: "8 min",
+    keywords: [
+      "software a medida",
+      "software a medida para empresas",
+      "software a medida ejemplos",
+      "desarrollo de software a medida",
+      "aplicación a medida",
+      "app a medida para empresas",
+    ],
+    intro:
+      "El software a medida es una aplicación construida para el proceso de una empresa específica, en vez de adaptar la empresa a un producto genérico. No siempre es la mejor opción: muchas veces un software estándar resuelve el problema por menos dinero. Esta guía muestra ejemplos, explica de qué depende el costo y ayuda a decidir cuándo conviene cada camino.",
+    sections: [
+      {
+        heading: "Qué es el software a medida",
+        paragraphs: [
+          "Es software que se diseña a partir de cómo trabaja tu empresa: sus pasos, sus roles, sus reglas y los sistemas que ya usa. Puede ser una aplicación web interna, un portal para clientes o proveedores, un panel de control o una herramienta para equipos en terreno.",
+          "Lo contrario es el software estándar, que se contrata listo y se configura. El estándar parte más rápido y reparte su costo entre muchos clientes. El software a medida calza con el proceso, pero hay que construirlo y mantenerlo.",
+        ],
+      },
+      {
+        heading: "Ejemplos de software a medida en empresas",
+        paragraphs: [
+          "Estos son tipos de aplicaciones que las empresas suelen construir a medida. Son ejemplos de alcance, no casos de clientes.",
+        ],
+        table: {
+          columns: ["Aplicación", "Qué reemplaza", "Qué resuelve"],
+          rows: [
+            ["Solicitudes y aprobaciones", "Correos y planillas de seguimiento", "Cada solicitud tiene estado, responsable y registro de la decisión."],
+            ["Portal de proveedores o clientes", "Correos con adjuntos y llamadas", "El tercero carga documentos y consulta su estado sin escribirle a nadie."],
+            ["Rendiciones y fondos por rendir", "Fotos por WhatsApp y Excel", "Gastos con respaldo, aprobación y saldo de cada fondo a la vista."],
+            ["Control de operaciones en terreno", "Formularios en papel", "Visitas, entregas o inspecciones con fotos y ubicación, disponibles el mismo día."],
+            ["Panel de gestión", "Reportes armados a mano", "Indicadores de varios sistemas en un solo lugar, actualizados solos."],
+            ["Cotizador o configurador", "Planillas con fórmulas frágiles", "Reglas de precio centralizadas y cotizaciones con formato único."],
+          ],
+        },
+        links: [
+          { label: "Aplicaciones y software a medida: cómo trabaja YAGO", href: "/servicios/apps-automatizacion" },
+        ],
+      },
+      {
+        heading: "Cuándo conviene a medida y cuándo un software estándar",
+        paragraphs: [
+          "Antes de construir, revisa si un producto que ya existe resuelve el proceso con ajustes menores. Si lo hace, suele ser la mejor decisión. El software a medida se justifica en situaciones como estas:",
+        ],
+        bullets: [
+          "El proceso es propio de tu empresa y ningún producto lo cubre sin forzarlo.",
+          "Necesitas conectar varios sistemas que hoy no se hablan.",
+          "Pagas por un software con muchas funciones que no usas y te faltan las que necesitas.",
+          "El proceso vive en planillas que ya no dan abasto.",
+          "El proceso es parte de lo que te diferencia y no quieres que dependa de un tercero.",
+        ],
+      },
+      {
+        heading: "De qué depende el costo",
+        paragraphs: [
+          "No hay un precio único, porque el costo sigue al alcance. Estos son los factores que más lo mueven:",
+        ],
+        bullets: [
+          "Módulos: cuántas funciones distintas tiene la aplicación.",
+          "Usuarios, roles y permisos: quién puede ver y hacer qué.",
+          "Integraciones: cada sistema que hay que conectar, y si tiene API.",
+          "Migración de datos: cuánta información hay que traer y en qué estado está.",
+          "Funciones de IA: lectura de documentos, clasificación o búsqueda, con sus pruebas.",
+          "Operación: infraestructura, soporte y mejoras después de la puesta en marcha.",
+        ],
+      },
+      {
+        heading: "Cómo comparar propuestas",
+        paragraphs: [
+          "Pide que cada propuesta separe el desarrollo de la operación mensual, para comparar el costo completo y no solo el inicial. También conviene dejar por escrito:",
+        ],
+        bullets: [
+          "Alcance y criterios de aceptación de cada módulo.",
+          "Quién es dueño del código y cómo accedes al repositorio.",
+          "Dónde se aloja la aplicación y quién la administra.",
+          "Qué documentación recibes.",
+          "Cómo se cobran los cambios y el soporte.",
+        ],
+        links: [
+          { label: "Cómo elegir un proveedor de automatización e IA en Chile", href: "/blog/elegir-proveedor-automatizacion-ia-chile" },
+        ],
+      },
+      {
+        heading: "Cómo partir: un módulo primero",
+        paragraphs: [
+          "Un proyecto a medida no tiene que partir completo. Lo habitual es elegir el módulo que más trabajo manual elimina, construirlo, ponerlo en uso y ampliar desde ahí. Así se prueba con usuarios reales antes de comprometer el resto.",
+          "Para definir ese primer módulo sirve tener a mano el proceso actual, aunque sea en una planilla, los roles que participan, los sistemas que hay que conectar y una idea del volumen mensual.",
+        ],
+        links: [
+          { label: "Cómo automatizar un Excel y cuándo pasar a una aplicación", href: "/blog/automatizar-excel-o-pasar-a-una-aplicacion" },
+        ],
+      },
+      {
+        heading: "Qué cambia con la inteligencia artificial",
+        paragraphs: [
+          "La IA entra de dos formas. Una es dentro de la aplicación, como una función: leer un documento, clasificar una solicitud o buscar en archivos internos. La otra es durante la construcción, cuando el equipo usa herramientas de IA para programar y documentar, con revisión de código y pruebas.",
+          "Ninguna de las dos garantiza por sí sola un proyecto más rápido o más barato. El efecto depende del alcance, las integraciones y la revisión que el proyecto necesita.",
+        ],
+        links: [
+          { label: "Apps con IA y desarrollo asistido por IA: diferencias", href: "/blog/apps-ia-desarrollo-asistido-diferencias" },
+        ],
+      },
+    ],
+    conclusion:
+      "El software a medida conviene cuando el proceso es propio, cuando hay que conectar sistemas o cuando una planilla ya no alcanza. Si un producto estándar resuelve el problema, úsalo. Si no, parte por un módulo acotado, con alcance y criterios de aceptación por escrito, y amplía cuando ese módulo esté en uso.",
+    faq: [
+      {
+        question: "¿Qué es un software a medida?",
+        answer: "Es una aplicación construida para el proceso de una empresa específica, con sus pasos, roles, reglas e integraciones. Se diferencia del software estándar, que se contrata listo y se configura.",
+      },
+      {
+        question: "¿Cuánto cuesta un software a medida?",
+        answer: "Depende del alcance: módulos, usuarios y permisos, integraciones, migración de datos, funciones de IA y operación posterior. Conviene pedir que la propuesta separe el desarrollo de la operación mensual para ver el costo completo.",
+      },
+      {
+        question: "¿Cuánto demora desarrollar una aplicación a medida?",
+        answer: "Depende de los módulos, las integraciones y la disponibilidad de datos. Como referencia del servicio de YAGO, un primer módulo acotado puede tomar 2 a 4 semanas. El calendario se confirma después de definir el alcance.",
+      },
+      {
+        question: "¿Es mejor un software a medida o uno estándar?",
+        answer: "Si un software estándar resuelve el proceso con ajustes menores, suele convenir más. El software a medida se justifica cuando el proceso es propio de la empresa, cuando hay que conectar varios sistemas o cuando faltan funciones clave en los productos disponibles.",
+      },
+      {
+        question: "¿Quién es dueño del código?",
+        answer: "Depende de lo que se acuerde. Por eso conviene dejar por escrito en la propuesta las condiciones de acceso al repositorio, al despliegue y a la documentación antes de empezar.",
+      },
+    ],
+    service: {
+      name: "Aplicaciones y software a medida",
+      href: "/servicios/apps-automatizacion",
+      text: "YAGO desarrolla aplicaciones internas, portales y paneles conectados a tus procesos. Cuéntanos qué proceso quieres ordenar y definimos un primer módulo.",
+    },
+    relatedSlugs: ["automatizar-excel-o-pasar-a-una-aplicacion", "apps-ia-desarrollo-asistido-diferencias", "elegir-proveedor-automatizacion-ia-chile"],
+  },
+  {
+    slug: "automatizar-excel-o-pasar-a-una-aplicacion",
+    title: "Cómo automatizar un Excel y cuándo pasar a una aplicación",
+    seoTitle: "Cómo automatizar un Excel o pasar a una app | YAGO",
+    description:
+      "Cómo automatizar una planilla Excel paso a paso, qué se puede resolver con fórmulas, macros, flujos e IA, y las señales de que el proceso ya necesita una aplicación.",
+    excerpt:
+      "Qué automatizar dentro de la planilla, qué conviene sacar de ella y cómo reconocer que el proceso ya necesita una aplicación.",
+    image: "/images/optimized/service-apps-automatizacion.webp",
+    category: "Automatización empresarial",
+    date: "2026-11-16",
+    modifiedDate: "2026-11-16",
+    readingTime: "8 min",
+    keywords: [
+      "como automatizar un excel",
+      "automatizar planilla excel",
+      "automatizar excel",
+      "automatizar excel con ia",
+      "pasar de excel a una aplicación",
+      "reemplazar excel por un sistema",
+    ],
+    intro:
+      "Casi todas las empresas tienen una planilla que sostiene un proceso completo: pedidos, cobranzas, turnos o inventario. Funciona hasta que crece. Esta guía explica cómo automatizar un Excel, qué herramienta sirve para cada tipo de tarea y cuáles son las señales de que ya conviene pasar ese proceso a una aplicación.",
+    sections: [
+      {
+        heading: "Primero: qué parte del trabajo es repetitiva",
+        paragraphs: [
+          "Antes de elegir una herramienta, anota qué haces con la planilla cada semana. Casi siempre aparecen las mismas tareas: copiar datos desde otro sistema, limpiar y ordenar, cruzar con otra planilla, armar un reporte y enviarlo.",
+          "Cada una de esas tareas se automatiza de forma distinta. Mezclarlas es la razón por la que muchas planillas terminan llenas de macros que nadie se atreve a tocar.",
+        ],
+      },
+      {
+        heading: "Qué herramienta sirve para cada tarea",
+        paragraphs: [
+          "Esta tabla resume las opciones más comunes y para qué sirve cada una.",
+        ],
+        table: {
+          columns: ["Tarea", "Opción habitual", "Límite"],
+          rows: [
+            ["Calcular y validar dentro de la planilla", "Fórmulas, tablas y validación de datos", "Se rompen cuando alguien cambia la estructura."],
+            ["Importar y limpiar datos de otros archivos", "Consultas de datos de la propia planilla", "Depende de que los archivos de origen no cambien de formato."],
+            ["Repetir una secuencia de pasos", "Macros o scripts", "Quedan atadas a quien las escribió y son difíciles de revisar."],
+            ["Mover datos entre la planilla y otros sistemas", "Flujos con herramientas como n8n, Make o Power Automate", "Requieren que los otros sistemas permitan conectarse."],
+            ["Leer correos o documentos y pasar datos a la planilla", "Flujos con IA u OCR", "La lectura necesita revisión cuando el documento es dudoso."],
+            ["Varias personas, permisos y estados", "Una aplicación", "Hay que construirla y mantenerla."],
+          ],
+        },
+        links: [
+          { label: "n8n, Make e IA: cuándo usar cada herramienta", href: "/blog/herramientas-automatizacion-n8n-make-ia" },
+        ],
+      },
+      {
+        heading: "Cómo automatizar una planilla, paso a paso",
+        paragraphs: [
+          "Este orden evita automatizar un desorden:",
+        ],
+        bullets: [
+          "Ordena la planilla: una fila por registro, una columna por dato y sin celdas combinadas.",
+          "Separa los datos de los reportes. Los datos se ingresan en una hoja y los reportes se calculan en otra.",
+          "Valida al ingresar: listas desplegables, formatos de fecha y campos obligatorios.",
+          "Automatiza la entrada: que los datos lleguen desde un formulario, un archivo o el sistema de origen, sin copiar y pegar.",
+          "Automatiza la salida: que el reporte se genere y se envíe solo, o que los datos pasen al sistema que los necesita.",
+          "Deja un registro: qué se cargó, cuándo y desde dónde, para revisar cuando algo no cuadre.",
+        ],
+      },
+      {
+        heading: "Dónde ayuda la IA y dónde no",
+        paragraphs: [
+          "La IA sirve en los pasos que requieren interpretar: leer un pedido escrito en un correo, extraer datos de un PDF o clasificar un texto libre. También ayuda a escribir fórmulas o scripts más rápido.",
+          "No reemplaza las reglas. Sumar, cruzar por un código o validar un formato se resuelve mejor con una fórmula o una regla, que da siempre el mismo resultado. Y lo que la IA lee conviene revisarlo antes de que pase a un sistema contable o de pagos.",
+        ],
+      },
+      {
+        heading: "Señales de que la planilla ya necesita una aplicación",
+        paragraphs: [
+          "Una planilla automatizada sigue siendo una planilla. Estas señales indican que el proceso ya la superó:",
+        ],
+        bullets: [
+          "Varias personas editan al mismo tiempo y se pisan los cambios.",
+          "Necesitas que cada persona vea solo una parte de los datos.",
+          "Hay estados y aprobaciones, y se siguen por colores o comentarios.",
+          "Nadie sabe quién cambió un dato ni cuándo.",
+          "El archivo se volvió lento o existe en varias versiones.",
+          "Personas externas, como clientes o proveedores, necesitan ingresar información.",
+          "Un error en una fórmula ya causó un problema con dinero o con un cliente.",
+        ],
+        links: [
+          { label: "Aplicaciones y software a medida", href: "/servicios/apps-automatizacion" },
+          { label: "Software a medida para empresas: ejemplos y costos", href: "/blog/software-a-medida-para-empresas" },
+        ],
+      },
+      {
+        heading: "Cómo pasar de la planilla a una aplicación sin frenar la operación",
+        paragraphs: [
+          "No hace falta reemplazar todo de una vez. La planilla actual sirve como especificación: muestra qué datos se usan, qué reglas se aplican y qué reportes se necesitan.",
+          "Lo habitual es construir primero el módulo donde más se trabaja, cargar ahí los datos vigentes y dejar la planilla solo como respaldo por un período. Un ejemplo ficticio: una empresa de servicios controla sus visitas técnicas en un Excel compartido. El primer módulo puede ser solo el registro de visitas desde el celular. La planificación y la facturación siguen en la planilla hasta que ese módulo esté en uso.",
+        ],
+        links: [
+          { label: "Automatización de procesos: cómo se trabaja y qué incluye", href: "/servicios/automatizacion-procesos" },
+        ],
+      },
+    ],
+    conclusion:
+      "Automatizar un Excel parte por ordenarlo y por separar las tareas: fórmulas para calcular, flujos para mover datos e IA para interpretar. Cuando aparecen varios usuarios, permisos, estados y la necesidad de saber quién cambió qué, el proceso ya pide una aplicación. El paso se puede dar por módulos, usando la planilla actual como punto de partida.",
+    faq: [
+      {
+        question: "¿Cómo automatizar una planilla Excel?",
+        answer: "Primero ordena los datos y sepáralos de los reportes. Después automatiza la entrada, para que los datos lleguen sin copiar y pegar, y la salida, para que los reportes se generen solos o los datos pasen al sistema que los necesita. Las fórmulas sirven para calcular, los flujos para mover datos y la IA para interpretar textos o documentos.",
+      },
+      {
+        question: "¿Se puede automatizar Excel con IA?",
+        answer: "Sí, en los pasos que requieren interpretar, como leer un correo o extraer datos de un PDF para cargarlos a la planilla. Los cálculos y cruces conviene dejarlos en fórmulas o reglas, que dan siempre el mismo resultado.",
+      },
+      {
+        question: "¿Cuándo conviene reemplazar un Excel por una aplicación?",
+        answer: "Cuando varias personas lo editan a la vez, cuando necesitas permisos distintos por rol, cuando hay estados y aprobaciones, o cuando necesitas saber quién cambió cada dato. También cuando personas externas deben ingresar información.",
+      },
+      {
+        question: "¿Hay que dejar de usar Excel por completo?",
+        answer: "No. Excel sigue siendo útil para analizar datos y armar reportes puntuales. Lo que conviene sacar de la planilla es el registro diario del proceso, cuando ya participan varias personas y hay reglas que cumplir.",
+      },
+      {
+        question: "¿Se pueden traspasar los datos de la planilla a la aplicación?",
+        answer: "Sí. La migración se planifica como parte del proyecto: se revisa el estado de los datos, se corrigen duplicados y formatos, y se carga la información vigente. La planilla puede quedar como respaldo por un período.",
+      },
+    ],
+    service: {
+      name: "Aplicaciones y software a medida",
+      href: "/servicios/apps-automatizacion",
+      text: "Si una planilla sostiene un proceso clave de tu empresa, en el diagnóstico de YAGO revisamos si conviene automatizarla o pasarla a una aplicación, y por qué módulo partir.",
+    },
+    relatedSlugs: ["software-a-medida-para-empresas", "herramientas-automatizacion-n8n-make-ia", "automatizar-rendicion-de-gastos"],
+  },
+  {
+    slug: "automatizar-carga-de-facturas-al-erp",
+    title: "Cómo automatizar la carga de facturas de proveedores al ERP",
+    seoTitle: "Automatizar la carga de facturas al ERP | YAGO",
+    description:
+      "Cómo automatizar facturas de proveedores: leer el XML de la factura electrónica, validarla contra la orden de compra, cargarla al ERP y controlar el plazo de reclamo.",
+    excerpt:
+      "La factura electrónica ya es un archivo de datos. El flujo para dejar de digitarla, qué se valida y qué excepciones revisa una persona.",
+    image: "/images/optimized/service-automatizacion-procesos.webp",
+    category: "Automatización empresarial",
+    date: "2026-11-16",
+    modifiedDate: "2026-11-16",
+    readingTime: "9 min",
+    keywords: [
+      "automatizar facturas",
+      "automatizar carga de facturas",
+      "automatizar facturas con ia",
+      "carga de facturas al ERP",
+      "facturas de proveedores",
+      "cuentas por pagar",
+    ],
+    intro:
+      "En muchas empresas, las facturas de proveedores llegan por correo y alguien copia a mano el RUT, el folio y los montos al ERP. Ese trabajo es innecesario en buena parte: la factura electrónica ya es un archivo de datos. Esta guía explica cómo automatizar la carga de facturas, qué validar antes de registrarlas, qué casos debe revisar una persona y qué necesitas para empezar.",
+    sections: [
+      {
+        heading: "La factura electrónica ya viene como datos",
+        paragraphs: [
+          "En Chile, una factura electrónica es un documento tributario electrónico (DTE). El SII publica su formato, que en la versión 2.5 de febrero de 2026 describe cada campo junto al tag XML que le corresponde, como el tipo de documento, el folio, el RUT del emisor, las fechas, el detalle y los totales. El PDF que llega por correo es solo una representación de ese archivo.",
+          "Por eso, digitar una factura electrónica o pasarle OCR a su PDF es hacer el camino largo. Leer el XML entrega los mismos datos sin errores de lectura. El OCR sigue siendo útil para lo que no viene estructurado: documentos en papel, facturas de proveedores extranjeros o respaldos escaneados.",
+        ],
+        links: [
+          { label: "OCR para empresas: documentos en papel, imagen o PDF", href: "/ocr" },
+        ],
+      },
+      {
+        heading: "Dónde se pierde tiempo hoy",
+        paragraphs: [
+          "El problema rara vez es una factura. Es el volumen y lo que pasa alrededor de cada una:",
+        ],
+        bullets: [
+          "Las facturas llegan a varios correos y nadie tiene la lista completa del mes.",
+          "Alguien digita los datos en el ERP y vuelve a revisar lo digitado.",
+          "La orden de compra y la recepción de la mercadería o del servicio se buscan en otro sistema o en una planilla.",
+          "Las diferencias de precio o de cantidad se conversan por correo, sin registro junto a la factura.",
+          "La misma factura se registra dos veces, o no se registra hasta que el proveedor reclama el pago.",
+          "El plazo para reclamar una factura con problemas se pasa sin que nadie lo note.",
+        ],
+      },
+      {
+        heading: "El plazo de 8 días que conviene vigilar",
+        paragraphs: [
+          "El SII indica que el receptor tiene 8 días corridos, contados desde la recepción del documento en el SII, para reclamar una factura electrónica. Si no lo hace, la factura se entiende aceptada automáticamente. El mismo SII recomienda revisar a diario los documentos que otros contribuyentes te han emitido.",
+          "El SII también arma el Registro de Compras de cada contribuyente con los documentos tributarios electrónicos que ha recibido. Es decir, la lista de lo que te facturaron existe aunque el correo del proveedor nunca haya llegado a la persona correcta.",
+          "Para una automatización, esto se traduce en dos controles: comparar lo que aparece en el Registro de Compras con lo que tu empresa tiene registrado, y avisar con tiempo cuando una factura lleva días sin orden de compra, sin recepción o con diferencias. Qué facturas reclamar y cómo tratarlas lo define tu empresa con su contador.",
+        ],
+      },
+      {
+        heading: "El flujo automatizado, paso a paso",
+        paragraphs: [
+          "Un flujo de cuentas por pagar automatizado suele seguir este orden. Cada paso se ajusta a tus reglas y a tus sistemas.",
+        ],
+        bullets: [
+          "Recepción: el flujo reúne las facturas desde las casillas de correo donde llegan y desde los archivos que entrega tu sistema de facturación.",
+          "Lectura: toma los datos del XML. Si un documento llega solo como imagen o PDF, un OCR con IA propone los datos y marca los campos dudosos.",
+          "Validación: revisa que el proveedor exista en tu maestro, que el documento no esté duplicado y que los totales cuadren.",
+          "Cruce: compara la factura con la orden de compra y con la recepción de la mercadería o del servicio, dentro de las tolerancias que definas.",
+          "Excepciones: lo que no cuadra llega a una bandeja con el motivo, el responsable y los días que quedan del plazo de reclamo.",
+          "Registro: las facturas aprobadas se cargan al ERP por API o con un archivo de importación, según lo que permita tu sistema.",
+          "Seguimiento: queda un registro de cada factura, con su estado, quién la aprobó y cuándo se cargó.",
+        ],
+        links: [
+          { label: "Automatización de procesos: cómo se trabaja y qué incluye", href: "/servicios/automatizacion-procesos" },
+          { label: "Automatización de finanzas: conciliaciones, pagos y cierre", href: "/soluciones/automatizacion-finanzas" },
+        ],
+      },
+      {
+        heading: "Qué hace el sistema y qué decide una persona",
+        paragraphs: [
+          "Automatizar la carga no saca a finanzas del proceso. Cambia su trabajo: deja de digitar y revisa las diferencias.",
+        ],
+        table: {
+          columns: ["Tarea", "Quién la hace", "Por qué"],
+          rows: [
+            ["Leer los datos de la factura", "El sistema", "El XML trae los datos estructurados."],
+            ["Detectar duplicados", "El sistema", "Comparar RUT del emisor, tipo de documento y folio es una regla clara."],
+            ["Cruzar con orden de compra y recepción", "El sistema marca y una persona resuelve", "Una diferencia puede tener una explicación válida."],
+            ["Aprobar una factura sin orden de compra", "La jefatura que corresponda", "Es una decisión de negocio."],
+            ["Reclamar una factura ante el SII", "Finanzas, con el plazo a la vista", "Tiene efectos tributarios y comerciales."],
+            ["Definir cuenta contable y centro de costo", "Reglas que define contabilidad", "Dependen del plan de cuentas de tu empresa."],
+          ],
+        },
+      },
+      {
+        heading: "Flujo con herramientas o aplicación propia",
+        paragraphs: [
+          "Hay dos formas de construirlo. La primera es un flujo que conecta el correo, el ERP y una planilla de control, con herramientas como n8n o Make y las API disponibles. Sirve cuando el volumen es moderado y las reglas son pocas.",
+          "La segunda es una aplicación interna de cuentas por pagar, con una bandeja de excepciones, roles de aprobación e historial por factura. Conviene cuando hay varias personas aprobando, muchas excepciones o varias empresas en el mismo grupo.",
+          "Un ejemplo ficticio: una distribuidora recibe facturas de cientos de proveedores. La mayoría calza con su orden de compra y podría cargarse sin intervención. El trabajo real está en las que no calzan. Una bandeja que muestre solo esas facturas, con el motivo y los días que quedan para reclamar, le sirve más al equipo que una carga más rápida de las que ya estaban bien.",
+        ],
+        links: [
+          { label: "n8n, Make e IA: cuándo usar cada herramienta", href: "/blog/herramientas-automatizacion-n8n-make-ia" },
+          { label: "Aplicaciones y software a medida", href: "/servicios/apps-automatizacion" },
+        ],
+      },
+      {
+        heading: "Qué necesitas para empezar",
+        paragraphs: [
+          "Para evaluar el proyecto no hace falta tener todo resuelto. Sirve reunir esto:",
+        ],
+        bullets: [
+          "Cuántas facturas de proveedores recibes al mes y por qué canales llegan.",
+          "Qué ERP o sistema contable usas y si permite API o importación de archivos.",
+          "Dónde viven las órdenes de compra y las recepciones.",
+          "Las reglas de hoy: tolerancias, quién aprueba qué y qué pasa con una factura sin orden de compra.",
+          "Una muestra de facturas reales, incluidas las que dieron problemas.",
+          "Cómo está tu maestro de proveedores: RUT, razón social y condiciones de pago.",
+        ],
+      },
+      {
+        heading: "Cómo medir si funcionó",
+        paragraphs: [
+          "Mide antes de cambiar el proceso y compara con un período equivalente después:",
+        ],
+        bullets: [
+          "Facturas cargadas sin intervención y facturas que pasaron a revisión.",
+          "Días entre la recepción de la factura y su registro en el ERP.",
+          "Facturas duplicadas o registradas con errores.",
+          "Facturas que llegaron al final del plazo de reclamo sin revisar.",
+          "Horas de finanzas dedicadas a digitar y a buscar respaldos, medidas igual antes y después.",
+        ],
+      },
+      {
+        heading: "Si tu empresa está fuera de Chile",
+        paragraphs: [
+          "El principio es el mismo en otros países de la región: la factura electrónica es un archivo XML y conviene leerlo en vez de digitarlo. Cambian la autoridad tributaria, el formato y los plazos, así que cada flujo se ajusta a las reglas de su país.",
+        ],
+        links: [
+          { label: "Automatización y apps a medida para Perú, Colombia, México y Ecuador", href: "/soluciones/automatizacion-latinoamerica" },
+        ],
+      },
+    ],
+    conclusion:
+      "La carga de facturas es un buen primer proceso para automatizar: se repite todos los meses, los datos ya vienen estructurados y las reglas se pueden escribir. El valor no está en cargar más rápido las facturas que calzan, sino en ver a tiempo las que no calzan. Con una muestra de facturas, tus reglas de aprobación y el detalle de tu ERP se puede definir un primer alcance.",
+    faq: [
+      {
+        question: "¿Se pueden automatizar las facturas sin cambiar el ERP?",
+        answer: "En muchos casos, sí. El flujo carga las facturas por la API del ERP o con un archivo de importación, según lo que el sistema permita. Las interfaces disponibles se revisan al inicio, antes de definir el alcance.",
+      },
+      {
+        question: "¿Hace falta OCR para leer facturas electrónicas?",
+        answer: "Para las facturas electrónicas, no: sus datos vienen en un archivo XML. El OCR se usa para documentos que llegan en papel, como imagen o en PDF sin datos estructurados, por ejemplo facturas de proveedores extranjeros.",
+      },
+      {
+        question: "¿Qué pasa con las facturas que no calzan con la orden de compra?",
+        answer: "Pasan a una bandeja de excepciones con el motivo de la diferencia. Una persona decide si se aprueba, se corrige o se reclama. Las tolerancias y quién resuelve cada caso se definen con tu equipo.",
+      },
+      {
+        question: "¿Se puede automatizar con n8n o Make?",
+        answer: "Sí, cuando el volumen y las reglas lo permiten. Estas herramientas conectan el correo, el ERP y otros sistemas. Con muchas excepciones o varios niveles de aprobación, suele convenir una aplicación interna. La decisión se toma después de revisar el proceso.",
+      },
+      {
+        question: "¿Cuánto demora automatizar la carga de facturas?",
+        answer: "Depende de las integraciones y de la disponibilidad de accesos. Como referencia del servicio de automatización de YAGO, un primer alcance acotado puede tomar 1 a 2 semanas y una implementación productiva 3 a 6 semanas. El plazo se confirma después de revisar el proceso.",
+      },
+    ],
+    sources: [
+      { title: "SII: Formato de documentos tributarios electrónicos, versión 2.5 (febrero de 2026)", url: "https://www.sii.cl/factura_electronica/factura_mercado/formato_dte_202602.pdf" },
+      { title: "SII: ¿Qué es el Registro de Compras (RC)?", url: "https://www.sii.cl/preguntas_frecuentes/factura_electronica/001_003_6972.htm" },
+      { title: "SII: plazo para reclamar una factura electrónica recibida", url: "https://www.sii.cl/destacados/iva/iva_vende.html" },
+    ],
+    service: {
+      name: "Automatización de procesos",
+      href: "/servicios/automatizacion-procesos",
+      text: "En el diagnóstico de YAGO revisamos cómo llegan tus facturas, tus reglas de aprobación y tu ERP para definir un primer alcance, con las excepciones a la vista.",
+    },
+    relatedSlugs: ["automatizar-rendicion-de-gastos", "herramientas-automatizacion-n8n-make-ia", "como-calcular-el-roi-de-automatizar-procesos"],
+  },
   {
     slug: "automatizar-rendicion-de-gastos",
     title: "Cómo automatizar la rendición de gastos: flujo, validaciones y respaldo",
